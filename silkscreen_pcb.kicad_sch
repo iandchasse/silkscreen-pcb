@@ -11538,25 +11538,15 @@
 		)
 		(uuid "317420ad-1ca8-4417-9e05-12e050b6482b")
 	)
-	(text "ratio will be 0.5"
+	(text "ratio will be 0.107"
 		(exclude_from_sim no)
-		(at 366.014 226.822 0)
+		(at 361.95 226.568 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 		)
 		(uuid "34f72ece-e815-4aa1-b6d7-2dd9a1c28135")
-	)
-	(text "3.3V min -> 1.65V"
-		(exclude_from_sim no)
-		(at 366.014 231.394 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "385d952b-26bf-4c09-a734-8e584a0134e9")
 	)
 	(text "3.3V min -> 1.65V"
 		(exclude_from_sim no)
@@ -17659,7 +17649,7 @@
 			)
 		)
 	)
-	(global_label "3031_SW"
+	(global_label "TPS_SW_NODE"
 		(shape input)
 		(at 318.77 241.3 90)
 		(fields_autoplaced yes)
@@ -17671,7 +17661,7 @@
 		)
 		(uuid "2b72e2ff-0e90-42bf-900a-98c171771d04")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 318.77 229.8483 90)
+			(at 318.77 225.1916 90)
 			(effects
 				(font
 					(size 1.27 1.27)

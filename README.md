@@ -10,10 +10,10 @@ essentially any 24-pin SPI e-paper panel, from any battery, in any enclosure, un
 firmware — so the interesting work (display, case, software) isn't gated on redesigning power
 and interface electronics every time.
 
-![Silkscreen board — 3D render, top](docs/images/board-3d-top.png)
+![Silkscreen — full schematic](docs/images/full-capture.png)
 
 Current full plots: **[schematic PDF](docs/silkscreen_pcb_schematic.pdf)** ·
-**[PCB PDF](docs/silkscreen_pcb.pdf)**.
+**[PCB layout PDF](docs/silkscreen_pcb_layout.pdf)**.
 
 ---
 

@@ -25,11 +25,11 @@ Successor to [de-link](https://de-link.me).
 > **Findings, open questions and proposed changes live in a separate document:
 > [`DESIGN_REVIEW.md`](../DESIGN_REVIEW.md).** This file describes the board *as it is*.
 >
-> Verified against `silkscreen_pcb.kicad_sch` / `silkscreen_pcb.pdf`, 2026-09-10.
+> Verified against `silkscreen_pcb.kicad_sch` / `silkscreen_pcb_layout.pdf`, 2026-09-13.
 > 173 components, 126 nets, single A2 sheet.
 >
 > **Current full plots:** [`silkscreen_pcb_schematic.pdf`](silkscreen_pcb_schematic.pdf)
-> (schematic) and [`silkscreen_pcb.pdf`](silkscreen_pcb.pdf) (PCB) are the authoritative,
+> (schematic) and [`silkscreen_pcb_layout.pdf`](silkscreen_pcb_layout.pdf) (PCB) are the authoritative,
 > up-to-date views. The per-block screenshots in `images/` below are illustrative and may lag
 > the latest revision — regenerate them from KiCad if a block looks out of date.
 
@@ -103,7 +103,7 @@ Several blocks are populated only if the chosen panel needs them:
 
 ## 2. System overview
 
-![Full schematic sheet](images/00-full-sheet.png)
+![Full schematic sheet](images/full-capture.png)
 
 The whole design is a single A2 sheet. It divides into four domains:
 
@@ -576,9 +576,8 @@ colour, and no firmware fault can double the load.
 
 `R49`/`R50` (1 M) bleed the two cathode nets to ground so neither floats when its FET is off.
 `R75` (100 k) holds `COLOR_SEL` low at boot, so the inverter never sits at mid-rail (which
-would draw shoot-through current).
-
-![Colour select](images/18-color-select.png)
+would draw shoot-through current). (The colour-select circuit is drawn inside the LED driver
+block above — see [`10-led-driver.png`](images/10-led-driver.png).)
 
 ### Colour-temperature blending
 
@@ -755,14 +754,18 @@ Standard ESP32 programming interface:
 
 | Signal | Circuit | Purpose |
 |---|---|---|
-| `ESP32_EN` | `R7` 10 k pull-up, `C5` 1 µF, `SW11` via `R63` 100 Ω | reset, with ~10 ms RC |
-| `ESP32_IO0` | `R13` 10 k pull-up, `SW6` via `R64` 100 Ω | boot mode select |
+| `ESP32_EN` | `R7` 10 k pull-up, `C5` 1 µF, `SW11` via `R63` 100 Ω | reset, with ~10 ms RC (populated) |
+| `ESP32_IO0` | `R13` 10 k pull-up, `SW6` via `R64` 100 Ω | boot mode select (**`SW6` = DNP**) |
 
 Holding `IO0` low during reset enters the ROM bootloader. The 100 Ω series resistors limit
 current if firmware ever drives these pins. `C5` gives a clean power-on reset.
 
-`SW6` uses a larger 6×3.5 mm switch — likely intended to be more accessible, as boot-mode
-entry is a developer action.
+**`SW6` (the BOOT/`IO0` button) is DNP** — its 6×3.5 mm land is left unpopulated. The reset
+button (`SW11`) is populated. This is fine for normal flashing: the ESP32-S3's **USB-Serial-JTAG**
+lets `esptool` trigger download mode over the USB-C link with no BOOT button. The one caveat is
+recovery — if application firmware fully claims the USB-OTG peripheral and hangs, forcing download
+mode then means momentarily grounding `IO0` by hand (it's on `R64`/`R13`), since there's no button.
+Populate `SW6` (e.g. a `TS365ZJ`-class part on its land) if you want hardware boot-mode entry.
 
 ---
 
@@ -1010,7 +1013,7 @@ left edge.
 | Resistors | 78 | all **0603**; incl. 12× 33 Ω series, 6× DNP config jumpers |
 | Capacitors | 35 | 22× **0603**, 13× **0805** (HV / bulk — see below); 7× 50 V-rated |
 | ICs | 13 | see below |
-| Switches | 11 | 8 ladder + power + reset + boot |
+| Switches | 11 | 8 ladder + power + reset + boot (`SW6`/boot DNP → 10 populated) |
 | Diodes | 6 | 3× B5819W, SMAJ26A, PESD2IVN-UX, LED |
 | Connectors | 7 | USB-C, 24p ZIF, 2× 6p ZIF, microSD, JST-PH, 2×6 header |
 | Transistors | 7 | 3× AO3419, 3× BSS138, FS8205A |

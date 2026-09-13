@@ -758,7 +758,7 @@
       },
       {
         "netclass": "SW",
-        "pattern": "3031_SW"
+        "pattern": "TPS_SW_NODE"
       },
       {
         "netclass": "SW",

@@ -1,6 +1,6 @@
 # de-link PCB — Schematic Review
 
-**Source of truth:** `silkscreen_pcb.kicad_sch` (KiCad 9.0.6, edited 2026-09-09) and `silkscreen_pcb.pdf` (printed 2026-09-09).
+**Source of truth:** `silkscreen_pcb.kicad_sch` (KiCad 9.0.6) and `silkscreen_pcb_layout.pdf` / `silkscreen_pcb_schematic.pdf` (printed 2026-09-13).
 **Method:** netlist regenerated from the live schematic with `kicad-cli sch export netlist`, then every net and every device pin traced by hand; ERC run with `--severity-all`; all active-device pinouts checked against manufacturer datasheets.
 
 > Note: this file replaces an earlier review that described an *LM27313 / MCP73832 / AO3401 / 22 µH L2* design. Those parts are no longer on the board and that review was invalid.
@@ -44,7 +44,7 @@ Verified pin-by-pin against datasheets — these are **right**, including the on
 | **TP4056** | ✔ `TEMP→GND` correctly disables the NTC (datasheet-sanctioned). `CE→VCC` is active-high enable, and CE is rated to 10 V so a 5 V tie is in spec. `R6 = 4.7 k → ~255 mA` (raised from 12 k, §6.21). EPAD→GND with thermal vias ✔. |
 | **TPS2116 MODE→USB_VBUS** | ✔ Safe in all four quadrants. On unplug, PR1 falls below its threshold before MODE crosses V_IL, so you never land in the `MODE=low + PR1=high` **shutdown** state. |
 | **ADC pin selection** | ✔ All five analog nets are on **ADC1** (`IO1/CH0, IO2/CH1, IO4/CH3, IO8/CH7, IO9/CH8`). ADC2 is unusable with Wi-Fi — you avoided it. |
-| **Boot/reset straps** | ✔ `IO0`: 10 k pull-up + SW6 via 100 Ω to GND. `EN`: 10 k + 1 µF (10 ms) + SW11 via 100 Ω. Both correct. |
+| **Boot/reset straps** | ✔ `IO0`: 10 k pull-up + SW6 via 100 Ω to GND (**SW6 now DNP** — download mode via S3 USB-Serial-JTAG; see HARDWARE §9.3). `EN`: 10 k + 1 µF (10 ms) + SW11 via 100 Ω (populated). Both correct. |
 | **e-paper connector J2** | ✔ 22 of 24 pins verified correct: `BS→GND` (4-wire SPI), VDDIO/VCI→3V3, VSS→GND, and every panel rail decoupled. Pin 4 is correctly left NC. |
 | **LED strip J3** | ✔ `C+`/`W+` both to LED_SW (common anode), `C−`/`W−` switched into the sense resistor. Correct for a bicolour strip. |
 | **ESD coverage** | ✔ Genuinely thorough: USB D±/CC (U6), all 4 SD data (U1), SD CLK+CMD (U9), dev-header GPIO (U8), touch FFC (U7), plus TSD05C on VBUS/3V3/P+ and TVS on the LED lines. SD CLK/CMD *are* protected. |
