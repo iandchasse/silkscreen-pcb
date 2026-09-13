@@ -11608,9 +11608,9 @@
 		)
 		(uuid "4f6e402b-42d4-43d5-abd4-7e30d527a209")
 	)
-	(text "HIGH = USB\nLOW = BATTERY"
+	(text "HIGH-Z = USB\nLOW = BATTERY"
 		(exclude_from_sim no)
-		(at 151.384 70.104 0)
+		(at 147.574 62.484 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11659,7 +11659,7 @@
 		)
 		(uuid "5ca7bf0f-33b4-4b99-a3fd-05331acbf19e")
 	)
-	(text "74479325207247"
+	(text "VLS252010HBU-4R7M"
 		(exclude_from_sim no)
 		(at 302.26 234.188 0)
 		(effects
@@ -11904,7 +11904,7 @@
 		)
 		(uuid "c3470206-db53-4085-857d-38ffd6f77411")
 	)
-	(text "Switchover at ~3.4V"
+	(text "Switchover at ~4V"
 		(exclude_from_sim no)
 		(at 169.672 42.926 90)
 		(effects
@@ -27670,7 +27670,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_Card:microSD_HC_Hirose_DM3AT-SF-PEJM5"
+		(property "Footprint" "microSD_dualsource:microSD_PushPush_TFPUSH-MEM2075"
 			(at 361.95 74.93 0)
 			(effects
 				(font

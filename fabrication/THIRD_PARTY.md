@@ -32,10 +32,17 @@ and **SamacSys / Component Search Engine**.
 | FS8205A | Q1 | symbol, footprint | Ultra Librarian | https://app.ultralibrarian.com/search?queryText=FS8205A |
 | TPS923610DRLR | U10 | symbol, footprint | Ultra Librarian | https://app.ultralibrarian.com/search?queryText=TPS923610DRLR |
 | MJTP1117 | SW1–SW5, SW7–SW11 (footprint) | footprint | SamacSys / Component Search Engine | https://componentsearchengine.com/search?term=MJTP1117 |
+| microSD push-push (unified) | J7 | footprint (project-built), 3D model | GCT MEM2075 pad geometry + SHOU HAN TF PUSH DXF + FastEDA 3D (via Protoflow) | see note below |
 
 Notes:
 - `SRN3010C-100M` and `MJTP1117` contribute only the **footprint**; their symbols are KiCad
   standard (`Device:L`, `Switch:SW_Push`). `SW6` uses a KiCad-standard MJTP1243 footprint.
-- `J1` (USB-C), `J7` (microSD), and every passive/IC not listed above use **standard KiCad
-  libraries** — no third-party terms apply.
+- `J1` (USB-C) and every passive/IC not listed above use **standard KiCad libraries** — no
+  third-party terms apply.
+- `J7`'s footprint `microSD_dualsource:microSD_PushPush_TFPUSH-MEM2075` is **project-built** in
+  this repo (KiCad symbol is standard `Connector:Micro_SD_Card`). Its pad geometry was derived
+  from GCT's official MEM2075 `.kicad_mod` and SHOU HAN's TF PUSH manufacturer DXF; the attached
+  3D model (`TF-SMD_TF-PUSH.wrl`) is FastEDA-generated (obtained via Protoflow) and carries its
+  generator's terms. The footprint is a dual-source land accepting either the SHOU HAN TF PUSH
+  (LCSC C393941) or GCT MEM2075-00-140-01-A.
 - `TPS923610DRLR`'s 3D model (`SOT563.STEP`) is the manufacturer's, added separately.

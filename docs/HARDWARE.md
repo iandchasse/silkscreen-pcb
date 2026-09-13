@@ -371,8 +371,8 @@ Firmware can detect it by the *transition* rather than the level.
 
 ![MCU](images/07-mcu.png)
 
-**`U4` ESP32-S3-WROOM-1** — dual-core Xtensa LX7, Wi-Fi + BLE, with **8 MB octal PSRAM**
-(N8R8-class). PSRAM matters here: a 4.26" panel at 800×480 needs meaningful framebuffer
+**`U4` ESP32-S3-WROOM-1** — dual-core Xtensa LX7, Wi-Fi + BLE, with **16 MB flash + 8 MB octal
+PSRAM** (N16R8). PSRAM matters here: a 4.26" panel at 800×480 needs meaningful framebuffer
 space, and e-reader firmware wants room for page rendering and font caches.
 
 **Native USB.** `IO19`/`IO20` connect directly to the USB-C connector's D−/D+ — the S3 has a
@@ -383,7 +383,7 @@ card to a host) and native DFU.
 ### `IO35`/`IO36`/`IO37` — the PSRAM pins
 
 `IO37`/`IO36`/`IO35` are consumed internally by the PSRAM bus on **octal-PSRAM** ESP32-S3 parts
-(the `R8` variants, including the `N8R8` fitted here) and **must not be connected or probed**.
+(the `R8` variants, including the `N16R8` fitted here) and **must not be connected or probed**.
 On every other S3 variant — `N4`, `N8`, `N16`, and the quad-PSRAM `R2` parts — they are ordinary
 free GPIO.
 
@@ -398,9 +398,14 @@ cannot accidentally load a DDR PSRAM line.
 
 ![SD card](images/08-sdcard.png)
 
-`J7` is a push-pull microSD socket wired for **4-bit SDMMC**, not SPI. That is a deliberate
+`J7` is a **push-push** microSD socket wired for **4-bit SDMMC**, not SPI. That is a deliberate
 performance choice: 4-bit at ~40 MHz is roughly 8× the throughput of 1-bit SPI, which matters
 when loading page images or large fonts.
+
+The socket uses a project-local **dual-source footprint** (`microSD_dualsource:microSD_PushPush_TFPUSH-MEM2075`)
+that accepts either the SHOU HAN **TF PUSH** (LCSC C393941 — JLC-assembled builds) or the GCT
+**MEM2075** (DigiKey — hand builds). Both are push-push and pin-identical; the land carries both
+parts' anchor pads plus the MEM2075's two locating-peg holes.
 
 **Bus conditioning:**
 

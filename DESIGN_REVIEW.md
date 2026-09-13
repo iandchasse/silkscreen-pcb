@@ -327,23 +327,23 @@ With your software OVP at 20 V the rail normally lives at ≤20 V, so a 26 V sta
 1. Even SMAJ26A clamps at ~42 V at its full 400 W rating, which is still above 32 V. For a *large* strike `U10` sees an overshoot regardless. That is acceptable — ESD is nanoseconds and abs-max ratings are DC limits — but do not read the TVS as a guarantee. Your real protection against sustained overvoltage is the internal OVP; `D3` is for transients only.
 2. **Placement decides whether it works at all.** `LED_SW` reaches *both* `J3` (pins 1, 5) and `J6` (pin 5), and one TVS cannot be adjacent to both. Put `D3` at whichever connector is more exposed — I'd say `J6`, since that is the user-accessible header — and accept longer inductance to the other, or fit a second clamp. The return side is already covered: `D8` (`PESD2IVN-UX`) sits on `C−`/`W−`, which serve both connectors. ✔
 
-### 3.5 ~~`L2 = 4.7 µH`~~ — ✅ **RESOLVED**: `74479325207247`, I_sat 2.7 A confirmed
+### 3.5 ~~`L2 = 4.7 µH`~~ — ✅ **RESOLVED**: `VLS252010HBU-4R7M`, I_sat 1.55 A confirmed
 
-My first pass flagged this as a current-limit risk. Having computed the operating point, **it isn't** — and the confirmed part has enormous margin:
+My first pass flagged this as a current-limit risk. Having computed the operating point, **it isn't** — the fitted part still has comfortable margin:
 
-| V_OUT | D | I_in | ΔI_L pk-pk | I_peak | vs 1.8 A I_LIM | vs 2.7 A I_sat |
+| V_OUT | D | I_in | ΔI_L pk-pk | I_peak | vs 1.8 A I_LIM | vs 1.55 A I_sat |
 |---:|---:|---:|---:|---:|---:|---:|
-| 15.0 V | 0.780 | 80 mA | 498 mA | 329 mA | 18 % | 12 % |
-| 20.0 V | 0.835 | 107 mA | 533 mA | 374 mA | 21 % | 14 % |
-| 24.5 V | 0.865 | 131 mA | 552 mA | 408 mA | **23 %** | **15 %** |
+| 15.0 V | 0.780 | 80 mA | 498 mA | 329 mA | 18 % | 21 % |
+| 20.0 V | 0.835 | 107 mA | 533 mA | 374 mA | 21 % | 24 % |
+| 24.5 V | 0.865 | 131 mA | 552 mA | 408 mA | **23 %** | **26 %** |
 
-**I_sat 2.7 A against a 408 mA worst-case peak is 6.6× margin.** Closed — no action.
+**I_sat 1.55 A against a 408 mA worst-case peak is 3.8× margin,** and it still sits below the 1.8 A internal I_LIM so the core cannot saturate even in a fault. Closed — no action.
 
 The converter runs deep in **DCM** at this power level (ΔI_L is 4–6× I_in), and would even with the datasheet's 10 µH reference, because that reference is drawn for 60 mA of LEDs and you run 15 mA. Normal and expected.
 
 Residual note (layout, not schematic): 550 mA pk-pk of triangular ripple at 1.1 MHz is a meaningful radiator on a 2-layer board. Keep the `L2`/`C12`/`C9` loop tight.
 
-*(MPN confirmed: `74479325207247` — Würth Elektronik WE-LQS 4.7 µH, 1008.)*
+*(MPN: `VLS252010HBU-4R7M` — TDK, metal-composite / magnetically shielded, 1008 (2.5 × 2.0 × 1.0 mm), 4.7 µH ±20 %, I_sat 1.55 A, I_rms 1.01 A, DCR 274 mΩ. LCSC C413592, in stock. Replaces the earlier `74479325207247`, which is not stocked at LCSC.)*
 
 ### 3.5.1 ⬜ **OUTSTANDING** — `L1` (22 µH, `NR3015T220MNGH`) is NRND and needs a replacement
 
@@ -489,7 +489,7 @@ P+ ──[R1 100 Ω]──┬── U5.5  (DW01A VCC)
 * `production_files/` gerbers, BOM and CPL are from **2026-08-13**.
 
 **Verify before ordering:**
-* **ESP32-S3-WROOM-1 variant.** Your note *"ESP32-S3-WROOM-1 does not reserve GPIO for PSRAM"* is only true for the **non-octal** variants — on octal-PSRAM parts IO35/36/37 are consumed internally. Since those three pins are **not broken out** on this board (IO35–37 have no pads/vias — §6.13), the fitted **`N8R8`** is fine. Pin the BOM to your intended MPN so a build gets the right flash/PSRAM size and RF calibration.
+* **ESP32-S3-WROOM-1 variant.** Your note *"ESP32-S3-WROOM-1 does not reserve GPIO for PSRAM"* is only true for the **non-octal** variants — on octal-PSRAM parts IO35/36/37 are consumed internally. Since those three pins are **not broken out** on this board (IO35–37 have no pads/vias — §6.13), the fitted **`N16R8`** is fine (16 MB flash / 8 MB octal PSRAM — same R8 bus as N8R8, just more flash). Pin the BOM to your intended MPN so a build gets the right flash/PSRAM size and RF calibration.
 * **FS8205A vs FS8205 naming.** Fortune's own `FS8205A-DS-17_EN.pdf` describes a **TSSOP-8** part; the SOT-23-6 device is documented as **`FS8205`** (rev 1.7). LCSC C32254 is the SOT-23-6 one. Your footprint is SOT-23-6, so order **C32254** and don't let a distributor substitute a TSSOP-8 "FS8205A". Also: older FS8205 datasheets (rev <1.4) show a *different* pinout — only trust rev ≥1.7.
 * **J2 pins 1/6/7** (`HLT_CTL`, `TSCL`, `TSDA`) left NC — correct for a non-touch panel driven without HLT_CTL, but confirm against your exact 4.26" panel.
 * **`C19` on `VPP`** (J2 pin 19). VPP is the OTP programming pin; most reference designs leave it NC. A 1 µF to GND is harmless but check the panel datasheet.
@@ -587,7 +587,7 @@ P+ ──[R1 100 Ω]──┬── U5.5  (DW01A VCC)
 | 14 | `J6`: swap `SDA` (pin 4) ↔ `GND` (pin 12) | Only real HV adjacency; `W−`/`C−` turned out to be low-voltage nets |
 | 2 | `J2` symbol: pin 4 `VGL` → **NC**, audit the other 23 names | Circuit is correct; the symbol caused a false finding |
 | 18 | Resolve 6 `lib_symbol_mismatch`; **regenerate BOM / netlist / gerbers** | Artefacts are 3–5 weeks stale and materially wrong |
-| 17 | ✅ **`N8R8` fitted; IO35–37 not broken out** (no pads/vias), so nothing loads the octal-PSRAM bus (§6.13) | — |
+| 17 | ✅ **`N16R8` fitted; IO35–37 not broken out** (no pads/vias), so nothing loads the octal-PSRAM bus (§6.13) | — |
 | 20 | **Bench-measure `USB_STAT` unplugged** — expect 1.98 V | ~0.93 V means TP4056 ESD backfeed; its datasheet doesn't rate those pins |
 
 **Optional:**
@@ -611,7 +611,7 @@ P+ ──[R1 100 Ω]──┬── U5.5  (DW01A VCC)
 
 | # | Item | Why it was wrong |
 |---|---|---|
-| 13 | `L2` inductor | Peak current is 23 % of I_LIM, not near it — and `74479325207247` I_sat 2.7 A confirms 6.6× margin ✅ |
+| 13 | `L2` inductor | Peak current is 23 % of I_LIM, not near it — and `VLS252010HBU-4R7M` I_sat 1.55 A confirms 3.8× margin ✅ |
 | 16 | `CR1–CR3` footprint | TI `DYF` **is** SOD-323; your footprint is correct |
 | 22 | `EPD_CS` pull-up | Glitch is a *driven static low* — no SCK edges, so nothing is clocked; a pull-up can't override 20 mA anyway |
 | 23 | `SW` net-class clearance | I quoted IPC column B2 (uncoated); under solder mask it's **B4 = 0.13 mm**, so 0.15 mm passes. *Residual:* tent vias on `/PREVGH` + `/PREVGL`, and don't route them adjacent |
@@ -775,7 +775,9 @@ With the touch panel on a flex cable *and* the bus exposed on `J6`, 100–200 pF
 
 33 Ω series (`R21`–`R26`) with ~30–40 Ω ESP32 output impedance gives ~65–73 Ω source against a ~60 Ω trace — **slightly over-damped, which is exactly right** for EMC. 10 k pull-ups on DAT0–3 + CMD ✔; **CLK correctly has no pull-up** ✔. RC edge (33 Ω × ~15 pF ≈ 1 ns) is negligible against a 38 ns bit period at 26 MHz. ✔
 
-**Nit:** `J7.4 (VDD)` is hard-wired to `3V3` with no power switch. An idle-but-powered microSD draws **0.2–1 mA** — that is 2–10× your entire deep-sleep budget. If shelf life matters, put the card's VDD on a load switch (or a GPIO-driven P-FET) so deep sleep can actually remove it. Also confirm `C36`/`C37` (0.1 µF + 4.7 µF on 3V3) are physically at the socket — the card needs local bulk for write bursts.
+**~~Nit~~ (resolved — see §6.15):** `J7.4 (VDD)` is **not** hard-wired to `3V3` — it is switched by `Q7` (P-FET high-side, gate = `SD_ACTIVATE`, 100 k pull-up) onto the `SD_VDD` rail, so deep sleep removes card power and the 0.2–1 mA idle draw is gated off. Local bulk on `SD_VDD` is `C36` (0.1 µF) + `C37` (1 µF); confirm both sit physically at the socket for write-burst current (§6.23 covers the 1 µF vs 2.2 µF trade).
+
+**microSD connector — swapped to push-push dual-source (post-layout).** `J7` was changed from the Hirose DM3AT-SF-PEJM5 (push-pull) to a project-built **dual-source footprint** (`microSD_dualsource:microSD_PushPush_TFPUSH-MEM2075`) accepting the SHOU HAN **TF PUSH** (LCSC C393941, JLC builds) or GCT **MEM2075** (DigiKey). Both are **push-push** and **pin-identical** to the DM3AT (pad 1 = DAT2 … pad 8 = DAT1, 9 = shield/GND) — verified against all three datasheets, so the SDMMC nets, termination and gating above are unchanged. After re-placement: ERC 0 errors, DRC 0 unconnected; `J7` shows only the same benign 1-spoke GND thermals as the rest of the ground pours. The land carries both parts' anchor pads plus the MEM2075's two NPTH locating pegs (the TF PUSH is fully SMD, no pegs).
 
 ### 6.10 E-paper charge pump — topology verified correct
 
@@ -803,7 +805,7 @@ ESP32-S3-WROOM-1 datasheet v1.8, Table 3-1, footnote b:
 > *"For modules with Octal SPI PSRAM … pins **IO35, IO36, and IO37 are connected to the Octal SPI PSRAM and are not available for other uses**."*
 
 The old future-proofing plan (pads to reach IO35–37 on non-octal modules) was **dropped** —
-IO35–37 have no pads or vias on this board. On the fitted **`N8R8`** those three pins carry the
+IO35–37 have no pads or vias on this board. On the fitted **`N16R8`** those three pins carry the
 octal-PSRAM DDR bus, and because nothing connects to them there is **no stub to manage and no
 restriction to silkscreen** — the earlier concern is moot. (The `TP3`–`TP5` designators were
 later reused for the frontlight driver — `LED_SW`/`C−`/`W−` — not for these pins; see §6.18.)

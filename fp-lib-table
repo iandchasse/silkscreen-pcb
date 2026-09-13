@@ -8,4 +8,5 @@
   (lib (name "srn3010C-100m")(type "KiCad")(uri "${KIPRJMOD}/KiCad/9.0/3rdparty/SRN3010C-100M")(options "")(descr ""))
   (lib (name "mjtp1117")(type "KiCad")(uri "${KIPRJMOD}/KiCad/9.0/3rdparty/Mjtp1117")(options "")(descr ""))
   (lib (name "TPS923610DRLR")(type "KiCad")(uri "${KIPRJMOD}/KiCad/9.0/3rdparty/TPS923610DRLR/KiCADv6/footprints.pretty")(options "")(descr ""))
+  (lib (name "microSD_dualsource")(type "KiCad")(uri "${KIPRJMOD}/KiCad/9.0/3rdparty/microSD_dualsource.pretty")(options "")(descr "Unified push-push microSD: TF PUSH + MEM2075"))
 )

@@ -1,6 +1,6 @@
 # Silkscreen — Bill of Materials
 
-**Board-assembled parts: ~**\$47.63** per board** (163 placed parts, one-off qty-1 pricing). 
+**Board-assembled parts: ~**\$48.24** per board** (163 placed parts, one-off qty-1 pricing). 
 Add the off-board items below for a complete unit. Excludes 5 mounting holes and 5 test pads.
 
 > **Pricing sources:** `ODS` = from the project's own DigiKey sourcing sheet (mid-2026). `est` = estimate — **verify at the link before ordering.** Prices are qty-1 unit cost; passives and Chinese-market parts are far cheaper in reels/from LCSC. Links are DigiKey keyword searches (live stock). Sanity-check every MPN against its footprint.
@@ -13,7 +13,7 @@ Add the off-board items below for a complete unit. Excludes 5 mounting holes and
 | 1 | U12 | 74LVC1G04 | SN74LVC1G04DBVR | Texas Instruments | — | ~$0.10 | $0.10 | est | [DK](https://www.digikey.com/en/products/result?keywords=SN74LVC1G04DBVR) | inverter |
 | 1 | U13 | DS3231MZ | DS3231MZ+ | Analog Devices | LCSC clone (e.g. C9866) far cheaper | ~$5.50 | $5.50 | est | [DK](https://www.digikey.com/en/products/result?keywords=DS3231MZ%2B) | RTC |
 | 1 | U5 | DW01A | DW01A | Fortune | — | $0.10 | $0.10 | ODS | [DK](https://www.digikey.com/en/products/result?keywords=DW01A) | LCSC C8724; source LCSC |
-| 1 | U4 | ESP32-S3-WROOM-1 | ESP32-S3-WROOM-1-N8R8 | Espressif | N16R8 (more flash) | $5.66 | $5.66 | ODS | [DK](https://www.digikey.com/en/products/result?keywords=ESP32-S3-WROOM-1-N8R8) | octal-PSRAM; must be N8R8 |
+| 1 | U4 | ESP32-S3-WROOM-1 | ESP32-S3-WROOM-1-N16R8 | Espressif | N8R8 (less flash / cheaper) | $6.50 | $6.50 | ODS | [DK](https://www.digikey.com/en/products/result?keywords=ESP32-S3-WROOM-1-N16R8) | 16 MB flash + 8 MB octal PSRAM; must be an R8 (octal-PSRAM) part |
 | 1 | U3 | TLV75533PDBV | TLV75533PDBVR | Texas Instruments | — | ~$0.35 | $0.35 | est | [DK](https://www.digikey.com/en/products/result?keywords=TLV75533PDBVR) | 3.3V LDO |
 | 1 | U11 | TP4056-42-ESOP8 | TP4056-42-ESOP8 | Nanjing Extension | — | ~$0.15 | $0.15 | est | [DK](https://www.digikey.com/en/products/result?keywords=TP4056-42-ESOP8) | LCSC C382139; source LCSC |
 | 5 | U1 U6 U7 U8 U9 | TPD4E1U06DBVR | TPD4E1U06DBVR | Texas Instruments | — | $0.86 | $4.30 | ODS | [DK](https://www.digikey.com/en/products/result?keywords=296-35965-1-ND) |  |
@@ -27,7 +27,7 @@ Add the off-board items below for a complete unit. Excludes 5 mounting holes and
 | 1 | J5 | Conn_01x02 | B2B-PH-K-S(LF)(SN) | JST | A2001WR-2P (LCSC PH equiv) | ~$0.15 | $0.15 | est | [DK](https://www.digikey.com/en/products/result?keywords=B2B-PH-K-S%28LF%29%28SN%29) | 2p PH |
 | 1 | J2 | FH34SRJ-24S-0.5SH_50_ | FH34SRJ-24S-0.5SH(50) | Hirose | — | $2.26 | $2.26 | ODS | [DK](https://www.digikey.com/en/products/result?keywords=FH34SRJ-24S-0.5SH%2850%29) | 24p ZIF |
 | 2 | J3 J4 | FH34SRJ-6S-0.5SH_50_ | FH34SRJ-6S-0.5SH(50) | Hirose | — | $0.79 | $1.58 | ODS | [DK](https://www.digikey.com/en/products/result?keywords=H125773CT-ND) |  |
-| 1 | J7 | Micro_SD_Card | DM3AT-SF-PEJM5 | Hirose | — | $2.86 | $2.86 | ODS | [DK](https://www.digikey.com/en/products/result?keywords=DM3AT-SF-PEJM5) | microSD |
+| 1 | J7 | Micro_SD_Card | MEM2075-00-140-01-A | GCT | TF PUSH (LCSC C393941, ~$0.06 for JLC) | ~$1.92 | $1.92 | ODS | [DK](https://www.digikey.com/en/products/result?keywords=MEM2075-00-140-01-A) | push-push; unified footprint (DigiKey=MEM2075, JLC=TF PUSH) |
 | 1 | J6 | PPPC062LJBN-RC | PPPC062LJBN-RC | Sullins | A2541HWR-2x6P (LCSC, if OOS) | ~$1.50 | $1.50 | est | [DK](https://www.digikey.com/en/products/result?keywords=PPPC062LJBN-RC) | 2x6 header |
 | 1 | J1 | USB_C_Receptacle | USB4085-GF-A-060 | GCT | — | $0.91 | $0.91 | ODS | [DK](https://www.digikey.com/en/products/result?keywords=USB4085-GF-A-060) | USB-C; verify suffix |
 
@@ -59,7 +59,7 @@ Add the off-board items below for a complete unit. Excludes 5 mounting holes and
 | Qty | Refs | Value | MPN | Mfr | LCSC alt | Unit | Ext | src | Buy | Notes |
 |--:|---|---|---|---|---|--:|--:|:--:|---|---|
 | 1 | L1 | 22u | VLS3012HBX-220M | TDK | — | ~$0.50 | $0.50 | est | [DK](https://www.digikey.com/en/products/result?keywords=VLS3012HBX-220M) | 22uH shielded |
-| 1 | L2 | 4.7u | 74479325207247 | Wurth Elektronik | — | ~$0.30 | $0.30 | est | [DK](https://www.digikey.com/en/products/result?keywords=74479325207247) | 4.7uH WE-LQS 1008 |
+| 1 | L2 | 4.7u | VLS252010HBU-4R7M | TDK | LCSC C413592 | ~$0.07 | $0.07 | est | [LCSC](https://www.lcsc.com/product-detail/C413592.html) | 4.7uH metal-composite shielded 1008 (2.5×2.0×1.0 mm), Isat 1.55 A, Irms 1.01 A, DCR 274 mΩ |
 
 ## Fuse
 
@@ -71,8 +71,8 @@ Add the off-board items below for a complete unit. Excludes 5 mounting holes and
 
 | Qty | Refs | Value | MPN | Mfr | LCSC alt | Unit | Ext | src | Buy | Notes |
 |--:|---|---|---|---|---|--:|--:|:--:|---|---|
-| 10 | SW1 SW2 SW3 SW4 SW5 SW7 SW8 SW9 SW10 SW11 | SW_Push | MJTP1117 | APEM | SKHLLAA010 / TS365ZJ (cheaper, LCSC) | ~$0.12 | $1.20 | est | [DK](https://www.digikey.com/en/products/result?keywords=MJTP1117) | 6mm tactile |
-| 1 | SW6 | SW_Push | MJTP1243 | APEM | — | ~$0.20 | $0.20 | est | [DK](https://www.digikey.com/en/products/result?keywords=MJTP1243) | 6x3.5mm tactile |
+| 10 | SW1 SW2 SW3 SW4 SW5 SW7 SW8 SW9 SW10 SW11 | SW_Push | MJTP1117 | APEM | TS365ZJ (LCSC C557598, drop-in same land) / SKHLLAA010 | ~$0.12 | $1.20 | est | [DK](https://www.digikey.com/en/products/result?keywords=MJTP1117) | 6mm right-angle tactile |
+| 1 | SW6 | SW_Push | MJTP1243 | APEM | TS365ZJ (if populating) | — | — | DNP | [DK](https://www.digikey.com/en/products/result?keywords=MJTP1243) | **DNP** — 6x3.5mm side tactile, not populated |
 
 ## Resistors
 
@@ -128,12 +128,12 @@ Add the off-board items below for a complete unit. Excludes 5 mounting holes and
 | 4.26" e-paper w/ frontlight | AliExpress | $29.59 | GDEQ0426T82-FL01C |
 | 650 mAh LiPo (<6 mm) | Amazon | $10.06 | battery-agnostic; any 1-cell fits |
 
-**Rough single-unit total:** ~\$47.63 board parts + ~\$4.83 PCB + \$29.59 display + \$10.06 battery ≈ **~\$92.11** (qty 1, before assembly labor).
+**Rough single-unit total:** ~\$47.30 board parts + ~\$4.83 PCB + \$29.59 display + \$10.06 battery ≈ **~\$91.78** (qty 1, DigiKey-sourced, before assembly labor). *(microSD `J7` now the push-push GCT MEM2075 ~\$1.92, down from the \$2.86 Hirose DM3AT.)* JLC-assembled runs are far cheaper — see [`../production/bom-JLCPCB_PriceMaxed.xlsx`](../production/bom-JLCPCB_PriceMaxed.xlsx) (~\$6.86/board in parts at qty 25 with the LCSC-cheap equivalents: TF PUSH microSD, TS365ZJ tactiles, SD05C, etc.).
 
 ## Notes & caveats
 
 - **LCSC-cheaper / alternates:** buttons `MJTP1117` → **SKHLLAA010 / TS365ZJ**; JST `S2B-PH-K-S` → **A2001WR-2P**; header `PPPC062LJBN-RC` → **A2541HWR-2x6P** (if PPPC is out of stock at LCSC).
 - **LCSC-only** (not DigiKey): `DW01A` (C8724), `TP4056` (C382139), `FS8205A` (C32254). `DS3231MZ` genuine is pricey (~$5–8); LCSC clones are ~$1–2.
-- **Verify before ordering:** `J1` USB4085 suffix; `U4` = **N8R8**; `B5819W` DigiKey equiv `1N5819HW-7-F`.
+- **Verify before ordering:** `J1` USB4085 suffix; `U4` = **N16R8** (JLC C2913202); `B5819W` DigiKey equiv `1N5819HW-7-F`.
 - **DNP** (excluded from assembly): `R43 R45 R58 R66 R72 R74`.
 - `est` prices are placeholders for parts changed since the sourcing sheet was made (TLV75533P, TPS923610, TP4056, TPS2116, VLS3012HBX, SMAJ26A, PESD2IVN, DS3231MZ, LED, fuse, switches) — confirm at the links.

@@ -2,7 +2,7 @@ Qty,Designators,Value,Footprint,Manufacturer,MPN,LCSC alt,Unit USD,Ext USD,Price
 1,U12,74LVC1G04,SOT-23-5_HandSoldering,Texas Instruments,SN74LVC1G04DBVR,,0.10,0.10,est,https://www.digikey.com/en/products/result?keywords=SN74LVC1G04DBVR,,inverter
 1,U13,DS3231MZ,SOIC-8_3.9x4.9mm_P1.27mm,Analog Devices,DS3231MZ+,LCSC clone (e.g. C9866) far cheaper,5.50,5.50,est,https://www.digikey.com/en/products/result?keywords=DS3231MZ%2B,,RTC
 1,U5,DW01A,SOT-23-6_Handsoldering,Fortune,DW01A,,0.10,0.10,ODS,https://www.digikey.com/en/products/result?keywords=DW01A,,LCSC C8724; source LCSC
-1,U4,ESP32-S3-WROOM-1,ESP32-S3-WROOM-1,Espressif,ESP32-S3-WROOM-1-N8R8,N16R8 (more flash),5.66,5.66,ODS,https://www.digikey.com/en/products/result?keywords=ESP32-S3-WROOM-1-N8R8,,octal-PSRAM; must be N8R8
+1,U4,ESP32-S3-WROOM-1,ESP32-S3-WROOM-1,Espressif,ESP32-S3-WROOM-1-N16R8,N8R8 (less flash / cheaper),6.50,6.50,ODS,https://www.digikey.com/en/products/result?keywords=ESP32-S3-WROOM-1-N16R8,JLC C2913202,16MB flash + 8MB octal PSRAM; must be an R8 (octal-PSRAM) part
 1,U3,TLV75533PDBV,SOT-23-5_HandSoldering,Texas Instruments,TLV75533PDBVR,,0.35,0.35,est,https://www.digikey.com/en/products/result?keywords=TLV75533PDBVR,,3.3V LDO
 1,U11,TP4056-42-ESOP8,SOIC-8-1EP_3.9x4.9mm_P1.27mm_EP2.41x3.3mm_ThermalVias,Nanjing Extension,TP4056-42-ESOP8,,0.15,0.15,est,https://www.digikey.com/en/products/result?keywords=TP4056-42-ESOP8,,LCSC C382139; source LCSC
 5,U1 U6 U7 U8 U9,TPD4E1U06DBVR,SOT-23-6_Handsoldering,Texas Instruments,TPD4E1U06DBVR,,0.86,4.30,ODS,https://www.digikey.com/en/products/result?keywords=296-35965-1-ND,,
@@ -11,7 +11,7 @@ Qty,Designators,Value,Footprint,Manufacturer,MPN,LCSC alt,Unit USD,Ext USD,Price
 1,J5,Conn_01x02,JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal,JST,B2B-PH-K-S(LF)(SN),A2001WR-2P (LCSC PH equiv),0.15,0.15,est,https://www.digikey.com/en/products/result?keywords=B2B-PH-K-S%28LF%29%28SN%29,,2p PH
 1,J2,FH34SRJ-24S-0.5SH_50_,HRS_FH34SRJ-24S-0.5SH_50_,Hirose,FH34SRJ-24S-0.5SH(50),,2.26,2.26,ODS,https://www.digikey.com/en/products/result?keywords=FH34SRJ-24S-0.5SH%2850%29,,24p ZIF
 2,J3 J4,FH34SRJ-6S-0.5SH_50_,HRS_FH34SRJ-6S-0.5SH_50_,Hirose,FH34SRJ-6S-0.5SH(50),,0.79,1.58,ODS,https://www.digikey.com/en/products/result?keywords=H125773CT-ND,,
-1,J7,Micro_SD_Card,microSD_HC_Hirose_DM3AT-SF-PEJM5,Hirose,DM3AT-SF-PEJM5,,2.86,2.86,ODS,https://www.digikey.com/en/products/result?keywords=DM3AT-SF-PEJM5,,microSD
+1,J7,Micro_SD_Card,microSD_dualsource:microSD_PushPush_TFPUSH-MEM2075,GCT,MEM2075-00-140-01-A,TF PUSH (LCSC C393941 ~$0.06 for JLC),1.92,1.92,ODS,https://www.digikey.com/en/products/result?keywords=MEM2075-00-140-01-A,,push-push microSD; unified footprint (DigiKey=MEM2075, JLC=TF PUSH)
 1,J6,PPPC062LJBN-RC,CONN_PPPC062LJBN-RC_SUL,Sullins,PPPC062LJBN-RC,"A2541HWR-2x6P (LCSC, if OOS)",1.50,1.50,est,https://www.digikey.com/en/products/result?keywords=PPPC062LJBN-RC,,2x6 header
 1,J1,USB_C_Receptacle,USB_C_Receptacle_GCT_USB4085,GCT,USB4085-GF-A-060,,0.91,0.91,ODS,https://www.digikey.com/en/products/result?keywords=USB4085-GF-A-060,,USB-C; verify suffix
 3,Q3 Q7 Q8,AO3419,SOT-23_Handsoldering,Alpha & Omega,AO3419,IRLML6402,0.49,1.47,ODS,https://www.digikey.com/en/products/result?keywords=AO3419,,
@@ -23,10 +23,10 @@ Qty,Designators,Value,Footprint,Manufacturer,MPN,LCSC alt,Unit USD,Ext USD,Price
 1,D3,SMAJ26A,D_SMA,Littelfuse,SMAJ26A,,0.30,0.30,est,https://www.digikey.com/en/products/result?keywords=SMAJ26A,,TVS
 3,CR1 CR2 CR3,TSD05CDYFR,D_SOD-323_HandSoldering,Texas Instruments,TSD05CDYFR,GOODWORK SD05C,0.67,2.01,ODS,https://www.digikey.com/en/products/result?keywords=TSD05CDYFR,,
 1,L1,22u,IND_SRN3010C-100M,TDK,VLS3012HBX-220M,,0.50,0.50,est,https://www.digikey.com/en/products/result?keywords=VLS3012HBX-220M,,22uH shielded
-1,L2,4.7u,L_1008_2520Metric_Pad1.43x2.20mm_HandSolder,Wurth Elektronik,74479325207247,,0.30,0.30,est,https://www.digikey.com/en/products/result?keywords=74479325207247,,4.7uH WE-LQS 1008
+1,L2,4.7u,L_1008_2520Metric_Pad1.43x2.20mm_HandSolder,TDK,VLS252010HBU-4R7M,,0.07,0.07,est,https://www.lcsc.com/product-detail/C413592.html,LCSC C413592,4.7uH metal-composite shielded 1008 (2.5x2.0x1.0mm) Isat 1.55A Irms 1.01A DCR 274m
 1,F1,0805L100WR,Fuse_0805_2012Metric_Pad1.15x1.40mm_HandSolder,Littelfuse,0805L100WR,,0.30,0.30,est,https://www.digikey.com/en/products/result?keywords=0805L100WR,,1.0A PPTC
-10,SW1 SW2 SW3 SW4 SW5 SW7 SW8 SW9 SW10 SW11,SW_Push,MJTP1117,APEM,MJTP1117,"SKHLLAA010 / TS365ZJ (cheaper, LCSC)",0.12,1.20,est,https://www.digikey.com/en/products/result?keywords=MJTP1117,,6mm tactile
-1,SW6,SW_Push,SW_PUSH_1P1T_6x3.5mm_H4.3_APEM_MJTP1243,APEM,MJTP1243,,0.20,0.20,est,https://www.digikey.com/en/products/result?keywords=MJTP1243,,6x3.5mm tactile
+10,SW1 SW2 SW3 SW4 SW5 SW7 SW8 SW9 SW10 SW11,SW_Push,MJTP1117,APEM,MJTP1117,"TS365ZJ (LCSC C557598, ~$0.027, drop-in same 5.0x2.5 land) / SKHLLAA010",0.12,1.20,est,https://www.digikey.com/en/products/result?keywords=MJTP1117,,6mm right-angle tactile
+1,SW6,SW_Push,SW_PUSH_1P1T_6x3.5mm_H4.3_APEM_MJTP1243,APEM,MJTP1243,TS365ZJ (if populating),0,0,DNP,https://www.digikey.com/en/products/result?keywords=MJTP1243,,DNP - 6x3.5mm side tactile not populated
 6,R27 R42 R44 R46 R52 R73,0,R_0603_1608Metric_Pad0.98x0.95mm_HandSolder,,RES 0 0603,,0.10,0.60,ODS,https://www.digikey.com/en/products/result?keywords=RES%200%200603,,0 ohm jumper
 5,R43 R45 R58 R66 R74,0,R_0603_1608Metric_Pad0.98x0.95mm_HandSolder,,RES 0 0603,,0.10,0.50,ODS,https://www.digikey.com/en/products/result?keywords=RES%200%200603,DNP,0 ohm jumper
 4,R60 R61 R63 R64,100,R_0603_1608Metric_Pad0.98x0.95mm_HandSolder,,RES 100 0603,,0.10,0.40,ODS,https://www.digikey.com/en/products/result?keywords=RES%20100%200603,,

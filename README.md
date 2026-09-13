@@ -21,13 +21,13 @@ Current full plots: **[schematic PDF](docs/silkscreen_pcb_schematic.pdf)** ·
 
 | | |
 |---|---|
-| **MCU** | ESP32-S3-WROOM-1 (**N8R8**, 8 MB octal PSRAM), native USB — no UART bridge |
+| **MCU** | ESP32-S3-WROOM-1 (**N16R8**, 16 MB flash / 8 MB octal PSRAM), native USB — no UART bridge |
 | **Display** | 24-pin 0.5 mm ZIF for SPI e-paper; primary target 4.26" GDEQ426T82 family; panel-driven charge pump generates the ±15–22 V rails |
 | **Frontlight** | TPS923610 constant-current boost, warm/cool CCT blending via a single GPIO + inverter |
 | **Touch** | Optional I²C capacitive touch (for `-FT01C`-class panels) with a 0 Ω pin-swap mux |
 | **Power** | USB-C in → TP4056 charger → DW01A + FS8205A cell protection → TPS2116 priority mux → TLV75533P 3V3 LDO |
 | **Battery** | Bring-your-own single-cell LiPo; full on-board protection makes a bare cell safe |
-| **Storage** | microSD in 4-bit SDMMC, power-gated |
+| **Storage** | push-push microSD in 4-bit SDMMC, power-gated |
 | **Input** | 8 buttons on two ADC resistor ladders + power/boot/reset |
 | **RTC** | DS3231MZ (±2 ppm), VBAT-only mode |
 | **Board** | 2-layer, 60 × 111 mm, 1 oz Cu, 173 components |
