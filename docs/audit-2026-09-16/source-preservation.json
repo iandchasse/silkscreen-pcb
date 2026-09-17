@@ -1,0 +1,54 @@
+{
+  "checked_local": "2026-09-17T05:05:10.487516-04:00",
+  "files": [
+    {
+      "path": "silkscreen_pcb.kicad_sch",
+      "initial_sha256": "5ad733babda743ddf1a934b08dd83851c90d0ee94d76677222c02382f6712616",
+      "final_sha256": "5ad733babda743ddf1a934b08dd83851c90d0ee94d76677222c02382f6712616",
+      "unchanged": true,
+      "status": "present"
+    },
+    {
+      "path": "silkscreen_pcb.kicad_pcb",
+      "initial_sha256": "ed789584237c929fac5bd185ef2e24b2d161f2235a78c180e91b4f49e283cd1d",
+      "final_sha256": "ed789584237c929fac5bd185ef2e24b2d161f2235a78c180e91b4f49e283cd1d",
+      "unchanged": true,
+      "status": "present"
+    },
+    {
+      "path": "silkscreen_pcb.kicad_pro",
+      "initial_sha256": "7b8ab29bfc709f0e9cd3a83333748a2791f23e2f7f4e3afd5d8a8080843ac76b",
+      "final_sha256": "7b8ab29bfc709f0e9cd3a83333748a2791f23e2f7f4e3afd5d8a8080843ac76b",
+      "unchanged": true,
+      "status": "present"
+    },
+    {
+      "path": "_autosave-silkscreen_pcb.kicad_pcb",
+      "initial_sha256": "ed789584237c929fac5bd185ef2e24b2d161f2235a78c180e91b4f49e283cd1d",
+      "final_sha256": null,
+      "unchanged": null,
+      "status": "absent_ephemeral_autosave"
+    },
+    {
+      "path": "production/bom_JLC_upload.csv",
+      "initial_sha256": "2e60f41eb5b5493c03bbbbaa7a345acfc67a7940802ac280f5e5796184c69f70",
+      "final_sha256": "2e60f41eb5b5493c03bbbbaa7a345acfc67a7940802ac280f5e5796184c69f70",
+      "unchanged": true,
+      "status": "present"
+    },
+    {
+      "path": "production/positions.csv",
+      "initial_sha256": "b3a1c8abd31475c69dc8d05d040088eec1320c99364fa22cb12ef557dca5922b",
+      "final_sha256": "b3a1c8abd31475c69dc8d05d040088eec1320c99364fa22cb12ef557dca5922b",
+      "unchanged": true,
+      "status": "present"
+    },
+    {
+      "path": "production/Silkscreen_Reader_PCB_1.0.zip",
+      "initial_sha256": "292366990fa327d694ebcca4aef470beb40bef24e8ee8be3d41785ac41e8bf07",
+      "final_sha256": "292366990fa327d694ebcca4aef470beb40bef24e8ee8be3d41785ac41e8bf07",
+      "unchanged": true,
+      "status": "present"
+    }
+  ]
+}

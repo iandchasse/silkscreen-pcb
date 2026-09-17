@@ -1,0 +1,33 @@
+﻿Refs,Qty,MPN,Manufacturer,Ref unit $ (qty-1),Ext $,Price source,Note
+U4,1,ESP32-S3-WROOM-1-N16R8,Espressif,6.5,6.5,ODS,
+U3,1,TLV75533PDBVR,TI,0.35,0.35,est,
+U2,1,TPS2116DRLR,TI,0.6,0.6,est,
+U10,1,TPS923610DRLR,TI,0.7,0.7,est,
+U11,1,TP4056-42-ESOP8,TOPPOWER (LCSC-only),0.2,0.2,est,buy from LCSC
+U5,1,DW01A,Fortune/PUOLOP (LCSC-only),0.1,0.1,ODS,buy from LCSC
+U12,1,SN74LVC1G04DBVR,TI,0.1,0.1,est,
+U13,1,DS3231MZ+,Analog Devices,5.5,5.5,est,optional
+"U1,U6,U7,U8,U9",5,TPD4E1U06DBVR,TI,0.86,4.3,ODS,x5
+Q1,1,FS8205A,Fortune (LCSC-only),0.39,0.39,ODS,buy from LCSC
+"Q2,Q3,Q7,Q8",4,AO3401A,AOS,0.45,1.8,est,x4 (AO3419 also fine)
+"Q5,Q6,Q9",3,BSS138LT1G,onsemi,0.31,0.93,ODS,x3
+Q4,1,IRLML6346TRPBF,Infineon,0.45,0.45,est,
+"D4,D5,D6",3,B5819W / 1N5819HW-7-F,Diodes,0.22,0.66,ODS,x3
+D2,1,LTST-C150KRKT,Lite-On,0.3,0.3,est,"red 1206, pad1=cathode"
+D3,1,SMAJ26A,Littelfuse,0.3,0.3,est,
+D8,1,PESD2IVN-UX,Nexperia,0.2,0.2,est,
+CR1,1,SMF6.5CA,Littelfuse,0.35,0.35,est,"VBUS TVS, SOD-123FL, 6.5 V standoff (bidirectional)"
+"CR2,CR3",2,TSD05CDYFR,TI,0.67,1.34,ODS,"x2, 3V3 and P+ rails"
+J1,1,USB4085-GF-A,GCT,0.91,0.91,ODS,
+J2,1,FH34SRJ-24S-0.5SH(50),Hirose,2.26,2.26,ODS,
+"J3,J4",2,FH34SRJ-6S-0.5SH(50),Hirose,0.79,1.58,ODS,x2
+J5,1,S2B-PH-K-S(LF)(SN),JST,0.15,0.15,est,
+J6,1,PPPC062LJBN-RC,Sullins,1.5,1.5,est,
+J7,1,MEM2075-00-140-01-A,GCT,1.92,1.92,ODS,"push-push, fits the slotted land"
+SW1..SW11 (10),10,MJTP1117,APEM,0.12,1.2,est,x10
+SW6,0,MJTP1243,APEM,0.12,0.0,est,DNP
+L1,1,VLS3012HBX-220M,TDK,0.5,0.5,est,
+L2,1,VLS252012HBX-100M-1,TDK,0.3,0.3,est,"10 uH, 1.2 mm; VLS252010HBU-100M is the 1.0 mm alternative"
+F1,1,0805L100WR,Littelfuse,0.3,0.3,est,
+"resistors (76 pcs, 23 values)",76,0603 1% thick film (Yageo RC0603FR / Panasonic ERJ),—,0.1,7.6,ODS,per piece qty-1
+capacitors (35 pcs),35,"Samsung CL10/CL21, Yageo CC0603",—,0.13,4.55,ODS,per piece qty-1; 50V parts on panel rails

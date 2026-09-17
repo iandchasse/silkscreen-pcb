@@ -1,0 +1,62 @@
+{
+  "coordinate_system": "PCB top-view, relative to J7 contact-row anchor; B.Cu orientation included",
+  "board_holes": [
+    {
+      "center": [
+        -2.799999999999997,
+        -11.219999999999999
+      ],
+      "drill": [
+        2.25,
+        1.05
+      ]
+    },
+    {
+      "center": [
+        4.670000000000002,
+        -11.219999999999999
+      ],
+      "drill": [
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tf_nominal_pegs": [
+    [
+      -3.3,
+      -11.0
+    ],
+    [
+      4.7,
+      -11.0
+    ]
+  ],
+  "gct_nominal_pegs": [
+    [
+      -2.13,
+      -11.42
+    ],
+    [
+      4.67,
+      -11.42
+    ]
+  ],
+  "tf_translation_to_center_right_peg": [
+    -0.03,
+    -0.22
+  ],
+  "gct_translation_to_center_right_peg": [
+    0,
+    0.2
+  ],
+  "tf_nominal_contact_land_vertical_overlap_after_translation_mm": 1.3800000000000001,
+  "gct_nominal_contact_land_vertical_overlap_after_translation_mm": 1.3,
+  "qualification": "Overlap refers to recommended land rectangles, not a measured solder joint. Requires tolerance/actual-lot check.",
+  "gct_keepout_board_rect": [
+    57.27,
+    67.47,
+    77.05,
+    81.1
+  ]
+}

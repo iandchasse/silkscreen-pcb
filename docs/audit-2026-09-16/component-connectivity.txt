@@ -1,0 +1,673 @@
+C1 | 1n | Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder | ~
+  ('1', '', 'GND')
+  ('2', '', 'Net-(J1-SHIELD)')
+C2 | 10u | Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder | ~
+  ('2', '', 'GND')
+  ('1', '', 'USB_VBUS')
+C3 | 10u | Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder | ~
+  ('2', '', 'GND')
+  ('1', '', 'P+')
+C4 | 22u | Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder | ~
+  ('2', '', 'GND')
+  ('1', '', 'LDO_IN')
+C5 | 1u | Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder | ~
+  ('1', '', 'ESP32_EN')
+  ('2', '', 'GND')
+C6 | 22u | Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder | ~
+  ('1', '', '3V3')
+  ('2', '', 'GND')
+C7 | 0.1u | Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder | ~
+  ('2', '', 'B-')
+  ('1', '', 'P+')
+C8 | 1u | Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder | ~
+  ('1', '', 'BAT_MONIT')
+  ('2', '', 'GND')
+C9 | 1u/50V | Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder | ~
+  ('1', '', 'GND')
+  ('2', '', 'LED_SW')
+C10 | 4.7u | Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder | ~
+  ('2', '', '3V3')
+  ('1', '', 'GND')
+C11 | 4.7u/50V | Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder | ~
+  ('2', '', 'EINK_SW')
+  ('1', '', 'Net-(D4-K)')
+C12 | 4.7u | Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder | ~
+  ('1', '', 'GND')
+  ('2', '', 'LDO_IN')
+C13 | 4.7u/50V | Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder | ~
+  ('1', '', 'GND')
+  ('2', '', 'Net-(C13-Pad2)')
+C14 | 4.7u/50V | Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder | ~
+  ('1', '', 'GND')
+  ('2', '', 'PREVGH')
+C15 | 4.7u/50V | Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder | ~
+  ('1', '', 'GND')
+  ('2', '', 'Net-(C15-Pad2)')
+C16 | 4.7u/50V | Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder | ~
+  ('1', '', 'GND')
+  ('2', '', 'PREVGL')
+C17 | 4.7u/50V | Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder | ~
+  ('1', '', 'GND')
+  ('2', '', 'Net-(C17-Pad2)')
+C18 | 1u | Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder | ~
+  ('1', '', 'GND')
+  ('2', '', 'Net-(C18-Pad2)')
+C19 | 1u | Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder | ~
+  ('1', '', 'GND')
+  ('2', '', 'Net-(C19-Pad2)')
+C20 | 1u/50V | Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder | ~
+  ('1', '', 'GND')
+  ('2', '', 'Net-(C20-Pad2)')
+C21 | 1u | Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder | ~
+  ('1', '', '3V3')
+  ('2', '', 'GND')
+C22 | 1u | Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder | ~
+  ('2', '', '3V3')
+  ('1', '', 'GND')
+C23 | 2.2n | Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder | ~
+  ('2', '', 'GND')
+  ('1', '', 'USB_STAT')
+C24 | 100n | Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder | ~
+  ('1', '', '3V3')
+  ('2', '', 'GND')
+C25 | 1u | Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder | ~
+  ('1', '', 'GND')
+  ('2', '', 'USB_VBUS')
+C26 | 1u | Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder | ~
+  ('2', '', 'GND')
+  ('1', '', 'P+')
+C27 | 2.2n | Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder | ~
+  ('2', '', 'BUTTON_ADC_1')
+  ('1', '', 'GND')
+C28 | 2.2n | Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder | ~
+  ('2', '', 'BUTTON_ADC_2')
+  ('1', '', 'GND')
+C29 | 2.2n | Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder | ~
+  ('2', '', 'GND')
+  ('1', '', 'PWR_BUTTON')
+C30 | 0.1u | Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder | ~
+  ('1', '', '3V3')
+  ('2', '', 'GND')
+C31 | 100n | Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder | ~
+  ('2', '', 'GND')
+  ('1', '', 'LED_MONIT')
+C32 | 22u | Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder | ~
+  ('1', '', '3V3')
+  ('2', '', 'GND')
+C33 | 0.1u | Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder | ~
+  ('1', '', '3V3')
+  ('2', '', 'GND')
+C36 | 0.1u | Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder | ~
+  ('1', '', 'GND')
+  ('2', '', 'SD_VDD')
+C37 | 1u | Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder | ~
+  ('1', '', 'GND')
+  ('2', '', 'SD_VDD')
+CR1 | TSD05CDYFR | Diode_SMD:D_SOD-323_HandSoldering | https://www.ti.com/lit/gpn/tsd05c
+  ('2', 'GND', 'GND')
+  ('1', 'I/O', 'VBUS_PRE_FUSE')
+CR2 | TSD05CDYFR | Diode_SMD:D_SOD-323_HandSoldering | https://www.ti.com/lit/gpn/tsd05c
+  ('1', 'I/O', '3V3')
+  ('2', 'GND', 'GND')
+CR3 | TSD05CDYFR | Diode_SMD:D_SOD-323_HandSoldering | https://www.ti.com/lit/gpn/tsd05c
+  ('2', 'GND', 'GND')
+  ('1', 'I/O', 'P+')
+D2 | LED | LED_SMD:LED_1206_3216Metric_Pad1.42x1.75mm_HandSolder | ~
+  ('1', 'K', 'Net-(D2-K)')
+  ('2', 'A', 'USB_VBUS')
+D3 | SMAJ26A | Diode_SMD:D_SMA | https://www.littelfuse.com/media?resourcetype=datasheets&itemid=75e32973-b177-4ee3-a0ff-cedaf1abdb93&filename=smaj-datasheet
+  ('2', 'A2', 'GND')
+  ('1', 'A1', 'LED_SW')
+D4 | B5819W | Diode_SMD:D_SOD-123 | http://www.mccsemi.com/up_pdf/MBR0520~MBR0580(SOD123).pdf
+  ('1', 'K', 'Net-(D4-K)')
+  ('2', 'A', 'PREVGL')
+D5 | B5819W | Diode_SMD:D_SOD-123 | http://www.mccsemi.com/up_pdf/MBR0520~MBR0580(SOD123).pdf
+  ('2', 'A', 'EINK_SW')
+  ('1', 'K', 'PREVGH')
+D6 | B5819W | Diode_SMD:D_SOD-123 | http://www.mccsemi.com/up_pdf/MBR0520~MBR0580(SOD123).pdf
+  ('1', 'K', 'GND')
+  ('2', 'A', 'Net-(D4-K)')
+D8 | PESD2IVN-UX | Package_TO_SOT_SMD:SOT-323_SC-70_Handsoldering | ~
+  ('1', 'A1', 'C-')
+  ('3', 'common', 'GND')
+  ('2', 'A2', 'W-')
+F1 | 0805L100WR | Fuse:Fuse_0805_2012Metric_Pad1.15x1.40mm_HandSolder | ~
+  ('2', '', 'USB_VBUS')
+  ('1', '', 'VBUS_PRE_FUSE')
+H1 | MountingHole_Pad | MountingHole:MountingHole_2.2mm_M2_DIN965_Pad_TopBottom | ~
+  ('1', '1', 'GND')
+H2 | MountingHole_Pad | MountingHole:MountingHole_2.2mm_M2_DIN965_Pad_TopBottom | ~
+  ('1', '1', 'GND')
+H3 | MountingHole_Pad | MountingHole:MountingHole_2.2mm_M2_DIN965_Pad_TopBottom | ~
+  ('1', '1', 'GND')
+H4 | MountingHole_Pad | MountingHole:MountingHole_2.2mm_M2_DIN965_Pad_TopBottom | ~
+  ('1', '1', 'GND')
+H5 | MountingHole_Pad | MountingHole:MountingHole_2.2mm_M2_DIN965_Pad_TopBottom | ~
+  ('1', '1', 'GND')
+J1 | USB_C_Receptacle | Connector_USB:USB_C_Receptacle_GCT_USB4085 | https://www.usb.org/sites/default/files/documents/usb_type-c.zip
+  ('A5', 'CC1', 'CC1')
+  ('B5', 'CC2', 'CC2')
+  ('A7', 'D-', 'DN')
+  ('B7', 'D-', 'DN')
+  ('A6', 'D+', 'DP')
+  ('B6', 'D+', 'DP')
+  ('A1', 'GND', 'GND')
+  ('A12', 'GND', 'GND')
+  ('B1', 'GND', 'GND')
+  ('B12', 'GND', 'GND')
+  ('S1', 'SHIELD', 'Net-(J1-SHIELD)')
+  ('A4', 'VBUS', 'VBUS_PRE_FUSE')
+  ('A9', 'VBUS', 'VBUS_PRE_FUSE')
+  ('B4', 'VBUS', 'VBUS_PRE_FUSE')
+  ('B9', 'VBUS', 'VBUS_PRE_FUSE')
+J2 | FH34SRJ-24S-0.5SH_50_ | FH34SRJ-24S-0.5SH(50):HRS_FH34SRJ-24S-0.5SH_50_ | None
+  ('2', '2', '/GDR')
+  ('3', '3', '/RESE')
+  ('15', '15', '3V3')
+  ('16', '16', '3V3')
+  ('9', '9', 'EPD_BUSY')
+  ('12', '12', 'EPD_CS')
+  ('11', '11', 'EPD_DC')
+  ('10', '10', 'EPD_RST')
+  ('17', '17', 'GND')
+  ('8', '8', 'GND')
+  ('S1', 'SHIELD', 'GND')
+  ('S2', 'SHIELD__1', 'GND')
+  ('20', '20', 'Net-(C13-Pad2)')
+  ('22', '22', 'Net-(C15-Pad2)')
+  ('5', '5', 'Net-(C17-Pad2)')
+  ('18', '18', 'Net-(C18-Pad2)')
+  ('19', '19', 'Net-(C19-Pad2)')
+  ('24', '24', 'Net-(C20-Pad2)')
+  ('21', '21', 'PREVGH')
+  ('23', '23', 'PREVGL')
+  ('14', '14', 'SPI_MOSI')
+  ('13', '13', 'SPI_SCK')
+  ('1', '1', 'unconnected-(J2-Pad1)')
+  ('4', '4', 'unconnected-(J2-Pad4)')
+  ('6', '6', 'unconnected-(J2-Pad6)')
+  ('7', '7', 'unconnected-(J2-Pad7)')
+J3 | FH34SRJ-6S-0.5SH_50_ | FH34SRJ-6S-0.5SH(50):HRS_FH34SRJ-6S-0.5SH_50_ | None
+  ('2', '2', 'C-')
+  ('S1', 'SHIELD', 'GND')
+  ('S2', 'SHIELD', 'GND')
+  ('1', '1', 'LED_SW')
+  ('5', '5', 'LED_SW')
+  ('6', '6', 'W-')
+  ('3', '3', 'unconnected-(J3-Pad3)')
+  ('4', '4', 'unconnected-(J3-Pad4)')
+J4 | FH34SRJ-6S-0.5SH_50_ | FH34SRJ-6S-0.5SH(50):HRS_FH34SRJ-6S-0.5SH_50_ | None
+  ('2', '2', '/PIN_2')
+  ('4', '4', '/PIN_4')
+  ('5', '5', '/PIN_5')
+  ('6', '6', '/PIN_6')
+  ('1', '1', 'GND')
+  ('S1', 'SHIELD', 'GND')
+  ('S2', 'SHIELD', 'GND')
+  ('3', '3', 'TP_RST')
+J5 | Conn_01x02 | Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal | ~
+  ('2', 'Pin_2', 'B+')
+  ('1', 'Pin_1', 'B-')
+J6 | PPPC062LJBN-RC | PPPC_12:CONN_PPPC062LJBN-RC_SUL | PPPC062LJBN-RC
+  ('7', '7', '3V3')
+  ('11', '11', 'C-')
+  ('1', '1', 'GND')
+  ('4', '4', 'GND')
+  ('10', '10', 'I2C_SCL')
+  ('8', '8', 'I2C_SDA')
+  ('5', '5', 'LED_SW')
+  ('12', '12', 'P+')
+  ('9', '9', 'UNUSED_GPIO_3')
+  ('3', '3', 'UNUSED_GPIO_45')
+  ('2', '2', 'UNUSED_GPIO_46')
+  ('6', '6', 'W-')
+J7 | Micro_SD_Card | microSD_dualsource:microSD_PushPush_TFPUSH-MEM2075 | https://www.we-online.com/components/products/datasheet/693072010801.pdf
+  ('6', 'VSS', 'GND')
+  ('9', 'SHIELD', 'GND')
+  ('5', 'CLK', 'SD_CLK')
+  ('3', 'CMD', 'SD_CMD')
+  ('7', 'DAT0', 'SD_DAT0')
+  ('8', 'DAT1', 'SD_DAT1')
+  ('1', 'DAT2', 'SD_DAT2')
+  ('2', 'DAT3/CD', 'SD_DAT3')
+  ('4', 'VDD', 'SD_VDD')
+L1 | 22u | srn3010C-100m:IND_SRN3010C-100M | ~
+  ('2', '2', '3V3')
+  ('1', '1', 'EINK_SW')
+L2 | 4.7u | Inductor_SMD:L_1008_2520Metric_Pad1.43x2.20mm_HandSolder | ~
+  ('1', '1', 'LDO_IN')
+  ('2', '2', 'TPS_SW_NODE')
+Q1 | FS8205A | Package_TO_SOT_SMD:SOT-23-6_Handsoldering | FS8205A
+  ('1', '1', 'B-')
+  ('3', '3', 'GND')
+  ('4', '4', 'Net-(U5-OC)')
+  ('6', '6', 'Net-(U5-OD)')
+  ('2', '2', 'unconnected-(Q1-Pad2)')
+  ('5', '5', 'unconnected-(Q1-Pad5)')
+Q3 | AO3419 | Package_TO_SOT_SMD:SOT-23_Handsoldering | https://www.infineon.com/dgdl/irlml6402pbf.pdf?fileId=5546d462533600a401535668d5c2263c
+  ('2', 'S', 'B+')
+  ('3', 'D', 'Net-(Q3-D)')
+  ('1', 'G', 'Net-(Q3-G)')
+Q4 | BSS138 | Package_TO_SOT_SMD:SOT-23 | https://www.onsemi.com/pub/Collateral/BSS138-D.PDF
+  ('1', 'G', '/GDR')
+  ('2', 'S', '/RESE')
+  ('3', 'D', 'EINK_SW')
+Q5 | BSS138 | Package_TO_SOT_SMD:SOT-23 | https://www.onsemi.com/pub/Collateral/BSS138-D.PDF
+  ('1', 'G', 'COLOR_SEL')
+  ('2', 'S', 'Net-(Q5-S)')
+  ('3', 'D', 'W-')
+Q6 | BSS138 | Package_TO_SOT_SMD:SOT-23 | https://www.onsemi.com/pub/Collateral/BSS138-D.PDF
+  ('1', 'G', '/COLOR_SEL_INV')
+  ('3', 'D', 'C-')
+  ('2', 'S', 'Net-(Q5-S)')
+Q7 | AO3419 | Package_TO_SOT_SMD:SOT-23_Handsoldering | https://www.infineon.com/dgdl/irlml6402pbf.pdf?fileId=5546d462533600a401535668d5c2263c
+  ('2', 'S', '3V3')
+  ('1', 'G', 'Net-(Q7-G)')
+  ('3', 'D', 'SD_VDD')
+Q8 | AO3419 | Package_TO_SOT_SMD:SOT-23_Handsoldering | https://www.infineon.com/dgdl/irlml6402pbf.pdf?fileId=5546d462533600a401535668d5c2263c
+  ('1', 'G', 'GND')
+  ('3', 'D', 'Net-(Q8-D)')
+  ('2', 'S', 'P+')
+R1 | 1M | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'GND')
+  ('2', '', 'Net-(J1-SHIELD)')
+R2 | 5.1k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'CC2')
+  ('2', '', 'GND')
+R3 | 5.1k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'CC1')
+  ('2', '', 'GND')
+R4 | 10k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', '3V3')
+  ('1', '', 'BUTTON_ADC_1')
+R5 | 10k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', '3V3')
+  ('1', '', 'EPD_RST')
+R6 | 4.7k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'GND')
+  ('1', '', 'Net-(U11-PROG)')
+R7 | 10k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', '3V3')
+  ('2', '', 'ESP32_EN')
+R8 | 10k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'SD_DAT0')
+  ('2', '', 'SD_VDD')
+R9 | 10k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'SD_DAT1')
+  ('2', '', 'SD_VDD')
+R10 | 1M | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'BAT_MONIT')
+  ('2', '', 'GND')
+R11 | 12k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'BUTTON_ADC_2')
+  ('1', '', 'Net-(R11-Pad1)')
+R12 | 1M | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'BAT_MONIT')
+  ('1', '', 'P+')
+R13 | 10k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', '3V3')
+  ('2', '', 'ESP32_IO0')
+R14 | 3 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', '/RESE')
+  ('1', '', 'GND')
+R15 | 10k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', '/GDR')
+  ('1', '', 'GND')
+R16 | 1k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'GND')
+  ('2', '', 'Net-(U5-CS)')
+R17 | 150k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'ST')
+  ('2', '', 'USB_STAT')
+R18 | 5.6k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'BUTTON_ADC_1')
+  ('1', '', 'Net-(R18-Pad1)')
+R19 | 20k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'BUTTON_ADC_1')
+  ('1', '', 'Net-(R19-Pad1)')
+R20 | 56k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'BUTTON_ADC_1')
+  ('1', '', 'Net-(R20-Pad1)')
+R21 | 33 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'Net-(U4-IO17)')
+  ('2', '', 'SD_DAT2')
+R22 | 33 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'Net-(U4-IO16)')
+  ('2', '', 'SD_DAT3')
+R23 | 33 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'Net-(U4-IO15)')
+  ('2', '', 'SD_CMD')
+R24 | 33 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'Net-(U4-IO7)')
+  ('2', '', 'SD_CLK')
+R25 | 33 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'Net-(U4-IO6)')
+  ('2', '', 'SD_DAT0')
+R26 | 33 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'Net-(U4-IO5)')
+  ('2', '', 'SD_DAT1')
+R27 | 0 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'Net-(Q3-D)')
+  ('1', '', 'Net-(Q8-D)')
+R28 | 10k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', '3V3')
+  ('1', '', 'BUTTON_ADC_2')
+R29 | 33 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'Net-(U4-IO12)')
+  ('1', '', 'SPI_MOSI')
+R30 | 33 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'Net-(U4-IO13)')
+  ('1', '', 'SPI_SCK')
+R31 | 33 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'EPD_CS')
+  ('2', '', 'Net-(U4-IO14)')
+R32 | 33 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'EPD_DC')
+  ('2', '', 'Net-(U4-IO21)')
+R33 | 33 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'EPD_RST')
+  ('2', '', 'Net-(U4-IO47)')
+R34 | 33 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'EPD_BUSY')
+  ('2', '', 'Net-(U4-IO48)')
+R35 | 33k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'BUTTON_ADC_2')
+  ('1', '', 'Net-(R35-Pad1)')
+R36 | 68k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'BUTTON_ADC_2')
+  ('1', '', 'Net-(R36-Pad1)')
+R37 | 13.3 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'GND')
+  ('1', '', 'Net-(Q5-S)')
+R38 | 300k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', '/PR1')
+  ('1', '', 'USB_VBUS')
+R39 | 1M | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'LED_MONIT')
+  ('1', '', 'LED_SW')
+R40 | 100k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', '3V3')
+  ('1', '', 'Net-(Q7-G)')
+R41 | 120k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'GND')
+  ('1', '', 'LED_MONIT')
+R42 | 0 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', '/PIN_2')
+  ('1', '', '3V3')
+R43 | 0 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', '/PIN_2')
+  ('1', '', 'TP_INT')
+R44 | 0 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', '/PIN_4')
+  ('1', '', 'TP_INT')
+R45 | 0 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', '/PIN_5')
+  ('1', '', 'I2C_SCL')
+R46 | 0 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', '/PIN_5')
+  ('1', '', 'I2C_SDA')
+R47 | 2.2k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', '3V3')
+  ('2', '', 'I2C_SCL')
+R48 | 2.2k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', '3V3')
+  ('2', '', 'I2C_SDA')
+R49 | 1M | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'C-')
+  ('2', '', 'GND')
+R50 | 1M | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'GND')
+  ('1', '', 'W-')
+R51 | 100k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', '/PR1')
+  ('2', '', 'GND')
+R52 | 0 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', '/PIN_6')
+  ('1', '', 'I2C_SCL')
+R53 | 10k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'SD_DAT2')
+  ('2', '', 'SD_VDD')
+R54 | 10k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'SD_DAT3')
+  ('2', '', 'SD_VDD')
+R55 | 10k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'SD_CMD')
+  ('2', '', 'SD_VDD')
+R56 | 10k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'B-')
+  ('1', '', 'Net-(Q3-G)')
+R57 | 1M | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'B+')
+  ('1', '', 'Net-(Q3-G)')
+R58 | 0 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', '/PIN_6')
+  ('1', '', 'I2C_SDA')
+R59 | 2k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'GND')
+  ('1', '', 'Net-(D2-K)')
+R60 | 100 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'BUTTON_ADC_1')
+  ('1', '', 'Net-(R60-Pad1)')
+R61 | 100 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'BUTTON_ADC_2')
+  ('1', '', 'Net-(R61-Pad1)')
+R62 | 10k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'Net-(R62-Pad1)')
+  ('2', '', 'PWR_BUTTON')
+R63 | 100 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'ESP32_EN')
+  ('1', '', 'Net-(R63-Pad1)')
+R64 | 100 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'ESP32_IO0')
+  ('1', '', 'Net-(R64-Pad1)')
+R65 | 33 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'Net-(U4-IO46)')
+  ('2', '', 'UNUSED_GPIO_46')
+R66 | 0 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', '/PIN_4')
+  ('1', '', '3V3')
+R67 | 56k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'CHRG')
+  ('2', '', 'USB_STAT')
+R68 | 33 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'Net-(U4-IO3)')
+  ('1', '', 'UNUSED_GPIO_3')
+R69 | 33 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'Net-(U4-IO45)')
+  ('2', '', 'UNUSED_GPIO_45')
+R70 | 100k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', '3V3')
+  ('1', '', 'USB_STAT')
+R71 | 22k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'STDBY')
+  ('2', '', 'USB_STAT')
+R72 | 10k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'Net-(R36-Pad1)')
+  ('1', '', 'PWR_BUTTON')
+R73 | 0 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'GND')
+  ('2', '', 'Net-(R73-Pad2)')
+R74 | 0 | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', '3V3')
+  ('2', '', 'Net-(R73-Pad2)')
+R75 | 100k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('1', '', 'COLOR_SEL')
+  ('2', '', 'GND')
+R76 | 100k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'GND')
+  ('1', '', 'PWR_BUTTON')
+R77 | 100k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'GND')
+  ('1', '', 'SD_VDD')
+R78 | 1k | Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder | ~
+  ('2', '', 'Net-(Q7-G)')
+  ('1', '', 'SD_ACTIVATE')
+SW1 | SW_Push | mjtp1117:MJTP1117 | ~
+  ('1', '1', 'GND')
+  ('2', '2', 'Net-(R61-Pad1)')
+SW2 | SW_Push | mjtp1117:MJTP1117 | ~
+  ('1', '1', 'GND')
+  ('2', '2', 'Net-(R60-Pad1)')
+SW3 | SW_Push | mjtp1117:MJTP1117 | ~
+  ('1', '1', 'GND')
+  ('2', '2', 'Net-(R18-Pad1)')
+SW4 | SW_Push | mjtp1117:MJTP1117 | ~
+  ('1', '1', 'GND')
+  ('2', '2', 'Net-(R11-Pad1)')
+SW5 | SW_Push | mjtp1117:MJTP1117 | ~
+  ('1', '1', 'GND')
+  ('2', '2', 'Net-(R35-Pad1)')
+SW6 | SW_Push | Button_Switch_THT:SW_PUSH_1P1T_6x3.5mm_H4.3_APEM_MJTP1243 | ~
+  ('1', '1', 'GND')
+  ('2', '2', 'Net-(R64-Pad1)')
+SW7 | SW_Push | mjtp1117:MJTP1117 | ~
+  ('2', '2', 'Net-(R36-Pad1)')
+  ('1', '1', 'Net-(R73-Pad2)')
+SW8 | SW_Push | mjtp1117:MJTP1117 | ~
+  ('1', '1', 'GND')
+  ('2', '2', 'Net-(R19-Pad1)')
+SW9 | SW_Push | mjtp1117:MJTP1117 | ~
+  ('1', '1', 'GND')
+  ('2', '2', 'Net-(R20-Pad1)')
+SW10 | SW_Push | mjtp1117:MJTP1117 | ~
+  ('2', '2', '3V3')
+  ('1', '1', 'Net-(R62-Pad1)')
+SW11 | SW_Push | mjtp1117:MJTP1117 | ~
+  ('1', '1', 'GND')
+  ('2', '2', 'Net-(R63-Pad1)')
+TP1 | TestPoint | TestPoint:TestPoint_Pad_1.0x1.0mm | ~
+  ('1', '1', 'RX')
+TP2 | TestPoint | TestPoint:TestPoint_Pad_1.0x1.0mm | ~
+  ('1', '1', 'TX')
+TP3 | TestPoint | Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical | ~
+  ('1', '1', 'LED_SW')
+TP4 | TestPoint | Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical | ~
+  ('1', '1', 'C-')
+TP5 | TestPoint | Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical | ~
+  ('1', '1', 'W-')
+U1 | TPD4E1U06DBVR | Package_TO_SOT_SMD:SOT-23-6_Handsoldering | None
+  ('2', '', 'GND')
+  ('4', '', 'SD_CLK')
+  ('6', '', 'SD_CMD')
+  ('3', '', 'SD_DAT2')
+  ('1', '', 'SD_DAT3')
+U2 | TPS2116DRL | Package_TO_SOT_SMD:SOT-583-8 | https://www.ti.com/lit/ds/symlink/tps2116.pdf
+  ('4', 'PR1', '/PR1')
+  ('1', 'GND', 'GND')
+  ('2', 'VOUT', 'LDO_IN')
+  ('7', 'VOUT', 'LDO_IN')
+  ('6', 'VIN2', 'P+')
+  ('8', 'ST', 'ST')
+  ('3', 'VIN1', 'USB_VBUS')
+  ('5', 'MODE', 'USB_VBUS')
+U3 | TLV75533PDBV | Package_TO_SOT_SMD:SOT-23-5_HandSoldering | http://www.ti.com/lit/ds/symlink/tlv755p.pdf
+  ('5', 'OUT', '3V3')
+  ('2', 'GND', 'GND')
+  ('1', 'IN', 'LDO_IN')
+  ('3', 'EN', 'LDO_IN')
+  ('4', 'NC', 'unconnected-(U3-NC-Pad4)')
+U4 | ESP32-S3-WROOM-1 | RF_Module:ESP32-S3-WROOM-1 | https://www.espressif.com/sites/default/files/documentation/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf
+  ('2', '3V3', '3V3')
+  ('12', 'IO8', 'BAT_MONIT')
+  ('39', 'IO1', 'BUTTON_ADC_1')
+  ('4', 'IO4', 'BUTTON_ADC_2')
+  ('33', 'IO40', 'COLOR_SEL')
+  ('13', 'USB_D-', 'DN')
+  ('14', 'USB_D+', 'DP')
+  ('3', 'EN', 'ESP32_EN')
+  ('27', 'IO0', 'ESP32_IO0')
+  ('1', 'GND', 'GND')
+  ('40', 'GND', 'GND')
+  ('41', 'GND', 'GND')
+  ('32', 'IO39', 'I2C_SCL')
+  ('31', 'IO38', 'I2C_SDA')
+  ('38', 'IO2', 'LED_MONIT')
+  ('15', 'IO3', 'Net-(U4-IO3)')
+  ('5', 'IO5', 'Net-(U4-IO5)')
+  ('6', 'IO6', 'Net-(U4-IO6)')
+  ('7', 'IO7', 'Net-(U4-IO7)')
+  ('20', 'IO12', 'Net-(U4-IO12)')
+  ('21', 'IO13', 'Net-(U4-IO13)')
+  ('22', 'IO14', 'Net-(U4-IO14)')
+  ('8', 'IO15', 'Net-(U4-IO15)')
+  ('9', 'IO16', 'Net-(U4-IO16)')
+  ('10', 'IO17', 'Net-(U4-IO17)')
+  ('23', 'IO21', 'Net-(U4-IO21)')
+  ('26', 'IO45', 'Net-(U4-IO45)')
+  ('16', 'IO46', 'Net-(U4-IO46)')
+  ('24', 'IO47', 'Net-(U4-IO47)')
+  ('25', 'IO48', 'Net-(U4-IO48)')
+  ('35', 'IO42', 'PWM_LED')
+  ('11', 'IO18', 'PWR_BUTTON')
+  ('36', 'RXD0', 'RX')
+  ('18', 'IO10', 'SD_ACTIVATE')
+  ('34', 'IO41', 'TP_INT')
+  ('19', 'IO11', 'TP_RST')
+  ('37', 'TXD0', 'TX')
+  ('17', 'IO9', 'USB_STAT')
+  ('28', 'IO35', 'unconnected-(U4-IO35-Pad28)')
+  ('29', 'IO36', 'unconnected-(U4-IO36-Pad29)')
+  ('30', 'IO37', 'unconnected-(U4-IO37-Pad30)')
+U5 | DW01A | Package_TO_SOT_SMD:SOT-23-6_Handsoldering | https://hmsemi.com/downfile/DW01A.PDF
+  ('6', 'GND', 'B-')
+  ('2', 'CS', 'Net-(U5-CS)')
+  ('3', 'OC', 'Net-(U5-OC)')
+  ('1', 'OD', 'Net-(U5-OD)')
+  ('5', 'VCC', 'P+')
+  ('4', 'TD', 'unconnected-(U5-TD-Pad4)')
+U6 | TPD4E1U06DBVR | Package_TO_SOT_SMD:SOT-23-6_Handsoldering | None
+  ('4', '', 'CC1')
+  ('3', '', 'CC2')
+  ('1', '', 'DN')
+  ('6', '', 'DP')
+  ('2', '', 'GND')
+U7 | TPD4E1U06DBVR | Package_TO_SOT_SMD:SOT-23-6_Handsoldering | None
+  ('1', '', '/PIN_4')
+  ('4', '', '/PIN_5')
+  ('6', '', '/PIN_6')
+  ('2', '', 'GND')
+  ('3', '', 'TP_RST')
+U8 | TPD4E1U06DBVR | Package_TO_SOT_SMD:SOT-23-6_Handsoldering | None
+  ('2', '', 'GND')
+  ('3', '', 'I2C_SCL')
+  ('4', '', 'I2C_SDA')
+  ('6', '', 'UNUSED_GPIO_3')
+  ('1', '', 'UNUSED_GPIO_45')
+U9 | TPD4E1U06DBVR | Package_TO_SOT_SMD:SOT-23-6_Handsoldering | None
+  ('2', '', 'GND')
+  ('3', '', 'SD_DAT0')
+  ('1', '', 'SD_DAT1')
+  ('6', '', 'UNUSED_GPIO_46')
+  ('4', '', 'unconnected-(U9-Pad4)')
+U10 | TPS923610DRLR | TPS923610DRLR:U_DRL0006A_6L_TEX-M | https://www.ti.com/lit/gpn/tps923610
+  ('4', 'GND', 'GND')
+  ('1', 'VIN', 'LDO_IN')
+  ('5', 'VOUT', 'LED_SW')
+  ('3', 'FB', 'Net-(Q5-S)')
+  ('2', 'ADIM', 'PWM_LED')
+  ('6', 'SW', 'TPS_SW_NODE')
+U11 | TP4056-42-ESOP8 | Package_SO:SOIC-8-1EP_3.9x4.9mm_P1.27mm_EP2.41x3.3mm_ThermalVias | https://www.lcsc.com/datasheet/lcsc_datasheet_2410121619_TOPPOWER-Nanjing-Extension-Microelectronics-TP4056-42-ESOP8_C16581.pdf
+  ('7', '~{CHRG}', 'CHRG')
+  ('1', 'TEMP', 'GND')
+  ('3', 'GND', 'GND')
+  ('9', 'EPAD', 'GND')
+  ('2', 'PROG', 'Net-(U11-PROG)')
+  ('5', 'BAT', 'P+')
+  ('6', '~{STDBY}', 'STDBY')
+  ('4', 'V_{CC}', 'USB_VBUS')
+  ('8', 'CE', 'USB_VBUS')
+U12 | 74LVC1G04 | Package_TO_SOT_SMD:SOT-23-5_HandSoldering | https://www.ti.com/lit/ds/symlink/sn74lvc1g04.pdf
+  ('4', '', '/COLOR_SEL_INV')
+  ('5', 'VCC', '3V3')
+  ('2', '', 'COLOR_SEL')
+  ('3', 'GND', 'GND')
+  ('1', 'NC', 'unconnected-(U12-NC-Pad1)')
+U13 | DS3231MZ | Package_SO:SOIC-8_3.9x4.9mm_P1.27mm | http://datasheets.maximintegrated.com/en/ds/DS3231M.pdf
+  ('6', 'VBAT', '3V3')
+  ('2', 'VCC', 'GND')
+  ('5', 'GND', 'GND')
+  ('8', 'SCL', 'I2C_SCL')
+  ('7', 'SDA', 'I2C_SDA')
+  ('1', '32KHZ', 'unconnected-(U13-32KHZ-Pad1)')
+  ('3', '~{INT}/SQW', 'unconnected-(U13-~{INT}/SQW-Pad3)')
+  ('4', '~{RST}', 'unconnected-(U13-~{RST}-Pad4)')

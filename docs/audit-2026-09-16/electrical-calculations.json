@@ -1,0 +1,217 @@
+{
+  "USB_STAT": {
+    "USB idle/no active status": {
+      "nominal_V": 3.3,
+      "resistor_only_min_V": 3.3,
+      "resistor_only_max_V": 3.3
+    },
+    "battery selected": {
+      "nominal_V": 1.98,
+      "resistor_only_min_V": 1.964128256513026,
+      "resistor_only_max_V": 1.9958083832335327
+    },
+    "USB charging": {
+      "nominal_V": 1.1846153846153846,
+      "resistor_only_min_V": 1.1694707236001023,
+      "resistor_only_max_V": 1.1998457186937515
+    },
+    "USB charged": {
+      "nominal_V": 0.5950819672131148,
+      "resistor_only_min_V": 0.5853884997556605,
+      "resistor_only_max_V": 0.6049001814882032
+    },
+    "weak USB; battery selected and charging": {
+      "nominal_V": 0.9558620689655172,
+      "resistor_only_min_V": 0.9423391250600919,
+      "resistor_only_max_V": 0.9694992728028257
+    },
+    "weak USB; battery selected and charged": {
+      "nominal_V": 0.531219512195122,
+      "resistor_only_min_V": 0.5223654246814283,
+      "resistor_only_max_V": 0.540194489465154
+    }
+  },
+  "USB_STAT_limitations": "Ideal low outputs; fixed 3.3V supply; only resistor tolerance included. ADC error, supply error, status output VOL/leakage excluded. Not production firmware thresholds. Weak-source near-full states can overlap after real errors.",
+  "buttons_single_press": {
+    "BUTTON_ADC_1": [
+      {
+        "resistor_ohm": 100,
+        "nominal_V": 0.032673267326732675
+      },
+      {
+        "resistor_ohm": 5600,
+        "nominal_V": 1.1846153846153846
+      },
+      {
+        "resistor_ohm": 20000,
+        "nominal_V": 2.1999999999999997
+      },
+      {
+        "resistor_ohm": 56000,
+        "nominal_V": 2.8
+      }
+    ],
+    "BUTTON_ADC_2": [
+      {
+        "resistor_ohm": 100,
+        "nominal_V": 0.032673267326732675
+      },
+      {
+        "resistor_ohm": 12000,
+        "nominal_V": 1.8
+      },
+      {
+        "resistor_ohm": 33000,
+        "nominal_V": 2.5325581395348835
+      },
+      {
+        "resistor_ohm": 68000,
+        "nominal_V": 2.876923076923077
+      }
+    ]
+  },
+  "mux_threshold_V": {
+    "nominal": 4,
+    "min": 3.6253465346534655,
+    "max": 4.385454545454546
+  },
+  "LED_current_mA": {
+    "nominal": 15.037593984962406,
+    "min": 14.516489242909252,
+    "max": 15.645173539910383,
+    "14.3ohm_max": 14.55110546019637
+  },
+  "LDO_power_at_5V_W": {
+    "0.15": 0.255,
+    "0.25": 0.425,
+    "0.35": 0.595,
+    "0.4": 0.68,
+    "0.5": 0.85
+  },
+  "RC_time_s": {
+    "BAT_MONIT": 0.5,
+    "LED_MONIT": 0.010714285714285713,
+    "SD_VDD_bleeder_no_card": 0.11
+  },
+  "LED_current_alternatives": [
+    {
+      "R_ohm": 13.3,
+      "R_tolerance_fraction": 0.01,
+      "nominal_mA": 15.037593984962406,
+      "min_mA": 14.516489242909252,
+      "max_mA": 15.645173539910383,
+      "max_resistor_power_mW": 3.2229057492215385
+    },
+    {
+      "R_ohm": 14.3,
+      "R_tolerance_fraction": 0.01,
+      "nominal_mA": 13.986013986013985,
+      "min_mA": 13.5013501350135,
+      "max_mA": 14.55110546019637,
+      "max_resistor_power_mW": 2.9975277248004515
+    },
+    {
+      "R_ohm": 15,
+      "R_tolerance_fraction": 0.01,
+      "nominal_mA": 13.333333333333334,
+      "min_mA": 12.87128712871287,
+      "max_mA": 13.872053872053872,
+      "max_resistor_power_mW": 2.857643097643097
+    },
+    {
+      "R_ohm": 15,
+      "R_tolerance_fraction": 0.05,
+      "nominal_mA": 13.333333333333334,
+      "min_mA": 12.380952380952381,
+      "max_mA": 14.456140350877194,
+      "max_resistor_power_mW": 2.9779649122807017
+    },
+    {
+      "R_ohm": 16,
+      "R_tolerance_fraction": 0.01,
+      "nominal_mA": 12.5,
+      "min_mA": 12.066831683168317,
+      "max_mA": 13.005050505050505,
+      "max_resistor_power_mW": 2.679040404040404
+    },
+    {
+      "R_ohm": 18,
+      "R_tolerance_fraction": 0.01,
+      "nominal_mA": 11.11111111111111,
+      "min_mA": 10.726072607260726,
+      "max_mA": 11.560044893378226,
+      "max_resistor_power_mW": 2.3813692480359143
+    },
+    {
+      "R_ohm": 18,
+      "R_tolerance_fraction": 0.05,
+      "nominal_mA": 11.11111111111111,
+      "min_mA": 10.317460317460316,
+      "max_mA": 12.046783625730995,
+      "max_resistor_power_mW": 2.4816374269005848
+    },
+    {
+      "R_ohm": 22,
+      "R_tolerance_fraction": 0.01,
+      "nominal_mA": 9.090909090909092,
+      "min_mA": 8.775877587758776,
+      "max_mA": 9.45821854912764,
+      "max_resistor_power_mW": 1.9483930211202936
+    }
+  ],
+  "LED_current_alternatives_limitations": "Steady full-scale VFB=195..206mV and initial resistor tolerance. Excludes resistor drift, aging and transients. Optional 15 ohm / 1% / 100ppm per C temperature example below is a bounded calculation, not a board measurement.",
+  "LED_15ohm_1pct_100ppm_60C_delta_upper_mA": 13.955788603675929,
+  "Q4_source_degenerated_drive_examples": {
+    "limitations": "Illustrative GDR-to-ground voltages, not guaranteed controller specifications or measured current limits. VGS=VGDR-I*3ohm; assumes R14=3ohm nominal.",
+    "rows": [
+      {
+        "GDR_to_ground_V": 3.3,
+        "current_A": 0.1,
+        "source_V": 0.30000000000000004,
+        "VGS_V": 3.0
+      },
+      {
+        "GDR_to_ground_V": 3.3,
+        "current_A": 0.2,
+        "source_V": 0.6000000000000001,
+        "VGS_V": 2.6999999999999997
+      },
+      {
+        "GDR_to_ground_V": 3.3,
+        "current_A": 0.3,
+        "source_V": 0.8999999999999999,
+        "VGS_V": 2.4
+      },
+      {
+        "GDR_to_ground_V": 3.3,
+        "current_A": 0.4,
+        "source_V": 1.2000000000000002,
+        "VGS_V": 2.0999999999999996
+      },
+      {
+        "GDR_to_ground_V": 3.0,
+        "current_A": 0.1,
+        "source_V": 0.30000000000000004,
+        "VGS_V": 2.7
+      },
+      {
+        "GDR_to_ground_V": 3.0,
+        "current_A": 0.2,
+        "source_V": 0.6000000000000001,
+        "VGS_V": 2.4
+      },
+      {
+        "GDR_to_ground_V": 3.0,
+        "current_A": 0.3,
+        "source_V": 0.8999999999999999,
+        "VGS_V": 2.1
+      },
+      {
+        "GDR_to_ground_V": 3.0,
+        "current_A": 0.4,
+        "source_V": 1.2000000000000002,
+        "VGS_V": 1.7999999999999998
+      }
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "schematic_refs": 173,
+  "order_rows": 60,
+  "duplicate_order_refs": [],
+  "order_refs_missing_schematic": [],
+  "passive_value_errors": [],
+  "counts": {
+    "FIT": 155,
+    "MECHANICAL/BARE PAD": 10,
+    "DNP": 8
+  },
+  "unexplained_exclusions": [],
+  "dnp_flag_disagreements": [
+    "SW6",
+    "U13"
+  ],
+  "lcsc_disagreements": [
+    {
+      "ref": "L2",
+      "upload": "C413592",
+      "order": "C88528"
+    }
+  ]
+}

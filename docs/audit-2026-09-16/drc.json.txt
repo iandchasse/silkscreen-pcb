@@ -1,0 +1,134 @@
+error clearance: Clearance violation (netclass 'Power' clearance 0.2000 mm; actual 0.1500 mm) | PTH pad A1 [GND] of J1 | PTH pad A4 [VBUS_PRE_FUSE] of J1
+error clearance: Clearance violation (netclass 'Power' clearance 0.2000 mm; actual 0.1500 mm) | PTH pad B1 [GND] of J1 | PTH pad B4 [VBUS_PRE_FUSE] of J1
+error clearance: Clearance violation (netclass 'Power' clearance 0.2000 mm; actual 0.1500 mm) | PTH pad B9 [VBUS_PRE_FUSE] of J1 | PTH pad B12 [GND] of J1
+warning silk_edge_clearance: Silkscreen clipped by board edge | NPTH pad of J7 | Polygon on F.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | NPTH pad of J7 | Polygon on F.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | PCB Text Box 'The dev-header label is from the
+perspective of looking at the device
+straight on from its top side (not from
+the back).
+
+External series LEDs powered through
+LED/C-/W- should ideally have a forward
+voltage of less than 22V and at least
+15mA (strict unless you replace R37).
+
+
+Please refer to docs at
+silkscreenreader.com
+ for more specific info.' on F.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | PCB Text Box '' on F.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Arc on Edge.Cuts | PCB Text Box '3V3    SDA    3      SCL    C-      BAT+
+GND    46     45    GND   LED+    W-' on F.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | PCB Text Box '' on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of J6 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Arc on Edge.Cuts | Segment of J6 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of SW3 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of SW3 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of SW7 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of SW7 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of SW5 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of SW5 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Reference field of R59
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of SW4 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of SW4 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of U4 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of U4 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of U4 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of SW8 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of SW8 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of SW2 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of SW2 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of J1 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of J1 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of SW1 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of SW1 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of SW10 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of SW10 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of SW9 on B.Silkscreen
+warning silk_edge_clearance: Silkscreen clipped by board edge | Segment on Edge.Cuts | Segment of SW9 on B.Silkscreen
+warning starved_thermal: Thermal relief connection to zone incomplete (layer F.Cu; 1 spokes connected to isolated island) | Zone [GND] on F.Cu and B.Cu, priority 0 | PTH pad 1 [GND] of SW9
+warning starved_thermal: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1) | Zone [GND] on F.Cu and B.Cu, priority 0 | Pad 3 [GND] of Q1 on B.Cu
+warning starved_thermal: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1) | Zone [GND] on F.Cu and B.Cu, priority 0 | PTH pad 4 [GND] of J6
+warning starved_thermal: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1) | Zone [GND] on F.Cu and B.Cu, priority 0 | Pad 1 [GND] of U2 on B.Cu
+warning starved_thermal: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1) | Zone [GND] on F.Cu and B.Cu, priority 0 | Pad 2 [GND] of R37 on B.Cu
+warning starved_thermal: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1) | Zone [GND] on F.Cu and B.Cu, priority 0 | Pad 2 [GND] of U3 on B.Cu
+warning starved_thermal: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1) | Zone [GND] on F.Cu and B.Cu, priority 0 | Pad 2 [GND] of C21 on B.Cu
+warning starved_thermal: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1) | Zone [GND] on F.Cu and B.Cu, priority 0 | Pad 1 [GND] of R15 on B.Cu
+warning starved_thermal: Thermal relief connection to zone incomplete (layer B.Cu; 1 spokes connected to isolated island) | Zone [GND] on F.Cu and B.Cu, priority 0 | PTH pad 1 [GND] of SW8
+warning starved_thermal: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1) | Zone [GND] on F.Cu and B.Cu, priority 0 | Pad 2 [GND] of R50 on B.Cu
+warning starved_thermal: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1) | Zone [GND] on F.Cu and B.Cu, priority 0 | Pad 2 [GND] of CR2 on B.Cu
+warning starved_thermal: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1) | Zone [GND] on F.Cu and B.Cu, priority 0 | Pad 2 [GND] of U9 on B.Cu
+warning starved_thermal: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1) | Zone [GND] on F.Cu and B.Cu, priority 0 | Pad 2 [GND] of C26 on B.Cu
+warning starved_thermal: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1) | Zone [GND] on F.Cu and B.Cu, priority 0 | Pad 1 [GND] of U11 on B.Cu
+warning starved_thermal: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1) | Zone [GND] on F.Cu and B.Cu, priority 0 | Pad 1 [GND] of C27 on B.Cu
+warning starved_thermal: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1) | Zone [GND] on F.Cu and B.Cu, priority 0 | Pad 2 [GND] of C3 on B.Cu
+warning starved_thermal: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1) | Zone [GND] on F.Cu and B.Cu, priority 0 | Pad 6 [GND] of J7 on B.Cu
+warning starved_thermal: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1) | Zone [GND] on F.Cu and B.Cu, priority 0 | Pad 9 [GND] of J7 on B.Cu
+warning starved_thermal: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1) | Zone [GND] on F.Cu and B.Cu, priority 0 | Pad 2 [GND] of C29 on B.Cu
+warning starved_thermal: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1) | Zone [GND] on F.Cu and B.Cu, priority 0 | Pad 2 [GND] of U7 on B.Cu
+warning starved_thermal: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1) | Zone [GND] on F.Cu and B.Cu, priority 0 | Pad 2 [GND] of R41 on B.Cu
+warning starved_thermal: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1) | Zone [GND] on F.Cu and B.Cu, priority 0 | Pad 2 [GND] of C4 on B.Cu
+warning starved_thermal: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1) | Zone [GND] on F.Cu and B.Cu, priority 0 | Pad 17 [GND] of J2 on B.Cu
+warning starved_thermal: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1) | Zone [GND] on F.Cu and B.Cu, priority 0 | Pad 1 [GND] of C37 on B.Cu
+warning silk_over_copper: Silkscreen clipped by solder mask | Polygon on F.Silkscreen
+warning silk_over_copper: Silkscreen clipped by solder mask | Polygon on F.Silkscreen
+warning silk_over_copper: Silkscreen clipped by solder mask | PCB Text Box 'The dev-header label is from the
+perspective of looking at the device
+straight on from its top side (not from
+the back).
+
+External series LEDs powered through
+LED/C-/W- should ideally have a forward
+voltage of less than 22V and at least
+15mA (strict unless you replace R37).
+
+
+Please refer to docs at
+silkscreenreader.com
+ for more specific info.' on F.Silkscreen
+warning silk_over_copper: Silkscreen clipped by solder mask | PCB Text Box 'Vasu B, Aaron, lowflowio.xyz, Brandon P, PDH, Johan BM, Erin M, Fillipo C,         .
+UserName99, Ken K, Daniel P, Fallon, Chancellor, Lauryn, KemoNine,            ruph, .
+Mo, Spiderquill, Eric J, Liam H, Thomas A, Harrison S, Imogen K, Kevin P, moul7anout,
+Will, Gia B, Kurt M, Aidan S, subtlebutnotillegal, parrotful, rickoroni, Loicos, Rob,
+Emily B, Charlie O, Randy L, Artem C, Justin M, Joe S, Harley S, Lian K
+and my coworkers Steven, Matt, and Dave' on F.Silkscreen
+warning silk_over_copper: Silkscreen clipped by solder mask | Reference field of R78
+warning silk_over_copper: Silkscreen clipped by solder mask | Reference field of C6
+warning silk_over_copper: Silkscreen clipped by solder mask | Reference field of R8
+warning silk_over_copper: Silkscreen clipped by solder mask | Reference field of R77
+warning silk_over_copper: Silkscreen clipped by solder mask | Segment of J2 on B.Silkscreen
+warning silk_over_copper: Silkscreen clipped by solder mask | Segment of J2 on B.Silkscreen
+warning silk_over_copper: Silkscreen clipped by solder mask | Segment of J2 on B.Silkscreen
+warning silk_overlap: Silkscreen overlap | PCB Text Box 'The dev-header label is from the
+perspective of looking at the device
+straight on from its top side (not from
+the back).
+
+External series LEDs powered through
+LED/C-/W- should ideally have a forward
+voltage of less than 22V and at least
+15mA (strict unless you replace R37).
+
+
+Please refer to docs at
+silkscreenreader.com
+ for more specific info.' on F.Silkscreen | PCB text 'PWR
+' on F.Silkscreen
+warning silk_overlap: Silkscreen overlap | PCB text 'Development Header' on F.Silkscreen | PCB Text Box '3V3    SDA    3      SCL    C-      BAT+
+GND    46     45    GND   LED+    W-' on F.Silkscreen
+warning silk_overlap: Silkscreen overlap | Reference field of U2 | Segment of U2 on B.Silkscreen
+warning silk_overlap: Silkscreen overlap | Reference field of R77 | Reference field of C21
+warning silk_overlap: Silkscreen overlap | Reference field of C4 | Segment of C4 on B.Silkscreen
+warning silk_overlap: Silkscreen overlap | Segment of CR1 on B.Silkscreen | Polygon of U6 on B.Silkscreen
+error clearance: Clearance violation (netclass 'Power' clearance 0.2000 mm; actual 0.1500 mm) | PTH pad A1 [GND] of J1 | PTH pad A4 [VBUS_PRE_FUSE] of J1
+error clearance: Clearance violation (netclass 'Power' clearance 0.2000 mm; actual 0.1500 mm) | PTH pad A4 [VBUS_PRE_FUSE] of J1 | PTH pad A5 [CC1] of J1
+error clearance: Clearance violation (netclass 'Power' clearance 0.2000 mm; actual 0.1500 mm) | PTH pad A8 [<no net>] of J1 | PTH pad A9 [VBUS_PRE_FUSE] of J1
+error clearance: Clearance violation (netclass 'Power' clearance 0.2000 mm; actual 0.1500 mm) | PTH pad A9 [VBUS_PRE_FUSE] of J1 | PTH pad A12 [GND] of J1
+error clearance: Clearance violation (netclass 'Power' clearance 0.2000 mm; actual 0.1500 mm) | PTH pad B1 [GND] of J1 | PTH pad B4 [VBUS_PRE_FUSE] of J1
+error clearance: Clearance violation (netclass 'Power' clearance 0.2000 mm; actual 0.1500 mm) | PTH pad B4 [VBUS_PRE_FUSE] of J1 | PTH pad B5 [CC2] of J1
+error clearance: Clearance violation (netclass 'Power' clearance 0.2000 mm; actual 0.1500 mm) | PTH pad B8 [<no net>] of J1 | PTH pad B9 [VBUS_PRE_FUSE] of J1
+error clearance: Clearance violation (netclass 'Power' clearance 0.2000 mm; actual 0.1500 mm) | PTH pad B9 [VBUS_PRE_FUSE] of J1 | PTH pad B12 [GND] of J1
+error clearance: Clearance violation (netclass 'SW' clearance 0.2500 mm; actual 0.2000 mm) | Pad 1 [LED_SW] of J3 on B.Cu | Pad 2 [C-] of J3 on B.Cu
+error clearance: Clearance violation (netclass 'SW' clearance 0.2500 mm; actual 0.2000 mm) | Pad 4 [unconnected-(J3-Pad4)] of J3 on B.Cu | Pad 5 [LED_SW] of J3 on B.Cu
+error clearance: Clearance violation (netclass 'SW' clearance 0.2500 mm; actual 0.2000 mm) | Pad 5 [LED_SW] of J3 on B.Cu | Pad 6 [W-] of J3 on B.Cu

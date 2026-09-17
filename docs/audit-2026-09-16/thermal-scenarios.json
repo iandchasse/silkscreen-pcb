@@ -1,0 +1,353 @@
+{
+  "date": "2026-09-17",
+  "formula": "Tj = Tamb + (Vin - 3.3) * I_3V3 * theta_JA",
+  "ambient_C": 25,
+  "theta_JA_C_per_W": {
+    "TI_DBV_EVM": 100.8,
+    "TI_DBV_JEDEC": 231.1
+  },
+  "recommended_Tj_max_C": 125,
+  "typical_shutdown_C": 165,
+  "assumptions": [
+    "Fixed nominal 3.3V output; not all component tolerances included.",
+    "Actual sustained board load and actual thermal resistance are unknown.",
+    "Input values are at U3; neglecting cable/fuse/mux/PMOS drops is conservative for its heating.",
+    "No charging or main frontlight current flows through U3.",
+    "Other heat sources and enclosure coupling are not modeled.",
+    "Short pulses do not produce the full steady-state rise calculated here.",
+    "Numbers above shutdown are mathematical extrapolations, not operating temperature predictions.",
+    "At 40C local ambient, add 15C to the 25C calculations before interpreting limits.",
+    "4.2V is a nominal fully charged cell; 5.5V is the USB upper-voltage design case."
+  ],
+  "sources": [
+    "https://www.ti.com/lit/ds/symlink/tlv755p.pdf",
+    "https://compliance.usb.org/index.asp?UpdateFile=Electrical"
+  ],
+  "rows": [
+    {
+      "sustained_3V3_mA": 100,
+      "U3_input_V": 3.7,
+      "U3_power_W_ignoring_Iq": 0.04,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 29.032,
+        "TI_DBV_JEDEC": 34.244
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "below_125C_in_this_scenario_only"
+      }
+    },
+    {
+      "sustained_3V3_mA": 100,
+      "U3_input_V": 4.2,
+      "U3_power_W_ignoring_Iq": 0.09,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 34.072,
+        "TI_DBV_JEDEC": 45.799
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "below_125C_in_this_scenario_only"
+      }
+    },
+    {
+      "sustained_3V3_mA": 100,
+      "U3_input_V": 5.0,
+      "U3_power_W_ignoring_Iq": 0.17,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 42.136,
+        "TI_DBV_JEDEC": 64.287
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "below_125C_in_this_scenario_only"
+      }
+    },
+    {
+      "sustained_3V3_mA": 100,
+      "U3_input_V": 5.25,
+      "U3_power_W_ignoring_Iq": 0.195,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 44.656,
+        "TI_DBV_JEDEC": 70.065
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "below_125C_in_this_scenario_only"
+      }
+    },
+    {
+      "sustained_3V3_mA": 100,
+      "U3_input_V": 5.5,
+      "U3_power_W_ignoring_Iq": 0.22,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 47.176,
+        "TI_DBV_JEDEC": 75.842
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "below_125C_in_this_scenario_only"
+      }
+    },
+    {
+      "sustained_3V3_mA": 150,
+      "U3_input_V": 3.7,
+      "U3_power_W_ignoring_Iq": 0.06,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 31.048,
+        "TI_DBV_JEDEC": 38.866
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "below_125C_in_this_scenario_only"
+      }
+    },
+    {
+      "sustained_3V3_mA": 150,
+      "U3_input_V": 4.2,
+      "U3_power_W_ignoring_Iq": 0.135,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 38.608,
+        "TI_DBV_JEDEC": 56.199
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "below_125C_in_this_scenario_only"
+      }
+    },
+    {
+      "sustained_3V3_mA": 150,
+      "U3_input_V": 5.0,
+      "U3_power_W_ignoring_Iq": 0.255,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 50.704,
+        "TI_DBV_JEDEC": 83.93
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "below_125C_in_this_scenario_only"
+      }
+    },
+    {
+      "sustained_3V3_mA": 150,
+      "U3_input_V": 5.25,
+      "U3_power_W_ignoring_Iq": 0.2925,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 54.484,
+        "TI_DBV_JEDEC": 92.597
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "below_125C_in_this_scenario_only"
+      }
+    },
+    {
+      "sustained_3V3_mA": 150,
+      "U3_input_V": 5.5,
+      "U3_power_W_ignoring_Iq": 0.33,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 58.264,
+        "TI_DBV_JEDEC": 101.263
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "below_125C_in_this_scenario_only"
+      }
+    },
+    {
+      "sustained_3V3_mA": 250,
+      "U3_input_V": 3.7,
+      "U3_power_W_ignoring_Iq": 0.1,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 35.08,
+        "TI_DBV_JEDEC": 48.11
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "below_125C_in_this_scenario_only"
+      }
+    },
+    {
+      "sustained_3V3_mA": 250,
+      "U3_input_V": 4.2,
+      "U3_power_W_ignoring_Iq": 0.225,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 47.68,
+        "TI_DBV_JEDEC": 76.998
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "below_125C_in_this_scenario_only"
+      }
+    },
+    {
+      "sustained_3V3_mA": 250,
+      "U3_input_V": 5.0,
+      "U3_power_W_ignoring_Iq": 0.425,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 67.84,
+        "TI_DBV_JEDEC": 123.218
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "below_125C_in_this_scenario_only"
+      }
+    },
+    {
+      "sustained_3V3_mA": 250,
+      "U3_input_V": 5.25,
+      "U3_power_W_ignoring_Iq": 0.4875,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 74.14,
+        "TI_DBV_JEDEC": 137.661
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "exceeds_125C_recommended_limit"
+      }
+    },
+    {
+      "sustained_3V3_mA": 250,
+      "U3_input_V": 5.5,
+      "U3_power_W_ignoring_Iq": 0.55,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 80.44,
+        "TI_DBV_JEDEC": 152.105
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "exceeds_125C_recommended_limit"
+      }
+    },
+    {
+      "sustained_3V3_mA": 350,
+      "U3_input_V": 3.7,
+      "U3_power_W_ignoring_Iq": 0.14,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 39.112,
+        "TI_DBV_JEDEC": 57.354
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "below_125C_in_this_scenario_only"
+      }
+    },
+    {
+      "sustained_3V3_mA": 350,
+      "U3_input_V": 4.2,
+      "U3_power_W_ignoring_Iq": 0.315,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 56.752,
+        "TI_DBV_JEDEC": 97.797
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "below_125C_in_this_scenario_only"
+      }
+    },
+    {
+      "sustained_3V3_mA": 350,
+      "U3_input_V": 5.0,
+      "U3_power_W_ignoring_Iq": 0.595,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 84.976,
+        "TI_DBV_JEDEC": 162.505
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "exceeds_125C_recommended_limit"
+      }
+    },
+    {
+      "sustained_3V3_mA": 350,
+      "U3_input_V": 5.25,
+      "U3_power_W_ignoring_Iq": 0.6825,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 93.796,
+        "TI_DBV_JEDEC": 182.726
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "exceeds_typical_shutdown_no_regulated_equilibrium"
+      }
+    },
+    {
+      "sustained_3V3_mA": 350,
+      "U3_input_V": 5.5,
+      "U3_power_W_ignoring_Iq": 0.77,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 102.616,
+        "TI_DBV_JEDEC": 202.947
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "exceeds_typical_shutdown_no_regulated_equilibrium"
+      }
+    },
+    {
+      "sustained_3V3_mA": 500,
+      "U3_input_V": 3.7,
+      "U3_power_W_ignoring_Iq": 0.2,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 45.16,
+        "TI_DBV_JEDEC": 71.22
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "below_125C_in_this_scenario_only"
+      }
+    },
+    {
+      "sustained_3V3_mA": 500,
+      "U3_input_V": 4.2,
+      "U3_power_W_ignoring_Iq": 0.45,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 70.36,
+        "TI_DBV_JEDEC": 128.995
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "exceeds_125C_recommended_limit"
+      }
+    },
+    {
+      "sustained_3V3_mA": 500,
+      "U3_input_V": 5.0,
+      "U3_power_W_ignoring_Iq": 0.85,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 110.68,
+        "TI_DBV_JEDEC": 221.435
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "exceeds_typical_shutdown_no_regulated_equilibrium"
+      }
+    },
+    {
+      "sustained_3V3_mA": 500,
+      "U3_input_V": 5.25,
+      "U3_power_W_ignoring_Iq": 0.975,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 123.28,
+        "TI_DBV_JEDEC": 250.323
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "below_125C_in_this_scenario_only",
+        "TI_DBV_JEDEC": "exceeds_typical_shutdown_no_regulated_equilibrium"
+      }
+    },
+    {
+      "sustained_3V3_mA": 500,
+      "U3_input_V": 5.5,
+      "U3_power_W_ignoring_Iq": 1.1,
+      "Tj_C_at_25C_ambient": {
+        "TI_DBV_EVM": 135.88,
+        "TI_DBV_JEDEC": 279.21
+      },
+      "interpretation": {
+        "TI_DBV_EVM": "exceeds_125C_recommended_limit",
+        "TI_DBV_JEDEC": "exceeds_typical_shutdown_no_regulated_equilibrium"
+      }
+    }
+  ]
+}

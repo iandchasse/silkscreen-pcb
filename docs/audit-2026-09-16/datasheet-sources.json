@@ -1,0 +1,73 @@
+[
+  {
+    "name": "tps923610",
+    "url": "https://www.ti.com/lit/ds/symlink/tps923610.pdf",
+    "pages": 32,
+    "cache": "C:\\Users\\iandc\\AppData\\Local\\Temp\\silkscreen-audit-2026-09-16\\tps923610.pdf"
+  },
+  {
+    "name": "tps2116",
+    "url": "https://www.ti.com/lit/ds/symlink/tps2116.pdf",
+    "pages": 25,
+    "cache": "C:\\Users\\iandc\\AppData\\Local\\Temp\\silkscreen-audit-2026-09-16\\tps2116.pdf"
+  },
+  {
+    "name": "tlv755p",
+    "url": "https://www.ti.com/lit/ds/symlink/tlv755p.pdf",
+    "pages": 51,
+    "cache": "C:\\Users\\iandc\\AppData\\Local\\Temp\\silkscreen-audit-2026-09-16\\tlv755p.pdf"
+  },
+  {
+    "name": "esp32s3",
+    "url": "https://www.espressif.com/sites/default/files/documentation/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf",
+    "pages": 53,
+    "cache": "C:\\Users\\iandc\\AppData\\Local\\Temp\\silkscreen-audit-2026-09-16\\esp32s3.pdf"
+  },
+  {
+    "name": "tpd4e1u06",
+    "url": "https://www.ti.com/lit/ds/symlink/tpd4e1u06.pdf",
+    "pages": 23,
+    "cache": "C:\\Users\\iandc\\AppData\\Local\\Temp\\silkscreen-audit-2026-09-16\\tpd4e1u06.pdf"
+  },
+  {
+    "name": "dw01a",
+    "url": "https://hmsemi.com/downfile/DW01A.PDF",
+    "pages": 7,
+    "cache": "C:\\Users\\iandc\\AppData\\Local\\Temp\\silkscreen-audit-2026-09-16\\dw01a.pdf"
+  },
+  {
+    "name": "fs8205-ordered",
+    "url": "https://datasheet.lcsc.com/datasheet/pdf/c060cb7baa8cc2b2d2a0ed3afa443ef8.pdf",
+    "error": "403 Client Error: Forbidden for url: https://datasheet.lcsc.com/datasheet/pdf/c060cb7baa8cc2b2d2a0ed3afa443ef8.pdf"
+  },
+  {
+    "name": "dw01-ordered",
+    "url": "https://datasheet.lcsc.com/datasheet/pdf/0d2b2b5e8d1207bf276387cb4ff3a495.pdf",
+    "error": "403 Client Error: Forbidden for url: https://datasheet.lcsc.com/datasheet/pdf/0d2b2b5e8d1207bf276387cb4ff3a495.pdf"
+  },
+  {
+    "name": "tp4056-ordered",
+    "url": "https://datasheet.lcsc.com/datasheet/pdf/d328ee101cbb1f3719611cd61db479c2.pdf",
+    "error": "403 Client Error: Forbidden for url: https://datasheet.lcsc.com/datasheet/pdf/d328ee101cbb1f3719611cd61db479c2.pdf"
+  },
+  {
+    "name": "sd05c-ordered",
+    "url": "https://datasheet.lcsc.com/datasheet/pdf/f9b7b3e2c9eb25bcff59f2b72aceabee.pdf",
+    "error": "403 Client Error: Forbidden for url: https://datasheet.lcsc.com/datasheet/pdf/f9b7b3e2c9eb25bcff59f2b72aceabee.pdf"
+  },
+  {
+    "name": "bss138-ordered",
+    "url": "https://datasheet.lcsc.com/datasheet/pdf/e82111e7bf6514856f73f1b91d3645f8.pdf",
+    "error": "403 Client Error: Forbidden for url: https://datasheet.lcsc.com/datasheet/pdf/e82111e7bf6514856f73f1b91d3645f8.pdf"
+  },
+  {
+    "name": "led-substitute",
+    "url": "https://datasheet.lcsc.com/datasheet/pdf/8e04df73a20896aea76d4672dc480ed1.pdf",
+    "error": "403 Client Error: Forbidden for url: https://datasheet.lcsc.com/datasheet/pdf/8e04df73a20896aea76d4672dc480ed1.pdf"
+  },
+  {
+    "name": "sd-shouhan",
+    "url": "https://datasheet.lcsc.com/datasheet/pdf/dc83ceb7bc09989eab2815b685da60e4.pdf",
+    "error": "403 Client Error: Forbidden for url: https://datasheet.lcsc.com/datasheet/pdf/dc83ceb7bc09989eab2815b685da60e4.pdf"
+  }
+]

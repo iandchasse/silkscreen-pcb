@@ -1,0 +1,37 @@
+Battery-polarity-qualified PMOS: TOPOLOGY CHECK ONLY, not a device-qualified model
+* Proposed circuit, NOT the existing PCB. LTspice batch: -b this-file.cir
+* Generic MOSFET approximations chosen for plausible conduction and capacitance.
+* These are NOT AOS/Nexperia vendor models. No DW01/FS8205/TP4056 model,
+* protection IC clamps, gate leakage, temperature corners, wiring L or contact bounce.
+* The closed low-side protection path is represented by 50 milliohms.
+* Cases: 0=discharge3.7, 1=charge3.7, 2=charge2.5, 3=reverse/noUSB,
+* 4=reverse/USB, 5=zeroV/USB, 6=noBattery/USB, 7=discharge2.5.
+.step param CASE list 0 1 2 3 4 5 6 7
+.param VB=table(CASE,0,3.7,1,3.7,2,2.5,3,-4.2,4,-4.2,5,0,6,0,7,2.5)
+.param USB=table(CASE,0,0,1,1,2,1,3,0,4,1,5,1,6,1,7,0)
+.param LOAD=table(CASE,0,.25,1,.001,2,.001,3,0,4,.001,5,.001,6,.001,7,.25)
+Vcell cell bm {VB}
+Rcell cell bp {if(CASE==6,1T,.05)}
+Rreturn bm 0 .05
+Bcharger 0 pp I={if(USB,limit((4.2-V(pp))*2,0,.25),0)}
+Bload pp 0 I={LOAD*limit(V(pp),0,1)}
+Rbleed pp 0 100Meg
+Cout pp 0 10u
+* AO3419 candidate power switch: D=B+, G=pg, S=P+.
+Mpass bp pg pp P_APPROX
+Roff pp pg 100k
+* PMV40UN2 candidate detector: D=pg, G=ng, S=raw B-.
+Mdetect pg ng bm N_APPROX
+Rin bp ng 10k
+Rgs ng bm 1Meg
+.model P_APPROX VDMOS(pchan Vto=-.85 Kp=10 Rd=.045 Rs=.035 Rg=11 Cgdmin=37p Cgdmax=150p Cgs=288p Cjo=63p Is=1n Rb=.1)
+.model N_APPROX VDMOS(Vto=.65 Kp=14 Rd=.01 Rs=.005 Rg=9 Cgdmin=35p Cgdmax=70p Cgs=600p Cjo=40p Is=.1n Rb=.1)
+.op
+.meas op pp_V param V(pp)
+.meas op battery_V param V(bp,bm)
+.meas op pass_Vgs param V(pg,pp)
+.meas op detector_Vgs param V(ng,bm)
+.meas op battery_charge_A param I(Vcell)
+.meas op gate_bias_A param I(Roff)
+.save V(pp) V(bp) V(bm) V(pg) V(ng) I(Vcell) I(Roff)
+.end

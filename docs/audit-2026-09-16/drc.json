@@ -1,0 +1,1935 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-09-16T22:42:43-0400",
+    "kicad_version": "9.0.6",
+    "schematic_parity": [],
+    "source": "silkscreen_pcb.kicad_pcb",
+    "unconnected_items": [],
+    "violations": [
+        {
+            "description": "Clearance violation (netclass 'Power' clearance 0.2000 mm; actual 0.1500 mm)",
+            "items": [
+                {
+                    "description": "PTH pad A1 [GND] of J1",
+                    "pos": {
+                        "x": 96.475,
+                        "y": 95.025
+                    },
+                    "uuid": "86ed7cc3-4dcb-40d1-bb9e-1460edf0f795"
+                },
+                {
+                    "description": "PTH pad A4 [VBUS_PRE_FUSE] of J1",
+                    "pos": {
+                        "x": 96.475,
+                        "y": 95.875
+                    },
+                    "uuid": "c1d99d19-8084-4394-9490-debcd95fd981"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation (netclass 'Power' clearance 0.2000 mm; actual 0.1500 mm)",
+            "items": [
+                {
+                    "description": "PTH pad B1 [GND] of J1",
+                    "pos": {
+                        "x": 97.825,
+                        "y": 100.975
+                    },
+                    "uuid": "9661b4c2-ac33-4d94-9cf8-b66be786afeb"
+                },
+                {
+                    "description": "PTH pad B4 [VBUS_PRE_FUSE] of J1",
+                    "pos": {
+                        "x": 97.825,
+                        "y": 100.125
+                    },
+                    "uuid": "4b60172a-e0b3-47e4-be0e-ed76ff891983"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation (netclass 'Power' clearance 0.2000 mm; actual 0.1500 mm)",
+            "items": [
+                {
+                    "description": "PTH pad B9 [VBUS_PRE_FUSE] of J1",
+                    "pos": {
+                        "x": 97.825,
+                        "y": 95.875
+                    },
+                    "uuid": "59bc41f9-06dd-45cc-89c9-4d9ba0e7c83e"
+                },
+                {
+                    "description": "PTH pad B12 [GND] of J1",
+                    "pos": {
+                        "x": 97.825,
+                        "y": 95.025
+                    },
+                    "uuid": "6d348c88-d635-48ba-8f1f-a61219854bbb"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "NPTH pad of J7",
+                    "pos": {
+                        "x": 60.25,
+                        "y": 73.38
+                    },
+                    "uuid": "aa121875-a789-4f04-acd4-103b31a0a8e9"
+                },
+                {
+                    "description": "Polygon on F.Silkscreen",
+                    "pos": {
+                        "x": 62.111657,
+                        "y": 71.356745
+                    },
+                    "uuid": "2b4071b9-2af2-49d9-ab65-56e9f7a56648"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "NPTH pad of J7",
+                    "pos": {
+                        "x": 60.25,
+                        "y": 73.38
+                    },
+                    "uuid": "aa121875-a789-4f04-acd4-103b31a0a8e9"
+                },
+                {
+                    "description": "Polygon on F.Silkscreen",
+                    "pos": {
+                        "x": 60.431107,
+                        "y": 71.35404
+                    },
+                    "uuid": "2eafb135-c414-47e6-9be4-82667ad8c746"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 84.237462,
+                        "y": 64.5
+                    },
+                    "uuid": "64209b3d-5c1e-4cb9-8fa6-8c711620229f"
+                },
+                {
+                    "description": "PCB Text Box 'The dev-header label is from the\nperspective of looking at the device\nstraight on from its top side (not from\nthe back).\n\nExternal series LEDs powered through\nLED/C-/W- should ideally have a forward\nvoltage of less than 22V and at least\n15mA (strict unless you replace R37).\n\n\nPlease refer to docs at\nsilkscreenreader.com\n for more specific info.' on F.Silkscreen",
+                    "pos": {
+                        "x": 84.226914,
+                        "y": 52.5
+                    },
+                    "uuid": "aba772c3-3172-4976-9a5a-36ce4810147a"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 104.237462,
+                        "y": 39.0
+                    },
+                    "uuid": "222b7799-1ca5-471e-96f9-f73de515bfcd"
+                },
+                {
+                    "description": "PCB Text Box '' on F.Silkscreen",
+                    "pos": {
+                        "x": 83.9,
+                        "y": 61.6
+                    },
+                    "uuid": "c974b380-e761-4cf5-adb4-3b9f07900b39"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Arc on Edge.Cuts",
+                    "pos": {
+                        "x": 102.1857,
+                        "y": 38.9733
+                    },
+                    "uuid": "07e99680-1b08-4ca2-add3-e7a5f61b1d33"
+                },
+                {
+                    "description": "PCB Text Box '3V3    SDA    3      SCL    C-      BAT+\nGND    46     45    GND   LED+    W-' on F.Silkscreen",
+                    "pos": {
+                        "x": 109.705,
+                        "y": 44.01625
+                    },
+                    "uuid": "e42efeab-9b6a-4337-93a7-72a6b442ce7c"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 104.237462,
+                        "y": 39.0
+                    },
+                    "uuid": "222b7799-1ca5-471e-96f9-f73de515bfcd"
+                },
+                {
+                    "description": "PCB Text Box '' on B.Silkscreen",
+                    "pos": {
+                        "x": 83.9,
+                        "y": 61.5746
+                    },
+                    "uuid": "8d49a030-2c8b-4009-98ee-0156e76cc20e"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 86.963949,
+                        "y": 37.000725
+                    },
+                    "uuid": "f7e07fad-8bdc-45b6-94b7-9d4465310f96"
+                },
+                {
+                    "description": "Segment of J6 on B.Silkscreen",
+                    "pos": {
+                        "x": 87.091362,
+                        "y": 43.956627
+                    },
+                    "uuid": "76dc6262-c404-4f9a-822b-e481f92f5d4c"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Arc on Edge.Cuts",
+                    "pos": {
+                        "x": 102.1857,
+                        "y": 38.9733
+                    },
+                    "uuid": "07e99680-1b08-4ca2-add3-e7a5f61b1d33"
+                },
+                {
+                    "description": "Segment of J6 on B.Silkscreen",
+                    "pos": {
+                        "x": 103.093362,
+                        "y": 35.193627
+                    },
+                    "uuid": "bd03699f-a121-4caf-b352-e260f88ec169"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 102.487462,
+                        "y": 148.25
+                    },
+                    "uuid": "4be9b4a9-9ae2-43c2-92ad-706541e754af"
+                },
+                {
+                    "description": "Segment of SW3 on B.Silkscreen",
+                    "pos": {
+                        "x": 77.087462,
+                        "y": 148.72
+                    },
+                    "uuid": "b6efd305-28de-48f1-acc1-d1b2fb390b05"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 102.487462,
+                        "y": 148.25
+                    },
+                    "uuid": "4be9b4a9-9ae2-43c2-92ad-706541e754af"
+                },
+                {
+                    "description": "Segment of SW3 on B.Silkscreen",
+                    "pos": {
+                        "x": 84.387462,
+                        "y": 145.32
+                    },
+                    "uuid": "078856ea-12a0-4386-bf7c-407a917369fd"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 44.256749,
+                        "y": 93.3
+                    },
+                    "uuid": "dbb3bc1e-4411-4366-9d9a-37b74242f337"
+                },
+                {
+                    "description": "Segment of SW7 on B.Silkscreen",
+                    "pos": {
+                        "x": 43.267462,
+                        "y": 71.25
+                    },
+                    "uuid": "5335ffb6-2bcb-4c31-a043-c4e155716430"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 44.256749,
+                        "y": 93.3
+                    },
+                    "uuid": "dbb3bc1e-4411-4366-9d9a-37b74242f337"
+                },
+                {
+                    "description": "Segment of SW7 on B.Silkscreen",
+                    "pos": {
+                        "x": 44.717462,
+                        "y": 74.25
+                    },
+                    "uuid": "be6a201f-2fa3-4b18-984f-4de2adb6339a"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 44.256749,
+                        "y": 93.3
+                    },
+                    "uuid": "dbb3bc1e-4411-4366-9d9a-37b74242f337"
+                },
+                {
+                    "description": "Segment of SW5 on B.Silkscreen",
+                    "pos": {
+                        "x": 43.267462,
+                        "y": 85.25
+                    },
+                    "uuid": "b60a2e12-3be6-4fb7-9886-9f4c94de6651"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 44.256749,
+                        "y": 93.3
+                    },
+                    "uuid": "dbb3bc1e-4411-4366-9d9a-37b74242f337"
+                },
+                {
+                    "description": "Segment of SW5 on B.Silkscreen",
+                    "pos": {
+                        "x": 44.717462,
+                        "y": 88.25
+                    },
+                    "uuid": "bda77960-cf10-4c73-8c38-435ce429466f"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 104.237462,
+                        "y": 39.0
+                    },
+                    "uuid": "222b7799-1ca5-471e-96f9-f73de515bfcd"
+                },
+                {
+                    "description": "Reference field of R59",
+                    "pos": {
+                        "x": 104.43,
+                        "y": 113.5875
+                    },
+                    "uuid": "8544e708-b573-4b71-8976-a3cb9c63bacb"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 104.237462,
+                        "y": 39.0
+                    },
+                    "uuid": "222b7799-1ca5-471e-96f9-f73de515bfcd"
+                },
+                {
+                    "description": "Segment of SW4 on B.Silkscreen",
+                    "pos": {
+                        "x": 103.757462,
+                        "y": 71.25
+                    },
+                    "uuid": "402dabd3-0874-4114-9615-25b052f77c5e"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 104.237462,
+                        "y": 39.0
+                    },
+                    "uuid": "222b7799-1ca5-471e-96f9-f73de515bfcd"
+                },
+                {
+                    "description": "Segment of SW4 on B.Silkscreen",
+                    "pos": {
+                        "x": 105.207462,
+                        "y": 74.25
+                    },
+                    "uuid": "a43a9cfd-e11a-4d9b-b37b-3510be32ce88"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 50.585302,
+                        "y": 93.300012
+                    },
+                    "uuid": "83562a23-a57e-4ee5-9531-e39cbc000d9d"
+                },
+                {
+                    "description": "Segment of U4 on B.Silkscreen",
+                    "pos": {
+                        "x": 44.599999,
+                        "y": 93.3
+                    },
+                    "uuid": "a85e205c-ba98-4cf3-9592-371d7cecd0c6"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 50.585302,
+                        "y": 93.300012
+                    },
+                    "uuid": "83562a23-a57e-4ee5-9531-e39cbc000d9d"
+                },
+                {
+                    "description": "Segment of U4 on B.Silkscreen",
+                    "pos": {
+                        "x": 44.599999,
+                        "y": 93.3
+                    },
+                    "uuid": "f5123c77-d816-45d5-b5cf-bb28131208fb"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 50.6,
+                        "y": 111.999978
+                    },
+                    "uuid": "e0e266d5-505c-4581-8d1e-56a3eac333e6"
+                },
+                {
+                    "description": "Segment of U4 on B.Silkscreen",
+                    "pos": {
+                        "x": 44.599999,
+                        "y": 111.7
+                    },
+                    "uuid": "37e97c71-e356-4a08-9b58-bbdb1105dfbb"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 102.487462,
+                        "y": 148.25
+                    },
+                    "uuid": "4be9b4a9-9ae2-43c2-92ad-706541e754af"
+                },
+                {
+                    "description": "Segment of SW8 on B.Silkscreen",
+                    "pos": {
+                        "x": 64.087462,
+                        "y": 148.72
+                    },
+                    "uuid": "985a3965-9c48-4758-b293-d79c979c8c7b"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 102.487462,
+                        "y": 148.25
+                    },
+                    "uuid": "4be9b4a9-9ae2-43c2-92ad-706541e754af"
+                },
+                {
+                    "description": "Segment of SW8 on B.Silkscreen",
+                    "pos": {
+                        "x": 71.387462,
+                        "y": 145.32
+                    },
+                    "uuid": "50a0eb5c-c5b4-4c08-b792-57cd82618121"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 102.487462,
+                        "y": 148.25
+                    },
+                    "uuid": "4be9b4a9-9ae2-43c2-92ad-706541e754af"
+                },
+                {
+                    "description": "Segment of SW2 on B.Silkscreen",
+                    "pos": {
+                        "x": 89.087462,
+                        "y": 148.72
+                    },
+                    "uuid": "0630881f-ad3b-4c51-b411-f6302a72d08f"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 102.487462,
+                        "y": 148.25
+                    },
+                    "uuid": "4be9b4a9-9ae2-43c2-92ad-706541e754af"
+                },
+                {
+                    "description": "Segment of SW2 on B.Silkscreen",
+                    "pos": {
+                        "x": 96.387462,
+                        "y": 145.32
+                    },
+                    "uuid": "0af2c9d7-7a3a-4af1-ae2e-c817fe052e29"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 104.237462,
+                        "y": 39.0
+                    },
+                    "uuid": "222b7799-1ca5-471e-96f9-f73de515bfcd"
+                },
+                {
+                    "description": "Segment of J1 on B.Silkscreen",
+                    "pos": {
+                        "x": 102.475,
+                        "y": 93.405
+                    },
+                    "uuid": "eb5793e2-3ec8-445e-aed8-f12fa09c8b01"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 104.237462,
+                        "y": 39.0
+                    },
+                    "uuid": "222b7799-1ca5-471e-96f9-f73de515bfcd"
+                },
+                {
+                    "description": "Segment of J1 on B.Silkscreen",
+                    "pos": {
+                        "x": 102.475,
+                        "y": 102.595
+                    },
+                    "uuid": "9e81cbc3-01f4-4ac0-955f-79acc77d31ab"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 104.237462,
+                        "y": 39.0
+                    },
+                    "uuid": "222b7799-1ca5-471e-96f9-f73de515bfcd"
+                },
+                {
+                    "description": "Segment of SW1 on B.Silkscreen",
+                    "pos": {
+                        "x": 103.712462,
+                        "y": 85.25
+                    },
+                    "uuid": "289d8ffb-7516-4e42-92b1-7909d1b1933b"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 104.237462,
+                        "y": 39.0
+                    },
+                    "uuid": "222b7799-1ca5-471e-96f9-f73de515bfcd"
+                },
+                {
+                    "description": "Segment of SW1 on B.Silkscreen",
+                    "pos": {
+                        "x": 105.162462,
+                        "y": 88.25
+                    },
+                    "uuid": "1a2f8eec-56e9-427b-83dd-32d6a6385b00"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 104.237462,
+                        "y": 39.0
+                    },
+                    "uuid": "222b7799-1ca5-471e-96f9-f73de515bfcd"
+                },
+                {
+                    "description": "Segment of SW10 on B.Silkscreen",
+                    "pos": {
+                        "x": 103.975,
+                        "y": 53.25
+                    },
+                    "uuid": "e308efe3-2946-40bb-97ba-28fd4d4c148e"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 104.237462,
+                        "y": 39.0
+                    },
+                    "uuid": "222b7799-1ca5-471e-96f9-f73de515bfcd"
+                },
+                {
+                    "description": "Segment of SW10 on B.Silkscreen",
+                    "pos": {
+                        "x": 105.425,
+                        "y": 56.25
+                    },
+                    "uuid": "3c367673-0f94-4234-befd-128a138052b1"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 102.487462,
+                        "y": 148.25
+                    },
+                    "uuid": "4be9b4a9-9ae2-43c2-92ad-706541e754af"
+                },
+                {
+                    "description": "Segment of SW9 on B.Silkscreen",
+                    "pos": {
+                        "x": 52.087462,
+                        "y": 148.72
+                    },
+                    "uuid": "a8e1cbf0-9b93-49b7-91ae-aeb5719b5025"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 102.487462,
+                        "y": 148.25
+                    },
+                    "uuid": "4be9b4a9-9ae2-43c2-92ad-706541e754af"
+                },
+                {
+                    "description": "Segment of SW9 on B.Silkscreen",
+                    "pos": {
+                        "x": 59.387462,
+                        "y": 145.32
+                    },
+                    "uuid": "1db15522-edf4-40b4-98a0-571cb9e9c7ae"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer F.Cu; 1 spokes connected to isolated island)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "PTH pad 1 [GND] of SW9",
+                    "pos": {
+                        "x": 58.237462,
+                        "y": 146.45
+                    },
+                    "uuid": "c0985fa8-3f5e-4820-b857-6f043f867025"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "Pad 3 [GND] of Q1 on B.Cu",
+                    "pos": {
+                        "x": 85.705866,
+                        "y": 70.402276
+                    },
+                    "uuid": "8f5cd7f1-efb6-4d56-9f10-b0130f0e0159"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "PTH pad 4 [GND] of J6",
+                    "pos": {
+                        "x": 96.362362,
+                        "y": 47.969573
+                    },
+                    "uuid": "a54928d3-9e37-4a44-af9f-47a2742d25be"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "Pad 1 [GND] of U2 on B.Cu",
+                    "pos": {
+                        "x": 84.349108,
+                        "y": 85.475328
+                    },
+                    "uuid": "a314c921-88aa-4c6d-aea5-b2e03544fb10"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "Pad 2 [GND] of R37 on B.Cu",
+                    "pos": {
+                        "x": 48.525912,
+                        "y": 124.115871
+                    },
+                    "uuid": "3249ff28-cbf3-4a2c-84ab-3281901128ef"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "Pad 2 [GND] of U3 on B.Cu",
+                    "pos": {
+                        "x": 80.0,
+                        "y": 84.15
+                    },
+                    "uuid": "3444bd2d-96b5-4443-bade-2edff90c2f71"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "Pad 2 [GND] of C21 on B.Cu",
+                    "pos": {
+                        "x": 74.8,
+                        "y": 80.3375
+                    },
+                    "uuid": "5eabfed4-56aa-4475-b729-64850bdd6f33"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "Pad 1 [GND] of R15 on B.Cu",
+                    "pos": {
+                        "x": 89.979369,
+                        "y": 120.506437
+                    },
+                    "uuid": "d3eda8fb-22fb-442b-bb9a-aee470c699ab"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; 1 spokes connected to isolated island)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "PTH pad 1 [GND] of SW8",
+                    "pos": {
+                        "x": 70.237462,
+                        "y": 146.45
+                    },
+                    "uuid": "2810f508-f375-481d-bd05-eb80138d709a"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "Pad 2 [GND] of R50 on B.Cu",
+                    "pos": {
+                        "x": 51.523121,
+                        "y": 132.883135
+                    },
+                    "uuid": "53e00d3e-87ac-4daf-9272-2563d2a9a023"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "Pad 2 [GND] of CR2 on B.Cu",
+                    "pos": {
+                        "x": 89.0,
+                        "y": 57.75
+                    },
+                    "uuid": "35adb4c4-f033-41a2-b824-f2eb7f68692d"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "Pad 2 [GND] of U9 on B.Cu",
+                    "pos": {
+                        "x": 78.283734,
+                        "y": 70.482636
+                    },
+                    "uuid": "fa5c8773-f865-4ec6-ac3d-a6d31bc6f258"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "Pad 2 [GND] of C26 on B.Cu",
+                    "pos": {
+                        "x": 82.881794,
+                        "y": 89.580374
+                    },
+                    "uuid": "43052df5-2c69-42b5-a61b-952a832f99b7"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "Pad 1 [GND] of U11 on B.Cu",
+                    "pos": {
+                        "x": 86.605,
+                        "y": 96.675
+                    },
+                    "uuid": "d4f33d52-596c-40a6-a38a-6ca085c019e5"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "Pad 1 [GND] of C27 on B.Cu",
+                    "pos": {
+                        "x": 52.0,
+                        "y": 115.3625
+                    },
+                    "uuid": "80b17817-06a5-4f4a-b414-27b66c522484"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "Pad 2 [GND] of C3 on B.Cu",
+                    "pos": {
+                        "x": 81.0,
+                        "y": 88.481151
+                    },
+                    "uuid": "37cad96f-1258-4e57-81a0-9d325456214f"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "Pad 6 [GND] of J7 on B.Cu",
+                    "pos": {
+                        "x": 61.4,
+                        "y": 84.6
+                    },
+                    "uuid": "7e9184e9-daa5-43ba-9e6f-a31e14c5b488"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "Pad 9 [GND] of J7 on B.Cu",
+                    "pos": {
+                        "x": 72.87,
+                        "y": 82.6
+                    },
+                    "uuid": "fcfe3665-26f2-4968-b867-768551fc61cf"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "Pad 2 [GND] of C29 on B.Cu",
+                    "pos": {
+                        "x": 66.118779,
+                        "y": 89.923767
+                    },
+                    "uuid": "ca4c627c-f54d-4a61-8339-0492940b47a6"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "Pad 2 [GND] of U7 on B.Cu",
+                    "pos": {
+                        "x": 98.8,
+                        "y": 129.73895
+                    },
+                    "uuid": "104b7ab7-6d50-4ceb-a0f2-9d1a35a88d7b"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "Pad 2 [GND] of R41 on B.Cu",
+                    "pos": {
+                        "x": 54.0,
+                        "y": 119.0
+                    },
+                    "uuid": "42f47f5e-32b7-45da-b6e9-0b1520045f92"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "Pad 2 [GND] of C4 on B.Cu",
+                    "pos": {
+                        "x": 82.137557,
+                        "y": 83.061243
+                    },
+                    "uuid": "9d1582e3-62a6-449d-b2f9-2f8e5d62ab7b"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "Pad 17 [GND] of J2 on B.Cu",
+                    "pos": {
+                        "x": 75.737462,
+                        "y": 124.325
+                    },
+                    "uuid": "6243f434-f26a-4570-96fc-e87bb0d54d0b"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 42.737462,
+                        "y": 26.969715
+                    },
+                    "uuid": "278dd5dd-46fb-4ce7-85f2-7726b1aacaf8"
+                },
+                {
+                    "description": "Pad 1 [GND] of C37 on B.Cu",
+                    "pos": {
+                        "x": 61.4375,
+                        "y": 88.2
+                    },
+                    "uuid": "f5568dc2-97cc-409a-9b66-1b72d68fdedb"
+                }
+            ],
+            "severity": "warning",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Polygon on F.Silkscreen",
+                    "pos": {
+                        "x": 60.431107,
+                        "y": 71.35404
+                    },
+                    "uuid": "2eafb135-c414-47e6-9be4-82667ad8c746"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Polygon on F.Silkscreen",
+                    "pos": {
+                        "x": 68.818444,
+                        "y": 72.807038
+                    },
+                    "uuid": "8be138a6-0174-4bf7-b705-6f24b787155a"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB Text Box 'The dev-header label is from the\nperspective of looking at the device\nstraight on from its top side (not from\nthe back).\n\nExternal series LEDs powered through\nLED/C-/W- should ideally have a forward\nvoltage of less than 22V and at least\n15mA (strict unless you replace R37).\n\n\nPlease refer to docs at\nsilkscreenreader.com\n for more specific info.' on F.Silkscreen",
+                    "pos": {
+                        "x": 84.226914,
+                        "y": 52.5
+                    },
+                    "uuid": "aba772c3-3172-4976-9a5a-36ce4810147a"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB Text Box 'Vasu B, Aaron, lowflowio.xyz, Brandon P, PDH, Johan BM, Erin M, Fillipo C,         .\nUserName99, Ken K, Daniel P, Fallon, Chancellor, Lauryn, KemoNine,            ruph, .\nMo, Spiderquill, Eric J, Liam H, Thomas A, Harrison S, Imogen K, Kevin P, moul7anout,\nWill, Gia B, Kurt M, Aidan S, subtlebutnotillegal, parrotful, rickoroni, Loicos, Rob,\nEmily B, Charlie O, Randy L, Artem C, Justin M, Joe S, Harley S, Lian K\nand my coworkers Steven, Matt, and Dave' on F.Silkscreen",
+                    "pos": {
+                        "x": 46.28125,
+                        "y": 118.6
+                    },
+                    "uuid": "d7b063a8-5e17-4a6d-abc1-8a1df4763be4"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of R78",
+                    "pos": {
+                        "x": 81.626821,
+                        "y": 79.66962
+                    },
+                    "uuid": "8e02c8d3-a254-44db-ba66-3f4b9d69b5fd"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of C6",
+                    "pos": {
+                        "x": 76.400428,
+                        "y": 84.880793
+                    },
+                    "uuid": "ea1fa703-c4b3-4ec9-b0a5-13a386c7d375"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of R8",
+                    "pos": {
+                        "x": 76.4,
+                        "y": 74.0
+                    },
+                    "uuid": "9d5a2ade-3cd5-4e2a-ab2f-b745920bc40c"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of R77",
+                    "pos": {
+                        "x": 75.6,
+                        "y": 80.7
+                    },
+                    "uuid": "6dbabbbf-8831-46dd-97d9-8f2bb76d2c3a"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Segment of J2 on B.Silkscreen",
+                    "pos": {
+                        "x": 66.487462,
+                        "y": 124.65
+                    },
+                    "uuid": "14977d1e-529d-4524-982c-f1af792d7032"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Segment of J2 on B.Silkscreen",
+                    "pos": {
+                        "x": 79.717462,
+                        "y": 127.55
+                    },
+                    "uuid": "59075856-333c-41a9-9251-45744d734d37"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Segment of J2 on B.Silkscreen",
+                    "pos": {
+                        "x": 80.487462,
+                        "y": 124.65
+                    },
+                    "uuid": "3bfa97b2-2dbf-4b78-8751-e2b46ecb009b"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen overlap",
+            "items": [
+                {
+                    "description": "PCB Text Box 'The dev-header label is from the\nperspective of looking at the device\nstraight on from its top side (not from\nthe back).\n\nExternal series LEDs powered through\nLED/C-/W- should ideally have a forward\nvoltage of less than 22V and at least\n15mA (strict unless you replace R37).\n\n\nPlease refer to docs at\nsilkscreenreader.com\n for more specific info.' on F.Silkscreen",
+                    "pos": {
+                        "x": 84.226914,
+                        "y": 52.5
+                    },
+                    "uuid": "aba772c3-3172-4976-9a5a-36ce4810147a"
+                },
+                {
+                    "description": "PCB text 'PWR\n' on F.Silkscreen",
+                    "pos": {
+                        "x": 100.158266,
+                        "y": 56.963102
+                    },
+                    "uuid": "d93386c7-b412-4e68-8888-d977c9df4f7d"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen overlap",
+            "items": [
+                {
+                    "description": "PCB text 'Development Header' on F.Silkscreen",
+                    "pos": {
+                        "x": 94.997702,
+                        "y": 44.168475
+                    },
+                    "uuid": "b49d92c1-b3e3-4061-ae58-6f329cd716fc"
+                },
+                {
+                    "description": "PCB Text Box '3V3    SDA    3      SCL    C-      BAT+\nGND    46     45    GND   LED+    W-' on F.Silkscreen",
+                    "pos": {
+                        "x": 109.705,
+                        "y": 44.01625
+                    },
+                    "uuid": "e42efeab-9b6a-4337-93a7-72a6b442ce7c"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen overlap",
+            "items": [
+                {
+                    "description": "Reference field of U2",
+                    "pos": {
+                        "x": 83.810605,
+                        "y": 87.355558
+                    },
+                    "uuid": "aa19aebd-ee93-49e6-8227-51a723880e5b"
+                },
+                {
+                    "description": "Segment of U2 on B.Silkscreen",
+                    "pos": {
+                        "x": 83.939108,
+                        "y": 86.865328
+                    },
+                    "uuid": "e2913746-7ae0-4d05-8870-ce632a1dc7ba"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen overlap",
+            "items": [
+                {
+                    "description": "Reference field of R77",
+                    "pos": {
+                        "x": 75.6,
+                        "y": 80.7
+                    },
+                    "uuid": "6dbabbbf-8831-46dd-97d9-8f2bb76d2c3a"
+                },
+                {
+                    "description": "Reference field of C21",
+                    "pos": {
+                        "x": 75.874801,
+                        "y": 81.277308
+                    },
+                    "uuid": "7277c5a0-2bb6-4136-b1e9-a7406841dc1b"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen overlap",
+            "items": [
+                {
+                    "description": "Reference field of C4",
+                    "pos": {
+                        "x": 82.872557,
+                        "y": 84.098743
+                    },
+                    "uuid": "6077bc47-22ce-4095-8410-ae64a95b1ab9"
+                },
+                {
+                    "description": "Segment of C4 on B.Silkscreen",
+                    "pos": {
+                        "x": 82.872557,
+                        "y": 84.359995
+                    },
+                    "uuid": "8db53694-8cbf-4aa2-aabb-a33b9040aec1"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen overlap",
+            "items": [
+                {
+                    "description": "Segment of CR1 on B.Silkscreen",
+                    "pos": {
+                        "x": 95.481616,
+                        "y": 103.356768
+                    },
+                    "uuid": "c4d0b0ad-0eb9-48c8-8d42-1802498a1b66"
+                },
+                {
+                    "description": "Polygon of U6 on B.Silkscreen",
+                    "pos": {
+                        "x": 95.879915,
+                        "y": 104.513098
+                    },
+                    "uuid": "dd37ce36-84cb-4cc7-8f1d-22c3ab6d6322"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Clearance violation (netclass 'Power' clearance 0.2000 mm; actual 0.1500 mm)",
+            "excluded": true,
+            "items": [
+                {
+                    "description": "PTH pad A1 [GND] of J1",
+                    "pos": {
+                        "x": 96.475,
+                        "y": 95.025
+                    },
+                    "uuid": "86ed7cc3-4dcb-40d1-bb9e-1460edf0f795"
+                },
+                {
+                    "description": "PTH pad A4 [VBUS_PRE_FUSE] of J1",
+                    "pos": {
+                        "x": 96.475,
+                        "y": 95.875
+                    },
+                    "uuid": "c1d99d19-8084-4394-9490-debcd95fd981"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation (netclass 'Power' clearance 0.2000 mm; actual 0.1500 mm)",
+            "excluded": true,
+            "items": [
+                {
+                    "description": "PTH pad A4 [VBUS_PRE_FUSE] of J1",
+                    "pos": {
+                        "x": 96.475,
+                        "y": 95.875
+                    },
+                    "uuid": "c1d99d19-8084-4394-9490-debcd95fd981"
+                },
+                {
+                    "description": "PTH pad A5 [CC1] of J1",
+                    "pos": {
+                        "x": 96.475,
+                        "y": 96.725
+                    },
+                    "uuid": "0eec7ea8-427b-4943-b215-38b8a6f056d7"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation (netclass 'Power' clearance 0.2000 mm; actual 0.1500 mm)",
+            "excluded": true,
+            "items": [
+                {
+                    "description": "PTH pad A8 [<no net>] of J1",
+                    "pos": {
+                        "x": 96.475,
+                        "y": 99.275
+                    },
+                    "uuid": "f2fd9d68-f706-41bf-ba0d-b74e3ae44f15"
+                },
+                {
+                    "description": "PTH pad A9 [VBUS_PRE_FUSE] of J1",
+                    "pos": {
+                        "x": 96.475,
+                        "y": 100.125
+                    },
+                    "uuid": "7c2d07f3-59a5-48c8-8750-aebd9e86a83e"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation (netclass 'Power' clearance 0.2000 mm; actual 0.1500 mm)",
+            "excluded": true,
+            "items": [
+                {
+                    "description": "PTH pad A9 [VBUS_PRE_FUSE] of J1",
+                    "pos": {
+                        "x": 96.475,
+                        "y": 100.125
+                    },
+                    "uuid": "7c2d07f3-59a5-48c8-8750-aebd9e86a83e"
+                },
+                {
+                    "description": "PTH pad A12 [GND] of J1",
+                    "pos": {
+                        "x": 96.475,
+                        "y": 100.975
+                    },
+                    "uuid": "6c892870-6fbc-452d-8a1c-64a1f1dcb08c"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation (netclass 'Power' clearance 0.2000 mm; actual 0.1500 mm)",
+            "excluded": true,
+            "items": [
+                {
+                    "description": "PTH pad B1 [GND] of J1",
+                    "pos": {
+                        "x": 97.825,
+                        "y": 100.975
+                    },
+                    "uuid": "9661b4c2-ac33-4d94-9cf8-b66be786afeb"
+                },
+                {
+                    "description": "PTH pad B4 [VBUS_PRE_FUSE] of J1",
+                    "pos": {
+                        "x": 97.825,
+                        "y": 100.125
+                    },
+                    "uuid": "4b60172a-e0b3-47e4-be0e-ed76ff891983"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation (netclass 'Power' clearance 0.2000 mm; actual 0.1500 mm)",
+            "excluded": true,
+            "items": [
+                {
+                    "description": "PTH pad B4 [VBUS_PRE_FUSE] of J1",
+                    "pos": {
+                        "x": 97.825,
+                        "y": 100.125
+                    },
+                    "uuid": "4b60172a-e0b3-47e4-be0e-ed76ff891983"
+                },
+                {
+                    "description": "PTH pad B5 [CC2] of J1",
+                    "pos": {
+                        "x": 97.825,
+                        "y": 99.275
+                    },
+                    "uuid": "9c101602-9add-4b3d-9eb5-32eb54c1d338"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation (netclass 'Power' clearance 0.2000 mm; actual 0.1500 mm)",
+            "excluded": true,
+            "items": [
+                {
+                    "description": "PTH pad B8 [<no net>] of J1",
+                    "pos": {
+                        "x": 97.825,
+                        "y": 96.725
+                    },
+                    "uuid": "7c881a6b-4df7-4f48-a962-cf1caee4131a"
+                },
+                {
+                    "description": "PTH pad B9 [VBUS_PRE_FUSE] of J1",
+                    "pos": {
+                        "x": 97.825,
+                        "y": 95.875
+                    },
+                    "uuid": "59bc41f9-06dd-45cc-89c9-4d9ba0e7c83e"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation (netclass 'Power' clearance 0.2000 mm; actual 0.1500 mm)",
+            "excluded": true,
+            "items": [
+                {
+                    "description": "PTH pad B9 [VBUS_PRE_FUSE] of J1",
+                    "pos": {
+                        "x": 97.825,
+                        "y": 95.875
+                    },
+                    "uuid": "59bc41f9-06dd-45cc-89c9-4d9ba0e7c83e"
+                },
+                {
+                    "description": "PTH pad B12 [GND] of J1",
+                    "pos": {
+                        "x": 97.825,
+                        "y": 95.025
+                    },
+                    "uuid": "6d348c88-d635-48ba-8f1f-a61219854bbb"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation (netclass 'SW' clearance 0.2500 mm; actual 0.2000 mm)",
+            "excluded": true,
+            "items": [
+                {
+                    "description": "Pad 1 [LED_SW] of J3 on B.Cu",
+                    "pos": {
+                        "x": 52.987462,
+                        "y": 124.575
+                    },
+                    "uuid": "cef15608-eefc-4222-9bf1-eb5998f6677a"
+                },
+                {
+                    "description": "Pad 2 [C-] of J3 on B.Cu",
+                    "pos": {
+                        "x": 53.487462,
+                        "y": 124.575
+                    },
+                    "uuid": "32d5838f-0008-435a-a56e-cf11d34175a1"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation (netclass 'SW' clearance 0.2500 mm; actual 0.2000 mm)",
+            "excluded": true,
+            "items": [
+                {
+                    "description": "Pad 4 [unconnected-(J3-Pad4)] of J3 on B.Cu",
+                    "pos": {
+                        "x": 54.487462,
+                        "y": 124.575
+                    },
+                    "uuid": "ca093715-17c1-47d6-80a2-40784adf983a"
+                },
+                {
+                    "description": "Pad 5 [LED_SW] of J3 on B.Cu",
+                    "pos": {
+                        "x": 54.987462,
+                        "y": 124.575
+                    },
+                    "uuid": "3ce51e4e-f1e5-4c7a-84dc-2f229c5781be"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation (netclass 'SW' clearance 0.2500 mm; actual 0.2000 mm)",
+            "excluded": true,
+            "items": [
+                {
+                    "description": "Pad 5 [LED_SW] of J3 on B.Cu",
+                    "pos": {
+                        "x": 54.987462,
+                        "y": 124.575
+                    },
+                    "uuid": "3ce51e4e-f1e5-4c7a-84dc-2f229c5781be"
+                },
+                {
+                    "description": "Pad 6 [W-] of J3 on B.Cu",
+                    "pos": {
+                        "x": 55.487462,
+                        "y": 124.575
+                    },
+                    "uuid": "43920391-8c0b-48d5-bea3-3de568c47dd2"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        }
+    ]
+}

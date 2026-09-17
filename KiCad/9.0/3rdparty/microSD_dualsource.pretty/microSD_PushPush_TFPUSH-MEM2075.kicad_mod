@@ -3,7 +3,7 @@
 	(generator "pcbnew")
 	(generator_version "9.0")
 	(layer "F.Cu")
-	(descr "Unified push-push microSD: SHOU HAN TF PUSH (LCSC C393941, geometry from mfr DXF - fully SMD, no pegs) + GCT MEM2075-00-140-01-A (2 NPTH locating pegs). Contacts identical 1.10mm. Pinout matches Hirose DM3AT: 1-8 signals, 9=shield/GND.")
+	(descr "Unified push-push microSD: SHOU HAN TF PUSH (LCSC C393941, 2x Ø0.80 pegs @ 8.00mm) + GCT MEM2075-00-140-01-A (2x Ø0.75 pegs @ 6.80mm). Locating holes are slots sized to accept EITHER part's pegs (union + clearance). Contacts identical 1.10mm pitch. Pinout matches Hirose DM3AT: 1-8 signals, 9=shield/GND. Dwgs.User rect = GCT MEM2075 body keepout (keep top Cu/vias out only if the GCT part will be fitted; not required for TF PUSH). Verify seating against an actual socket before assembly.")
 	(tags "microSD push-push dual-source")
 	(property "Reference" "REF**"
 		(at 0 -2.4 0)
@@ -73,6 +73,17 @@
 		(layer "F.SilkS")
 		(uuid "05349487-dab3-4255-ab98-bf8d881bb382")
 	)
+	(fp_rect
+		(start -5.78 3.5)
+		(end 4.42 7.55)
+		(stroke
+			(width 0.1)
+			(type dash)
+		)
+		(fill no)
+		(layer "Dwgs.User")
+		(uuid "a1b2c3d4-0001-4000-8000-000000000001")
+	)
 	(fp_line
 		(start -6.9 -1)
 		(end 10.4 -1)
@@ -113,17 +124,28 @@
 		(layer "F.CrtYd")
 		(uuid "1cb47516-1008-4558-964f-8f963f737279")
 	)
-	(pad "" np_thru_hole circle
-		(at -2.13 11.42)
-		(size 1 1)
-		(drill 1)
+	(fp_text user "MEM2075 keepout (GCT)"
+		(at -0.68 5.525 0)
+		(layer "Dwgs.User")
+		(uuid "a1b2c3d4-0002-4000-8000-000000000002")
+		(effects
+			(font
+				(size 0.6 0.6)
+				(thickness 0.1)
+			)
+		)
+	)
+	(pad "" np_thru_hole oval
+		(at -2.73 11.2)
+		(size 2.25 1.5)
+		(drill oval 2.25 1.5)
 		(layers "*.Cu" "*.Mask")
 		(uuid "8150750a-7084-4f6a-b416-dd31a7f3ae81")
 	)
-	(pad "" np_thru_hole circle
-		(at 4.67 11.42)
-		(size 1 1)
-		(drill 1)
+	(pad "" np_thru_hole oval
+		(at 4.7 11.2)
+		(size 1.05 1.5)
+		(drill oval 1.05 1.5)
 		(layers "*.Cu" "*.Mask")
 		(uuid "ed5a9f55-1948-4ad0-bde6-5fb8221cfc6d")
 	)
@@ -246,10 +268,49 @@
 		(roundrect_rratio 0.15)
 		(uuid "3b6d63a0-1ce6-4e5a-ab1b-5ef059823684")
 	)
+	(zone
+		(net 0)
+		(net_name "")
+		(layer "F.SilkS")
+		(uuid "77136d91-ea05-4dcc-9a83-a24085b6ca27")
+		(name "keep-out-gct")
+		(hatch edge 0.5)
+		(connect_pads
+			(clearance 0)
+		)
+		(min_thickness 0.25)
+		(filled_areas_thickness no)
+		(keepout
+			(tracks not_allowed)
+			(vias not_allowed)
+			(pads not_allowed)
+			(copperpour allowed)
+			(footprints allowed)
+		)
+		(placement
+			(enabled no)
+			(sheetname "")
+		)
+		(fill
+			(thermal_gap 0.5)
+			(thermal_bridge_width 0.5)
+		)
+		(polygon
+			(pts
+				(xy -5.5 3.5) (xy 4.5 3.5) (xy 4.5 7.5) (xy -5.5 7.5)
+			)
+		)
+	)
 	(embedded_fonts no)
-  (model "${KIPRJMOD}/KiCad/9.0/3rdparty/microSD_dualsource.pretty/TF-SMD_TF-PUSH.wrl"
-    (offset (xyz 1.6 -5.3 0))
-    (scale (xyz 2.54 2.54 2.54))
-    (rotate (xyz 0 0 0))
-  )
+	(model "${KIPRJMOD}/KiCad/9.0/3rdparty/microSD_dualsource.pretty/TF-SMD_TF-PUSH.wrl"
+		(offset
+			(xyz 1.6 -5.3 0)
+		)
+		(scale
+			(xyz 2.54 2.54 2.54)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
 )

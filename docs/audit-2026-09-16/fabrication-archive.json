@@ -1,0 +1,158 @@
+[
+  {
+    "name": "silkscreen_pcb-B_Cu.gbl",
+    "bytes": 661837,
+    "time": [
+      2026,
+      9,
+      16,
+      0,
+      55,
+      18
+    ]
+  },
+  {
+    "name": "silkscreen_pcb-B_Mask.gbs",
+    "bytes": 27522,
+    "time": [
+      2026,
+      9,
+      16,
+      0,
+      55,
+      18
+    ]
+  },
+  {
+    "name": "silkscreen_pcb-B_Paste.gbp",
+    "bytes": 31988,
+    "time": [
+      2026,
+      9,
+      16,
+      0,
+      55,
+      18
+    ]
+  },
+  {
+    "name": "silkscreen_pcb-B_Silkscreen.gbo",
+    "bytes": 823511,
+    "time": [
+      2026,
+      9,
+      16,
+      0,
+      55,
+      18
+    ]
+  },
+  {
+    "name": "silkscreen_pcb-Edge_Cuts.gm1",
+    "bytes": 3426,
+    "time": [
+      2026,
+      9,
+      16,
+      0,
+      55,
+      18
+    ]
+  },
+  {
+    "name": "silkscreen_pcb-F_Cu.gtl",
+    "bytes": 285307,
+    "time": [
+      2026,
+      9,
+      16,
+      0,
+      55,
+      18
+    ]
+  },
+  {
+    "name": "silkscreen_pcb-F_Mask.gts",
+    "bytes": 5273,
+    "time": [
+      2026,
+      9,
+      16,
+      0,
+      55,
+      18
+    ]
+  },
+  {
+    "name": "silkscreen_pcb-F_Paste.gtp",
+    "bytes": 507,
+    "time": [
+      2026,
+      9,
+      16,
+      0,
+      55,
+      18
+    ]
+  },
+  {
+    "name": "silkscreen_pcb-F_Silkscreen.gto",
+    "bytes": 2455611,
+    "time": [
+      2026,
+      9,
+      16,
+      0,
+      55,
+      18
+    ]
+  },
+  {
+    "name": "silkscreen_pcb-NPTH-drl_map.gbr",
+    "bytes": 40273,
+    "time": [
+      2026,
+      9,
+      16,
+      0,
+      55,
+      18
+    ]
+  },
+  {
+    "name": "silkscreen_pcb-NPTH.drl",
+    "bytes": 481,
+    "time": [
+      2026,
+      9,
+      16,
+      0,
+      55,
+      18
+    ]
+  },
+  {
+    "name": "silkscreen_pcb-PTH-drl_map.gbr",
+    "bytes": 174710,
+    "time": [
+      2026,
+      9,
+      16,
+      0,
+      55,
+      18
+    ]
+  },
+  {
+    "name": "silkscreen_pcb-PTH.drl",
+    "bytes": 4912,
+    "time": [
+      2026,
+      9,
+      16,
+      0,
+      55,
+      18
+    ]
+  }
+]

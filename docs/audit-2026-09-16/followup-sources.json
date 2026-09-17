@@ -1,0 +1,43 @@
+[
+  {
+    "name": "si1308edl",
+    "url": "https://www.vishay.com/docs/63399/si1308edl.pdf",
+    "sha256": "a86d6f766f259d8b170a01081f577055f37b527257a0f9af497c8f2c33625c9a",
+    "pages": 11,
+    "cache": "C:\\Users\\iandc\\AppData\\Local\\Temp\\silkscreen-audit-2026-09-16\\followup\\si1308edl.pdf"
+  },
+  {
+    "name": "irlml6346",
+    "url": "https://www.infineon.com/assets/row/public/documents/24/49/infineon-irlml6346-datasheet-en.pdf",
+    "mirror_landing": "https://jlcpcb.com/partdetail/InfineonTechnologies-IRLML6346TRPBF/C67276",
+    "sha256": "d7f0c119ab4783abac6641ff7e00fdb133394ab077c481d1cd72b0c0be0367c1",
+    "pages": 10,
+    "cache": "C:\\Users\\iandc\\AppData\\Local\\Temp\\silkscreen-audit-2026-09-16\\followup\\irlml6346.pdf"
+  },
+  {
+    "name": "dmn3150l",
+    "url": "https://www.diodes.com/datasheet/download/DMN3150L.pdf",
+    "sha256": "e9dfd4e2a0fc08cb0f23d35438456f26ddbf964a2367826c850f0441307089b5",
+    "pages": 5,
+    "cache": "C:\\Users\\iandc\\AppData\\Local\\Temp\\silkscreen-audit-2026-09-16\\followup\\dmn3150l.pdf"
+  },
+  {
+    "name": "dmn3200u",
+    "url": "https://www.diodes.com/datasheet/download/DMN3200U.pdf",
+    "sha256": "aca2ac53a2e44d273b13a0c4713409038f8fe714b3f520b0df0c868701b3e813",
+    "pages": 6,
+    "cache": "C:\\Users\\iandc\\AppData\\Local\\Temp\\silkscreen-audit-2026-09-16\\followup\\dmn3200u.pdf"
+  },
+  {
+    "name": "pmv40un2",
+    "url": "https://assets.nexperia.com/documents/data-sheet/PMV40UN2.pdf",
+    "error": "403 Client Error: Forbidden for url: https://assets.nexperia.com/documents/data-sheet/PMV40UN2.pdf"
+  },
+  {
+    "name": "ao3400a",
+    "url": "https://www.aosmd.com/res/data_sheets/AO3400A.pdf",
+    "sha256": "9c60d0b6c1ddc7609a4b788a91181468d8ffe6c3e9ba425c3d8ffc5ba88c5033",
+    "pages": 5,
+    "cache": "C:\\Users\\iandc\\AppData\\Local\\Temp\\silkscreen-audit-2026-09-16\\followup\\ao3400a.pdf"
+  }
+]

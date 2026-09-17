@@ -1,0 +1,174 @@
+﻿Ref,Block,Population,Value,Ordered MPN
+C1,USB connector/shield/CC,FIT,1n,CL10B102KB8NNNC
+C2,Charger and USB indicator,FIT,10u,CL10A106KP8NNNC
+C3,Charger and USB indicator,FIT,10u,CL10A106KP8NNNC
+C4,Power mux,FIT,22u,TCC0805X5R226M250FT
+C5,"Processor, boot, reset, UART",FIT,1u,CL10A105KB8NNNC
+C6,3.3 V regulator,FIT,22u,TCC0805X5R226M250FT
+C7,"Battery connector, protection, polarity",FIT,0.1u,CC0603KRX7R9BB104
+C8,Battery ADC,FIT,1u,CL10A105KB8NNNC
+C9,"Frontlight boost, selection and ADC",FIT,1u/50V,CL21B105KBFNNNE
+C10,"E-paper connector, power and logic",FIT,4.7u,CL10A475KO8NNNC
+C11,"E-paper connector, power and logic",FIT,4.7u/50V,CL21A475KBQNNNE
+C12,"Frontlight boost, selection and ADC",FIT,4.7u,CL10A475KO8NNNC
+C13,"E-paper connector, power and logic",FIT,4.7u/50V,CL21A475KBQNNNE
+C14,"E-paper connector, power and logic",FIT,4.7u/50V,CL21A475KBQNNNE
+C15,"E-paper connector, power and logic",FIT,4.7u/50V,CL21A475KBQNNNE
+C16,"E-paper connector, power and logic",FIT,4.7u/50V,CL21A475KBQNNNE
+C17,"E-paper connector, power and logic",FIT,4.7u/50V,CL21A475KBQNNNE
+C18,"E-paper connector, power and logic",FIT,1u,CL21B105KBFNNNE
+C19,"E-paper connector, power and logic",FIT,1u,CL21B105KBFNNNE
+C20,"E-paper connector, power and logic",FIT,1u/50V,CL21B105KBFNNNE
+C21,3.3 V regulator,FIT,1u,CL10A105KB8NNNC
+C22,"Processor, boot, reset, UART",FIT,1u,CL10A105KB8NNNC
+C23,USB status ADC,FIT,2.2n,0603B222K500NT
+C24,"Frontlight boost, selection and ADC",FIT,100n,CC0603KRX7R9BB104
+C25,Power mux,FIT,1u,CL10A105KB8NNNC
+C26,Power mux,FIT,1u,CL10A105KB8NNNC
+C27,Buttons and alternate wake link,FIT,2.2n,0603B222K500NT
+C28,Buttons and alternate wake link,FIT,2.2n,0603B222K500NT
+C29,Power/wake button,FIT,2.2n,0603B222K500NT
+C30,Optional RTC,FIT,0.1u,CC0603KRX7R9BB104
+C31,"Frontlight boost, selection and ADC",FIT,100n,CC0603KRX7R9BB104
+C32,"Processor, boot, reset, UART",FIT,22u,TCC0805X5R226M250FT
+C33,"Processor, boot, reset, UART",FIT,0.1u,CC0603KRX7R9BB104
+C36,SDMMC and power gating,FIT,0.1u,CC0603KRX7R9BB104
+C37,SDMMC and power gating,FIT,1u,CL10A105KB8NNNC
+CR1,USB ESD,FIT,TSD05CDYFR,SD05C
+CR2,Expansion and shared ESD,FIT,TSD05CDYFR,SD05C
+CR3,Expansion and shared ESD,FIT,TSD05CDYFR,SD05C
+D2,Charger and USB indicator,FIT,LED,P2-1206RTCS2-0.9T-F
+D3,Expansion and shared ESD,FIT,SMAJ26A,SMAJ26A
+D4,"E-paper connector, power and logic",FIT,B5819W,B5819W
+D5,"E-paper connector, power and logic",FIT,B5819W,B5819W
+D6,"E-paper connector, power and logic",FIT,B5819W,B5819W
+D8,Expansion and shared ESD,FIT,PESD2IVN-UX,PESD2IVN-UX
+F1,USB connector/shield/CC,FIT,0805L100WR,0805L100WR
+H1,Mounting,MECHANICAL/BARE PAD,MountingHole_Pad,
+H2,Mounting,MECHANICAL/BARE PAD,MountingHole_Pad,
+H3,Mounting,MECHANICAL/BARE PAD,MountingHole_Pad,
+H4,Mounting,MECHANICAL/BARE PAD,MountingHole_Pad,
+H5,Mounting,MECHANICAL/BARE PAD,MountingHole_Pad,
+J1,USB connector/shield/CC,FIT,USB_C_Receptacle,USB4085-GF-A
+J2,"E-paper connector, power and logic",FIT,FH34SRJ-24S-0.5SH_50_,FH34SRJ-24S-0.5SH(50)
+J3,"Frontlight boost, selection and ADC",FIT,FH34SRJ-6S-0.5SH_50_,FH34SRJ-6S-0.5SH(50)
+J4,Touch connector and links,FIT,FH34SRJ-6S-0.5SH_50_,FH34SRJ-6S-0.5SH(50)
+J5,"Battery connector, protection, polarity",FIT,Conn_01x02,A2001WR-2P
+J6,Expansion and shared ESD,FIT,PPPC062LJBN-RC,A2541HWR-2x6P
+J7,SDMMC and power gating,FIT,Micro_SD_Card,TF PUSH
+L1,"E-paper connector, power and logic",FIT,22u,VLS3012HBX-220M
+L2,"Frontlight boost, selection and ADC",FIT,4.7u,VLS252010HBX-4R7M-1
+Q1,"Battery connector, protection, polarity",FIT,FS8205A,FS8205A
+Q3,"Battery connector, protection, polarity",FIT,AO3419,AO3419
+Q4,"E-paper connector, power and logic",FIT,BSS138,BSS138
+Q5,"Frontlight boost, selection and ADC",FIT,BSS138,BSS138
+Q6,"Frontlight boost, selection and ADC",FIT,BSS138,BSS138
+Q7,SDMMC and power gating,FIT,AO3419,AO3419
+Q8,"Battery connector, protection, polarity",FIT,AO3419,AO3419
+R1,USB connector/shield/CC,FIT,1M,0603WAF1004T5E
+R2,USB connector/shield/CC,FIT,5.1k,0603WAF5101T5E
+R3,USB connector/shield/CC,FIT,5.1k,0603WAF5101T5E
+R4,Buttons and alternate wake link,FIT,10k,0603WAF1002T5E
+R5,"E-paper connector, power and logic",FIT,10k,0603WAF1002T5E
+R6,Charger and USB indicator,FIT,4.7k,0603WAF4701T5E
+R7,"Processor, boot, reset, UART",FIT,10k,0603WAF1002T5E
+R8,SDMMC and power gating,FIT,10k,0603WAF1002T5E
+R9,SDMMC and power gating,FIT,10k,0603WAF1002T5E
+R10,Battery ADC,FIT,1M,0603WAF1004T5E
+R11,Buttons and alternate wake link,FIT,12k,0603WAF1202T5E
+R12,Battery ADC,FIT,1M,0603WAF1004T5E
+R13,"Processor, boot, reset, UART",FIT,10k,0603WAF1002T5E
+R14,"E-paper connector, power and logic",FIT,3,RCA033RFLF
+R15,"E-paper connector, power and logic",FIT,10k,0603WAF1002T5E
+R16,"Battery connector, protection, polarity",FIT,1k,0603WAF1001T5E
+R17,USB status ADC,FIT,150k,0603WAF1503T5E
+R18,Buttons and alternate wake link,FIT,5.6k,0603WAF5601T5E
+R19,Buttons and alternate wake link,FIT,20k,0603WAF2002T5E
+R20,Buttons and alternate wake link,FIT,56k,0603WAF5602T5E
+R21,SDMMC and power gating,FIT,33,0603WAF330JT5E
+R22,SDMMC and power gating,FIT,33,0603WAF330JT5E
+R23,SDMMC and power gating,FIT,33,0603WAF330JT5E
+R24,SDMMC and power gating,FIT,33,0603WAF330JT5E
+R25,SDMMC and power gating,FIT,33,0603WAF330JT5E
+R26,SDMMC and power gating,FIT,33,0603WAF330JT5E
+R27,"Battery connector, protection, polarity",FIT,0,0603WAF0000T5E
+R28,Buttons and alternate wake link,FIT,10k,0603WAF1002T5E
+R29,"E-paper connector, power and logic",FIT,33,0603WAF330JT5E
+R30,"E-paper connector, power and logic",FIT,33,0603WAF330JT5E
+R31,"E-paper connector, power and logic",FIT,33,0603WAF330JT5E
+R32,"E-paper connector, power and logic",FIT,33,0603WAF330JT5E
+R33,"E-paper connector, power and logic",FIT,33,0603WAF330JT5E
+R34,"E-paper connector, power and logic",FIT,33,0603WAF330JT5E
+R35,Buttons and alternate wake link,FIT,33k,0603WAF3302T5E
+R36,Buttons and alternate wake link,FIT,68k,0603WAF6802T5E
+R37,"Frontlight boost, selection and ADC",FIT,13.3,ERJ3EKF13R3V
+R38,Power mux,FIT,300k,0603WAF3003T5E
+R39,"Frontlight boost, selection and ADC",FIT,1M,0603WAF1004T5E
+R40,SDMMC and power gating,FIT,100k,0603WAF1003T5E
+R41,"Frontlight boost, selection and ADC",FIT,120k,0603WAF1203T5E
+R42,Touch connector and links,FIT,0,0603WAF0000T5E
+R43,Touch connector and links,DNP,0,
+R44,Touch connector and links,FIT,0,0603WAF0000T5E
+R45,Touch connector and links,DNP,0,
+R46,Touch connector and links,FIT,0,0603WAF0000T5E
+R47,Expansion and shared ESD,FIT,2.2k,0603WAF2201T5E
+R48,Expansion and shared ESD,FIT,2.2k,0603WAF2201T5E
+R49,"Frontlight boost, selection and ADC",FIT,1M,0603WAF1004T5E
+R50,"Frontlight boost, selection and ADC",FIT,1M,0603WAF1004T5E
+R51,Power mux,FIT,100k,0603WAF1003T5E
+R52,Touch connector and links,FIT,0,0603WAF0000T5E
+R53,SDMMC and power gating,FIT,10k,0603WAF1002T5E
+R54,SDMMC and power gating,FIT,10k,0603WAF1002T5E
+R55,SDMMC and power gating,FIT,10k,0603WAF1002T5E
+R56,"Battery connector, protection, polarity",FIT,10k,0603WAF1002T5E
+R57,"Battery connector, protection, polarity",FIT,1M,0603WAF1004T5E
+R58,Touch connector and links,DNP,0,
+R59,Charger and USB indicator,FIT,2k,0603WAF2001T5E
+R60,Buttons and alternate wake link,FIT,100,0603WAF1000T5E
+R61,Buttons and alternate wake link,FIT,100,0603WAF1000T5E
+R62,Power/wake button,FIT,10k,0603WAF1002T5E
+R63,"Processor, boot, reset, UART",FIT,100,0603WAF1000T5E
+R64,"Processor, boot, reset, UART",FIT,100,0603WAF1000T5E
+R65,Expansion and shared ESD,FIT,33,0603WAF330JT5E
+R66,Touch connector and links,DNP,0,
+R67,USB status ADC,FIT,56k,0603WAF5602T5E
+R68,Expansion and shared ESD,FIT,33,0603WAF330JT5E
+R69,Expansion and shared ESD,FIT,33,0603WAF330JT5E
+R70,USB status ADC,FIT,100k,0603WAF1003T5E
+R71,USB status ADC,FIT,22k,0603WAF2202T5E
+R72,Buttons and alternate wake link,DNP,10k,
+R73,Buttons and alternate wake link,FIT,0,0603WAF0000T5E
+R74,Buttons and alternate wake link,DNP,0,
+R75,"Frontlight boost, selection and ADC",FIT,100k,0603WAF1003T5E
+R76,Power/wake button,FIT,100k,0603WAF1003T5E
+R77,SDMMC and power gating,FIT,100k,0603WAF1003T5E
+R78,SDMMC and power gating,FIT,1k,0603WAF1001T5E
+SW1,Buttons and alternate wake link,FIT,SW_Push,TS365ZJ
+SW2,Buttons and alternate wake link,FIT,SW_Push,TS365ZJ
+SW3,Buttons and alternate wake link,FIT,SW_Push,TS365ZJ
+SW4,Buttons and alternate wake link,FIT,SW_Push,TS365ZJ
+SW5,Buttons and alternate wake link,FIT,SW_Push,TS365ZJ
+SW6,"Processor, boot, reset, UART",DNP,SW_Push,No Part Selected
+SW7,Buttons and alternate wake link,FIT,SW_Push,TS365ZJ
+SW8,Buttons and alternate wake link,FIT,SW_Push,TS365ZJ
+SW9,Buttons and alternate wake link,FIT,SW_Push,TS365ZJ
+SW10,Power/wake button,FIT,SW_Push,TS365ZJ
+SW11,"Processor, boot, reset, UART",FIT,SW_Push,TS365ZJ
+TP1,"Processor, boot, reset, UART",MECHANICAL/BARE PAD,TestPoint,
+TP2,"Processor, boot, reset, UART",MECHANICAL/BARE PAD,TestPoint,
+TP3,"Frontlight boost, selection and ADC",MECHANICAL/BARE PAD,TestPoint,
+TP4,"Frontlight boost, selection and ADC",MECHANICAL/BARE PAD,TestPoint,
+TP5,"Frontlight boost, selection and ADC",MECHANICAL/BARE PAD,TestPoint,
+U1,SDMMC and power gating,FIT,TPD4E1U06DBVR,TPD4E1U06DBVR
+U2,Power mux,FIT,TPS2116DRL,TPS2116DRLR
+U3,3.3 V regulator,FIT,TLV75533PDBV,TLV75533PDBVR
+U4,"Processor, boot, reset, UART",FIT,ESP32-S3-WROOM-1,ESP32-S3-WROOM-1-N16R8
+U5,"Battery connector, protection, polarity",FIT,DW01A,DW01A
+U6,USB ESD,FIT,TPD4E1U06DBVR,TPD4E1U06DBVR
+U7,Touch connector and links,FIT,TPD4E1U06DBVR,TPD4E1U06DBVR
+U8,Expansion and shared ESD,FIT,TPD4E1U06DBVR,TPD4E1U06DBVR
+U9,Expansion and shared ESD,FIT,TPD4E1U06DBVR,TPD4E1U06DBVR
+U10,"Frontlight boost, selection and ADC",FIT,TPS923610DRLR,TPS923610DRLR
+U11,Charger and USB indicator,FIT,TP4056-42-ESOP8,TP4056-42-ESOP8
+U12,"Frontlight boost, selection and ADC",FIT,74LVC1G04,74LVC1G04GV
+U13,Optional RTC,DNP,DS3231MZ,No Part Selected

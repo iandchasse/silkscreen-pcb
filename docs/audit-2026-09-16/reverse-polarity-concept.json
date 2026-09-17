@@ -1,0 +1,101 @@
+{
+  "status": "Illustrative topology check; NOT a hardware qualification",
+  "models": "Handwritten generic VDMOS approximations, not manufacturer models",
+  "excluded": [
+    "DW01 and FS8205 operation and parasitics",
+    "Actual TP4056 control",
+    "Gate leakage and temperature corners",
+    "Hot-plug transients",
+    "Contact bounce, cable inductance, ESR corners, MOSFET SOA"
+  ],
+  "dc_cases": [
+    {
+      "case": 0,
+      "description": "3.7 V discharge",
+      "pp_v": 3.64613413811,
+      "battery_v": 3.68749804679,
+      "pass_vgs": -3.65863271989,
+      "detector_vgs": 3.6509880561,
+      "battery_charge_a": -0.250040262938,
+      "gate_bias_a": 3.65863270417e-05
+    },
+    {
+      "case": 1,
+      "description": "3.7 V charging",
+      "pp_v": 3.75346565247,
+      "battery_v": 3.71244786336,
+      "pass_vgs": -3.74101420958,
+      "detector_vgs": 3.67569110944,
+      "battery_charge_a": 0.248958870769,
+      "gate_bias_a": 3.74101400666e-05
+    },
+    {
+      "case": 2,
+      "description": "2.5 V charging",
+      "pp_v": 2.55962705612,
+      "battery_v": 2.51244853033,
+      "pass_vgs": -2.54717568494,
+      "detector_vgs": 2.48757288946,
+      "battery_charge_a": 0.248972013593,
+      "gate_bias_a": 2.54717579082e-05
+    },
+    {
+      "case": 3,
+      "description": "Reversed, USB absent",
+      "pp_v": -0.0477059856057,
+      "battery_v": -4.19999980929,
+      "pass_vgs": 5.31226396561e-05,
+      "detector_vgs": -4.1584157944,
+      "battery_charge_a": 4.15942395193e-06,
+      "gate_bias_a": -5.31244381818e-10
+    },
+    {
+      "case": 4,
+      "description": "Reversed, USB present",
+      "pp_v": 4.19950008392,
+      "battery_v": -4.19999980932,
+      "pass_vgs": -1.09672546387e-05,
+      "detector_vgs": -4.15841579443,
+      "battery_charge_a": 4.15943259213e-06,
+      "gate_bias_a": 1.08393211073e-10
+    },
+    {
+      "case": 5,
+      "description": "0 V pack, USB present",
+      "pp_v": 4.19950008392,
+      "battery_v": 5.04199318102e-11,
+      "pass_vgs": -1.09672546387e-05,
+      "detector_vgs": 4.99207269661e-11,
+      "battery_charge_a": 1.00839858685e-09,
+      "gate_bias_a": 1.08393211073e-10
+    },
+    {
+      "case": 6,
+      "description": "No battery, USB present",
+      "pp_v": 4.1994767189,
+      "battery_v": 4.19947393443,
+      "pass_vgs": -4.19947292624,
+      "detector_vgs": 4.15789516475,
+      "battery_charge_a": 4.1994741018e-12,
+      "gate_bias_a": 4.19947318733e-05
+    },
+    {
+      "case": 7,
+      "description": "2.5 V discharge",
+      "pp_v": 2.43954896927,
+      "battery_v": 2.48749871376,
+      "pass_vgs": -2.45204763673,
+      "detector_vgs": 2.46286983612,
+      "battery_charge_a": -0.250027000904,
+      "gate_bias_a": 2.45204773819e-05
+    }
+  ],
+  "no_battery_note": "An enabled no-battery operating point exists: USB can hold B+ high through the pass channel. This is not a battery-presence detector. Do not assume an empty connector is de-energized.",
+  "nominal_bias_uA": {
+    "2.5": 27.475247524752476,
+    "3.7": 40.66336633663367,
+    "4.2": 46.158415841584166
+  },
+  "added_bias_at_4V2_uA_vs_existing_divider": 42.0,
+  "added_consumption_mAh_per_30_days": 30.240000000000002
+}

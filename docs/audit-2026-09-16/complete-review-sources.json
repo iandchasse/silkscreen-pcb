@@ -1,0 +1,34 @@
+[
+  {
+    "name": "tpd4-tech",
+    "source": "https://jlcpcb.com/partdetail/TECHPUBLIC-TPD4E1U06DBVR/C19829453",
+    "part_code": "C19829453",
+    "cache": "C:\\Users\\iandc\\AppData\\Local\\Temp\\silkscreen-audit-2026-09-16\\complete\\tpd4-tech.pdf",
+    "pages": 4,
+    "sha256": "27235e7c0a9219c38beb085c74127d9d60790a4187f985012e13717851417861"
+  },
+  {
+    "name": "inverter-mdd",
+    "source": "https://jlcpcb.com/partdetail/MDD_MicrodiodeSemiconductor-74LVC1G04GV/C53185133",
+    "part_code": "C53185133",
+    "cache": "C:\\Users\\iandc\\AppData\\Local\\Temp\\silkscreen-audit-2026-09-16\\complete\\inverter-mdd.pdf",
+    "pages": 15,
+    "sha256": "cfa009201d12fb559338ce03a893b7dfdcc300a0fe1a36737f4ff464859b37f9"
+  },
+  {
+    "name": "pesd-tech",
+    "source": "https://jlcpcb.com/partdetail/TECHPUBLIC-PESD2IVNUX/C42370512",
+    "part_code": "C42370512",
+    "cache": "C:\\Users\\iandc\\AppData\\Local\\Temp\\silkscreen-audit-2026-09-16\\complete\\pesd-tech.pdf",
+    "pages": 4,
+    "sha256": "645a9446f1990b00de2716ae4b448a05aa7c4f7e859c5c4a615db72ee9025416"
+  },
+  {
+    "name": "ao3419",
+    "source": "https://www.aosmd.com/res/data_sheets/AO3419.pdf",
+    "part_code": "",
+    "cache": "C:\\Users\\iandc\\AppData\\Local\\Temp\\silkscreen-audit-2026-09-16\\complete\\ao3419.pdf",
+    "pages": 5,
+    "sha256": "1eb1a64e0a067db0da98c2bdc823eed495f51d5bdbd29a2c125af1c9bc40c97f"
+  }
+]
