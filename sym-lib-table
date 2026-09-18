@@ -6,6 +6,5 @@
   (lib (name "PPPC_12")(type "KiCad")(uri "${KIPRJMOD}/KiCad/9.0/3rdparty/PPPC062LJBN_RC/2026-05-25_00-23-42.kicad_sym")(options "")(descr ""))
   (lib (name "TPD4E1U06DBVR")(type "KiCad")(uri "${KIPRJMOD}/KiCad/9.0/3rdparty/TPD4E1U06DBVR/TPD4E1U06DBVR.kicad_sym")(options "")(descr ""))
   (lib (name "TSD05CDYFR")(type "KiCad")(uri "${KIPRJMOD}/KiCad/9.0/3rdparty/TSD05CDYFR/KiCADv6/2025-12-14_19-02-00.kicad_sym")(options "")(descr ""))
-  (lib (name "mjtp117")(type "KiCad")(uri "${KIPRJMOD}/KiCad/9.0/3rdparty/Mjtp1117/MJTP1117.kicad_sym")(options "")(descr ""))
   (lib (name "TPS923610DRLR")(type "KiCad")(uri "${KIPRJMOD}/KiCad/9.0/3rdparty/TPS923610DRLR/KiCADv6/2026-09-06_02-10-40.kicad_sym")(options "")(descr ""))
 )

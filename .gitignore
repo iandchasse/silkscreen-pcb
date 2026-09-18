@@ -21,3 +21,14 @@ _autosave-*
 # BOM, assembly CSVs and the how-to ARE tracked; the gerber/drill artifacts are not.
 fabrication/gerbers/
 fabrication/*.zip
+
+# Output/cache folders created by other fab-house plugins
+nextpcb/
+database/
+
+# Fabrication Toolkit per-run copies and local order records
+production/backups/
+production/*.xls
+production/*.xlsx
+production/bom-JLCPCB
+production/bom_JLC_upload-JLCPCB

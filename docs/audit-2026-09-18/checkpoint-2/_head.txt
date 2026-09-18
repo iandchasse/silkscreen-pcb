@@ -1,0 +1,6 @@
+| key | severity | status | evidence |
+|---|---|---|---|
+| cpl-j4-anchor-offset-0p73mm | high | OPEN | production/positions.csv J4 still 92.5,-126.0 rot 0; no anchor/offset field added |
+| cpl-rot-u2-tps2116-sot583 | high | WON'T-FIX | owner: JLC DFM handles rotations; U2 still 270 in positions.csv, no FT Rotation Offset field |
+| dev-header-table-clipped-by-chamfer | high | WON'T-FIX | owner accepted intentional; text box unchanged |
+| f1-cr1-rating-vs-sustained-overvoltage-fault | high | WON'T-FIX | owner accepted sustained VBUS OV; F1/CR1 unchanged |

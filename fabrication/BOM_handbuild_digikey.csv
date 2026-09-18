@@ -8,7 +8,7 @@ U5,1,DW01A,Fortune/PUOLOP (LCSC-only),0.1,0.1,ODS,buy from LCSC
 U12,1,SN74LVC1G04DBVR,TI,0.1,0.1,est,
 U13,1,DS3231MZ+,Analog Devices,5.5,5.5,est,optional
 "U1,U6,U7,U8,U9",5,TPD4E1U06DBVR,TI,0.86,4.3,ODS,x5
-Q1,1,FS8205A,Fortune (LCSC-only),0.39,0.39,ODS,buy from LCSC
+Q1,1,FS8205A,EVVOSEMI (DigiKey 26220994),0.41,0.41,est,"SOT-23-6; JLC build uses TECH PUBLIC C2830320; Fortune FS8205A is TSSOP-8 only"
 "Q2,Q3,Q7,Q8",4,AO3401A,AOS,0.45,1.8,est,x4 (AO3419 also fine)
 "Q5,Q6,Q9",3,BSS138LT1G,onsemi,0.31,0.93,ODS,x3
 Q4,1,IRLML6346TRPBF,Infineon,0.45,0.45,est,
@@ -26,7 +26,7 @@ J6,1,PPPC062LJBN-RC,Sullins,1.5,1.5,est,
 J7,1,MEM2075-00-140-01-A,GCT,1.92,1.92,ODS,"push-push, fits the slotted land"
 SW1..SW11 (10),10,MJTP1117,APEM,0.12,1.2,est,x10
 SW6,0,MJTP1243,APEM,0.12,0.0,est,DNP
-L1,1,VLS3012HBX-220M,TDK,0.5,0.5,est,
+L1,1,TYS5040470M-10,Laird,0.41,0.41,ODS,"47 uH 5x5x4 mm shielded; JLC build uses Sunltech SLW5040S470MST C206267"
 L2,1,VLS252012HBX-100M-1,TDK,0.3,0.3,est,"10 uH, 1.2 mm; VLS252010HBU-100M is the 1.0 mm alternative"
 F1,1,0805L100WR,Littelfuse,0.3,0.3,est,
 "resistors (76 pcs, 23 values)",76,0603 1% thick film (Yageo RC0603FR / Panasonic ERJ),—,0.1,7.6,ODS,per piece qty-1
