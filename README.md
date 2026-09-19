@@ -59,8 +59,9 @@ docs/images/                                          schematic block crops, ful
 docs/silkscreen_pcb_schematic.pdf / _layout.pdf  schematic and PCB plots
 docs/audit-2026-09-16/, audit-2026-09-18/             review evidence and the pre-order audit
 DESIGN_REVIEW.md                                      schematic + layout review
-fabrication/                                          part_fields.csv + apply script, BOM.md / hand-build BOM, how-to
+fabrication/                                          part_fields.csv + apply script, make_fab_files.py, BOM.md / hand-build BOM, how-to
 production/                                           JLC upload BOMs (v3/v4); Toolkit output (zip, CPL, BOM) is regenerated locally
+production/other_fabs/                                PCBWay / NextPCB BOMs, KiCad placement file, bottom assembly drawing
 simulations/                                          LTspice work
 LICENSE / NOTICE                                      CERN-OHL-S v2
 ```
@@ -149,10 +150,11 @@ alternatives to `bom.csv` (same parts, JLC column names). Pick one BOM, not all 
 
 - Every line needs a match on its `LCSC` code (**Part No.**). A line exported as an MPN, or flagged *out of stock* / *not
   found*, is the one to fix; look the part up in [`fabrication/BOM.md`](fabrication/BOM.md), which lists approved alternates.
-- The fitted parts should be selected. The DNP references (`TP3-TP5`, `R43 R45 R58 R66 R72 R74`, `SW6`) are absent from
-  both files, so they are never offered. If you deliberately leave a block off (next section), remove its parts from the BOM
-  **and** the CPL, or untick them in this list.
-- The raw `bom.csv` also lists the bare UART pads **`TP1, TP2`** with no part number (they are copper-only and intentionally not assembled). Leave that line unselected, or use `bom_JLC_upload_v4_optimized.csv`, which does not include it. They are not in `positions.csv`.
+- The fitted parts should be selected. The DNP references (`TP3-TP5`, `R43 R45 R58 R66 R72 R74`, `SW6`) are not in
+  `positions.csv` and not in `bom.csv`, but the two `bom_JLC_upload_v*` files list all ten as lines with a **blank part
+  number**, tagged "DNP (standard build)". JLC shows them as unmatched; leave them unselected. If you deliberately leave a
+  block off (next section), remove its parts from the BOM **and** the CPL, or untick them in this list.
+- The raw `bom.csv` also lists the bare UART pads **`TP1, TP2`** with no part number (they are copper-only and intentionally not assembled). Leave that line unselected, or use a `bom_JLC_upload_v*` file, which does not include it. They are not in `positions.csv`.
 - Watch stock on **TPS923610DRLR** (about 189 pcs at last check).
 
 ### 5. Placement preview (do not skip on the first order)
@@ -162,10 +164,12 @@ The preview draws each part on the board, and JLC's DFM has corrected several be
 and move tools to fix anything wrong, and record the correction with the release files. A matched part code does not
 verify orientation.
 
-### 6. Through-hole and hand-fitted parts
+### 6. Through-hole parts
 
-Standard assembly places SMT parts only. Plan to hand-solder **J1** (USB-C shell tabs), **J5** (2-pin JST battery), **J6**
-(expansion header, if fitted) and the through-hole switches. Confirm J7's locating pegs against the approved placement.
+**J1** (USB-C), **J5** (2-pin JST battery), **J6** (expansion header) and the switches `SW1`-`SW5`, `SW7`-`SW11` are
+through-hole. They are in the BOM and CPL, and the project's cost notes count their soldering in the JLC quote
+([`fabrication/BOM.md`](fabrication/BOM.md)). Confirm at the quote that through-hole assembly is included and priced.
+Confirm J7's locating pegs against the approved placement.
 
 ### 7. Approve, order, and record
 
@@ -201,6 +205,53 @@ Notes:
 - Leaving a ladder switch off needs nothing else changed; the ladder resistors stay in the BOM.
 - `SW6` (boot button) and `TP3`-`TP5` are DNP in every standard build.
 - Prices in the site's model exclude the panel, battery and case. JLC per-board totals are in [`fabrication/BOM.md`](fabrication/BOM.md).
+
+## Ordering from PCBWay or NextPCB (alternative to JLCPCB)
+
+> **Status:** the files below are generated from the same board and part table and cross-checked against the JLC
+> set (same 162 placed parts), but **no order has been placed with either fab yet**. JLCPCB remains the proven path
+> and is likely cheaper. Both fabs review assembly files by hand, so expect a quote and a proof before production.
+
+Generate the files after every PCB save (KiCad may stay open; nothing in the project is modified):
+
+```bash
+python fabrication/make_fab_files.py            # add --no-tht to leave the through-hole parts out
+```
+
+| File in `production/other_fabs/` | Upload to | Notes |
+|---|---|---|
+| `Silkscreen_Reader_PCB_1.0.zip` (in `production/`) | both | The same gerber + drill zip as for JLCPCB |
+| `pcbway_bom.csv` | PCBWay | Turnkey BOM: manufacturer + MPN per line, fitted parts only |
+| `nextpcb_bom.csv` | NextPCB | NextPCB's own template columns (S/N, Designator, Quantity, Manufacturer Part Number, Procurement Type, Customer Note); DNP parts are listed with `DNP` in Procurement Type |
+| `placement_bottom_kicad.csv` | PCBWay | KiCad's own position export, SMD only, all **Bottom** |
+| `nextpcb_centroid.zip` | NextPCB | The same placement file zipped: NextPCB's centroid slot takes only zip, rar, xlsx or xls, not csv |
+| `assembly_drawing_bottom.pdf` | PCBWay (other files); NextPCB (e-mail it, its form has no slot) | Five A3 pages: an overview, then four zoomed pages (about x6.5) of part outlines, reference designators and polarity marks, seen from below, DNP parts crossed out. Attach as an extra assembly file. Needs KiCad's Python and Edge/Chrome to draw; the script skips it with a note otherwise |
+
+**Steps.** *PCBWay:* PCB Instant Quote, upload the gerber zip (2 layers, about 60 x 111 mm, 1.6 mm), switch on
+Assembly (turnkey, **bottom** side), upload the BOM and placement files and attach the drawing. PCBWay quotes assembly by
+e-mail (they state 1 to 2 working days) and you pay after their engineering review. *NextPCB:* on the
+[PCB Assembly Quote](https://www.nextpcb.com/pcb-assembly-quote) page, step 1 takes the gerber zip and the board
+options, step 2 takes `nextpcb_centroid.zip` and `nextpcb_bom.csv`; e-mail the drawing to support@nextpcb.com.
+NextPCB recommends break-away rails for assembly (this board has none), so ask whether a custom fixture fee applies.
+
+Differences from the JLCPCB files, and what to watch:
+
+- **Do not use `production/positions.csv` here.** The Fabrication Toolkit converts rotations for bottom-side parts
+  and adds per-part corrections for JLCPCB's parts library (93 of its 162 rows differ from KiCad's values); other
+  assemblers do not share those. The placement file above is unmodified KiCad output (rotation is KiCad's, Y is
+  negative, same origin as the gerbers).
+- **Every part is on the bottom side; say so in the order remarks.** A 180 degree error on bottom parts is the
+  main risk. In the fab's proof, check `U2`, `U5`, `D2` (LED pad 1 is the anode), `D8`, `J4`, `U4` and `J7`, the parts JLCPCB
+  needed corrected.
+- **Manufacturer part numbers, not LCSC codes.** These BOMs list the prime (DigiKey-findable) part for each line. The
+  LCSC equivalents used for the JLCPCB build are not on them, so the fab sources the named parts itself. Expect a higher
+  parts cost; there is no Basic/Extended fee structure to optimise.
+- **Through-hole parts** (`J1`, `J5`, `J6`, `SW1`-`SW5`, `SW7`-`SW11`) are listed as `THT` in the BOMs so the fab quotes and
+  solders them, as on the JLCPCB build. They are left out of the placement file because both fabs take that file for SMD
+  parts only. Check the quote includes through-hole assembly; if it is dear, generate with `--no-tht` and hand-fit them.
+- **DNP parts** (`R43 R45 R58 R66 R74`, `R72`, `SW6`, `TP3`-`TP5`) are not placed. The PCBWay BOM omits them; mention
+  them in the order remarks.
+- Check each fab's own limits against the four 0.5 mm perforation slots on `Edge.Cuts` before paying.
 
 ## Bill of materials
 
