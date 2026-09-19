@@ -62,6 +62,7 @@ Successor to [de-link](https://de-link.me).
 8. [Touch interface](#8-touch-interface)
 9. [Human input](#9-human-input)
    - 9.1 [Button ladders](#91-button-ladders)
+     - 9.1.1 [Front-mounted bottom buttons (optional)](#911-front-mounted-bottom-buttons-optional-hand-fitted)
    - 9.2 [Power button](#92-power-button)
    - 9.3 [Boot & reset](#93-boot--reset)
 10. [Real-time clock](#10-real-time-clock)
@@ -879,6 +880,74 @@ therefore fires only for `SW1`, `SW2` and the power button; waking on the other 
 or an extra "any press" line (e.g. a diode-OR to a spare RTC-capable GPIO) on a future revision. Both caps are placed at the
 ESP32 per the schematic annotations. The bottom-switch anchors are spaced 12 / 13 / 12 mm with a
 common actuator offset that preserves mirror symmetry (no placement asymmetry remains).
+
+#### 9.1.1 Front-mounted bottom buttons (optional, hand-fitted)
+
+**As manufactured** the four bottom-edge buttons (`SW2` RIGHT, `SW3` LEFT, `SW8` CONFIRM, `SW9` BACK) are
+right-angle through-hole tactile switches on the **back** (the assembly side): the `MJTP1117` land, fitted
+with the SHOU HAN `TS365ZJ` on the JLC build. Every fitted part on the board is on that one side, so a
+one-shot order pays for **single-sided assembly only**, which is the cheapest way to have it built. This is
+the standard build and nothing in this section changes it.
+
+**Alternative, for a case that wants the buttons on the front face:** leave `SW2`, `SW3`, `SW8` and `SW9`
+unpopulated, buy four **APEM `MJTP1243`** yourself (the same vertical 6 × 3.5 × 4.3 mm two-pin part
+as the BOOT button in [§9.3](#93-boot--reset)), and solder each one in from the front, with two solder
+bridges per button. The button then works exactly as the right-angle one does: same ladder resistor,
+same voltage levels, same firmware.
+
+**How it works.** The `MJTP1117` land has four holes. Pads 1 and 2 are the two contacts (GND and the
+button's ladder resistor). Pads 3 and 4 are the two large plated mounting holes (ø 1.3 mm, 1.95 mm rings,
+7.0 mm apart); they carry **no net** on the board. The `MJTP1243`'s two legs go in those mounting holes,
+and two small copper tabs on the **front** connect them to the contacts:
+
+| Bridge | From (tab on the front) | To (mounting-hole ring) | Result |
+|---|---|---|---|
+| GND | tab growing from pad 1 (GND) | pad 3 ring (the hole beside the GND pad) | one `MJTP1243` leg is on GND |
+| Signal | tab growing from pad 2 (ladder resistor) | pad 4 ring (the hole beside the signal pad) | the other leg is on the ladder node |
+
+Each tab stops **0.3 mm short** of its ring, with the solder mask opened over the tab tip, so a small
+blob of solder from an iron closes the gap. The tabs are plain copper, not parts: they add nothing to the
+schematic or the BOM, and left open (every shipped build) the board is electrically identical to one
+without them.
+
+| Button | Function | Ladder resistor | If the switch is left permanently pressed |
+|---|---|---|---|
+| `SW2` | RIGHT | `R60` 100 Ω | ~330 µA idle |
+| `SW3` | LEFT | `R18` 5.6 kΩ | ~210 µA |
+| `SW8` | CONFIRM | `R19` 20 kΩ | ~110 µA |
+| `SW9` | BACK | `R20` 56 kΩ | ~50 µA |
+
+(The right-hand column is why the warning below matters: it is `3.3 V` through `R4` plus the ladder resistor,
+against a deep-sleep budget of roughly 75 µA.)
+
+**Build steps, per button:**
+
+1. Leave the `MJTP1117` unfitted. If you are ordering assembled boards, take `SW2`, `SW3`, `SW8` and `SW9`
+   out of the assembly BOM/CPL (in the JLC upload BOMs they sit on the `TS365ZJ` line) or mark them DNP in
+   KiCad the way `SW6` is, so the fab does not fit them.
+2. **Bridge both tabs first**, before the switch goes in; its body sits over them. Use a normal iron; the GND
+   tab is on the ground pour and takes a little more heat than the signal tab.
+3. Push the `MJTP1243` into pad 3 and pad 4 from the front (it is a two-pin switch, so it has no
+   orientation) and solder the two legs.
+4. Check before powering: with the board unpowered and the switch released, the ladder node reads open to GND;
+   pressed, it reads roughly the ladder resistor above.
+
+**The pitch is not identical.** The `MJTP1117` mounting holes are 7.0 mm apart and the `MJTP1243`'s legs are
+6.5 mm apart, so each leg sits 0.25 mm inside its hole. The author reports the part seats fine in the 1.3 mm
+holes; fit one first and check before soldering the other three. The front silkscreen legends (RIGHT, LEFT,
+BACK, OK) sit where the switch body goes and will be covered.
+
+> **Never bridge these tabs on a board that has an `MJTP1117` / `TS365ZJ` fitted, or in any other
+> scenario.** The tabs are only for the front-mounted `MJTP1243`. On the right-angle switch, pads 3 and 4 are
+> the two legs of its metal cover, tied together inside the part (APEM lists the `MJTP1117` as a "grounding"
+> type, and the `TS365ZJ` drawing shows legs ③ and ④ as one grounded node, isolated from the contacts).
+> Bridging both tabs there puts the ladder node permanently on GND through the cover: that button reads
+> pressed all the time, the other three on its ladder become unreadable, and the idle current climbs by
+> the amount in the table. Bridging only one tab is also unsupported. It either puts the cover on the ladder
+> node or grounds it for no reason.
+
+The side buttons (`SW1`, `SW4`, `SW5`, `SW7`) and the power/reset buttons have no front option. Only the four
+bottom-edge buttons carry these tabs.
 
 ### 9.2 Power button
 

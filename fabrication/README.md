@@ -12,6 +12,8 @@ The two previous orders (25 and 30 boards) predate Fix 4, the Q4/R37 changes and
 microSD land.
 
 The step-by-step JLCPCB upload flow and the optional/base part groups are in the root [README](../README.md#ordering-from-jlcpcb-step-by-step).
+For PCBWay or NextPCB, `python fabrication/make_fab_files.py` builds their BOMs, a raw KiCad placement file and a bottom-side
+assembly drawing into `production/other_fabs/` (see the root [README](../README.md#ordering-from-pcbway-or-nextpcb-alternative-to-jlcpcb)).
 
 ## Release records
 
