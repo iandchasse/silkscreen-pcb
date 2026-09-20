@@ -7,10 +7,13 @@
 Inputs (nothing is modified; KiCad may stay open):
   - silkscreen_pcb.kicad_pcb  read by `kicad-cli` for placement and the assembly drawing
   - fabrication/part_fields.csv  MPN / Manufacturer / DNP per reference (the "prime" DigiKey-findable parts)
+  - fabrication/nextpcb_substitutes.csv  optional MPN swaps for parts NextPCB cannot match; applied to the
+                                 NextPCB BOM only (part_fields.csv and the PCBWay BOM keep the prime parts)
 
 Outputs, in production/other_fabs/ (the gerber zip is shared and stays in production/):
   - pcbway_bom.csv               PCBWay turnkey BOM (fitted parts only)
-  - nextpcb_bom.csv              NextPCB BOM in NextPCB's own template columns (DNP parts listed, marked DNP)
+  - nextpcb_bom.csv              NextPCB BOM in NextPCB's own template columns (fitted parts only: DNP parts are left
+                                 out, because NextPCB merges lines that share an MPN and drops the DNP mark)
   - placement_bottom_kicad.csv   KiCad's own position export, SMD only (PCBWay centroid)
   - nextpcb_centroid.csv         NextPCB's sample layout (Designator, Mid X, Mid Y, Layer, Rotation, "mm" suffix on the
                                  coordinates). Covers EVERY fitted part in nextpcb_bom.csv, through-hole included:
@@ -30,6 +33,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 PCB = ROOT / "silkscreen_pcb.kicad_pcb"
 FIELDS = ROOT / "fabrication" / "part_fields.csv"
+SUBS = ROOT / "fabrication" / "nextpcb_substitutes.csv"
 OUT = ROOT / "production" / "other_fabs"
 DNP_MARKS = {"1", "y", "yes", "x", "dnp", "true"}
 
@@ -200,6 +204,8 @@ def render_drawing(cli, pdf):
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--no-tht", action="store_true", help="leave through-hole parts out of the BOMs")
+    ap.add_argument("--split", action="store_true",
+                    help="also write separate SMD-only and through-hole-only NextPCB BOM+centroid pairs to other_fabs/split/")
     ap.add_argument("--skip-drawing", action="store_true", help="do not (re)draw assembly_drawing_bottom.pdf")
     ap.add_argument("--kicad-cli", help="path to kicad-cli (default: PATH, $KICAD_CLI, KiCad 9 install)")
     args = ap.parse_args()
@@ -216,7 +222,7 @@ def main():
     try:
         placed = export_pos(cli, tmp / "all.csv")
         smd = export_pos(cli, tmp / "smd.csv", smd_only=True)
-        # incl. DNP parts: package and SMD/THT lookup for the marked DNP lines only
+        # incl. DNP parts: package and SMD/THT lookup (SMD-only export drops DNP parts)
         every = export_pos(cli, tmp / "every.csv", exclude_dnp=False)
         every_smd = export_pos(cli, tmp / "every_smd.csv", smd_only=True, exclude_dnp=False)
     finally:
@@ -232,14 +238,26 @@ def main():
         return {"ref": ref, "mpn": r["MPN"].strip(), "mfr": r["Manufacturer"].strip(), "value": r["Value"].strip(),
                 "pkg": pkg, "type": "SMD" if ref in every_smd else "THT", "dnp": r["dnp"]}
 
-    # fitted parts come from the board (so KiCad's DNP flag decides what is placed);
-    # DNP parts come from part_fields.csv, for NextPCB's marked lines. DNP items without a part
-    # number (TP3-TP5, bare header pads) are skipped.
+    # fitted parts come from the board (so KiCad's DNP flag decides what is placed). DNP parts are NOT written to
+    # any BOM: NextPCB merged our DNP 0-ohm/10k lines into the fitted lines with the same MPN and dropped the DNP
+    # mark, which would have fitted R74 next to R73 (3V3 shorted to GND) and R43/R45/R58/R66/R72.
     parts = [part(ref, fields[ref]) for ref in placed]
-    dnp_parts = [part(ref, r) for ref, r in fields.items()
-                 if r["dnp"] and ref not in placed and r["MPN"].strip()]
+
+    # NextPCB-only substitutes: parts it cannot match are swapped for ones it can (fabrication/nextpcb_substitutes.csv)
+    subs = {}
+    if SUBS.exists():
+        with open(SUBS, newline="", encoding="utf-8-sig") as f:
+            for r in csv.DictReader(f):
+                for ref in refs_of(r["Refs"]):
+                    subs[ref] = r
+    unknown = sorted(r for r in subs if r not in placed)
+    if unknown:
+        sys.exit(f"nextpcb_substitutes.csv names references that are not fitted on the board: {unknown}")
+    nx_parts = [{**p, "mpn": subs[p["ref"]]["MPN"].strip(), "mfr": subs[p["ref"]]["Manufacturer"].strip()}
+                if p["ref"] in subs else p for p in parts]
     if args.no_tht:
         parts = [p for p in parts if p["type"] == "SMD"]
+        nx_parts = [p for p in nx_parts if p["type"] == "SMD"]
 
     def group(items):
         g = {}
@@ -258,15 +276,21 @@ def main():
                "Manufacturer", "Manufacturer Part Number", "Distributor Part Number"], pw_rows)
 
     # NextPCB's own BOM template (the quote page's "Download BOM Template"): S/N, Designator*, Quantity*,
-    # Manufacturer Part Number*, Procurement Type (DNP = do not buy or fit; C = customer supplied), Customer Note
-    nx_rows = []
-    for n, ((mpn, mfr, val, pkg, typ, dnp), refs) in enumerate(group(parts + dnp_parts), 1):
-        refs = sorted(refs, key=nat)
-        nx_rows.append([n, ",".join(refs), len(refs), mpn, "DNP" if dnp else "",
-                        f"{mfr} | {val} | {pkg} | {typ}"])
-    write_csv(OUT / "nextpcb_bom.csv",
-              ["S/N", "Designator", "Quantity", "Manufacturer Part Number", "Procurement Type", "Customer Note"],
-              nx_rows)
+    # Manufacturer Part Number*, Procurement Type, Customer Note. Fitted parts only (see the note above); the
+    # Procurement Type column stays empty (DNP = do not fit, C = customer supplied, which Rev0 does not accept).
+    NX_BOM_HEADER = ["S/N", "Designator", "Quantity", "Manufacturer Part Number", "Procurement Type", "Customer Note"]
+
+    def nx_bom_rows(plist):
+        rows = []
+        for n, ((mpn, mfr, val, pkg, typ, dnp), refs) in enumerate(group(plist), 1):
+            refs = sorted(refs, key=nat)
+            was = subs[refs[0]]["Replaces"].strip() if refs[0] in subs else ""
+            rows.append([n, ",".join(refs), len(refs), mpn, "",
+                         f"{mfr} | {val} | {pkg} | {typ}" + (f" | substitute for {was}" if was else "")])
+        return rows
+
+    nx_rows = nx_bom_rows(nx_parts)
+    write_csv(OUT / "nextpcb_bom.csv", NX_BOM_HEADER, nx_rows)
 
     write_csv(OUT / "placement_bottom_kicad.csv",
               ["Designator", "Val", "Package", "Mid X", "Mid Y", "Rotation", "Layer"],
@@ -283,12 +307,23 @@ def main():
     def rot(x):
         return str(int(round(x))) if abs(x - round(x)) < 1e-6 else f"{x:.4f}".rstrip("0").rstrip(".")
 
+    def nx_centroid(path, refs):
+        with open(path, "w", newline="", encoding="ascii") as f:
+            w = csv.writer(f, lineterminator="\n")
+            w.writerow(["Designator", "Mid X", "Mid Y", "Layer", "Rotation"])
+            w.writerows([ref, mm4(float(placed[ref]["PosX"])), mm4(float(placed[ref]["PosY"])),
+                         placed[ref]["Side"].capitalize(), rot(float(placed[ref]["Rot"]) % 360)] for ref in refs)
+
     cen_refs = sorted((p["ref"] for p in parts), key=nat)      # same set as the fitted lines of nextpcb_bom.csv
-    with open(OUT / "nextpcb_centroid.csv", "w", newline="", encoding="ascii") as f:
-        w = csv.writer(f, lineterminator="\n")
-        w.writerow(["Designator", "Mid X", "Mid Y", "Layer", "Rotation"])
-        w.writerows([ref, mm4(float(placed[ref]["PosX"])), mm4(float(placed[ref]["PosY"])), placed[ref]["Side"].capitalize(),
-                     rot(float(placed[ref]["Rot"]) % 360)] for ref in cen_refs)
+    nx_centroid(OUT / "nextpcb_centroid.csv", cen_refs)
+
+    if args.split:
+        # matched pairs (BOM designators == centroid designators) for an SMD-only and a through-hole-only NextPCB order
+        (OUT / "split").mkdir(exist_ok=True)
+        for kind in ("SMD", "THT"):
+            sub = [p for p in nx_parts if p["type"] == kind]
+            write_csv(OUT / "split" / f"nextpcb_bom_{kind.lower()}.csv", NX_BOM_HEADER, nx_bom_rows(sub))
+            nx_centroid(OUT / "split" / f"nextpcb_centroid_{kind.lower()}.csv", sorted((p["ref"] for p in sub), key=nat))
 
     # The browser stamps a creation time into the PDF, so only redraw it when the board or this script is newer
     # (avoids git churn on an unchanged board)
@@ -314,8 +349,8 @@ def main():
     n_tht = sum(1 for p in parts if p["type"] == "THT")
     print(f"placed parts: {len(placed)} ({len(smd)} SMD, {len(placed) - len(smd)} through-hole)")
     print(f"pcbway_bom.csv: {len(pw_rows)} lines{'  (through-hole left out)' if args.no_tht else f'  ({n_tht} through-hole parts included)'}")
-    n_dnp_lines = sum(1 for row in nx_rows if row[-2] == "DNP")
-    print(f"nextpcb_bom.csv: {len(nx_rows)} lines, incl. {n_dnp_lines} DNP lines ({len(dnp_parts)} parts) marked")
+    print(f"nextpcb_bom.csv: {len(nx_rows)} lines, fitted parts only (DNP parts left out); "
+          f"{len(subs)} references use a NextPCB substitute ({', '.join(sorted({r['MPN'] for r in subs.values()}))})")
     print(f"placement_bottom_kicad.csv: {len(smd)} SMD rows;  nextpcb_centroid.csv: {len(cen_refs)} rows (all fitted parts, matches the BOM)")
     print(f"assembly_drawing_bottom.pdf {drawing}")
     print(f"-> {OUT}\nUpload with the gerber zip from production/ (Silkscreen_Reader_PCB_*.zip).{note}")

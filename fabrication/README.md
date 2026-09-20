@@ -14,6 +14,8 @@ microSD land.
 The step-by-step JLCPCB upload flow and the optional/base part groups are in the root [README](../README.md#ordering-from-jlcpcb-step-by-step).
 For PCBWay or NextPCB, `python fabrication/make_fab_files.py` builds their BOMs, a raw KiCad placement file and a bottom-side
 assembly drawing into `production/other_fabs/` (see the root [README](../README.md#ordering-from-pcbway-or-nextpcb-alternative-to-jlcpcb)).
+What was learned from a NextPCB Rev0 upload (DNP lines merged into fitted ones, through-hole previews, error list, cost)
+is in [NEXTPCB_REV0_NOTES.md](NEXTPCB_REV0_NOTES.md); the NextPCB-only part swaps are in `nextpcb_substitutes.csv`.
 
 ## Release records
 

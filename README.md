@@ -209,22 +209,27 @@ Notes:
 ## Ordering from PCBWay or NextPCB (alternative to JLCPCB)
 
 > **Status:** the files below are generated from the same board and part table and cross-checked against the JLC
-> set (same 162 placed parts), but **no order has been placed with either fab yet**. JLCPCB remains the proven path
-> and is likely cheaper. Both fabs review assembly files by hand, so expect a quote and a proof before production.
+> set (same 162 placed parts). A NextPCB **Rev0** upload was tried on 2026-09-19/20 (quote and preview only, not a
+> completed order); PCBWay has not been tried. JLCPCB remains the proven path. **Read
+> [fabrication/NEXTPCB_REV0_NOTES.md](fabrication/NEXTPCB_REV0_NOTES.md) before using NextPCB**: its Rev0 flow has no
+> fix-it review, its importer merged our DNP lines into fitted ones (fitting `R74` beside `R73` shorts 3V3 to GND),
+> and its preview misplaces some through-hole parts.
 
 Generate the files after every PCB save (KiCad may stay open; nothing in the project is modified):
 
 ```bash
-python fabrication/make_fab_files.py            # add --no-tht to leave the through-hole parts out
+python fabrication/make_fab_files.py            # add --no-tht to leave the through-hole parts out,
+                                                # --split for separate SMD-only and through-hole-only NextPCB pairs
 ```
 
 | File in `production/other_fabs/` | Upload to | Notes |
 |---|---|---|
 | `Silkscreen_Reader_PCB_1.0.zip` (in `production/`) | both | The same gerber + drill zip as for JLCPCB |
 | `pcbway_bom.csv` | PCBWay | Turnkey BOM: manufacturer + MPN per line, fitted parts only |
-| `nextpcb_bom.csv` | NextPCB | NextPCB's own template columns (S/N, Designator, Quantity, Manufacturer Part Number, Procurement Type, Customer Note); DNP parts are listed with `DNP` in Procurement Type |
+| `nextpcb_bom.csv` | NextPCB | NextPCB's own template columns (S/N, Designator, Quantity, Manufacturer Part Number, Procurement Type, Customer Note); fitted parts only, with **three NextPCB-only substitutes** for parts it cannot match (`J6` CJT `A2541HWR-2x6P`, the ten `SW` buttons ALPS `SKHLLAA010`, `L1` Sunltech `SLW5040S470MST`; edit `fabrication/nextpcb_substitutes.csv`), and **DNP parts are deliberately left out** (NextPCB's importer merges lines that share an MPN and drops the `DNP` mark, which would fit `R74` beside `R73`, a dead short of 3V3 to GND) |
 | `placement_bottom_kicad.csv` | PCBWay | KiCad's own position export, SMD only, all **Bottom** |
 | `nextpcb_centroid.csv` | NextPCB | NextPCB's own sample layout (`Designator, Mid X, Mid Y, Layer, Rotation`, coordinates with an `mm` suffix, all **Bottom**), upload it as a plain `.csv`. It lists **every fitted part in `nextpcb_bom.csv`, through-hole included** (162 rows): NextPCB rejects a placement file whose designators differ from the BOM's ("Designators in the PnP file do not match those in the BOM file") |
+| `split/nextpcb_{bom,centroid}_{smd,tht}.csv` (with `--split`) | NextPCB | Matched BOM + centroid pairs for an SMD-only order (149 parts, hand-solder the rest) or a through-hole-only test; designators are identical within each pair |
 | `assembly_drawing_bottom.pdf` | PCBWay (other files); NextPCB (e-mail it, its form has no slot) | Five A3 pages: an overview, then four zoomed pages (about x6.5) of part outlines, reference designators and polarity marks, seen from below, DNP parts crossed out. Attach as an extra assembly file. Needs KiCad's Python and Edge/Chrome to draw; the script skips it with a note otherwise |
 
 **Steps.** *PCBWay:* PCB Instant Quote, upload the gerber zip (2 layers, about 60 x 111 mm, 1.6 mm), switch on
@@ -247,10 +252,13 @@ Differences from the JLCPCB files, and what to watch:
   LCSC equivalents used for the JLCPCB build are not on them, so the fab sources the named parts itself. Expect a higher
   parts cost; there is no Basic/Extended fee structure to optimise.
 - **Through-hole parts** (`J1`, `J5`, `J6`, `SW1`-`SW5`, `SW7`-`SW11`) are listed as `THT` in the BOMs so the fab quotes and
-  solders them, as on the JLCPCB build. They are left out of the placement file because both fabs take that file for SMD
-  parts only. Check the quote includes through-hole assembly; if it is dear, generate with `--no-tht` and hand-fit them.
-- **DNP parts** (`R43 R45 R58 R66 R74`, `R72`, `SW6`, `TP3`-`TP5`) are not placed. The PCBWay BOM omits them; mention
-  them in the order remarks.
+  solders them, as on the JLCPCB build. `nextpcb_centroid.csv` lists them too (NextPCB rejects a BOM/placement designator
+  mismatch); `placement_bottom_kicad.csv` (PCBWay) is SMD-only. On NextPCB the through-hole bodies for `J5`, `J6`, `SW1`
+  and `SW7` preview in the wrong orientation and rotation edits did not change it, so for a NextPCB order prefer the
+  `--split` SMD-only pair and hand-solder the 13 through-hole parts (about $70 from DigiKey for 10 boards).
+- **DNP parts** (`R43 R45 R58 R66 R74`, `R72`, `SW6`, `TP3`-`TP5`) are not placed. Both fab BOMs omit them; mention
+  them in the order remarks, and after uploading to NextPCB **check that none of them appear in its matched BOM** (it
+  once merged them into the fitted 0 Ω and 10 k lines).
 - Check each fab's own limits against the four 0.5 mm perforation slots on `Edge.Cuts` before paying.
 
 ## Bill of materials

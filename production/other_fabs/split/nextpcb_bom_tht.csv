@@ -1,0 +1,5 @@
+﻿S/N,Designator,Quantity,Manufacturer Part Number,Procurement Type,Customer Note
+1,J1,1,USB4085-GF-A,,GCT | USB_C_Receptacle | USB_C_Receptacle_GCT_USB4085 | THT
+2,J5,1,S2B-PH-K-S(LF)(SN),,JST | Conn_01x02 | JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal | THT
+3,J6,1,A2541HWR-2x6P,,CJT | PPPC062LJBN-RC | CONN_PPPC062LJBN-RC_SUL | THT | substitute for PPPC062LJBN-RC (Sullins)
+4,"SW1,SW2,SW3,SW4,SW5,SW7,SW8,SW9,SW10,SW11",10,SKHLLAA010,,ALPS Alpine | SW_Push | MJTP1117 | THT | substitute for MJTP1117 (APEM)

@@ -1,0 +1,4 @@
+﻿Refs,MPN,Manufacturer,Replaces,Reason
+J6,A2541HWR-2x6P,CJT,PPPC062LJBN-RC (Sullins),NextPCB matched this instead; it is the part in the JLC BOM (LCSC C5333437)
+"SW1,SW2,SW3,SW4,SW5,SW7,SW8,SW9,SW10,SW11",SKHLLAA010,ALPS Alpine,MJTP1117 (APEM),"NextPCB has no TS365ZJ. ALPS drawing No.3 land = the MJTP1117 land (2x d1.3 holes 7 mm apart, 2x d1.0 holes 5 mm apart, 2.5 mm offset). Catalog depth 7.22 mm vs 6 mm for the TS365ZJ and 0.98 N vs 2.5 N: check stem clearance and feel"
+L1,SLW5040S470MST,Sunltech,TYS5040470M-10 (Laird),"NextPCB could not match the Laird part; this is the part in the JLC BOM (same 5x5x4 mm shielded case, 47 uH)"
