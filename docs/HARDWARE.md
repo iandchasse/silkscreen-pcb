@@ -1012,7 +1012,7 @@ against a deep-sleep budget of roughly 60 µA.)
    pressed, it reads roughly the ladder resistor above.
 
 **The pitch is not identical.** The `MJTP1117` mounting holes are 7.0 mm apart and the `MJTP1243`'s legs are
-6.5 mm apart, so each leg sits 0.25 mm inside its hole. The author reports the part seats fine in the 1.3 mm
+6.5 mm apart, so each leg sits 0.25 mm inside its hole. In my builds the part seats fine in the 1.3 mm
 holes; fit one first and check before soldering the other three. The front silkscreen legends (RIGHT, LEFT,
 BACK, OK) sit where the switch body goes and will be covered.
 
@@ -1398,7 +1398,7 @@ separable target. The board is designed so no other *avoidable* load remains: th
 power-gated, the LED driver drops to a sub-µA shutdown, and every monitoring divider is
 1 MΩ-class.
 
-**Enclosure.** The author's own enclosure is 3D-printed and is not published in this repository; the board is meant to be housed in
+**Enclosure.** My own enclosure is 3D-printed and is not published in this repository; the board is meant to be housed in
 anything. Implications for a custom case:
 
 - The six `MountingHole_Pad`s (`H1`–`H6`) are **plated and GND-connected**, so a conductive

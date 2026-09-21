@@ -17,8 +17,8 @@ The step-by-step JLCPCB upload flow and the optional/base part groups are in the
 **JLCPCB is the only route that has produced working boards.** Other factories are supported in the sense that
 their upload files are generated and kept current — `python fabrication/make_fab_files.py --split` writes a
 PCBWay BOM + placement file, a NextPCB BOM + centroid and an assembly drawing into
-[`production/other_fabs/`](../production/other_fabs/) (last regenerated 2026-09-21, 165 placed parts) — but the
-author's NextPCB attempt did not end in a successful order and PCBWay is untried. What was learned from the NextPCB
+[`production/other_fabs/`](../production/other_fabs/) (last regenerated 2026-09-21, 165 placed parts). My NextPCB attempt did not end in a
+successful order and I have not tried PCBWay. What was learned from the NextPCB
 Rev0 upload (DNP lines merged into fitted ones, through-hole previews, error list, cost) is in
 [NEXTPCB_REV0_NOTES.md](NEXTPCB_REV0_NOTES.md). Which factory to use is the builder's choice; only the JLCPCB flow
 has a known-good order behind it.

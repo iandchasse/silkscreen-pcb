@@ -31,7 +31,7 @@ and **SamacSys / Component Search Engine**.
 | FS8205A | Q1 | symbol | Ultra Librarian | https://app.ultralibrarian.com/search?queryText=FS8205A |
 | TPS923610DRLR | U10 | symbol, footprint | Ultra Librarian | https://app.ultralibrarian.com/search?queryText=TPS923610DRLR |
 | MJTP1117 | SW1–SW5, SW7–SW11 (footprint) | footprint | SamacSys / Component Search Engine | https://componentsearchengine.com/search?term=MJTP1117 |
-| RV-8263-C7 | U14 (DNP) | symbol (project-made) | derived by the author from KiCad's stock `Timer_RTC:RV-3028-C7` symbol (KiCad libraries, CC-BY-SA-4.0 with the library exception), pins renamed for the RV-8263-C7; the footprint is KiCad-standard `Package_SON:MicroCrystal_C7_SON-8_1.5x3.2mm_P0.9mm` | n/a — edit `KiCad/9.0/3rdparty/RV-8263-C7/RV-8263-C7.kicad_sym` |
+| RV-8263-C7 | U14 (DNP) | symbol (project-made) | derived from KiCad's stock `Timer_RTC:RV-3028-C7` symbol (KiCad libraries, CC-BY-SA-4.0 with the library exception), pins renamed for the RV-8263-C7; the footprint is KiCad-standard `Package_SON:MicroCrystal_C7_SON-8_1.5x3.2mm_P0.9mm` | n/a — edit `KiCad/9.0/3rdparty/RV-8263-C7/RV-8263-C7.kicad_sym` |
 | microSD push-push (unified) | J7 | footprint (project-built), 3D model | GCT MEM2075 pad geometry + SHOU HAN TF PUSH DXF + FastEDA 3D (via Protoflow) | see note below |
 
 Notes:
