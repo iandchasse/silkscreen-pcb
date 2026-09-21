@@ -7,7 +7,10 @@ assembled from a factory, add an e-paper display, a battery and a microSD card, 
 case of your own choosing. It is a 2-layer ESP32-S3 board with a 24-pin display connector,
 optional touch and frontlight, microSD and single-cell Li-ion/LiPo power.
 
-It is the successor to [de-link](https://de-link.me). I designed it in KiCad 9.0.6, but
+It is the successor to [de-link](https://de-link.me). This repository was the de-link project hub
+until September 2026; the hub's pages and photos are kept on the
+[`de-link-old`](https://github.com/iandchasse/silkscreen-pcb/tree/de-link-old) branch. I designed
+Silkscreen in KiCad 9.0.6, but
 **you do not need KiCad to order a board.** Every file a factory asks for is already in the
 `production/` folder of this repository, ready to upload.
 
