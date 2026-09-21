@@ -23,8 +23,11 @@ Third-party content (NOT covered by the license above):
 - Component library files (symbols, footprints, 3D models) under
   KiCad/9.0/3rdparty/ were obtained from SnapEDA, Ultra Librarian and
   SamacSys / Component Search Engine. They retain their respective vendors'
-  licenses. See fabrication/THIRD_PARTY.md for the part list, sources and
-  re-download links.
+  licenses. Two items in that folder are project-made instead (the unified
+  microSD footprint and the RV-8263-C7 symbol, the latter derived from a
+  KiCad standard-library symbol) and are covered by the project license.
+  See fabrication/THIRD_PARTY.md for the part list, sources and re-download
+  links.
 
 - All other library content uses the KiCad standard libraries, licensed
   CC-BY-SA-4.0 with the KiCad library exception.

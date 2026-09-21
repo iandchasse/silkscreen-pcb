@@ -29,5 +29,6 @@ SW6,0,MJTP1243,APEM,0.12,0.0,est,DNP
 L1,1,TYS5040470M-10,Laird,0.41,0.41,ODS,"47 uH 5x5x4 mm shielded; JLC build uses Sunltech SLW5040S470MST C206267"
 L2,1,VLS252012HBX-100M-1,TDK,0.3,0.3,est,"10 uH, 1.2 mm; VLS252010HBU-100M is the 1.0 mm alternative"
 F1,1,0805L100WR,Littelfuse,0.3,0.3,est,
-"resistors (76 pcs, 23 values)",76,0603 1% thick film (Yageo RC0603FR / Panasonic ERJ),—,0.1,7.6,ODS,per piece qty-1
-capacitors (35 pcs),35,"Samsung CL10/CL21, Yageo CC0603",—,0.13,4.55,ODS,per piece qty-1; 50V parts on panel rails
+F2,1,0805L075WR,Littelfuse,0.3,0.3,est,0.75 A PPTC in series with J6 pin 12
+"resistors (77 pcs, 25 values)",77,0603 1% thick film (Yageo RC0603FR / Panasonic ERJ),—,0.1,7.7,ODS,per piece qty-1
+capacitors (36 pcs),36,"Samsung CL10/CL21, Yageo CC0603",—,0.13,4.68,ODS,per piece qty-1; 50V parts on panel rails

@@ -1,5 +1,3 @@
-EPD_Hub_ESP32-backups
-minRead_pcb-backups
 silkscreen_pcb-backups
 /ordering script
 
@@ -10,6 +8,9 @@ silkscreen_pcb-backups
 *.kicad_prl
 fp-info-cache
 
+# Per-user Claude Code settings
+.claude/settings.local.json
+
 # KiCad autosave, lock and backup files
 _autosave-*
 ~*.lck
@@ -17,10 +18,23 @@ _autosave-*
 *.bak
 *-bak
 
-# Generated fabrication output — regenerate with kicad-cli (see fabrication/README.md).
-# BOM, assembly CSVs and the how-to ARE tracked; the gerber/drill artifacts are not.
+# The release upload files in production/ (gerber zip, jlc_bom.csv, bom.csv, positions.csv, designators.csv,
+# netlist.ipc) ARE tracked: they are the Fabrication Toolkit output for the current board.
+# Loose kicad-cli exports made while following the README's "regenerate" commands are not.
 fabrication/gerbers/
+fabrication/assembly/
 fabrication/*.zip
+
+# Final review (2026-09-19): the reports are tracked; the ~38 MB evidence pack, its tooling and raw agent output are not
+docs/final-review-2026-09-19/evidence/
+docs/final-review-2026-09-19/repo_hygiene/agents/
+docs/final-review-2026-09-19/repo_hygiene/evidence/
+docs/final-review-2026-09-19/repo_hygiene/digest.txt
+docs/final-review-2026-09-19/findings_digest.txt
+docs/final-review-2026-09-19/**/*.json
+
+# Stray manual KiCad position export - production/positions.csv is the placement file
+placement/
 
 # Output/cache folders created by other fab-house plugins
 nextpcb/
@@ -30,5 +44,3 @@ database/
 production/backups/
 production/*.xls
 production/*.xlsx
-production/bom-JLCPCB
-production/bom_JLC_upload-JLCPCB

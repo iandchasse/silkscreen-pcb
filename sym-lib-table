@@ -7,4 +7,5 @@
   (lib (name "TPD4E1U06DBVR")(type "KiCad")(uri "${KIPRJMOD}/KiCad/9.0/3rdparty/TPD4E1U06DBVR/TPD4E1U06DBVR.kicad_sym")(options "")(descr ""))
   (lib (name "TSD05CDYFR")(type "KiCad")(uri "${KIPRJMOD}/KiCad/9.0/3rdparty/TSD05CDYFR/KiCADv6/2025-12-14_19-02-00.kicad_sym")(options "")(descr ""))
   (lib (name "TPS923610DRLR")(type "KiCad")(uri "${KIPRJMOD}/KiCad/9.0/3rdparty/TPS923610DRLR/KiCADv6/2026-09-06_02-10-40.kicad_sym")(options "")(descr ""))
+  (lib (name "RV-8263-C7")(type "KiCad")(uri "${KIPRJMOD}/KiCad/9.0/3rdparty/RV-8263-C7/RV-8263-C7.kicad_sym")(options "")(descr "Micro Crystal RV-8263-C7 RTC (custom: pin 3 = CLKOE)"))
 )

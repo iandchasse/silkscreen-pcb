@@ -1,15 +1,16 @@
 Refs,Value,MPN,Manufacturer,LCSC,DNP,LCSC part (what the code is),Note
 C1,1n,CL10B102KB8NNNC,Samsung Electro-Mechanics,C1588,,Samsung Electro-Mechanics CL10B102KB8NNNC,same part
-"C2,C3",10u,CL10A106KP8NNNC,Samsung Electro-Mechanics,C19702,,Samsung Electro-Mechanics CL10A106KP8NNNC,same part
-"C4,C6,C32",22u,CL21A226MAQNNNE,Samsung Electro-Mechanics,C20416420,,CCTC TCC0805X5R226M250FT,equivalent (CCTC 25 V X5R)
+C2,10u/25V,CL10A106MA8NRNC,Samsung Electro-Mechanics,C96446,,Samsung Electro-Mechanics CL10A106MA8NRNC,"same part; 25 V X5R, JLC Basic. Changed 2026-09-21 from the 10 V CL10A106KP8NNNC/C19702: C2 is the hot-plugged USB VBUS bulk cap (review BOM-04)"
+C3,10u,CL10A106KP8NNNC,Samsung Electro-Mechanics,C19702,,Samsung Electro-Mechanics CL10A106KP8NNNC,same part
+"C4,C6,C32",22u,GRM21BR61E226ME44L,Murata Electronics,C45783,,Samsung Electro-Mechanics CL21A226MAQNNNE,"equivalent (Samsung CL21A226MAQNNNE, 25 V X5R 0805, JLC Basic). Changed 2026-09-21: prime was the Samsung part, now obsolete at DigiKey; LCSC was the CCTC clone C20416420 (Extended, 396 left)"
 "C5,C8,C21,C22,C25,C26,C37",1u,CL10A105KB8NNNC,Samsung Electro-Mechanics,C15849,,Samsung Electro-Mechanics CL10A105KB8NNNC,same part
 "C7,C30,C33,C36",0.1u,CC0603KRX7R9BB104,Yageo,C14663,,YAGEO CC0603KRX7R9BB104,same part
 C20,1u/50V,CL21B105KBFNNNE,Samsung Electro-Mechanics,C28323,,Samsung Electro-Mechanics CL21B105KBFNNNE,same part
 "C10,C12",4.7u,CL10A475KO8NNNC,Samsung Electro-Mechanics,C19666,,Samsung Electro-Mechanics CL10A475KO8NNNC,same part
 "C9,C11,C13,C14,C15,C16,C17",4.7u/50V,CL21A475KBQNNNE,Samsung Electro-Mechanics,C513770,,Samwha Capacitor CS2012X5R475K500NRE,"equivalent (Samwha 50 V X5R); C9 raised 1u to 4.7u 2026-09-18 (TPS923610 COUT effective-capacitance minimum)"
-"C18,C19",1u,CL21B105KBFNNNE,Samsung Electro-Mechanics,C28323,,Samsung Electro-Mechanics CL21B105KBFNNNE,same part
-"C23,C27,C28,C29",2.2n,CL10B222KB8NNNC,Samsung Electro-Mechanics,C1604,,FH (Guangdong Fenghua Advanced Tech) 0603B222K500NT,equivalent (FH)
-"C24,C31",100n,CC0603KRX7R9BB104,Yageo,C14663,,YAGEO CC0603KRX7R9BB104,same part
+"C18,C19",1u/50V,CL21B105KBFNNNE,Samsung Electro-Mechanics,C28323,,Samsung Electro-Mechanics CL21B105KBFNNNE,same part
+"C27,C28,C29,C34",2.2n,CL10B222KB8NNNC,Samsung Electro-Mechanics,C1604,,FH (Guangdong Fenghua Advanced Tech) 0603B222K500NT,equivalent (FH)
+"C23,C24,C31",0.1u,CC0603KRX7R9BB104,Yageo,C14663,,YAGEO CC0603KRX7R9BB104,same part
 CR1,SMF6.5CA,SMF6.5CA,Littelfuse,C19077501,,hongjiacheng SMF6.5CA,"standard part, other maker"
 "CR2,CR3",TSD05CDYFR,TSD05CDYFR,Texas Instruments,C5299440,,DOWO SD05C-01FTG,"equivalent (DOWO SD05C-01FTG, 5.0 V class)"
 D2,LED,LTST-C150KRKT,Lite-On,C28310439,,YONGYUTAI YLED1206R,"equivalent (YONGYUTAI red 1206, top-emitting)"
@@ -17,6 +18,7 @@ D3,SMAJ26A,SMAJ26A,Littelfuse,C19077543,,hongjiacheng SMAJ26A,"standard part, ot
 "D4,D5,D6",B5819W,1N5819HW-7-F,Diodes Incorporated,C8598,,"Jiangsu Changjing Electronics Technology Co., Ltd. B5819W SL",equivalent (JCET B5819W)
 D8,PESD2IVN-UX,PESD2IVN-UX,Nexperia,C42370512,,TECH PUBLIC PESD2IVN-UX,clone (TECH PUBLIC)
 F1,0805L100WR,0805L100WR,Littelfuse,C269106,,Brightking SMD0805B100TFT,equivalent (Brightking SMD0805B100TFT)
+F2,0805L075WR,0805L075WR,Littelfuse,C151146,,Littelfuse 0805L075WR,"same part; 0.75 A-hold PPTC in series with J6 pin 12 (raw battery +) only - NOT in the main battery path. Added 2026-09-21 (review HMI-01)"
 J1,USB_C_Receptacle,USB4085-GF-A,GCT,C7095263,,Global Connector Technology USB4085-GF-A,same part
 J2,FH34SRJ-24S-0.5SH_50_,FH34SRJ-24S-0.5SH(50),Hirose,C324726,,HRS(Hirose) FH34SRJ-24S-0.5SH(50),same part
 "J3,J4",FH34SRJ-6S-0.5SH_50_,FH34SRJ-6S-0.5SH(50),Hirose,C224194,,HRS(Hirose) FH34SRJ-6S-0.5SH(50),same part
@@ -29,17 +31,17 @@ Q1,FS8205A,FS8205A,EVVOSEMI,C2830320,,TECH PUBLIC FS8205A,"clone (TECH PUBLIC); 
 "Q2,Q3,Q7,Q8",AO3401A,AO3401A,Alpha & Omega Semiconductor,C15127,,Alpha & Omega Semicon AO3401A,same part
 Q4,IRLML6346TRPBF,IRLML6346TRPBF,Infineon,C67276,,Infineon Technologies IRLML6346TRPBF,same part - do not accept a clone
 "Q5,Q6,Q9",BSS138,BSS138LT1G,onsemi,C7420339,,hongjiacheng BSS138,clone (hongjiacheng BSS138)
-"R1,R10,R12,R39,R49,R50,R57,R80,R81,R82",1M,RC0603FR-071ML,Yageo,C22935,,UNI-ROYAL(Uniroyal Elec) 0603WAF1004T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1004T5E)
+"R1,R10,R12,R15,R39,R49,R50,R70,R80,R81,R82",1M,RC0603FR-071ML,Yageo,C22935,,UNI-ROYAL(Uniroyal Elec) 0603WAF1004T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1004T5E)
 "R2,R3",5.1k,RC0603FR-075K1L,Yageo,C23186,,UNI-ROYAL(Uniroyal Elec) 0603WAF5101T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF5101T5E)
-"R4,R5,R7,R8,R9,R13,R15,R28,R53,R54,R55,R56,R62",10k,RC0603FR-0710KL,Yageo,C25804,,UNI-ROYAL(Uniroyal Elec) 0603WAF1002T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1002T5E)
+"R4,R5,R7,R8,R9,R13,R28,R53,R54,R55,R56,R62",10k,RC0603FR-0710KL,Yageo,C25804,,UNI-ROYAL(Uniroyal Elec) 0603WAF1002T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1002T5E)
 R6,4.7k,RC0603FR-074K7L,Yageo,C23162,,UNI-ROYAL(Uniroyal Elec) 0603WAF4701T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF4701T5E)
 R11,12k,RC0603FR-0712KL,Yageo,C22790,,UNI-ROYAL(Uniroyal Elec) 0603WAF1202T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1202T5E)
-R14,2.2,RC0603FR-072R2L,Yageo,C112307,,Yageo RC0603FR-072R2L,"same part; changed 2026-09-18 from 3 Yageo RC0603FR-073RL/C22356394 to match SSD1677 reference design alongside L1"
+R14,2.2,RC0603FR-072R2L,Yageo,C22939,,UNI-ROYAL(Uniroyal Elec) 0603WAF220KT5E,"equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF220KT5E, JLC Basic, 2.2 ohm 1% 0603, +/-400 ppm/C vs Yageo +/-200); LCSC code changed 2026-09-20 from C112307 (the Yageo part itself, JLC stock fell to 12). Value changed 2026-09-18 from 3 Yageo RC0603FR-073RL/C22356394 to match SSD1677 reference design alongside L1"
 "R16,R78",1k,RC0603FR-071KL,Yageo,C21190,,UNI-ROYAL(Uniroyal Elec) 0603WAF1001T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1001T5E)
-R17,150k,RC0603FR-07150KL,Yageo,C22807,,UNI-ROYAL(Uniroyal Elec) 0603WAF1503T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1503T5E)
+R17,2M,RC0603FR-072ML,Yageo,C22976,,UNI-ROYAL(Uniroyal Elec) 0603WAF2004T5E,"equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF2004T5E), JLC Basic. USB_STAT ladder rescaled 2026-09-21 for sleep current (was 150k)"
 R18,5.6k,RC0603FR-075K6L,Yageo,C23189,,UNI-ROYAL(Uniroyal Elec) 0603WAF5601T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF5601T5E)
 R19,20k,RC0603FR-0720KL,Yageo,C4184,,UNI-ROYAL(Uniroyal Elec) 0603WAF2002T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF2002T5E)
-"R20,R67",56k,RC0603FR-0756KL,Yageo,C23206,,UNI-ROYAL(Uniroyal Elec) 0603WAF5602T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF5602T5E)
+R20,56k,RC0603FR-0756KL,Yageo,C23206,,UNI-ROYAL(Uniroyal Elec) 0603WAF5602T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF5602T5E)
 "R21,R22,R23,R24,R25,R26,R29,R30,R31,R32,R33,R34,R65,R68,R69",33,RC0603FR-0733RL,Yageo,C23140,,UNI-ROYAL(Uniroyal Elec) 0603WAF330JT5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF330JT5E)
 "R42,R44,R46,R52,R73",0,RC0603JR-070RL,Yageo,C21189,,UNI-ROYAL(Uniroyal Elec) 0603WAF0000T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF0000T5E)
 R27,0,RC0805JR-070RL,Yageo,C17477,,UNI-ROYAL(Uniroyal Elec) 0805W8F0000T5E,"equivalent (UNI-ROYAL 0805W8F0000T5E, Basic); 0805 battery-path service jumper (was 0603)"
@@ -47,13 +49,15 @@ R35,33k,RC0603FR-0733KL,Yageo,C4216,,UNI-ROYAL(Uniroyal Elec) 0603WAF3302T5E,equ
 R36,68k,RC0603FR-0768KL,Yageo,C23231,,UNI-ROYAL(Uniroyal Elec) 0603WAF6802T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF6802T5E)
 R37,15,RC0603FR-0715RL,Yageo,C22810,,UNI-ROYAL(Uniroyal Elec) 0603WAF150JT5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF150JT5E)
 R38,300k,RC0603FR-07300KL,Yageo,C23024,,UNI-ROYAL(Uniroyal Elec) 0603WAF3003T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF3003T5E)
-"R40,R51,R70,R75,R76,R77,R79",100k,RC0603FR-07100KL,Yageo,C25803,,UNI-ROYAL(Uniroyal Elec) 0603WAF1003T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1003T5E)
+"R40,R51,R75,R76,R77,R79",100k,RC0603FR-07100KL,Yageo,C25803,,UNI-ROYAL(Uniroyal Elec) 0603WAF1003T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1003T5E)
 R41,120k,RC0603FR-07120KL,Yageo,C25808,,UNI-ROYAL(Uniroyal Elec) 0603WAF1203T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1203T5E)
 "R43,R45,R58,R66,R74",0,RC0603JR-070RL,Yageo,C21189,yes,UNI-ROYAL(Uniroyal Elec) 0603WAF0000T5E,DNP option link; equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF0000T5E)
 "R47,R48",2.2k,RC0603FR-072K2L,Yageo,C4190,,UNI-ROYAL(Uniroyal Elec) 0603WAF2201T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF2201T5E)
 R59,2k,RC0603FR-072KL,Yageo,C22975,,UNI-ROYAL(Uniroyal Elec) 0603WAF2001T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF2001T5E)
-"R60,R61,R63,R64",100,RC0603FR-07100RL,Yageo,C22775,,UNI-ROYAL(Uniroyal Elec) 0603WAF1000T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1000T5E)
-R71,22k,RC0603FR-0722KL,Yageo,C31850,,UNI-ROYAL(Uniroyal Elec) 0603WAF2202T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF2202T5E)
+R57,10M,RC0603FR-0710ML,Yageo,C7250,,UNI-ROYAL(Uniroyal Elec) 0603WAF1005T5E,"equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1005T5E), JLC Basic. Q3 gate bleed raised from 1M 2026-09-21 to cut 3.3 uA of standing battery drain; R56 (10k) still sets the gate"
+"R60,R61,R63,R64,R83",100,RC0603FR-07100RL,Yageo,C22775,,UNI-ROYAL(Uniroyal Elec) 0603WAF1000T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1000T5E)
+R67,510k,RC0603FR-07510KL,Yageo,C23192,,UNI-ROYAL(Uniroyal Elec) 0603WAF5103T5E,"equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF5103T5E), JLC Basic. USB_STAT ladder rescaled 2026-09-21 (was 56k)"
+R71,200k,RC0603FR-07200KL,Yageo,C25811,,UNI-ROYAL(Uniroyal Elec) 0603WAF2003T5E,"equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF2003T5E), JLC Basic. USB_STAT ladder rescaled 2026-09-21 (was 22k)"
 R72,10k,RC0603FR-0710KL,Yageo,C25804,yes,UNI-ROYAL(Uniroyal Elec) 0603WAF1002T5E,DNP option link; equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1002T5E)
 "SW1,SW2,SW3,SW4,SW5,SW7,SW8,SW9,SW10,SW11",SW_Push,MJTP1117,APEM,C557598,,SHOU HAN TS365ZJ,equivalent (SHOU HAN TS365ZJ)
 SW6,SW_Push,MJTP1243,APEM,,yes,,BOOT button; not needed (USB-Serial-JTAG). LCSC equivalents unverified: C382056 / C255782
@@ -67,3 +71,4 @@ U10,TPS923610DRLR,TPS923610DRLR,Texas Instruments,C52919131,,Texas Instruments T
 U11,TP4056-42-ESOP8,TP4056-42-ESOP8,NanJing Top Power (TOPPOWER),C16581,,TOPPOWER(Nanjing Extension Microelectronics) TP4056-42-ESOP8,same part (original maker)
 U12,74LVC1G04,"74LVC1G04GV,125",Nexperia,C53185133,,MDD(Microdiode Semiconductor) 74LVC1G04GV,clone (MDD)
 U13,DS3231MZ,DS3231MZ+TRL,Analog Devices,C107410,,Analog Devices Inc./Maxim Integrated DS3231MZ+TRL,same part
+U14,RV-8263-C7,RV-8263-C7-32.768KHZ-20PPM-TA-QA,Micro Crystal,C5137460,yes,Micro Crystal RV-8263-C7-32.768KHZ-20PPM-TA-QA,"same part; DNP alternative to U13 - fit ONE RTC or none (I2C 0x51 vs 0x68, no conflict). Custom symbol in KiCad/9.0/3rdparty/RV-8263-C7 (pin 3 = CLKOE, tied to GND). JLC stock thin (472 on 2026-09-21), Extended"

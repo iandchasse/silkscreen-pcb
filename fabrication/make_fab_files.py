@@ -3,6 +3,8 @@
 
     python fabrication/make_fab_files.py             # writes production/other_fabs/
     python fabrication/make_fab_files.py --no-tht    # leave through-hole parts out (hand-solder them)
+    python fabrication/make_fab_files.py --split     # also write other_fabs/split/: SMD-only and through-hole-only
+                                                     # NextPCB BOM + centroid pairs
 
 Inputs (nothing is modified; KiCad may stay open):
   - silkscreen_pcb.kicad_pcb  read by `kicad-cli` for placement and the assembly drawing

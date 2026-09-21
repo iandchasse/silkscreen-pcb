@@ -1,286 +1,381 @@
 # Silkscreen
 
 **An open-source, open-hardware e-reader base board.**
-Designed for compatible SPI e-paper panels, custom enclosures and firmware.
 
-Successor to [de-link](https://de-link.me). Designed in **KiCad 9.0.6**.
+Silkscreen is the mainboard of a build-it-yourself e-reader. You order the board already
+assembled from a factory, add an e-paper display, a battery and a microSD card, and put it in a
+case of your own choosing. It is a 2-layer ESP32-S3 board with a 24-pin display connector,
+optional touch and frontlight, microSD and single-cell Li-ion/LiPo power.
 
-Silkscreen is a 2-layer ESP32-S3 base board for e-ink development, with a 24-pin display
-interface, optional touch/frontlight, microSD and single-cell Li-ion/LiPo power.
-Check the selected panel's pinout and drive requirements, battery specification and enclosure fit.
-
-**Before assembly:** read **[DESIGN_REVIEW.md](DESIGN_REVIEW.md)**. This is the single source
-for the current assembly decision, applied corrections and first-article tests. The USB-present
-reverse-battery fault path ("Fix 4"), the Q4 replacement and the slotted microSD land are all
-applied in the source; what remains before a repeatable product is the first-article bench
-verification in DESIGN_REVIEW.md §13. The latest pre-order audit is in
-[`docs/audit-2026-09-18/`](docs/audit-2026-09-18/PREORDER_CONFIRMATION_AUDIT.md).
-
-![Silkscreen — full schematic](docs/images/full-capture.png)
+Successor to [de-link](https://de-link.me). Designed in KiCad 9.0.6 —
+**you do not need KiCad to order a board.** Every file a factory asks for is already in the
+`production/` folder of this repository, ready to upload.
 
 | Back (all components) | Front (silkscreen art) |
 |:---:|:---:|
 | ![Board, bottom view](docs/images/board-bottom.png) | ![Board, top view](docs/images/board-top.png) |
 
-Published plots: **[schematic PDF](docs/silkscreen_pcb_schematic.pdf)** (single A2 sheet) ·
-**[PCB layout PDF](docs/silkscreen_pcb_layout.pdf)** (2 pages, all layers). Both are plotted from the current
-source; the images above are renders of the same files, not the release record.
+## What it is
+
+- **Brain:** an ESP32-S3 module with 16 MB of flash and 8 MB of PSRAM, with USB built in — you
+  plug a USB-C cable straight into it, no adapter.
+- **Screen:** a 24-pin connector for SPI e-paper panels. The primary target is the 4.26"
+  Good Display `GDEQ0426T82` family, in plain, touch, frontlight, or touch + frontlight versions.
+  `GDEQ0426T82` is the base part number and the suffix picks the variant — `-T01C` touch,
+  `-FL01C` front light, `-FT01C` both — so always order by the full suffixed number.
+- **Power:** charges and runs from a single-cell Li-ion/LiPo pack over USB-C, with charger,
+  cell protection and a 3.3 V regulator on board.
+- **Storage:** a push-push microSD socket.
+- **Buttons:** eight page/navigation buttons, plus power and reset.
+- **Size:** 60.05 × 111.30 mm, 1.6 mm thick. Every part is soldered onto the **back** face, so
+  the front is clear for the display.
+
+There is **no firmware for this board yet** — see [Firmware](#firmware) before you order.
 
 ---
 
-## At a glance
+## What you need besides the board
+
+The factory sends you a populated circuit board and nothing else. You also need:
+
+| Item | What to get |
+|---|---|
+| **Display panel** | One of the 4.26" Good Display variants: `GDEQ0426T82` (plain), `-T01C` (touch), `-FL01C` (frontlight), `-FT01C` (touch + frontlight). The panel you pick decides which optional parts you fit — see [Choosing a configuration](#choosing-a-configuration). |
+| **Battery** | A **single-cell** (3.7 V nominal / 4.2 V charged) Li-ion or LiPo pack fitted with a **JST-PH 2.0 mm, 2-pin** plug. Read the polarity note below before you plug it in. The author uses [this 500 mAh `503035` pack (5 × 30 × 35 mm, JST-PH 2.0)](https://www.amazon.com/dp/B0GDQLLF12), which fits the board's 38.75 × 30.50 mm battery bay snugly (the 30 mm side has only 0.5 mm to spare); the board charges at about 0.25 A as built, which is a gentle 0.5C for this pack. For a much smaller cell, lower the charge current by raising `R6` ([HARDWARE.md §3.2](docs/HARDWARE.md#32-battery-charger)). Listings change — check the plug, the polarity and the size of whatever you buy. |
+| **microSD card** | Any normal microSD card. The battery normally sits in the board's cut-out directly in front of the card slot, so you lift or slide the cell aside to put a card in or take one out. That is intended — the card is not meant to be swapped often. |
+| **USB-C cable** | A **data** cable, not a charge-only one, or the board will charge but never appear on your computer. |
+
+**Battery lead order.** On the board, `J5` pin 1 is marked **“-”** and is battery **negative**;
+pin 2 is battery **positive**. There is no industry standard for JST-PH battery leads — packs
+ship both ways round, and a red-to-pin-1 pack and a black-to-pin-1 pack look identical in a
+photo. Check your pack with a multimeter before you plug it in.
+
+> [!WARNING]
+> Lithium cells are a fire risk if reversed, shorted or crushed. Measure the polarity of your
+> pack against the “-” mark on `J5` before plugging it in — do not trust the wire colours. Use a
+> pack with its own protection board. Stop using any cell that is puffed, hot or damaged.
+
+**Screws and case are not on this list.** The board has six M2 mounting holes, but which screws
+you need depends entirely on the case you use, and no case is supplied here — see
+[The board and your case](#the-board-and-your-case).
+
+---
+
+## Order an assembled board, step by step
+
+You do not need KiCad and you do not need to know how a PCB is designed. A factory makes the
+board and solders every part onto it. You will be clicking through a web shop and uploading three
+files that are already in this repository. Unfamiliar words are defined in
+[Words used on the factory's website](#words-used-on-the-factorys-website).
+
+> **A configurator is coming.** [silkscreenreader.com](https://silkscreenreader.com) has a
+> *Build one* page that walks you through the panel variant and the optional blocks and produces
+> the files for it. It is built but still behind a site preview and is **not live yet**. If it is
+> not live when you read this, use the steps below — they are complete on their own.
+
+### What it costs and how long it takes
+
+A real quote from **21 September 2026** (no coupons, US delivery) — prices, shipping and import charges move, so
+treat this as an expectation, not a promise:
 
 | | |
 |---|---|
-| **MCU** | ESP32-S3-WROOM-1 (**N16R8**, 16 MB flash / 8 MB octal PSRAM), native USB — no UART bridge |
-| **Display** | 24-pin 0.5 mm ZIF for SPI e-paper; primary target 4.26" GDEQ426T82 family; panel-driven charge pump generates the ±15–22 V rails |
-| **Frontlight** | TPS923610 constant-current boost, warm/cool selection through one GPIO + inverter; blending requires qualification |
-| **Touch** | Optional I²C capacitive touch (for `-FT01C`-class panels) with a 0 Ω pin-swap mux |
-| **Power** | USB-C in → TP4056 charger → DW01A + FS8205A cell protection → TPS2116 priority mux → TLV75533P 3V3 LDO |
-| **Battery** | Specified single-cell 4.2 V-charge Li-ion/LiPo; verify cable polarity and observe the review's protection limitations |
-| **Storage** | push-push microSD in 4-bit SDMMC, power-gated |
-| **Input** | 8 buttons on two ADC resistor ladders + power (`SW10`) + reset (`SW11`); a BOOT button footprint (`SW6`) is left unpopulated because USB-Serial-JTAG makes it unnecessary |
-| **RTC** | DS3231MZ (±5 ppm), VBAT-only mode; populated in the standard build, optional |
-| **Board** | 2-layer, 60 × 111 mm, 1 oz Cu; 179 references = 162 fitted + 10 DNP + 7 bare-copper (holes `H1`–`H5`, test pads `TP1`/`TP2`) |
+| Five boards, **two** of them assembled (the recommended first order) | **$223.95** for the boards, the parts and the assembly. **$305.23** at checkout once shipping, US tariffs and tax were added — about **$150 per working reader board** |
+| Each extra assembled board, up to all five | roughly **$15** more each (about $12 of parts plus placement) — worked out from the per-quantity parts table in [fabrication/BOM.md](fabrication/BOM.md), not a quote |
+| Why two boards cost nearly as much as five | most of the total is one-off: the five bare boards, setup, the solder stencil, and a small loading fee for each of about two dozen "Extended" part types the factory has to fetch. Only about $30 of it is the two boards' own parts and placement |
+| Time from clicking *order* to the parcel | about **2–3 weeks** |
+| Not included | display panel, battery, microSD card, case |
 
-Connection/GPIO reference: **[docs/HARDWARE.md](docs/HARDWARE.md)**.
-All engineering conclusions and release actions: **[DESIGN_REVIEW.md](DESIGN_REVIEW.md)**.
+The minimum order for **bare boards is 5**, but you can ask for as few as **2** of them to be
+assembled. That is the cheapest way in: one working reader, one spare, and three bare boards left
+over for later.
+
+### Step 1 — Get the three files
+
+Download this repository (green **Code** button → **Download ZIP**) and unzip it. Everything you
+need is in the `production/` folder. You upload exactly three files:
+
+| Upload this | What it is | Where it goes |
+|---|---|---|
+| `production/Silkscreen_Reader_PCB_1.0.zip` | the **Gerber** files — the board itself: copper layers, outline and hole positions | the *Add Gerber file* box |
+| `production/jlc_bom.csv` | the **BOM** (bill of materials) — the shopping list of parts | the *Add BOM file* box |
+| `production/positions.csv` | the **CPL** (also called the centroid or pick-and-place file) — where each part sits and which way it faces | the *Add CPL file* box |
+
+Ignore everything else in that folder. These three belong together and come from the same export;
+do not mix one of them with an older copy of another.
+
+### Step 2 — Order the bare board
+
+1. Sign in at [jlcpcb.com](https://jlcpcb.com), click **Order now**, then **Add Gerber file** and
+   choose `Silkscreen_Reader_PCB_1.0.zip`.
+2. The viewer draws the board. Confirm it says **2 layers** and about **60 × 111 mm**. If it does
+   not, you uploaded the wrong file.
+3. Set **PCB Qty = 5**, **Thickness = 1.6 mm**, **Outer Copper Weight = 1 oz**. Surface finish and
+   solder-mask colour are entirely your choice; nothing in this design needs a particular one.
+4. Leave everything else at its default.
+5. Scroll the viewer to the board edges and check the USB-C cut-out, the microSD opening and the
+   two narrow slots on the outline are open, not filled. The long one (47.04 × 1.30 mm) is the
+   display-flex slot; the short one at the tongue neck is **5.30 × 1.10 mm**. Both are at or above
+   JLCPCB's 1.0 mm minimum routed-slot width, so neither should raise a design-for-manufacture
+   (DFM) message. (Earlier revisions had four 0.5 mm perforation slots there; those are gone.)
+
+### Step 3 — Turn on assembly
+
+**PCBA** means "printed circuit board assembly" — the factory buys the parts and solders them on
+for you, instead of shipping you a bare board.
+
+1. Switch **PCB Assembly** on.
+2. Choose **Standard**, not Economic. JLCPCB runs two assembly services, and the ESP32-S3 module
+   this board is built around is only placeable on **Standard**, so for a complete board Standard
+   is the one you need. (If you are happy to hand-solder the module yourself, you could leave it
+   off the order and use the cheaper Economic service for everything else. That is an experienced
+   builder's choice, not the recommended path.)
+3. Because this board is 60 mm wide and Standard's conveyor wants at least 70 mm, the factory may
+   add **snap-off edge rails** — narrow strips of extra board material along the edges for the
+   machine to grip. There is nothing for you to design; just expect a small fee in the quote, and
+   snap the rails off when the boards arrive.
+4. Set **Assembly side: Bottom**. Every part on this board is on the back. If you leave this on
+   *Top* you will receive five blank boards and a bag of parts.
+5. Set the assembly quantity to **2** (or 5 if you want them all built).
+6. Leave **Tooling holes** on *Added by JLCPCB*.
+7. Set **Confirm Parts Placement** to **Yes**. It costs a small fee and is worth it on a first
+   order: it lets you look at a picture of where each part will go before the machine runs.
+8. Click **Confirm**, then **Next**.
+
+### Step 4 — Upload the parts list
+
+1. **Add BOM file** → `production/jlc_bom.csv`
+2. **Add CPL file** → `production/positions.csv`
+3. Click **Process BOM & CPL**.
+
+### Step 5 — Check the parts the factory picked
+
+You get a table with one row per part. Most rows will already be matched.
+
+- **Rows with a blank part number are meant to be blank.** Eleven references — `TP3 TP4 TP5`,
+  `R43 R45 R58 R66 R72 R74`, `SW6` and `U14` (the alternate clock chip; the board uses `U13`) — are tagged *"DNP (standard build)"*. **DNP** means "do not
+  populate": a spot on the board deliberately left empty. **Leave them unselected.**
+- **Every other row must show a match.** If a row says *No Parts Selected* or *out of stock*, or
+  shows a manufacturer's part number instead of an **LCSC code** (the `C…` number that identifies a
+  part in the factory's own warehouse), click **Search** and look it up.
+  [`fabrication/BOM.md`](fabrication/BOM.md) lists an approved alternative for every part on this
+  board — use that list rather than picking a look-alike yourself, because several of these parts
+  have near-identical siblings with different pinouts.
+- The part most often short is **TPS923610DRLR**, the frontlight driver. Check its stock. If it is
+  out and you are not fitting a frontlight panel, untick it along with the rest of the *Frontlight*
+  group in [Choosing a configuration](#choosing-a-configuration).
+- If you are deliberately leaving a block off, remove its parts from the BOM **and** the CPL, or
+  untick them here.
+- Click **Next**.
+
+### Step 6 — Check the placement preview (do not skip this)
+
+You see a drawing of the board with every part on it. This is your last chance to catch a part
+that is rotated wrongly, and the factory's own checker has corrected several on this board before.
+A matched part code does not prove the part is the right way round.
+
+| Part | What to check |
+|---|---|
+| `D2` | The USB power LED. **Pad 1 is the cathode** (the marked end) — this is the opposite of some libraries' convention. |
+| `U2`, `U5`, `D8` | Small 3–8 pin chips whose rotation the factory has corrected before. |
+| `J4` | Its drawn outline sits 0.73 mm off its own pads; the pads are what matter. |
+| `U4`, `J7` | The ESP32 module and the microSD socket — check they are centred on their pad patterns. |
+
+If something looks wrong, use the preview's rotate and move tools to fix it, and **save a
+screenshot of the corrected preview**. Click **Next**.
+
+### Step 7 — Through-hole parts: let them solder it, or solder it yourself
+
+Thirteen parts have legs that pass through the board rather than sitting on its surface — that is
+**THT** (through-hole technology), as opposed to **SMD** (surface-mount) for everything else. They
+are the USB-C socket `J1`, the battery connector `J5`, the expansion header `J6` and the ten
+buttons `SW1`–`SW5` and `SW7`–`SW11`. They are already in the files you uploaded, so this is a
+choice, not extra work:
+
+- **Let the factory solder them.** JLCPCB charges a one-off hand-soldering fee (about $3.60 per
+  order) plus roughly $0.016 per joint — about **$6** on the recommended two-board order, about $10 if all five are assembled — and adds
+  about a day. Confirm on the quote page that through-hole soldering appears as a line item.
+- **Solder them yourself.** You get the parts loose and put in 74 joints per board: the
+  USB-C shell pins, the JST battery connector, the 12-pin expansion header and ten buttons. The
+  USB-C shell is the fiddly one. Worth doing if you own a decent iron and a fine tip; not worth it
+  on a first board.
+
+### Step 8 — Pay, and keep the paperwork
+
+Read the price summary: bare boards, setup fee, per-part-type fees, the parts themselves,
+assembly. Place the order. Then keep in one folder the order confirmation, the accepted BOM as the
+factory matched it, any substitutions it proposed, and your screenshot of the approved placement
+preview. If you order again, you will want to know exactly what was built the first time.
+
+### Using a different factory (PCBWay, NextPCB, …)
+
+Nothing in the design is tied to JLCPCB, and upload files for other assemblers are kept in
+[`production/other_fabs/`](production/other_fabs/): a PCBWay BOM with KiCad's own placement file, a
+NextPCB BOM and centroid file in NextPCB's template (plus SMD-only / through-hole-only pairs in
+`split/`), and a bottom-side assembly drawing. They use the same Gerber zip as the JLCPCB order and
+are regenerated from the current design with:
+
+```bash
+python fabrication/make_fab_files.py --split
+```
+
+**Be honest with yourself about what you are signing up for, though: the only factory that has
+actually delivered working Silkscreen boards is JLCPCB.** The author's attempt with NextPCB did not
+end in a successful order (what went wrong, and what it would have cost, is written up in
+[fabrication/NEXTPCB_REV0_NOTES.md](fabrication/NEXTPCB_REV0_NOTES.md)), and PCBWay has not been tried
+at all. Another factory is a perfectly reasonable choice if you prefer one — you will just be doing
+the part matching, the rotation check and the back-and-forth with their engineers yourself, without
+a known-good order to compare against. Everything else in this guide assumes JLCPCB.
 
 ---
 
-## Repository layout
+## Choosing a configuration
 
-```
-silkscreen_pcb.kicad_pro / .kicad_sch / .kicad_pcb   KiCad 9 project
-sym-lib-table / fp-lib-table                          project-local library tables (${KIPRJMOD}-relative, resolve after a plain clone)
-KiCad/9.0/3rdparty/                                   vendored symbols/footprints/3D models actually used by the design
-docs/HARDWARE.md                                      hardware documentation
-docs/images/                                          schematic block crops, full sheet, board renders
-docs/silkscreen_pcb_schematic.pdf / _layout.pdf  schematic and PCB plots
-docs/audit-2026-09-16/, audit-2026-09-18/             review evidence and the pre-order audit
-DESIGN_REVIEW.md                                      schematic + layout review
-fabrication/                                          part_fields.csv + apply script, make_fab_files.py, BOM.md / hand-build BOM, how-to
-production/                                           JLC upload BOMs (v3/v4); Toolkit output (zip, CPL, BOM) is regenerated locally
-production/other_fabs/                                PCBWay / NextPCB BOMs, KiCad placement file, bottom assembly drawing
-simulations/                                          LTspice work
-LICENSE / NOTICE                                      CERN-OHL-S v2
-```
-
-A plain `git clone` opens without missing libraries: every project library path is relative, all in-repo 3D
-models resolve, and everything else comes from KiCad's standard libraries (KiCad 9.0.x).
-
-## Building the board
-
-The project and reviewed exports use **KiCad 9.0.6**. Keep a backup before saving with a
-newer major version; newer file formats may not reopen in KiCad 9.
-
-### Fabrication (bare board)
-
-The active assembly workflow is **JLCPCB**. Generate a Gerber + drill set, or use the
-Fabrication Toolkit workflow below:
-
-```bash
-kicad-cli pcb export gerbers -o fabrication/gerbers/ \
-  --layers F.Cu,B.Cu,F.Mask,B.Mask,F.SilkS,B.SilkS,F.Paste,B.Paste,Edge.Cuts \
-  --no-protel-ext --subtract-soldermask silkscreen_pcb.kicad_pcb
-kicad-cli pcb export drill -o fabrication/gerbers/ --format excellon \
-  --drill-origin absolute --excellon-units mm --excellon-separate-th silkscreen_pcb.kicad_pcb
-```
-
-Zip `fabrication/gerbers/` and upload. Board is 2-layer, 1.6 mm, 1 oz copper; outline on `Edge.Cuts`.
-
-### Assembly
-
-```bash
-kicad-cli pcb export pos -o fabrication/assembly/cpl.csv --format csv --units mm --side both silkscreen_pcb.kicad_pcb
-```
-
-- **JLCPCB:** use the KiCad **Fabrication Toolkit** plugin for the final placement export;
-  it applies JLC's part-rotation database and reads the `LCSC` field from the footprints (set by
-  `fabrication/apply_part_fields.py`, see fabrication/README.md). Keep the upload BOM separate from the
-  factory's matched/accepted BOM and save approved substitutions. The raw CLI centroid above is a
-  cross-check, not a replacement for the reviewed Toolkit CPL.
-- Regenerate the Toolkit set after **every** schematic/PCB save; a stale set silently misses new parts.
-
-See **[Ordering from JLCPCB](#ordering-from-jlcpcb-step-by-step)** below for the upload flow and **[fabrication/README.md](fabrication/README.md)** for the release-file workflow.
-
-## Ordering from JLCPCB, step by step
-
-> **Building your own configuration?** Start at **[silkscreenreader.com](https://silkscreenreader.com)** and use its
-> *Build one* configurator. It walks you through the panel variant (plain / touch / frontlight / both), the optional
-> blocks and the buttons, and shows the running cost against a fully loaded board. It is the intended way to choose a
-> configuration and, as the site's board-file export and ordering tutorials come online, to get files for it. (The site
-> still describes those as arriving with the closed beta; until then use the manual method below.)
-
-### 1. The files in `production/`
-
-| File | Use it for | Notes |
-|---|---|---|
-| `Silkscreen_Reader_PCB_1.0.zip` | **Gerbers + drills**: the bare-board upload | Fabrication Toolkit output. Never edit; regenerate after any PCB save |
-| `positions.csv` | **Pick-and-place (CPL)**: the assembly upload | 162 rows, all on the bottom side, rotations already corrected by the Toolkit |
-| `bom.csv` | **Factory BOM**: the assembly upload | Toolkit output, built from each footprint's `LCSC` field; equals `fabrication/part_fields.csv` |
-| `bom_JLC_upload_v4_optimized.csv` | The same BOM in JLC's upload format, **cost-optimised** (26 Extended part types) | Default alternative to `bom.csv`; regenerate from `part_fields.csv` if you change parts |
-| `bom_JLC_upload_v3.csv` | The same, **brand-conservative** variant (28 Extended types) | Slightly dearer, more name-brand parts |
-| `designators.csv`, `netlist.ipc` | Toolkit by-products (per-designator count; IPC-356 netlist) | Not uploaded to JLC; keep them with the release |
-| `bom_JLC_upload-JLCPCB Assembly Order.xls`, `bom-JLCPCB*`, `bom_JLC_upload-JLCPCB` | **Historical**: the September 2026 orders (25 and 30 boards), made before the reverse-battery gate and the L1/R14/C9/R27 changes | Reference only, kept locally (not in git). Do not upload |
-| `backups/` | The Toolkit's timestamped copy of every run | Local only, not tracked |
-
-Use `bom.csv` and `positions.csv` **together**: they come from the same run. The two `bom_JLC_upload_v*` files are
-alternatives to `bom.csv` (same parts, JLC column names). Pick one BOM, not all three.
-
-### 2. Order the bare board
-
-1. Sign in at [jlcpcb.com](https://jlcpcb.com), choose **Order now**, then **Add Gerber file** and upload `Silkscreen_Reader_PCB_1.0.zip`.
-2. Confirm what the viewer detects: **2 layers, about 60 x 111 mm**. Set thickness **1.6 mm** and copper **1 oz**. Surface
-   finish and mask colour are your choice; nothing in the design requires a particular one. Minimum quantity is **5**.
-3. In the Gerber viewer check the outline, the microSD and USB-C edge areas and the four narrow perforation slots. Those
-   0.5 mm `Edge.Cuts` polygons are below JLC's 1.0 mm routed-slot minimum; earlier orders were accepted with them, but
-   read any DFM message about them.
-
-### 3. Add assembly (PCBA)
-
-1. Switch on **PCB Assembly** and choose **Standard**.
-2. Set **Assembly side: Bottom**. Every component in `positions.csv` is on the back copper layer.
-3. Leave **Tooling holes** on *Added by JLCPCB* and set **Confirm Parts Placement** to *Yes* for the first run, so you
-   approve the preview in step 5.
-4. Click **Next**, **Add BOM file** (`bom.csv` or a `bom_JLC_upload_v*` file), then **Add CPL file** (`positions.csv`), and
-   **Process BOM & CPL**.
-
-### 4. Review the BOM match
-
-- Every line needs a match on its `LCSC` code (**Part No.**). A line exported as an MPN, or flagged *out of stock* / *not
-  found*, is the one to fix; look the part up in [`fabrication/BOM.md`](fabrication/BOM.md), which lists approved alternates.
-- The fitted parts should be selected. The DNP references (`TP3-TP5`, `R43 R45 R58 R66 R72 R74`, `SW6`) are not in
-  `positions.csv` and not in `bom.csv`, but the two `bom_JLC_upload_v*` files list all ten as lines with a **blank part
-  number**, tagged "DNP (standard build)". JLC shows them as unmatched; leave them unselected. If you deliberately leave a
-  block off (next section), remove its parts from the BOM **and** the CPL, or untick them in this list.
-- The raw `bom.csv` also lists the bare UART pads **`TP1, TP2`** with no part number (they are copper-only and intentionally not assembled). Leave that line unselected, or use a `bom_JLC_upload_v*` file, which does not include it. They are not in `positions.csv`.
-- Watch stock on **TPS923610DRLR** (about 189 pcs at last check).
-
-### 5. Placement preview (do not skip on the first order)
-
-The preview draws each part on the board, and JLC's DFM has corrected several before. Check **polarity and rotation** of
-`U2`, `U5`, `D8`, `D2` (LED pad 1 is the anode) and `J4`, and the origin offsets on `U4` and `J7`. Use the preview's rotate
-and move tools to fix anything wrong, and record the correction with the release files. A matched part code does not
-verify orientation.
-
-### 6. Through-hole parts
-
-**J1** (USB-C), **J5** (2-pin JST battery), **J6** (expansion header) and the switches `SW1`-`SW5`, `SW7`-`SW11` are
-through-hole. They are in the BOM and CPL, and the project's cost notes count their soldering in the JLC quote
-([`fabrication/BOM.md`](fabrication/BOM.md)). Confirm at the quote that through-hole assembly is included and priced.
-Confirm J7's locating pegs against the approved placement.
-
-### 7. Approve, order, and record
-
-Read the price summary (bare board, setup, Extended-part fees, parts, assembly). Save the approval e-mail, the accepted
-BOM and CPL and any substitutions with the release files. **Regenerate the whole Toolkit set after every schematic or PCB
-save**: a stale `positions.csv` silently misses new parts.
-
-## Which parts are optional? (configurations)
-
-The files in `production/` describe the **full standard build**: every block fitted except the DNP options. The
-[silkscreenreader.com](https://silkscreenreader.com) configurator treats the board as a **core** that is always fitted plus
-add-on groups you can leave off. The table maps those groups to reference designators. To build a reduced configuration by
-hand, delete the listed references from the BOM **and** the CPL and leave the pads empty. The easiest, least error-prone
-route is the configurator on the site.
+The files in `production/` build the **full standard build**: every block fitted except the DNP
+options. The board is a **core** that is always fitted, plus add-on groups you can leave off. To
+build a reduced configuration by hand, delete the listed references from the BOM **and** the CPL
+and leave the pads empty.
 
 | Group | References | Fit it when | Works without it? |
 |---|---|---|---|
-| **Core** (always) | Everything not listed below: ESP32-S3 `U4`, USB-C `J1`/`U6` and protection, charger `U11`, cell protection `U5`/`Q1`/`Q3`/`Q8`, power mux `U2`, LDO `U3`, battery monitor, microSD `J7`/`Q7`/`U1`/`U9`, the 24-pin display connector `J2` with its charge pump and boost (`L1`, `Q4`, `D4`-`D6`, `R14`, ...), power switch `SW10`, reset `SW11`, LED `D2`, and the shared parts `R47`/`R48` (I²C pull-ups) and `C12` (LDO-input capacitor) | Always | This is the minimum working board: about **$29.55** of parts at quantity 1 in the site's model |
+| **Core** (always) | Everything not listed below: ESP32-S3 `U4`, USB-C `J1`/`U6` and protection, charger `U11`, cell protection `U5`/`Q1`/`Q3`/`Q8`, power mux `U2`, LDO `U3`, battery monitor, microSD `J7`/`Q7`/`U1`/`U9`, the 24-pin display connector `J2` with its charge pump and boost (`L1`, `Q4`, `D4`-`D6`, `R14`, ...), power button `SW10`, reset `SW11`, LED `D2`, and the shared parts `R47`/`R48` (I²C pull-ups) and `C12` (LDO-input capacitor) | Always | This is the minimum working board |
 | **Touch** | `J4`, `U7`, jumpers `R42 R44 R46 R52` | The panel has a touch layer (`-T01C`, `-FT01C`) | Yes: omit the whole block on a non-touch panel |
 | **Frontlight** | `J3`, `U10`, `U12`, `L2`, `Q5`, `Q6`, `C9`, `C24`, `R37 R39 R41 R49 R50 R75` (`TP3`-`TP5` stay DNP) | The panel has a frontlight (`-FL01C`, `-FT01C`), or you want to drive an external light | Yes: omit for a plain or touch-only panel |
-| **Expansion header** | `J6`, `U8` | You want spare GPIO, I²C and the external-light output | Yes |
-| **Real-time clock** | `U13`, `C30` | You want accurate time | Yes: the reader runs without it, and it can be added later by hand |
+| **Expansion header** | `J6`, `U8`, `CR2`, `CR3`, `F2` | You want spare GPIO, I²C and the external-light output | Yes |
+| **Real-time clock** | `U13`, `C30` (or `U14` instead of `U13`) | You want accurate time | Yes: the reader runs without it, and it can be added later by hand |
+| **Alternate RTC** | `U14` (**DNP in every standard build**) | You want the cheaper clock instead of `U13` | Fit **either** `U13` **or** `U14`, never both |
 | **Side page-turn keys** | `SW1` (right-down), `SW4` (right-up), `SW7` (left-up), `SW5` (left-down) | Your case has side keys | Yes: fit any subset |
 | **Bottom-row keys** | `SW2 SW3 SW8 SW9` | Your case has bottom keys | Yes: fit any subset; with touch you can drop most keys |
 
 Notes:
 
-- **The panel choice drives touch and frontlight.** The four 4.26" GoodDisplay variants are `GDEQ0426T82` (plain), `-T01C`
-  (touch), `-FL01C` (frontlight) and `-FT01C` (touch + frontlight). Fit the touch parts only for a touch variant and the
-  frontlight parts only for a light variant.
-- **Fit only one of the two touch pin-order options.** The default build fits `R42 R44 R46 R52`. The alternate wiring
-  (`R43 R45 R58 R66`, DNP here) is for panels with the swapped pin order. Confirm the panel's pinout first.
-- Leaving a ladder switch off needs nothing else changed; the ladder resistors stay in the BOM.
+- **The panel choice drives touch and frontlight.** The four 4.26" Good Display variants are
+  `GDEQ0426T82` (plain), `-T01C` (touch), `-FL01C` (frontlight) and `-FT01C` (touch + frontlight).
+  Fit the touch parts only for a touch variant and the frontlight parts only for a light variant.
+- **`U8`, `CR2`, `CR3` and `F2` are `J6`'s own protection and come off with it.** `U8` protects only
+  `J6` pins; `CR2` and `CR3` clamp the 3V3 and raw-battery pins where they leave the board, and the
+  resettable fuse `F2` sits in series with that battery pin and feeds nothing else. Do
+  **not** remove `U9`, `D3` or `D8` — `U9` also protects the microSD data lines, and `D3`/`D8`
+  clamp front-light nets that need them whether or not `J6` is fitted.
+- **Fit only one of the two touch pin-order options.** The default build fits `R42 R44 R46 R52`.
+  The alternate wiring (`R43 R45 R58 R66`, DNP here) is for panels with the swapped pin order.
+  Confirm the panel's pinout first.
+- Leaving a button off needs nothing else changed; the ladder resistors stay in the BOM.
 - `SW6` (boot button) and `TP3`-`TP5` are DNP in every standard build.
-- Prices in the site's model exclude the panel, battery and case. JLC per-board totals are in [`fabrication/BOM.md`](fabrication/BOM.md).
+- Per-board part totals are in [`fabrication/BOM.md`](fabrication/BOM.md).
 
-## Ordering from PCBWay or NextPCB (alternative to JLCPCB)
+### Getting into download mode
 
-> **Status:** the files below are generated from the same board and part table and cross-checked against the JLC
-> set (same 162 placed parts). A NextPCB **Rev0** upload was tried on 2026-09-19/20 (quote and preview only, not a
-> completed order); PCBWay has not been tried. JLCPCB remains the proven path. **Read
-> [fabrication/NEXTPCB_REV0_NOTES.md](fabrication/NEXTPCB_REV0_NOTES.md) before using NextPCB**: its Rev0 flow has no
-> fix-it review, its importer merged our DNP lines into fitted ones (fitting `R74` beside `R73` shorts 3V3 to GND),
-> and its preview misplaces some through-hole parts.
+`SW6`, the BOOT button, is left unfitted to save cost. You will normally never need it: the
+ESP32-S3 has native USB, so it presents itself to your computer without any button press. If you
+ever do need download mode — a firmware that has wedged the USB stack, for instance — bridge the
+two `SW6` pads with a pair of metal tweezers while you tap **RESET** (`SW11`).
 
-Generate the files after every PCB save (KiCad may stay open; nothing in the project is modified):
+`SW11` (RESET) is set back from the board edge on purpose: it is meant to be pressed through a
+pin-hole in the case with a paperclip, not by a finger.
 
-```bash
-python fabrication/make_fab_files.py            # add --no-tht to leave the through-hole parts out,
-                                                # --split for separate SMD-only and through-hole-only NextPCB pairs
-```
+### Cutting the board down for a smaller display
 
-| File in `production/other_fabs/` | Upload to | Notes |
-|---|---|---|
-| `Silkscreen_Reader_PCB_1.0.zip` (in `production/`) | both | The same gerber + drill zip as for JLCPCB |
-| `pcbway_bom.csv` | PCBWay | Turnkey BOM: manufacturer + MPN per line, fitted parts only |
-| `nextpcb_bom.csv` | NextPCB | NextPCB's own template columns (S/N, Designator, Quantity, Manufacturer Part Number, Procurement Type, Customer Note); fitted parts only, with **three NextPCB-only substitutes** for parts it cannot match (`J6` CJT `A2541HWR-2x6P`, the ten `SW` buttons ALPS `SKHLLAA010`, `L1` Sunltech `SLW5040S470MST`; edit `fabrication/nextpcb_substitutes.csv`), and **DNP parts are deliberately left out** (NextPCB's importer merges lines that share an MPN and drops the `DNP` mark, which would fit `R74` beside `R73`, a dead short of 3V3 to GND) |
-| `placement_bottom_kicad.csv` | PCBWay | KiCad's own position export, SMD only, all **Bottom** |
-| `nextpcb_centroid.csv` | NextPCB | NextPCB's own sample layout (`Designator, Mid X, Mid Y, Layer, Rotation`, coordinates with an `mm` suffix, all **Bottom**), upload it as a plain `.csv`. It lists **every fitted part in `nextpcb_bom.csv`, through-hole included** (162 rows): NextPCB rejects a placement file whose designators differ from the BOM's ("Designators in the PnP file do not match those in the BOM file") |
-| `split/nextpcb_{bom,centroid}_{smd,tht}.csv` (with `--split`) | NextPCB | Matched BOM + centroid pairs for an SMD-only order (149 parts, hand-solder the rest) or a through-hole-only test; designators are identical within each pair |
-| `assembly_drawing_bottom.pdf` | PCBWay (other files); NextPCB (e-mail it, its form has no slot) | Five A3 pages: an overview, then four zoomed pages (about x6.5) of part outlines, reference designators and polarity marks, seen from below, DNP parts crossed out. Attach as an extra assembly file. Needs KiCad's Python and Edge/Chrome to draw; the script skips it with a note otherwise |
+The back of the board is marked with a line showing where it can be shortened for a smaller panel.
+If you do that:
 
-**Steps.** *PCBWay:* PCB Instant Quote, upload the gerber zip (2 layers, about 60 x 111 mm, 1.6 mm), switch on
-Assembly (turnkey, **bottom** side), upload the BOM and placement files and attach the drawing. PCBWay quotes assembly by
-e-mail (they state 1 to 2 working days) and you pay after their engineering review. *NextPCB:* on the
-[PCB Assembly Quote](https://www.nextpcb.com/pcb-assembly-quote) page, step 1 takes the gerber zip and the board
-options, step 2 takes `nextpcb_centroid.csv` and `nextpcb_bom.csv`; e-mail the drawing to support@nextpcb.com.
-NextPCB recommends break-away rails for assembly (this board has none), so ask whether a custom fixture fee applies.
-
-Differences from the JLCPCB files, and what to watch:
-
-- **Do not use `production/positions.csv` here.** The Fabrication Toolkit converts rotations for bottom-side parts
-  and adds per-part corrections for JLCPCB's parts library (93 of its 162 rows differ from KiCad's values); other
-  assemblers do not share those. The placement file above is unmodified KiCad output (rotation is KiCad's, Y is
-  negative, same origin as the gerbers).
-- **Every part is on the bottom side; say so in the order remarks.** A 180 degree error on bottom parts is the
-  main risk. In the fab's proof, check `U2`, `U5`, `D2` (LED pad 1 is the anode), `D8`, `J4`, `U4` and `J7`, the parts JLCPCB
-  needed corrected.
-- **Manufacturer part numbers, not LCSC codes.** These BOMs list the prime (DigiKey-findable) part for each line. The
-  LCSC equivalents used for the JLCPCB build are not on them, so the fab sources the named parts itself. Expect a higher
-  parts cost; there is no Basic/Extended fee structure to optimise.
-- **Through-hole parts** (`J1`, `J5`, `J6`, `SW1`-`SW5`, `SW7`-`SW11`) are listed as `THT` in the BOMs so the fab quotes and
-  solders them, as on the JLCPCB build. `nextpcb_centroid.csv` lists them too (NextPCB rejects a BOM/placement designator
-  mismatch); `placement_bottom_kicad.csv` (PCBWay) is SMD-only. On NextPCB the through-hole bodies for `J5`, `J6`, `SW1`
-  and `SW7` preview in the wrong orientation and rotation edits did not change it, so for a NextPCB order prefer the
-  `--split` SMD-only pair and hand-solder the 13 through-hole parts (about $70 from DigiKey for 10 boards).
-- **DNP parts** (`R43 R45 R58 R66 R74`, `R72`, `SW6`, `TP3`-`TP5`) are not placed. Both fab BOMs omit them; mention
-  them in the order remarks, and after uploading to NextPCB **check that none of them appear in its matched BOM** (it
-  once merged them into the fitted 0 Ω and 10 k lines).
-- Check each fab's own limits against the four 0.5 mm perforation slots on `Edge.Cuts` before paying.
-
-## Bill of materials
-
-**[fabrication/BOM.md](fabrication/BOM.md)** is the current, netlist-derived sourcing reference: the
-optimized JLC build, the brand-conservative variant and the hand-build (DigiKey) list, with prices and
-swap rationale. The factory BOM itself is the Toolkit's `bom.csv`; both come from
-[`fabrication/part_fields.csv`](fabrication/part_fields.csv), which maps every reference to its prime
-MPN and its LCSC code. Accepted factory changes must still be frozen in the release records.
-
-## Documentation
-
-- **[DESIGN_REVIEW.md](DESIGN_REVIEW.md)** — authoritative 18-block review, assembly decision,
-  critical layout measurements, component recommendations and acceptance plan.
-- **[docs/HARDWARE.md](docs/HARDWARE.md)** — GPIO/connector maps, population and operating reference.
+- **Disconnect the battery first.** Battery positive runs across the cut line. Cutting into it
+  with a pack connected can short the cell.
+- **It will not snap by hand.** More than half the tab width is solid 1.6 mm FR-4, with live
+  copper crossing it. Use a rotary tool (Dremel or similar) and cut along the marked line.
+- **You lose the expansion header `J6` with its protection parts (`U8`, `CR2`, `CR3`, `F2`), the power button `SW10`, mounting hole `H1` (five mounting points remain) and the two frontlight clamps `D3`/`D8`**, which sit on that tongue. A cut board therefore runs its frontlight without those two clamps — read [HARDWARE.md §7](docs/HARDWARE.md#7-frontlight-driver) before you drive a frontlight from one. After the cut, UP(2) can
+  serve as the power button instead: leave `R36` and `R73` unpopulated and populate `R72` and
+  `R74`. The same instruction is printed on the schematic and on the board.
+- Plan the cut before you order, so you can leave the parts you are cutting off out of the BOM.
 
 ---
 
-## License
+## Firmware
 
-Hardware licensed under the **CERN Open Hardware Licence Version 2 – Strongly Reciprocal
-(CERN-OHL-S-2.0)** — see [LICENSE](LICENSE).
+**There is no released firmware for this board yet.** The board is hardware only today.
+
+The plan is to port the FreeInk SDK to it and to maintain crosspoint-reader, crossink reader and
+the other XTEink X4 firmwares on it. All of that is future work, not something you can download
+now. First-power-up instructions will be written once there is firmware to power up into.
+
+If you order a board today, order it because you want the hardware to build on.
+
+---
+
+## The board and your case
+
+This board is **not tied to one enclosure**. It is meant to work with many different case designs,
+of whatever style you like — but no reference enclosure is supplied in this repository, so the case
+is yours to design or to take from someone else's.
+
+What you need in order to design around it:
+
+- A 3D model of the board is provided as a STEP file:
+  [`docs/mechanical/silkscreen_pcb.step`](docs/mechanical/silkscreen_pcb.step).
+- Board outline **60.05 × 111.30 mm**, **1.6 mm** thick.
+- **Six M2 mounting holes** (`H1`–`H6`). Use screws with heads of **4 mm or less and no metal washers** — tracks run close to the holes under the solder mask.
+- **Every component is on the bottom face.** The top face carries only the silkscreen art and the
+  protruding legs of the through-hole parts, so the display sits over a nearly clear surface.
+- **Keep the antenna corner clear.** The ESP32 module's PCB antenna overhangs a cut-out in the
+  board edge with no copper under it — do not lay the battery over that corner, and keep screws,
+  metal inserts and the display's metal backplane away from it.
+- Hole positions, connector locations and the full mechanical reference are in
+  [`docs/HARDWARE.md`](docs/HARDWARE.md).
+
+---
+
+## Specifications
+
+| | |
+|---|---|
+| **MCU** | ESP32-S3-WROOM-1 (**N16R8**, 16 MB flash / 8 MB octal PSRAM), native USB — no UART bridge |
+| **Display** | 24-pin 0.5 mm ZIF for SPI e-paper; primary target 4.26" `GDEQ0426T82` family; panel-driven charge pump generates the ±15–22 V rails |
+| **Frontlight** | TPS923610 constant-current boost, warm/cool selection through one GPIO + inverter; blending requires qualification |
+| **Touch** | Optional I²C capacitive touch (for `-FT01C`-class panels) with a 0 Ω pin-swap mux |
+| **Power** | USB-C in → TP4056 charger → DW01A + FS8205A cell protection → TPS2116 priority mux → TLV75533P 3V3 LDO |
+| **Battery** | Single-cell 4.2 V-charge Li-ion/LiPo on a JST-PH 2.0 mm 2-pin connector (`J5` pin 1 = negative) |
+| **Storage** | push-push microSD in 4-bit SDMMC, power-gated |
+| **Input** | 8 buttons on two ADC resistor ladders + a wake/power **button** (`SW10` — a wake input, not a hardware power switch; the 3.3 V rail is always live) + reset (`SW11`); a BOOT button footprint (`SW6`) is left unpopulated because USB-Serial-JTAG makes it unnecessary |
+| **RTC** | DS3231MZ (±5 ppm), VBAT-only mode; populated in the standard build, optional. A second footprint (`U14`, Micro Crystal RV-8263-C7) is DNP — fit either, never both |
+| **Revision** | **Rev 1.0.** The revision label — on both title blocks and in the name of the release zip — changes only when a new board is fabricated; until then every change is folded into Rev 1.0. The design content is current to **2026-09-21**; the title-block date (2026-09-12) is simply when Rev 1.0 was opened. |
+| **Board** | 2-layer, 60.05 × 111.30 × 1.6 mm, 1 oz Cu; 184 references = 165 fitted + 11 DNP + 8 bare-copper (holes `H1`–`H6`, test pads `TP1`/`TP2`) |
+
+Connection and GPIO reference: **[docs/HARDWARE.md](docs/HARDWARE.md)**.
+
+---
+
+## Words used on the factory's website
+
+| Word | What it means |
+|---|---|
+| **Gerber** | The standard file format for a bare circuit board — one file per copper, mask and silkscreen layer, plus the drill holes. Here they are zipped together in `production/Silkscreen_Reader_PCB_1.0.zip`. |
+| **BOM** | Bill of materials: the list of every part on the board and how many of each. |
+| **CPL / centroid / pick-and-place** | Three names for the same file: where each part sits on the board, which side it is on, and which way it faces. Here, `production/positions.csv`. |
+| **PCBA** | Printed circuit board assembly — the service where the factory buys the parts and solders them on, rather than shipping a bare board. |
+| **DNP** | Do not populate: a footprint on the board deliberately left empty. |
+| **SMD / SMT** | Surface-mount: parts that sit on top of the copper. Machine-placed. |
+| **THT** | Through-hole: parts whose legs go through the board and are soldered on the far side. |
+| **LCSC code** | The `C…` number identifying a part in JLCPCB's own warehouse, e.g. `C2913202` for the ESP32 module. The BOM you upload uses these. |
+| **Basic / Extended part** | JLCPCB's two stock classes. Extended parts carry a small one-off loading fee per part type, which is why the parts list has been tuned to use fewer of them. |
+| **DFM** | Design for manufacture — the factory's automated check, which may raise a note on your order. |
+| **Outer copper weight** | How thick the copper on the board is, in ounces per square foot. 1 oz is the normal default and is what this board is designed for. |
+| **Tooling holes** | Small extra holes the factory adds so its machines can hold the board during assembly. Let JLCPCB add them. |
+
+---
+
+## Licence
+
+The hardware is licensed under the **CERN Open Hardware Licence Version 2 – Strongly Reciprocal
+(CERN-OHL-S-2.0)** — see [LICENSE](LICENSE). In plain terms:
+
+- **You may build this board, use it, modify it and sell it**, including commercially. You do not
+  need to ask.
+- **If you distribute or sell a board based on this design, you must make your design source
+  available under the same CERN-OHL-S v2 licence**, and pass on the copyright and licence notice —
+  including any changes you made. That is what "strongly reciprocal" means.
+- There is **no warranty of any kind**. If you build one and it does not work, that is your risk.
+
+This is a plain-language summary, not legal advice; the licence text in [LICENSE](LICENSE) governs.
 
 > Copyright © 2026 idc LLC.
 > This source describes Open Hardware and is licensed under the CERN-OHL-S v2.
@@ -292,7 +387,91 @@ Hardware licensed under the **CERN Open Hardware Licence Version 2 – Strongly 
 `SPDX-License-Identifier: CERN-OHL-S-2.0`
 
 Third-party component library files (from SnapEDA / Ultra Librarian / SamacSys) retain their own
-terms and are not covered by the project license — see
+terms and are not covered by the project licence — see
 [fabrication/THIRD_PARTY.md](fabrication/THIRD_PARTY.md).
+
+---
+
+## For engineers / before you modify this design
+
+Nothing below is needed to order a board.
+
+### Read the review first
+
+- **[DESIGN_REVIEW.md](DESIGN_REVIEW.md)** — the 18-block review: the assembly decision, applied
+  corrections, critical layout measurements, component recommendations and the acceptance plan.
+  What remains before this is a repeatable product is the first-article bench verification in §13.
+- **[docs/audit-2026-09-18/](docs/audit-2026-09-18/PREORDER_CONFIRMATION_AUDIT.md)** — the
+  pre-order audit.
+- **[docs/final-review-2026-09-19/](docs/final-review-2026-09-19/FINAL_REVIEW.md)** — the last full,
+  block-by-block review before ordering, the author's answers to it, and the changes it led to
+  (through 2026-09-21). The design review above predates those changes.
+- **[docs/HARDWARE.md](docs/HARDWARE.md)** — GPIO and connector maps, population and operating
+  reference.
+
+### Plots and renders
+
+![Silkscreen — full schematic](docs/images/full-capture.png)
+
+**[Schematic PDF](docs/silkscreen_pcb_schematic.pdf)** (single A2 sheet) ·
+**[PCB layout PDF](docs/silkscreen_pcb_layout.pdf)** (2 pages: the front, then the back as you see it). Both are plotted from
+the current source; the board images at the top are renders of the same files, not the release
+record.
+
+### Repository layout
+
+```
+silkscreen_pcb.kicad_pro / .kicad_sch / .kicad_pcb   KiCad 9 project
+sym-lib-table / fp-lib-table                          project-local library tables (${KIPRJMOD}-relative, resolve after a plain clone)
+KiCad/9.0/3rdparty/                                   vendored symbols/footprints/3D models actually used by the design
+docs/HARDWARE.md                                      hardware documentation
+docs/mechanical/                                      board STEP model for case design
+docs/images/                                          schematic block crops, full sheet, board renders
+docs/silkscreen_pcb_schematic.pdf / _layout.pdf       schematic and PCB plots
+docs/audit-2026-09-16/, audit-2026-09-18/             review evidence and the pre-order audit
+docs/final-review-2026-09-19/                         final review reports (its bulky evidence pack is local-only, git-ignored)
+DESIGN_REVIEW.md                                      schematic + layout review
+fabrication/                                          part_fields.csv + apply script, make_fab_files.py, BOM.md / hand-build BOM, how-to
+production/                                           release upload files: JLCPCB gerber zip + jlc_bom.csv + positions.csv; other_fabs/ for PCBWay and NextPCB
+LICENSE / NOTICE                                      CERN-OHL-S v2
+```
+
+A plain `git clone` opens without missing libraries: every project library path is relative, all
+in-repo 3D models resolve, and everything else comes from KiCad's standard libraries (KiCad 9.0.x).
+
+### Bill of materials sources
+
+**[fabrication/BOM.md](fabrication/BOM.md)** is the current, netlist-derived sourcing reference:
+the optimized JLC build and the hand-build (DigiKey) list, with prices and swap rationale. Both
+come from [`fabrication/part_fields.csv`](fabrication/part_fields.csv), which maps every reference
+to its prime manufacturer part number and its LCSC code. Accepted factory changes must still be
+frozen in the release records.
+
+### Regenerating the release files
+
+The project and the reviewed exports use **KiCad 9.0.6**. Keep a backup before saving with a newer
+major version; newer file formats may not reopen in KiCad 9.
+
+For JLCPCB, use the KiCad **Fabrication Toolkit** plugin for the placement export: it applies JLC's
+part-rotation database and reads the `LCSC` field from the footprints (set by
+`fabrication/apply_part_fields.py`, see [fabrication/README.md](fabrication/README.md)).
+**Regenerate the whole Toolkit set after every schematic or PCB save** — a stale `positions.csv`
+silently misses new parts.
+
+Raw `kicad-cli` exports, as a cross-check only and not a replacement for the reviewed Toolkit set:
+
+```bash
+kicad-cli pcb export gerbers -o fabrication/gerbers/ \
+  --layers F.Cu,B.Cu,F.Mask,B.Mask,F.SilkS,B.SilkS,F.Paste,B.Paste,Edge.Cuts \
+  --no-protel-ext --subtract-soldermask silkscreen_pcb.kicad_pcb
+kicad-cli pcb export drill -o fabrication/gerbers/ --format excellon \
+  --drill-origin absolute --excellon-units mm --excellon-separate-th silkscreen_pcb.kicad_pcb
+kicad-cli pcb export pos -o fabrication/assembly/cpl.csv --format csv --units mm --side both silkscreen_pcb.kicad_pcb
+```
+
+See [fabrication/README.md](fabrication/README.md) for the release-file workflow and the
+assembly checklist.
+
+---
 
 Predecessor project: [de-link.me](https://de-link.me).

@@ -270,15 +270,7 @@
   "erc": {
     "erc_exclusions": [
       [
-        "footprint_link_issues|2971800|2743200|8ae59cbb-841e-4b29-8568-86fcc838bf3e|00000000-0000-0000-0000-000000000000|||",
-        ""
-      ],
-      [
         "footprint_link_issues|355600|2133600|da97c47e-900f-4e2f-8396-14012ec46c25|00000000-0000-0000-0000-000000000000|||",
-        ""
-      ],
-      [
-        "footprint_link_issues|762000|2882900|4d920bf0-9c12-416f-9f1c-8f95307e9f15|00000000-0000-0000-0000-000000000000|||",
         ""
       ],
       [
@@ -794,7 +786,7 @@
       "plot": "docs/",
       "pos_files": "placement/",
       "specctra_dsn": "",
-      "step": "delink_pcb_0806.step",
+      "step": "docs/mechanical/silkscreen_pcb.step",
       "svg": "",
       "vrml": ""
     },

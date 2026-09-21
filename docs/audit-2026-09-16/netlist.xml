@@ -1133,7 +1133,7 @@
       <datasheet>https://www.infineon.com/dgdl/irlml6402pbf.pdf?fileId=5546d462533600a401535668d5c2263c</datasheet>
       <description>-3.7A Id, -20V Vds, 65mOhm Rds, P-Channel HEXFET Power MOSFET, SOT-23</description>
       <fields>
-        <field name="Sim.Library">C:\Users\iandc\Downloads\irlml6402.spi</field>
+        <field name="Sim.Library">irlml6402.spi</field>
         <field name="Sim.Name">irlml6402</field>
         <field name="Sim.Device">SUBCKT</field>
         <field name="Sim.Pins">1=1 2=2 3=3</field>
@@ -1142,7 +1142,7 @@
         <field name="Description">-3.7A Id, -20V Vds, 65mOhm Rds, P-Channel HEXFET Power MOSFET, SOT-23</field>
       </fields>
       <libsource lib="Transistor_FET" part="IRLML6402" description="-3.7A Id, -20V Vds, 65mOhm Rds, P-Channel HEXFET Power MOSFET, SOT-23"/>
-      <property name="Sim.Library" value="C:\Users\iandc\Downloads\irlml6402.spi"/>
+      <property name="Sim.Library" value="irlml6402.spi"/>
       <property name="Sim.Name" value="irlml6402"/>
       <property name="Sim.Device" value="SUBCKT"/>
       <property name="Sim.Pins" value="1=1 2=2 3=3"/>
@@ -1213,7 +1213,7 @@
       <datasheet>https://www.infineon.com/dgdl/irlml6402pbf.pdf?fileId=5546d462533600a401535668d5c2263c</datasheet>
       <description>-3.7A Id, -20V Vds, 65mOhm Rds, P-Channel HEXFET Power MOSFET, SOT-23</description>
       <fields>
-        <field name="Sim.Library">C:\Users\iandc\Downloads\irlml6402.spi</field>
+        <field name="Sim.Library">irlml6402.spi</field>
         <field name="Sim.Name">irlml6402</field>
         <field name="Sim.Device">SUBCKT</field>
         <field name="Sim.Pins">1=1 2=2 3=3</field>
@@ -1222,7 +1222,7 @@
         <field name="Description">-3.7A Id, -20V Vds, 65mOhm Rds, P-Channel HEXFET Power MOSFET, SOT-23</field>
       </fields>
       <libsource lib="Transistor_FET" part="IRLML6402" description="-3.7A Id, -20V Vds, 65mOhm Rds, P-Channel HEXFET Power MOSFET, SOT-23"/>
-      <property name="Sim.Library" value="C:\Users\iandc\Downloads\irlml6402.spi"/>
+      <property name="Sim.Library" value="irlml6402.spi"/>
       <property name="Sim.Name" value="irlml6402"/>
       <property name="Sim.Device" value="SUBCKT"/>
       <property name="Sim.Pins" value="1=1 2=2 3=3"/>
@@ -1239,7 +1239,7 @@
       <datasheet>https://www.infineon.com/dgdl/irlml6402pbf.pdf?fileId=5546d462533600a401535668d5c2263c</datasheet>
       <description>-3.7A Id, -20V Vds, 65mOhm Rds, P-Channel HEXFET Power MOSFET, SOT-23</description>
       <fields>
-        <field name="Sim.Library">C:\Users\iandc\Downloads\irlml6402.spi</field>
+        <field name="Sim.Library">irlml6402.spi</field>
         <field name="Sim.Name">irlml6402</field>
         <field name="Sim.Device">SUBCKT</field>
         <field name="Sim.Pins">1=1 2=2 3=3</field>
@@ -1248,7 +1248,7 @@
         <field name="Description">-3.7A Id, -20V Vds, 65mOhm Rds, P-Channel HEXFET Power MOSFET, SOT-23</field>
       </fields>
       <libsource lib="Transistor_FET" part="IRLML6402" description="-3.7A Id, -20V Vds, 65mOhm Rds, P-Channel HEXFET Power MOSFET, SOT-23"/>
-      <property name="Sim.Library" value="C:\Users\iandc\Downloads\irlml6402.spi"/>
+      <property name="Sim.Library" value="irlml6402.spi"/>
       <property name="Sim.Name" value="irlml6402"/>
       <property name="Sim.Device" value="SUBCKT"/>
       <property name="Sim.Pins" value="1=1 2=2 3=3"/>

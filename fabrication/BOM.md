@@ -1,20 +1,19 @@
 # Silkscreen — bills of materials
 
-Three BOMs are maintained, all generated from the schematic netlist (2026-09-18, 179 references):
+Two BOMs are maintained, both generated from the schematic netlist (2026-09-18; cross-checked again 2026-09-21 at 184 references):
 
 | BOM | Who it's for | File |
 |---|---|---|
-| **JLCPCB optimized (standard)** | anyone ordering assembled boards from JLCPCB — the cheapest *verified* parts at every position, checked against JLC's live library on 2026-09-17/18 | [`production/bom_JLC_upload_v4_optimized.csv`](../production/bom_JLC_upload_v4_optimized.csv) |
-| JLCPCB brand-conservative | same population with the originally specified brands (Samsung 50 V caps, Littelfuse PTC, TECH PUBLIC SD05C on CR2/CR3, AO3419, cut-tape DS3231), but with the same design values as v4 (CR1 SMF6.5CA, L1 47 µH, L2 10 µH, R14 2.2 Ω, C9 4.7 µF) — costs ≈ $1.50–3/board more | [`production/bom_JLC_upload_v3.csv`](../production/bom_JLC_upload_v3.csv) |
+| **JLCPCB optimized (standard)** | anyone ordering assembled boards from JLCPCB — the cheapest *verified* parts at every position, checked against JLC's live library on 2026-09-17/18 | [`production/jlc_bom.csv`](../production/jlc_bom.csv) (named `bom_JLC_upload_v4_optimized.csv` until 2026-09-21) |
 | **Hand-build (DigiKey-style)** | building one or a few boards yourself from easily found Western-distributor parts (GCT MEM2075 microSD, APEM switches, Hirose, TI, onsemi, ADI…) | [`BOM_handbuild_digikey.csv`](BOM_handbuild_digikey.csv) |
 
-Population (all BOMs): **162 placed**, **10 DNP** (`TP3 TP4 TP5`, `R43 R45 R58 R66 R72 R74`, `SW6`), 7 bare-copper refs
-(`H1–H5`, `TP1`, `TP2`). The DNP set is flagged in both the schematic and the board, so the Fabrication
+Population (all BOMs): **165 placed**, **11 DNP** (`TP3 TP4 TP5`, `R43 R45 R58 R66 R72 R74`, `SW6`, `U14`), 8 bare-copper refs
+(`H1–H6`, `TP1`, `TP2`). The DNP set is flagged in both the schematic and the board, so the Fabrication
 Toolkit CPL agrees with the BOM. `U13` (DS3231MZ+) is populated and optional; `SW6` (APEM MJTP1243 BOOT button)
 is DNP because USB-Serial-JTAG makes it unnecessary. Never fit `R73` and `R74` together.
 
 Regenerate the Toolkit set after any schematic/PCB change — it must contain the six Fix 4 parts
-(`Q2 Q9 R79 R80 R81 R82`); the 2026-09-18 12:22 set does. The schematic and PCB now carry `MPN`, `Manufacturer` and
+(`Q2 Q9 R79 R80 R81 R82`); the 2026-09-21 set does. The schematic and PCB now carry `MPN`, `Manufacturer` and
 `LCSC` fields (written by `apply_part_fields.py` from [`part_fields.csv`](part_fields.csv), the source of truth for
 part numbers), and the Toolkit's `production/bom.csv` is exported from them. JLC's automatic matching is what put a
 reverse-mount LED on `D2` in the first order, so still check the placement preview.
@@ -39,15 +38,19 @@ slightly dearer Basic part is often cheaper overall. Seven cost swaps survived r
 | `C9 C11 C13–C17` | Samsung CL21A475KBQNNNE `C98192` (C9 was 1 µF `C28323`) | **Samwha CS2012X5R475K500NRE `C513770`** | 4.7 µF **50 V** X5R 0805 from a reputable maker, $0.045 vs $0.077, 209k stock; `C9` joined this line on 2026-09-18 (see "C9" below) |
 | `L2` | **4.7 µH** TDK VLS252010HBU-4R7M `C413592` (schematic), 1.0k stock | **10 µH TDK VLS252012HBX-100M-1 `C88532`**, 20.7k stock, $0.068 | value change — see "L2: 4.7 µH → 10 µH" below. **Applied — the schematic reads 10u / VLS252012HBX-100M-1.** If L2 must stay 4.7 µH, use HBX-4R7M-1 `C88528` (what both earlier orders were built with: cheaper than HBU at every tier, 208 vs 274 mΩ, 2× the stock) |
 | `L1` | 22 µH TDK VLS3012HBX-220M `C350879`, $0.208 @5 | **47 µH Sunltech SLW5040S470MST `C206267`**, Extended, 1.9k stock, $0.045 @1 | value change to match the SSD1677 reference design (47 µH / 2.2 Ω); 5 × 5 × 4 mm shielded, **footprint change** (`Inductor_SMD:L_APV_ANR5040`). Prime/DigiKey part: Laird TYS5040470M-10 (same case, also shielded). Both Extended, so no fee change; ≈ −$0.16/board |
-| `R14` | 3 Ω, JLC `C22356394` (HKR RCA033RFLF), $0.0016 | **2.2 Ω Yageo RC0603FR-072R2L `C112307`**, Extended, 94.9k stock, $0.0092 | matches the SSD1677 reference sense resistor once `L1` is 47 µH; both Extended, ≈ +$0.008/board |
+| `R14` | 3 Ω, JLC `C22356394` (HKR RCA033RFLF), $0.0016 | **2.2 Ω: prime Yageo RC0603FR-072R2L; JLC code `C22939`** (UNI-ROYAL 0603WAF220KT5E, **Basic**, 11.7k stock, $0.0023 on 2026-09-20). The Yageo part's own code `C112307` was used until 2026-09-20, when its JLC stock fell from 94.9k to 12 | matches the SSD1677 reference sense resistor once `L1` is 47 µH; now Basic, so no Extended fee |
 
 Evaluated and **not** taken: TP4056 clones ($0.037 vs $0.146 — but the TOPPOWER original is a *Preferred* part with
 no fee, and charge termination/thermal regulation of clones is unverified; the swap would actually add a fee at
 small quantities); 74LVC1G04 clones (saves $0.02/board); a second, cheaper TPD4E1U06 type for the non-USB
 positions (saves $0.16/board but adds a part type — only pays above ~10 boards); 2N7002 for the BSS138
 positions (Basic, but its Vgs(th) can reach 2.5 V and Q9's detector must turn on at a 2.4 V cell); a 6.3 V 0603
-22 µF Basic cap (wrong footprint, and `C4` sits on 5 V). The CCTC 22 µF (`C20416420`) stays: it is $0.12 —
-not the $0.04 the earlier sheet claimed — but still beats the Samsung Basic part at $0.24 even after its fee.
+22 µF Basic cap (wrong footprint, and `C4` sits on 5 V). **Changed 2026-09-21:** `C4 C6 C32` now use the Samsung
+Basic part `C45783` (CL21A226MAQNNNE, $0.12, 1.7 M in stock) instead of the CCTC clone `C20416420` ($0.034 but
+Extended, and down to 396 pcs). The clone only wins on price above about 12 boards (3 caps × $0.085 saved per board
+against one ≈ $3 Extended fee); for the 2–5 board orders the README is written for, Basic is cheaper and has no
+stock risk. `R15` (GDR pull-down) also moved from 10 k to 1 M to match Good Display's reference circuit (datasheet
+§8.2, R1 = 1 M) — no new BOM line, it joins the existing 1 M group.
 
 **Stock to watch (JLC, 2026-09-18):** TPS923610DRLR `C52919131` **189 pcs** — order promptly or consign (about 107
 are needed at 100 boards); A2541HWR-2x6P `C5333437` 1.3k; SLW5040S470MST `C206267` 1.9k; PESD2IVN-UX `C42370512` 3.0k;
@@ -121,9 +124,11 @@ loading fee. The model reproduces the line prices on both previous order exports
 
 | Per board, parts + fees | 5 boards | 10 | 30 | 100 |
 |---|--:|--:|--:|--:|
-| v3 brand-conservative (28 Extended types) | $36.40 | $24.78 | $17.62 | $13.72 |
-| **v4 optimized (26 Extended types)** | **$33.23** | **$22.70** | **$16.25** | **$12.61** |
+| earlier brand-conservative BOM (`bom_JLC_upload_v3.csv`, deleted 2026-09-21; 28 Extended types) | $36.40 | $24.78 | $17.62 | $13.72 |
+| **`jlc_bom.csv`, as costed 2026-09-18 (26 Extended types)** | **$33.23** | **$22.70** | **$16.25** | **$12.61** |
 | …if JLC's fee is $3.00 instead of $1.50 | $41.03 | $26.60 | $17.55 | $13.00 |
+
+*Since this costing: `R14` (2026-09-20) and `C4`/`C6`/`C32` (2026-09-21) moved to Basic parts and the Extended PPTC `F2` was added - a net of one Extended type fewer, a few cents per board either way. A real quote for five boards with two assembled was $223.95 before shipping on 2026-09-21 (see the root README).*
 
 *Recomputed 2026-09-18 after the L1 (47 µH Sunltech), R14 (2.2 Ω) and C9 (4.7 µF) changes, from the current production `bom.csv` and live JLC prices; the Extended-type count is unchanged because L1 and R14 swap one Extended part for another and C9 joins the existing `C513770` line. The saving is mostly `L1` (≈ −$0.16/board).*
 
@@ -136,7 +141,7 @@ Hirose FH34SRJ-24S $0.31 · fees $1.30 · everything else ≈ $5. Consigning the
 where the fixed setup dominates). All-in at 30 boards ≈ **$26/board** (≈ $25.75 with the 2026-09-18 parts).
 
 **Hand-build** (one board, DigiKey-style parts, reference qty-1 prices from the owner's mid-2026 DigiKey sourcing
-sheet or catalog estimates — DigiKey itself could not be crawled this session): ≈ **$48 in parts** before the
+sheet or catalog estimates — DigiKey itself could not be crawled this session): ≈ **$48 in parts by that sheet, but budget ≈ $66** — the 2026-09-19 review re-priced it against live DigiKey single-piece prices and found the sheet low by about 38 %, mostly on two lines (`U13` DS3231MZ+ is $13.85, not the $5.50 estimate, and the ten MJTP1117 switches are $6.13) — before the
 PCB (≈$5–10 each at qty 5) and your time. TP4056 and DW01A are LCSC-only and cheap enough to order alongside;
 **`Q1` FS8205A is DigiKey-findable after all** — verified 2026-09-18: Fortune Semiconductor's own "FS8205A" is
 TSSOP-8 only (every datasheet revision, 2009–2016; their SOT-23-6 dual-FET part is "FS8205," no A), but
@@ -147,18 +152,18 @@ times the JLC per-board parts cost at 30 boards, which is the expected premium f
 
 ## Review of the earlier "price-maxed" sheet
 
-`production/bom-JLCPCB_PriceMaxed.xlsx` (25-board basis) got the big things right and was the basis of the
+`bom-JLCPCB_PriceMaxed.xlsx` (25-board basis; a local working sheet that was never tracked in this repository) got the big things right and was the basis of the
 second order: TS365ZJ switches (−$1.17/board), TF PUSH microSD (−$1.23/board), SD05C TVS (−$0.35/board) and
-the unmatched-line fills. Its misses, now corrected in v4:
+the unmatched-line fills. Its misses, now corrected in `jlc_bom.csv`:
 
 - **`L2` "SWAP ~$0" to HBU** — proposed only to match the schematic's MPN, at +$0.0035 by its own numbers. HBX `C88528` was, and is, the cheaper and lower-DCR 4.7 µH part, and both orders kept it. (v4 now moves L2 to 10 µH — see above.)
 - **`CR1` "SD05C, −$0.35/board"** — right for CR2/CR3, but on VBUS it traded the schematic's 5.5 V-rated TSD05C for a 5.0 V-rated part on a rail that may legally sit at 5.5 V. v4 moves CR1 to SMF6.5CA (6.5 V standoff by family definition, JLC Preferred) — cheaper than either.
 
 - **`D2` endorsed as "floor"** — the $0.009 part it kept (`C2827254`) is a *reverse-mount* LED that needs a board cutout; JLC flagged it. Now YLED1206R (`C28310439`), standard top-emitting.
-- **22 µF "$0.04"** — the CCTC part is $0.12 at JLC. Still the right choice, but the projected saving was overstated by ~$0.25/board.
+- **22 µF "$0.04"** — the CCTC part was $0.12 at JLC, so the projected saving was overstated by ~$0.25/board. Dropped on 2026-09-21 in favour of the Basic part `C45783` (see above).
 - **B5819W and SMAJ26A "floor/keep"** — missed that a Basic B5819W and a Preferred SMAJ26A exist (two feeder fees).
 - **AO3419 "verify AO3401A"** — AO3401A is Basic, equal-priced, better R_DS(on) and stocked 200× deeper; it should have been a swap, not a caution.
-- **"R14/R37 may be Basic"** — checked: no Basic 3 Ω, 2.2 Ω or 15 Ω 0603 exists (R14 is now the Extended 2.2 Ω `C112307`); but the 15 Ω UNI-ROYAL is *Preferred* (no fee), so R37 costs nothing extra.
+- **"R14/R37 may be Basic"** — corrected 2026-09-20: a Basic 2.2 Ω 0603 **does** exist (`C22939`, UNI-ROYAL 0603WAF220KT5E, ±1 %, ±400 ppm/°C) and R14 now uses it; no Basic 3 Ω or 15 Ω 0603 was found, but the 15 Ω UNI-ROYAL is *Preferred* (no fee), so R37 costs nothing extra.
 - **DS3231 "consigned, no knock-off worth it"** — true, but JLC's own cut-tape listing is 45 % dearer than the reel listing of the same part.
 - **"No viable THT USB-C"** — one exists at $0.10 (different land; next rev).
 - Its "OPP" rows for TPD4E1U06/AO3419/F1: F1 adopted (spec-identical Brightking); AO3419 adopted via AO3401A; TPD4E1U06 declined (see above).
@@ -224,49 +229,53 @@ the unmatched-line fills. Its misses, now corrected in v4:
 | 1 | L1 | **47u** | `C206267` | **Sunltech SLW5040S470MST** | EPD charge-pump inductor, **5 × 5 × 4 mm shielded — changed 2026-09-18 from 22 µH/3×3 mm** to match the SSD1677 reference design; prime/DigiKey part is **Laird TYS5040470M-10**, same case size, also shielded. KiCad footprint `Inductor_SMD:L_APV_ANR5040` (pad gap checked against Bourns' published land pattern for this case class). Footprint change — see `DESIGN_REVIEW.md` §7 and §12 |
 | 1 | L2 | **10u** | `C88532` | TDK VLS252012HBX-100M-1 | frontlight boost inductor, 2.5 × 2.0 × 1.2 mm (schematic reads 10u / VLS252012HBX-100M-1; 1.0 mm alternative VLS252010HBU-100M `C2042741`) |
 | 1 | F1 | 0805L100WR | `C269106` | Brightking SMD0805B100TFT | 1 A hold / 1.95 A trip / 6 V PTC (≈0.65 A hold at 60 °C) |
+| 1 | F2 | 0805L075WR | `C151146` | Littelfuse 0805L075WR | 0.75 A hold / 1.5 A trip / 6 V PTC in series with `J6` pin 12 (raw battery on the expansion header). Added 2026-09-21 |
 
-### Resistors (0603, 1 %, except R27 which is 0805; all Basic except R14 [Extended] and R37 Preferred)
+### Resistors (0603, 1 %, except R27 which is 0805; all Basic except R37, which is Preferred)
 
 | Qty | Refs | Value | JLC/LCSC |
 |--:|---|---|---|
 | 5 | R42 R44 R46 R52 R73 | 0 | `C21189` |
 | 1 | R27 | 0 (**0805**) | **`C17477`** — changed 2026-09-18 from 0603 `C21189`; UNI-ROYAL 0805W8F0000T5E, Basic, $0.0045; prime part Yageo RC0805JR-070RL. Battery-path jumper, carries the full load current |
-| 4 | R60 R61 R63 R64 | 100 | `C22775` |
+| 5 | R60 R61 R63 R64 R83 | 100 | `C22775` — `R83` is the DW01A VCC filter resistor, added 2026-09-21 |
 | 2 | R16 R78 | 1k | `C21190` |
 | 1 | R59 | 2k | `C22975` |
-| 1 | R14 | **2.2** | **`C112307`** — changed 2026-09-18 from 3 Ω / `C22356394` (an HKR RCA033RFLF, $0.0016); Yageo RC0603FR-072R2L, Extended, $0.0092 |
+| 1 | R14 | **2.2** | **`C22939`** — UNI-ROYAL 0603WAF220KT5E, Basic, $0.0023 (2026-09-20; was `C112307`, the Yageo RC0603FR-072R2L itself, until its JLC stock fell to 12). Value changed 2026-09-18 from 3 Ω / `C22356394` |
 | 2 | R47 R48 | 2.2k | `C4190` |
 | 1 | R6 | 4.7k | `C23162` |
 | 2 | R2 R3 | 5.1k | `C23186` |
 | 1 | R18 | 5.6k | `C23189` |
-| 13 | R4 R5 R7 R8 R9 R13 R15 R28 R53 R54 R55 R56 R62 | 10k | `C25804` |
+| 12 | R4 R5 R7 R8 R9 R13 R28 R53 R54 R55 R56 R62 | 10k | `C25804` |
 | 1 | R11 | 12k | `C22790` |
 | 1 | R37 | 15 | `C22810` |
 | 1 | R19 | 20k | `C4184` |
-| 1 | R71 | 22k | `C31850` |
 | 15 | R21 R22 R23 R24 R25 R26 R29 R30 R31 R32 R33 R34 R65 R68 R69 | 33 | `C23140` |
 | 1 | R35 | 33k | `C4216` |
-| 2 | R20 R67 | 56k | `C23206` |
+| 1 | R20 | 56k | `C23206` |
 | 1 | R36 | 68k | `C23231` |
-| 7 | R40 R51 R70 R75 R76 R77 R79 | 100k | `C25803` |
+| 6 | R40 R51 R75 R76 R77 R79 | 100k | `C25803` |
 | 1 | R41 | 120k | `C25808` |
-| 1 | R17 | 150k | `C22807` |
+| 1 | R71 | **200k** | **`C25811`** — `USB_STAT` ladder rescaled ×10 on 2026-09-21 for sleep current (was 22k `C31850`); Basic |
 | 1 | R38 | 300k | `C23024` |
-| 10 | R1 R10 R12 R39 R49 R50 R57 R80 R81 R82 | 1M | `C22935` |
+| 1 | R67 | **510k** | **`C23192`** — `USB_STAT` ladder (was 56k, shared with `R20`); Basic |
+| 11 | R1 R10 R12 R15 R39 R49 R50 R70 R80 R81 R82 | 1M | `C22935` — `R70` joined this line 2026-09-21 (was 100k); `R57` left it |
+| 1 | R17 | **2M** | **`C22976`** — `USB_STAT` ladder (was 150k `C22807`); Basic |
+| 1 | R57 | **10M** | **`C7250`** — `Q3` gate bleed, raised from 1M on 2026-09-21 to cut ≈3.3 µA of permanent battery drain; Basic |
 
 ### Capacitors
 
 | Qty | Refs | Value | Pkg | JLC/LCSC | MPN |
 |--:|---|---|---|---|---|
 | 1 | C1 | 1n | 0603 | `C1588` | Samsung CL10B102KB8NNNC 50 V X7R (Basic) |
-| 4 | C23 C27 C28 C29 | 2.2n | 0603 | `C1604` | FH 0603B222K500NT 50 V X7R (Basic) |
-| 6 | C7 C24 C30 C31 C33 C36 | 0.1u / 100n | 0603 | `C14663` | Yageo CC0603KRX7R9BB104 50 V X7R (Basic) |
+| 4 | C27 C28 C29 C34 | 2.2n | 0603 | `C1604` | FH 0603B222K500NT 50 V X7R (Basic). `C34` (DW01A `CS` filter) added 2026-09-21; `C23` moved to 0.1u |
+| 7 | C7 C23 C24 C30 C31 C33 C36 | 0.1u | 0603 | `C14663` | Yageo CC0603KRX7R9BB104 50 V X7R (Basic) |
 | 7 | C5 C8 C21 C22 C25 C26 C37 | 1u | 0603 | `C15849` | Samsung CL10A105KB8NNNC 50 V X5R (Basic) |
 | 2 | C10 C12 | 4.7u | 0603 | `C19666` | Samsung CL10A475KO8NNNC 16 V X5R (Basic) |
-| 2 | C2 C3 | 10u | 0603 | `C19702` | Samsung CL10A106KP8NNNC 10 V X5R (Basic) |
-| 3 | C18 C19 C20 | 1u (C20 marked 50 V) | 0805 | `C28323` | Samsung CL21B105KBFNNNE **50 V** X7R (Basic) |
+| 1 | C2 | 10u/25V | 0603 | `C96446` | Samsung CL10A106MA8NRNC **25 V** X5R (Basic) — the hot-plugged USB VBUS bulk cap; changed 2026-09-21 from the 10 V part |
+| 1 | C3 | 10u | 0603 | `C19702` | Samsung CL10A106KP8NNNC 10 V X5R (Basic) |
+| 3 | C18 C19 C20 | 1u/50V | 0805 | `C28323` | Samsung CL21B105KBFNNNE **50 V** X7R (Basic) |
 | 7 | C9 C11 C13 C14 C15 C16 C17 | 4.7u/50V | 0805 | `C513770` | Samwha CS2012X5R475K500NRE **50 V** X5R (`C9` moved here from the 1 µF line 2026-09-18) |
-| 3 | C4 C6 C32 | 22u | 0805 | `C20416420` | CCTC TCC0805X5R226M250FT 25 V X5R |
+| 3 | C4 C6 C32 | 22u | 0805 | `C45783` | Samsung CL21A226MAQNNNE 25 V X5R (**Basic**, 1.7 M in stock 2026-09-21). Prime/DigiKey MPN is now Murata GRM21BR61E226ME44L because the Samsung part is obsolete at DigiKey. Was the CCTC clone `C20416420` (Extended, 396 left) |
 
 ## DNP in every build
 
@@ -277,6 +286,7 @@ the unmatched-line fills. Its misses, now corrected in v4:
 | R72 R74 | 10k / 0 | UP(2) as power button (alternate to R36/R73) — **never fit R73 and R74 together** |
 | TP3 TP4 TP5 | pin header | frontlight test pins (LED_SW, C−, W−) |
 | SW6 | APEM MJTP1243 | BOOT button. Not needed for flashing (USB-Serial-JTAG). LCSC equivalents if fitting: ALPS SKHLACA010 `C382056`, HYP 1TS002A-1600-4300 `C255782` — confirm the 6.5 mm pin pitch |
+| U14 | RV-8263-C7 | Alternate RTC — Micro Crystal RV-8263-C7-32.768KHZ-20PPM-TA-QA, `C5137460`. Cheaper than `U13` (DS3231MZ+) but less stocked; fit **one** of `U13`/`U14`, or neither |
 
 ## Hand-build (DigiKey-style) parts
 
@@ -294,7 +304,7 @@ JLC build; search DigiKey/Mouser by the manufacturer part number.
 | U2 U3 U10 U12 / U13 / U1 U6–U9 | TI TPS2116DRLR, TLV75533PDBVR, TPS923610DRLR, SN74LVC1G04DBVR / ADI DS3231MZ+ / TI TPD4E1U06DBVR | |
 | U11 / U5 | TP4056-42-ESOP8 / DW01A | LCSC-only; order from LCSC |
 | D2 / D3 / D4–D6 / D8 / CR1–CR3 | Lite-On LTST-C150KRKT (red 1206, pad 1 = cathode) / Littelfuse SMAJ26A / Diodes B5819W or 1N5819HW-7-F / Nexperia PESD2IVN-UX / Littelfuse SMF6.5CA (CR1) and TI TSD05CDYFR (CR2, CR3) | |
-| L1 / L2 / F1 | Laird TYS5040470M-10 (47 µH, changed 2026-09-18) / TDK VLS252012HBX-100M-1 (10 µH; or VLS252010HBU-100M) / Littelfuse 0805L100WR | |
+| L1 / L2 / F1 / F2 | Laird TYS5040470M-10 (47 µH, changed 2026-09-18) / TDK VLS252012HBX-100M-1 (10 µH; or VLS252010HBU-100M) / Littelfuse 0805L100WR / Littelfuse 0805L075WR | |
 | passives | 0603 1 % thick film; Samsung CL10/CL21 — keep the 50 V parts 50 V | |
 
 ## Off-board items

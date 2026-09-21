@@ -7,7 +7,7 @@
     (property "Value" "TPD4E1U06DBVR" (id 1) (at -12.7 -10.16 0.0)
       (effects (font (size 1.27 1.27)) (justify bottom left))
     )
-    (property "Footprint" "TPD4E1U06DBVR:SOT95P280X145-6N" (id 2) (at 0 0 0)
+    (property "Footprint" "Package_TO_SOT_SMD:SOT-23-6_Handsoldering" (id 2) (at 0 0 0)
       (effects (font (size 1.27 1.27)) (justify bottom) hide)
     )
     (property "DigiKey_Part_Number" "296-35965-1-ND" (id 4) (at 0 0 0)
