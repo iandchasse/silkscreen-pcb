@@ -112,10 +112,12 @@ requirements and voltage rails.
 
 Several blocks are populated only if the chosen panel needs them:
 
-- **Frontlight** (`U10` boost + `J3`) — only if the panel has no bonded light, or has one needing external drive
+- **Frontlight** (`U10` boost and its support parts; `J3` only for a panel with a bonded light) — for a `-FL01C` / `-FT01C` panel, or to drive an external light through `J6`
 - **Touch** (`J4` + `U7`) — only for `-T01C` / `-FT01C` panels
 - **RTC** (`U13`, or `U14` as the alternate footprint) — always useful, but not required to boot (`U13` is populated in the standard build; omit it if you don't need it)
-- **Expansion header** (`J6` + `U8`/`CR2`/`CR3`) — omit the connector and its own protection parts together
+- **Expansion header** (`J6` + `U8`/`CR2`/`CR3`/`F2`) — omit the connector and its own protection parts together
+
+The full part list for each group is in the README, [Choosing a configuration](../README.md#choosing-a-configuration).
 
 ---
 
@@ -1153,7 +1155,8 @@ it** — all four of `U8`'s channels land on `J6` pins, and `CR2`/`CR3` only gua
   light's own nets. Fit them with the front light whether or not `J6` is there. (They sit on the tongue, so a
   board shortened at the cut line loses both — see the cut-line row in [§16](#16-design-notes--conventions).)
 - The three 33 Ω series resistors `R65`/`R68`/`R69` are on the GPIO nets and cost nothing; leave
-  them fitted.
+  them fitted. Strictly they only serve `J6` (with `J6` off they connect each GPIO to an empty
+  net, or to `U9`'s spare channel for `IO46`), so a header-less build may drop them.
 
 **This is not a general-purpose isolated GPIO header.** It exposes `LED_SW`, switched LED
 cathodes and raw `P+` beside logic; external supply injection can back-power rails, and the

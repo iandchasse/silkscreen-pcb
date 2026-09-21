@@ -69,9 +69,9 @@ files that are already in this repository. Unfamiliar words are defined in
 [Words used on the factory's website](#words-used-on-the-factorys-website).
 
 > **A configurator is coming.** [silkscreenreader.com](https://silkscreenreader.com) has a
-> *Build one* page that walks you through the panel variant and the optional blocks and produces
-> the files for it. It is built but still behind a site preview and is **not live yet**. If it is
-> not live when you read this, use the steps below — they are complete on their own.
+> *Build one* page that walks you through the panel variant and the optional blocks and estimates
+> what the result costs. It does not produce order files yet, and it is still behind a site preview
+> and **not live yet**. Use the steps below: they are complete on their own.
 
 ### What it costs and how long it takes
 
@@ -236,16 +236,21 @@ options. The board is a **core** that is always fitted, plus add-on groups you c
 build a reduced configuration by hand, delete the listed references from the BOM **and** the CPL
 and leave the pads empty.
 
+Each group lists every part that exists only to serve it, taken from the schematic netlist (rails
+and the shared I²C bus aside), so leaving a group off leaves nothing behind that does no work. The
+[silkscreenreader.com](https://silkscreenreader.com) builder uses the same groups.
+
 | Group | References | Fit it when | Works without it? |
 |---|---|---|---|
-| **Core** (always) | Everything not listed below: ESP32-S3 `U4`, USB-C `J1`/`U6` and protection, charger `U11`, cell protection `U5`/`Q1`/`Q3`/`Q8`, power mux `U2`, LDO `U3`, battery monitor, microSD `J7`/`Q7`/`U1`/`U9`, the 24-pin display connector `J2` with its charge pump and boost (`L1`, `Q4`, `D4`-`D6`, `R14`, ...), power button `SW10`, reset `SW11`, LED `D2`, and the shared parts `R47`/`R48` (I²C pull-ups) and `C12` (LDO-input capacitor) | Always | This is the minimum working board |
+| **Core** (always) | Everything not listed below: ESP32-S3 `U4`, USB-C `J1`/`U6` and protection, charger `U11`, cell protection `U5`/`Q1`/`Q3`/`Q8`, power mux `U2`, LDO `U3` with its input capacitor `C4`, battery monitor, microSD `J7`/`Q7`/`U1`/`U9`, the 24-pin display connector `J2` with its charge pump and boost (`L1`, `Q4`, `D4`-`D6`, `R14`, ...), power button `SW10`, reset `SW11`, LED `D2`, and the I²C pull-ups `R47`/`R48` (shared by touch, clock and `J6`) | Always | This is the minimum working board |
 | **Touch** | `J4`, `U7`, jumpers `R42 R44 R46 R52` | The panel has a touch layer (`-T01C`, `-FT01C`) | Yes: omit the whole block on a non-touch panel |
-| **Frontlight** | `J3`, `U10`, `U12`, `L2`, `Q5`, `Q6`, `C9`, `C24`, `R37 R39 R41 R49 R50 R75` (`TP3`-`TP5` stay DNP) | The panel has a frontlight (`-FL01C`, `-FT01C`), or you want to drive an external light | Yes: omit for a plain or touch-only panel |
-| **Expansion header** | `J6`, `U8`, `CR2`, `CR3`, `F2` | You want spare GPIO, I²C and the external-light output | Yes |
+| **Frontlight** | driver `U10` with `L2`, input capacitor `C12` and output capacitor `C9`; current set `R37`; warm/cool select `Q5`, `Q6`, `U12` (with its decoupling `C24`) and `R75`; LED monitor `R39`, `R41`, `C31`; string bleeders `R49`, `R50`; output clamps `D3`, `D8` (`TP3`-`TP5` stay DNP) | The panel has a frontlight (`-FL01C`, `-FT01C`), or you want to drive an external light through `J6` | Yes: omit for a plain or touch-only panel |
+| **Frontlight connector** | `J3` | The panel has a bonded frontlight (`-FL01C`, `-FT01C`) | Yes: an external light connects through `J6` instead |
+| **Expansion header** | `J6`, `U8`, `CR2`, `CR3`, `F2`, and the GPIO series resistors `R65 R68 R69` | You want spare GPIO, I²C and the external-light output | Yes |
 | **Real-time clock** | `U13`, `C30` (or `U14` instead of `U13`) | You want accurate time | Yes: the reader runs without it, and it can be added later by hand |
 | **Alternate RTC** | `U14` (**DNP in every standard build**) | You want the cheaper clock instead of `U13` | Fit **either** `U13` **or** `U14`, never both |
-| **Side page-turn keys** | `SW1` (right-down), `SW4` (right-up), `SW7` (left-up), `SW5` (left-down) | Your case has side keys | Yes: fit any subset |
-| **Bottom-row keys** | `SW2 SW3 SW8 SW9` | Your case has bottom keys | Yes: fit any subset; with touch you can drop most keys |
+| **Side page-turn keys** | per key: `SW1`+`R61` (right-down), `SW4`+`R11` (right-up), `SW7`+`R36`+`R73` (left-up), `SW5`+`R35` (left-down); with any side key, the ladder's pull-up `R28` and filter `C28` | Your case has side keys | Yes: fit any subset |
+| **Bottom-row keys** | per key: `SW2`+`R60`, `SW3`+`R18`, `SW8`+`R19`, `SW9`+`R20`; with any bottom key, the ladder's pull-up `R4` and filter `C27` | Your case has bottom keys | Yes: fit any subset; with touch you can drop most keys |
 
 Notes:
 
@@ -254,14 +259,24 @@ Notes:
   Fit the touch parts only for a touch variant and the frontlight parts only for a light variant.
 - **`U8`, `CR2`, `CR3` and `F2` are `J6`'s own protection and come off with it.** `U8` protects only
   `J6` pins; `CR2` and `CR3` clamp the 3V3 and raw-battery pins where they leave the board, and the
-  resettable fuse `F2` sits in series with that battery pin and feeds nothing else. Do
-  **not** remove `U9`, `D3` or `D8` — `U9` also protects the microSD data lines, and `D3`/`D8`
-  clamp front-light nets that need them whether or not `J6` is fitted.
+  resettable fuse `F2` sits in series with that battery pin and feeds nothing else. The 33 Ω
+  series resistors `R65`/`R68`/`R69` only reach `J6` too; they cost nothing, so leaving them fitted
+  on a header-less board is harmless. Do **not** remove `U9`, `D3` or `D8` with `J6` — `U9` also
+  protects the microSD data lines, and `D3`/`D8` belong to the frontlight: they clamp its nets
+  whether or not `J6` is fitted.
+- **`C12` belongs to the frontlight.** It is on the shared `LDO_IN` rail but sits beside `U10` as
+  the driver's input capacitor; the LDO and power mux have their own, `C4`. Without the frontlight
+  it can go.
+- **An external light needs `J6`.** `J3` only mates a panel with a bonded light; for any other
+  light, the frontlight group drives it through the header.
 - **Fit only one of the two touch pin-order options.** The default build fits `R42 R44 R46 R52`.
   The alternate wiring (`R43 R45 R58 R66`, DNP here) is for panels with the swapped pin order.
   Confirm the panel's pinout first.
-- Leaving a button off needs nothing else changed; the ladder resistors stay in the BOM.
-- `SW6` (boot button) and `TP3`-`TP5` are DNP in every standard build.
+- Leaving a button off needs nothing else changed. Its ladder resistor then does nothing and can be
+  left off with it, but fitting it is harmless. Keep a ladder's pull-up and filter (`R4`/`C27`
+  bottom, `R28`/`C28` side) as long as any key on that ladder is fitted.
+- `SW6` (boot button) and `TP3`-`TP5` are DNP in every standard build. `R64` (100 Ω) is fitted
+  but only connects `SW6`, so it does nothing unless you fit the boot button.
 - Per-board part totals are in [`fabrication/BOM.md`](fabrication/BOM.md).
 
 ### Getting into download mode
@@ -287,6 +302,8 @@ If you do that:
   serve as the power button instead: leave `R36` and `R73` unpopulated and populate `R72` and
   `R74`. The same instruction is printed on the schematic and on the board.
 - Plan the cut before you order, so you can leave the parts you are cutting off out of the BOM.
+  `J6`'s series resistors `R65`/`R68`/`R69` stay on the main board near the ESP32 but have nothing
+  left to connect to, so they can be left out too.
 
 ---
 
