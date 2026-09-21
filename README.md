@@ -68,10 +68,13 @@ board and solders every part onto it. You will be clicking through a web shop an
 files that are already in this repository. Unfamiliar words are defined in
 [Words used on the factory's website](#words-used-on-the-factorys-website).
 
-> **A configurator is coming.** [silkscreenreader.com](https://silkscreenreader.com) has a
-> *Build one* page that walks you through the panel variant and the optional blocks and estimates
-> what the result costs. It does not produce order files yet, and it is still behind a site preview
-> and **not live yet**. Use the steps below: they are complete on their own.
+> **Or let the builder make the files.** The *Build one* page at
+> [silkscreenreader.com](https://silkscreenreader.com/builder.html) walks you through the panel
+> variant and the optional blocks, estimates what the result costs, and gives you the three upload
+> files for exactly that build: the same Gerber zip, plus a BOM and CPL with the parts you left off
+> already removed (see [Choosing a configuration](#choosing-a-configuration)). For the standard
+> build they are byte-for-byte the files in `production/`. The site is still in preview, and the
+> steps below are the same either way.
 
 ### What it costs and how long it takes
 
@@ -232,9 +235,10 @@ a known-good order to compare against. Everything else in this guide assumes JLC
 ## Choosing a configuration
 
 The files in `production/` build the **full standard build**: every block fitted except the DNP
-options. The board is a **core** that is always fitted, plus add-on groups you can leave off. To
-build a reduced configuration by hand, delete the listed references from the BOM **and** the CPL
-and leave the pads empty.
+options. The board is a **core** that is always fitted, plus add-on groups you can leave off. For
+a reduced configuration, download its files from the
+[silkscreenreader.com builder](https://silkscreenreader.com/builder.html), or do it by hand: delete
+the listed references from the BOM **and** the CPL and leave the pads empty.
 
 Each group lists every part that exists only to serve it, taken from the schematic netlist (rails
 and the shared I²C bus aside), so leaving a group off leaves nothing behind that does no work. The
