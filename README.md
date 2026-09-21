@@ -82,20 +82,24 @@ files that are already in this repository. Unfamiliar words are defined in
 
 ### What it costs and how long it takes
 
-My quote from **21 September 2026** (no coupons, US delivery). Prices, shipping and import charges
-move, so treat this as an expectation, not a promise:
+The minimum order is **5 bare boards**, and you choose how many of them the factory assembles:
+as few as **2**, all 5, or more boards if you want them. Most of the bill is one-off (the bare
+boards, setup, the solder stencil, and a small loading fee for each of about two dozen "Extended"
+part types the factory has to fetch), so the price per assembled board falls quickly as you build
+more. [silkscreenreader.com/cost](https://silkscreenreader.com/cost) breaks the cost down by
+order size and explains where each fee comes from.
+
+For scale, my own order on **21 September 2026** (no coupons, US delivery): five boards with two
+assembled came to **$223.95** for boards, parts and assembly, and **$305.23** at checkout once
+shipping, US tariffs and tax were added. That is about $150 per working board at two, and the
+cost page puts the same build at roughly $77 per board with all five assembled and about $50 at
+ten. Prices, shipping and import charges move, so treat every figure as an expectation, not a
+promise.
 
 | | |
 |---|---|
-| Five boards, **two** of them assembled (what I recommend for a first order) | **$223.95** for the boards, the parts and the assembly. **$305.23** at checkout once shipping, US tariffs and tax were added, about **$150 per working reader board** |
-| Each extra assembled board, up to all five | roughly **$15** more each (about $12 of parts plus placement). Worked out from the per-quantity parts table in [fabrication/BOM.md](fabrication/BOM.md), not a quote |
-| Why two boards cost nearly as much as five | most of the total is one-off: the five bare boards, setup, the solder stencil, and a small loading fee for each of about two dozen "Extended" part types the factory has to fetch. Only about $30 of it is the two boards' own parts and placement |
 | Time from clicking *order* to the parcel | about **2 to 3 weeks** |
 | Not included | display panel, battery, microSD card, case |
-
-The minimum order for **bare boards is 5**, but you can ask for as few as **2** of them to be
-assembled. That is the cheapest way in: one working reader, one spare, and three bare boards left
-over for later.
 
 ### Step 1: get the three files
 
@@ -142,8 +146,9 @@ for you, instead of shipping you a bare board.
    machine to grip. There is nothing for you to design. Expect a small fee in the quote, and snap
    the rails off when the boards arrive.
 4. Set **Assembly side: Bottom**. Every part on this board is on the back. If you leave this on
-   *Top* you will receive five blank boards and a bag of parts.
-5. Set the assembly quantity to **2** (or 5 if you want them all built).
+   *Top* you will receive blank boards and a bag of parts.
+5. Set the assembly quantity to the number of boards you want built, from 2 up to the number of
+   bare boards in the order.
 6. Leave **Tooling holes** on *Added by JLCPCB*.
 7. Set **Confirm Parts Placement** to **Yes**. It costs a small fee and is worth it on a first
    order: it lets you look at a picture of where each part will go before the machine runs.
@@ -201,8 +206,8 @@ buttons `SW1` to `SW5` and `SW7` to `SW11`. They are already in the files you up
 a choice, not extra work:
 
 - **Let the factory solder them.** JLCPCB charges a one-off hand-soldering fee (about $3.60 per
-  order) plus roughly $0.016 per joint: about **$6** on the two-board order, about $10 if all five
-  are assembled. It adds about a day. Confirm on the quote page that through-hole soldering
+  order) plus roughly $0.016 per joint, which is about **$1.20 per assembled board** on top of the
+  fee. It adds about a day. Confirm on the quote page that through-hole soldering
   appears as a line item.
 - **Solder them yourself.** You get the parts loose and put in 74 joints per board: the USB-C
   shell pins, the JST battery connector, the 12-pin expansion header and ten buttons. The USB-C
