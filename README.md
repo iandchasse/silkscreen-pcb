@@ -70,6 +70,21 @@ you need depends on the case you use, and no case is supplied here. See
 
 ## Order an assembled board, step by step
 
+> [!CAUTION]
+> **This revision of the board has not been tested yet.** I placed the first order for Rev 1.0 on
+> 21 September 2026 and the boards have not come back. Until I have powered one up, charged a
+> cell on it, talked to it over USB and driven a panel from it, every circuit on it is a design,
+> not a proven product. If you order before that, you take on a real risk: a mistake I have not
+> found yet could mean a board that does not work, and the factory does not refund a board that
+> was built exactly as the files said. I will update this section as soon as the first boards are
+> checked out.
+>
+> What you can do in the meantime, with no risk: order your screen panel and battery (see
+> [What you need besides the board](#what-you-need-besides-the-board)), and start on an enclosure
+> design from the STEP model in
+> [The board and your case](#the-board-and-your-case). The `#enclosure-design` channel on the
+> [Discord](https://discord.gg/zCnKFt4Y4P) is where case work is being shared and discussed.
+
 You do not need KiCad and you do not need to know how a PCB is designed. A factory makes the
 board and solders every part onto it. You will be clicking through a web shop and uploading three
 files that are already in this repository. Unfamiliar words are defined in
