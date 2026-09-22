@@ -35,6 +35,11 @@ Silkscreen in KiCad 9.0.6, but
 
 There is **no firmware for this board yet**. Read [Firmware](#firmware) before you order.
 
+The complete picture of the project, the story behind it, the cost breakdown and the build
+configurator are on the project website. As of 21 September 2026 the website is still locked
+while I wait for the first boards. It opens, and this README links to it, as soon as I have
+tested a board in my hands.
+
 Everything about how the board works, pin by pin, is in one document:
 [docs/HARDWARE.md](docs/HARDWARE.md). It covers every circuit block, the GPIO map, what firmware
 has to do for the hardware, and the dimensions a case needs.
@@ -90,13 +95,12 @@ board and solders every part onto it. You will be clicking through a web shop an
 files that are already in this repository. Unfamiliar words are defined in
 [Words used on the factory's website](#words-used-on-the-factorys-website).
 
-> **Or let the builder make the files.** The *Build one* page at
-> [silkscreenreader.com](https://silkscreenreader.com/builder.html) walks you through the panel
-> variant and the optional blocks, estimates what the result costs, and gives you the three upload
-> files for exactly that build: the same Gerber zip, plus a BOM and CPL with the parts you left off
-> already removed (see [Choosing a configuration](#choosing-a-configuration)). For the standard
-> build they are byte-for-byte the files in `production/`. The site is still in preview, and the
-> steps below are the same either way.
+> **Or let the builder make the files.** The *Build one* page on the website walks you through
+> the panel variant and the optional blocks, estimates what the result costs, and gives you the
+> three upload files for exactly that build: the same Gerber zip, plus a BOM and CPL with the
+> parts you left off already removed (see [Choosing a configuration](#choosing-a-configuration)).
+> For the standard build they are byte-for-byte the files in `production/`. The website is not
+> open yet, and the steps below are the same either way.
 
 ### What it costs and how long it takes
 
@@ -104,8 +108,8 @@ The minimum order is **5 bare boards**, and you choose how many of them the fact
 as few as **2**, all 5, or more boards if you want them. Most of the bill is one-off (the bare
 boards, setup, the solder stencil, and a small loading fee for each of about two dozen "Extended"
 part types the factory has to fetch), so the price per assembled board falls quickly as you build
-more. [silkscreenreader.com/cost](https://silkscreenreader.com/cost) breaks the cost down by
-order size and explains where each fee comes from.
+more. The website's cost page breaks the cost down by order size and explains where each fee
+comes from.
 
 For scale, my own order on **21 September 2026** (no coupons, US delivery): five boards with two
 assembled came to **$223.95** for boards, parts and assembly, and **$305.23** at checkout once
@@ -264,13 +268,12 @@ without a known-good order to compare against. Everything else in this guide ass
 
 The files in `production/` build the **full standard build**: every block fitted except the DNP
 options. The board is a **core** that is always fitted, plus add-on groups you can leave off. For
-a reduced configuration, download its files from the
-[silkscreenreader.com builder](https://silkscreenreader.com/builder.html), or do it by hand: delete
-the listed references from the BOM **and** the CPL and leave the pads empty.
+a reduced configuration, download its files from the builder on the website, or do it by hand:
+delete the listed references from the BOM **and** the CPL and leave the pads empty.
 
 Each group lists every part that exists only to serve it, taken from the schematic netlist (rails
 and the shared I²C bus aside), so leaving a group off leaves nothing behind that does no work. The
-[silkscreenreader.com](https://silkscreenreader.com) builder uses the same groups.
+website's builder uses the same groups.
 
 | Group | References | Fit it when | Works without it? |
 |---|---|---|---|
