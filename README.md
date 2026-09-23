@@ -196,12 +196,51 @@ You get a table with one row per part. Most rows will already be matched.
   [`fabrication/BOM.md`](fabrication/BOM.md) lists an approved alternative for every part on this
   board. Use that list rather than picking a look-alike yourself, because several of these parts
   have near-identical siblings with different pinouts.
-- The part most often short is **TPS923610DRLR**, the frontlight driver. Check its stock. If it is
-  out and you are not fitting a frontlight panel, untick it along with the rest of the *Frontlight*
-  group in [Choosing a configuration](#choosing-a-configuration).
+- The part most often short is **TPS923610DRLR** (`U10`, LCSC `C52919131`), the frontlight driver.
+  Check its stock. If you are not fitting a frontlight panel, untick it along with the rest of the
+  *Frontlight* group in [Choosing a configuration](#choosing-a-configuration). If you *are* fitting
+  one and it is out of stock, see [If the frontlight driver is out of stock](#if-the-frontlight-driver-is-out-of-stock).
+  Stock may well be back by the time you order, so check first.
 - If you are deliberately leaving a block off, remove its parts from the BOM **and** the CPL, or
   untick them here.
 - Click **Next**.
+
+#### If the frontlight driver is out of stock
+
+JLCPCB's stock of the TPS923610DRLR comes and goes, and restocking is unpredictable. It isn't a
+dead end, just a slower one. In order of preference:
+
+1. **Pre-order it through JLCPCB.** Any account can do this; it just takes lead time. While LCSC
+   lists several suppliers for this part, the wait should be short.
+   1. Sign in to JLCPCB and open **Parts Manager → Order Parts**.
+   2. Search `C52919131`. Enter the quantity you need, plus one or two spares, and add it to
+      **My Parts Lib**.
+   3. Go to the cart and check out within the hour, or the cart is cancelled. JLCPCB emails the final
+      price within 48 hours and refunds or charges the difference.
+   4. Wait until the parts reach JLCPCB's warehouse. Pre-ordered parts can't be used before then,
+      and they are never shipped to you; they only go into your assembly orders.
+   5. Place the board order as above. At Step 5, `U10` matches from your private library.
+
+   JLCPCB's own guide: [What is JLCPCB Parts Pre-order Service?](https://jlcpcb.com/help/article/What-is-JLCPCB-Parts-Pre-order-Service)
+   · [Pre-ordering terms](https://jlcpcb.com/help/article/pre-ordering-parts-terms-conditions)
+
+2. **If you can't pre-order it, swap two parts, not one:**
+
+   | Ref | Stock part | Swap to |
+   |---|---|---|
+   | `U10` | TPS923610DRLR | **TPS923611DRLR** |
+   | `D3` | SMAJ26A | **SMAJ33A** |
+
+   The TPS923611 shares the TPS923610's datasheet, package (SOT-563, `DRL`), pinout and 1.8 A switch
+   limit, so it fits the same footprint. The one difference is its output ceiling: about 30 V, with
+   over-voltage protection at 29.6–31.4 V, where the TPS923610 stops at about 24.5 V. The stock
+   `D3`, an SMAJ26A clamp on `LED_SW`, starts conducting at 28.9 V. With a TPS923611 and the stock
+   `D3`, a disconnected light lets the driver push current into `D3` before its own protection trips,
+   and `D3` can burn out. An SMAJ33A doesn't conduct until about 36.7 V, so the driver's protection
+   trips first. Don't leave `D3` off instead: it protects the light connectors (`J3`, `J6`).
+
+   The **TPS923612** is not an option: it only comes in a 2 × 2 mm WSON (`DRV`) package, which
+   doesn't fit this footprint.
 
 ### Step 6: check the placement preview (do not skip this)
 

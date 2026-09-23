@@ -56,6 +56,13 @@ stock risk. `R15` (GDR pull-down) also moved from 10 k to 1 M to match Good Disp
 are needed at 100 boards); A2541HWR-2x6P `C5333437` 1.3k; SLW5040S470MST `C206267` 1.9k; PESD2IVN-UX `C42370512` 3.0k;
 USB4085-GF-A `C7095263` 4.4k; IRLML6346TRPBF `C67276` 5.5k.
 
+**If TPS923610 is out of stock (2026-09-23):** JLC's stock of `C52919131` is being reserved for the
+open-beta run, and JLC says restocking is unpredictable. For a frontlight build: (1) pre-order it through JLC
+Parts Manager (any account; lead time only), or (2) fit **TPS923611DRLR for U10 *and* SMAJ33A for D3**
+together. The TPS923611 has the same DRL footprint and pinout but a ~30 V output ceiling, above the
+SMAJ26A's 28.9 V breakdown. Full steps are in the README under *If the frontlight driver is out of stock*.
+TPS923612 is WSON (DRV) only and doesn't fit.
+
 ### L2: 4.7 µH → 10 µH
 
 The TPS923610 is a peak-current-mode, internally compensated boost that runs **forced-continuous at 1.1 MHz at
