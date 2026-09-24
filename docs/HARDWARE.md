@@ -86,14 +86,14 @@ any firmware — so that the interesting work (the display, the case, the softwa
 gated on redesigning power and interface electronics every time.
 
 **Primary target:** 4.26" `GDEQ0426T82` family
-- `GDEQ0426T82` — plain
+- `GDEY0426T82` — plain (Good Display sells the plain panel under this number)
 - `GDEQ0426T82-T01C` — with capacitive touch
 - `GDEQ0426T82-FL01C` — with bonded frontlight
 - `GDEQ0426T82-FT01C` — with bonded frontlight **and** capacitive touch
 
-`GDEQ0426T82` is the base part number; the suffix selects the option set — `-T01C` touch,
-`-FL01C` front light, `-FT01C` both. Order by the full suffixed number, because the suffix is
-what decides which optional blocks you fit.
+`GDEQ0426T82` is the base part number of the variants; the suffix selects the option set —
+`-T01C` touch, `-FL01C` front light, `-FT01C` both. Order by the full suffixed number, because
+the suffix is what decides which optional blocks you fit.
 
 **Also supports:** most 24-pin SPI e-paper panels, larger or smaller, given a suitable enclosure.
 A 24-pin connector alone does not establish compatibility — check the panel's pinout, drive
@@ -1444,9 +1444,9 @@ All x/y figures are board (KiCad page) coordinates, the same frame the STEP and 
 | Side-button centres | left y = 75.25, 89.25; right y = 70.25, 84.25, and 52.25 for `SW10` |
 | Inner walls | right ≥ x 105.6, left ≤ x 43.1, bottom ≥ y 150.4 (plunger tips) |
 | USB-C aperture | mating face x = 105.485, centred y = 103.975; opening ≥ **9.3 × 3.6 mm** |
-| microSD aperture | left wall, centred y = 84.6; opening ≥ **12 × 2.2 mm** |
+| microSD access | no wall aperture: the card goes in from the battery cut-out, moving +y into `J7` (slot centred x = 63.05, mouth at y ≈ 69.3), with the cell lifted or slid aside (see [§5](#5-storage--4-bit-sdmmc)); keep ≥ **12 × 2.2 mm** clear for the card |
 | Expansion (`J6`) aperture | top wall, x 87.2 … 103.0, ≈6 mm tall |
-| Battery bay | **38.75 × 30.50 mm** at x 44.24 … 82.99, y 37.00 … 67.50; lead exit at `J5` (x 96.20, y 63.5 … 69.5, opening +x) |
+| Battery bay | **38.75 × 30.50 mm** at x 44.24 … 82.99, y 37.00 … 67.50; lead exit at `J5`, which opens toward −x into the bay (mouth at about x 88, y 63.5 … 69.5, with **- +** / CHECK printed beside it) |
 | Antenna keep-out | x 44.24 … 50.60, y 93.30 … 112.00, **plus ~10 mm of air** — nothing conductive, no battery |
 | Display-flex slot | **47.04 × 1.30 mm** at x 51.26 … 98.30, y 141.20 … 142.50 |
 | Tongue-neck slot | **5.30 × 1.10 mm** at x 89.59 … 94.89, y 61.40 … 62.50 |

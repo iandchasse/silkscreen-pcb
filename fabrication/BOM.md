@@ -318,5 +318,5 @@ JLC build; search DigiKey/Mouser by the manufacturer part number.
 
 | Item | Note |
 |---|---|
-| 4.26" e-paper panel | GDEQ0426T82 / -FL01C (frontlight) / -FT01C (frontlight + touch); check the J3 pin order for FT01C lots (DESIGN_REVIEW §8) |
+| 4.26" e-paper panel | GDEY0426T82 (plain) / GDEQ0426T82-FL01C (frontlight) / -FT01C (frontlight + touch); check the J3 pin order for FT01C lots (DESIGN_REVIEW §8) |
 | Battery | single-cell Li-ion/LiPo, 4.2 V charge; 500 mAh charges in ≈2.5–3 h at the default 0.25 A; verify cable polarity (pin 1 = B−) |
