@@ -2,8 +2,9 @@
 
 **An open-source, open-hardware e-reader mainboard.**
 
-Silkscreen is the mainboard of a build-it-yourself e-reader. You order the board already
-assembled from a factory, add an e-paper display, a battery and a microSD card, and put it in a
+Silkscreen is a build-it-yourself e-reader. The name covers both this board and a reader built
+around it; this repository covers the mainboard. You order the board already assembled from a
+factory, add an e-paper display, a battery and a microSD card, and put it in a
 case of your own choosing. It is a 2-layer ESP32-S3 board with a 24-pin display connector,
 optional touch and frontlight, microSD and single-cell Li-ion/LiPo power.
 
@@ -22,10 +23,10 @@ Silkscreen in KiCad 9.0.6, but
 
 - **Brain:** an ESP32-S3 module with 16 MB of flash and 8 MB of PSRAM, with USB built in. You
   plug a USB-C cable straight into it, no adapter.
-- **Screen:** a 24-pin connector for SPI e-paper panels. The primary target is the 4.26"
-  Good Display `GDEQ0426T82` family, in plain, touch, frontlight, or touch + frontlight versions.
-  `GDEQ0426T82` is the base part number and the suffix picks the variant (`-T01C` touch,
-  `-FL01C` front light, `-FT01C` both), so always order by the full suffixed number.
+- **Screen:** a 24-pin connector for SPI e-paper panels. The primary target is Good Display's
+  4.26" panel family, in plain, touch, frontlight, or touch + frontlight versions. The plain panel
+  is sold as `GDEY0426T82`; the others are `GDEQ0426T82` with a suffix for the variant (`-T01C`
+  touch, `-FL01C` front light, `-FT01C` both), so always order by the full part number.
 - **Power:** charges and runs from a single-cell Li-ion/LiPo pack over USB-C, with charger,
   cell protection and a 3.3 V regulator on board.
 - **Storage:** a push-push microSD socket.
@@ -33,7 +34,9 @@ Silkscreen in KiCad 9.0.6, but
 - **Size:** 60.05 × 111.30 mm, 1.6 mm thick. Every part is soldered onto the **back** face, so
   the front is clear for the display.
 
-There is **no firmware for this board yet**. Read [Firmware](#firmware) before you order.
+Silkscreen is built to run the open firmware made for Xteink's readers, starting with CrossPoint.
+Setting them up for this board is closed-beta work, so there is **no firmware release for it
+yet**. Read [Firmware](#firmware) before you order.
 
 The complete picture of the project, the story behind it, the cost breakdown and the build
 configurator are on the project website. As of 21 September 2026 the website is still locked
@@ -52,20 +55,25 @@ The factory sends you a populated circuit board and nothing else. You also need:
 
 | Item | What to get |
 |---|---|
-| **Display panel** | One of the 4.26" Good Display variants: `GDEQ0426T82` (plain), `-T01C` (touch), `-FL01C` (frontlight), `-FT01C` (touch + frontlight). The panel you pick decides which optional parts you fit. See [Choosing a configuration](#choosing-a-configuration). |
+| **Display panel** | One of the 4.26" Good Display variants: `GDEY0426T82` (plain), `GDEQ0426T82-T01C` (touch), `-FL01C` (frontlight), `-FT01C` (touch + frontlight). The panel you pick decides which optional parts you fit. See [Choosing a configuration](#choosing-a-configuration). |
 | **Battery** | A **single-cell** (3.7 V nominal / 4.2 V charged) Li-ion or LiPo pack fitted with a **JST-PH 2.0 mm, 2-pin** plug. Read the polarity note below before you plug it in. I use [this 500 mAh `503035` pack (5 × 30 × 35 mm, JST-PH 2.0)](https://www.amazon.com/dp/B0GDQLLF12). It fits the board's 38.75 × 30.50 mm battery bay snugly, with 0.5 mm to spare on the 30 mm side. The board charges at about 0.25 A as built, which is 0.5C for this pack. For a much smaller cell, lower the charge current by raising `R6` ([HARDWARE.md §3.2](docs/HARDWARE.md#32-battery-charger)). Listings change, so check the plug, the polarity and the size of whatever you buy. |
 | **microSD card** | Any normal microSD card. The battery normally sits in the board's cut-out directly in front of the card slot, so you lift or slide the cell aside to put a card in or take one out. I designed it that way; the card is not meant to be swapped often. |
 | **USB-C cable** | A **data** cable, not a charge-only one, or the board will charge but never appear on your computer. |
 
-**Battery lead order.** On the board, `J5` pin 1 is marked **"-"** and is battery **negative**;
-pin 2 is battery **positive**. There is no industry standard for JST-PH battery leads. Packs
-ship both ways round, and a red-to-pin-1 pack and a black-to-pin-1 pack look identical in a
-photo. Check your pack with a multimeter before you plug it in.
+**Battery lead order.** On the board, `J5` pin 1 is battery **negative** and pin 2 is battery
+**positive**, and the board prints **- +** with the word **CHECK** right beside the connector's
+mouth. A pack's wire colours are a good guide (black is negative, red is positive), but there is
+no industry standard for which side of a JST-PH plug each wire goes in: packs ship both ways
+round, and the two look identical in a photo. So before you plug a pack in, with USB unplugged,
+check that its black wire lines up with the **-** mark and its red wire with the **+**. If they are
+the wrong way round, swap the two wires in the plug
+([how to reverse a JST battery plug](https://www.digikey.com/en/maker/blogs/2025/reversing-the-polarity-on-lipo-battery-jst-connectors)).
+A multimeter is the surest check.
 
 > [!WARNING]
-> Lithium cells are a fire risk if reversed, shorted or crushed. Measure the polarity of your
-> pack against the "-" mark on `J5` before plugging it in. Do not trust the wire colours. Use a
-> pack with its own protection board. Stop using any cell that is puffed, hot or damaged.
+> Lithium cells are a fire risk if reversed, shorted or crushed. Check your pack against the
+> **- +** marks beside `J5` before plugging it in, and measure it if you can. Use a pack with its
+> own protection board. Stop using any cell that is puffed, hot or damaged.
 
 **Screws and case are not on this list.** The board has six M2 mounting holes, but which screws
 you need depends on the case you use, and no case is supplied here. See
@@ -294,8 +302,8 @@ are regenerated from the current design with:
 python fabrication/make_fab_files.py --split
 ```
 
-Know what you are taking on, though. **JLCPCB is the only factory that has delivered working
-Silkscreen boards.** My NextPCB attempt did not end in an order (what went wrong, and what it
+Know what you are taking on, though. **JLCPCB is the only factory I have ordered
+boards from so far.** My NextPCB attempt did not end in an order (what went wrong, and what it
 would have cost, is in [fabrication/NEXTPCB_REV0_NOTES.md](fabrication/NEXTPCB_REV0_NOTES.md)),
 and I have not tried PCBWay. Another factory is a fine choice if you prefer one. You will be doing
 the part matching, the rotation check and the back-and-forth with their engineers yourself,
@@ -329,7 +337,8 @@ website's builder uses the same groups.
 Notes:
 
 - **The panel choice drives touch and frontlight.** The four 4.26" Good Display variants are
-  `GDEQ0426T82` (plain), `-T01C` (touch), `-FL01C` (frontlight) and `-FT01C` (touch + frontlight).
+  `GDEY0426T82` (plain), `GDEQ0426T82-T01C` (touch), `-FL01C` (frontlight) and `-FT01C` (touch +
+  frontlight).
   Fit the touch parts only for a touch variant and the frontlight parts only for a light variant.
 - **`U8`, `CR2`, `CR3` and `F2` are `J6`'s own protection and come off with it.** `U8` protects only
   `J6` pins; `CR2` and `CR3` clamp the 3V3 and raw-battery pins where they leave the board, and the
@@ -387,13 +396,19 @@ If you do that:
 
 ## Firmware
 
-**There is no released firmware for this board yet.** The board is hardware only today.
+Silkscreen is built to run the open firmware made for Xteink's readers, starting with
+[CrossPoint](https://github.com/crosspoint-reader/crosspoint-reader), which de-link, the reader
+before it, ran. **There is no firmware release for this board yet:** setting them up for its
+pins is the closed beta's work.
 
-I plan to port the FreeInk SDK to it and to maintain crosspoint-reader, crossink reader and the
-other XTEink X4 firmwares on it. All of that is future work, not something you can download now.
-I will write first-power-up instructions once there is firmware to power up into.
+The plan is to bring the FreeInk SDK to the board, so that CrossPoint, CrossInk and the other
+Xteink X4 firmwares can add Silkscreen as a supported board, and to help maintain that support.
+First-power-up instructions come with it.
 
-If you order a board today, order it because you want the hardware to build on.
+**The board will never be locked.** You can flash any firmware you like over USB-C.
+
+Until the first Rev 1.0 boards check out, a board you order is one to build on. If you just want
+a reader to read on, wait for them to check out, or for the open-beta kits.
 
 If you want to write firmware for it, [docs/HARDWARE.md](docs/HARDWARE.md) is the whole
 reference. The GPIO map is section 13, and section 13.1 lists what the board needs firmware to do:
@@ -430,7 +445,7 @@ What you need in order to design around it:
 | | |
 |---|---|
 | **MCU** | ESP32-S3-WROOM-1 (**N16R8**, 16 MB flash / 8 MB octal PSRAM), native USB, no UART bridge |
-| **Display** | 24-pin 0.5 mm ZIF for SPI e-paper; primary target 4.26" `GDEQ0426T82` family; panel-driven charge pump generates the ±15 to 22 V rails |
+| **Display** | 24-pin 0.5 mm ZIF for SPI e-paper; primary target Good Display's 4.26" panels (`GDEY0426T82` plain, `GDEQ0426T82-*` variants); panel-driven charge pump generates the ±15 to 22 V rails |
 | **Frontlight** | TPS923610 constant-current boost, warm/cool selection through one GPIO and an inverter; the warm/cool blend has not been tested on hardware yet |
 | **Touch** | Optional I²C capacitive touch (for `-FT01C`-class panels) with a 0 Ω pin-swap mux |
 | **Power** | USB-C in, TP4056 charger, DW01A + FS8205A cell protection, TPS2116 priority mux, TLV75533P 3V3 LDO |
