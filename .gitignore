@@ -47,3 +47,6 @@ database/
 production/backups/
 production/*.xls
 production/*.xlsx
+
+# OrcaSlicer CLI log, written into whatever folder the slicer is run from
+00000.log
