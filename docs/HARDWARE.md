@@ -945,9 +945,13 @@ close to one of the six clean levels of its ladder as "ignore". `C27`/`C28` (2.2
 debounce** — mechanical bounce (1–10 ms) is handled in software.
 
 **Sleep wake from the ladders is limited.** Both ladders idle at 3.3 V, and only the lowest step of each
-(`SW2` RIGHT and `SW1` DOWN(1), ≈33 mV) presents a valid logic low; `SW3` (1.19 V) is in the undefined band
-and the higher steps (1.8–2.9 V) read as logic high. A GPIO-level wake (`ext0`/`ext1`, light-sleep GPIO)
-therefore fires only for `SW1`, `SW2` and the power button; waking on the other buttons needs the ADC awake
+(`SW2` RIGHT and `SW1` DOWN(1), ≈33 mV) presents a valid logic low. The ESP32-S3's input thresholds scale with
+the pad supply, which is the ladders' own `3V3`, so rail tolerance cancels: a valid low is ≤ 0.25 × VDD
+(0.825 V) and a valid high ≥ 0.75 × VDD (2.475 V) (datasheet Table 5-4, specified at 3.3 V / 25 °C).
+`SW3` LEFT (1.19 V), `SW4` UP(1) (1.80 V) and `SW8` OK (2.20 V) sit in the undefined band between the two;
+`SW5` DOWN(2) (2.53 V, ≈46 mV clear at ±1 % worst case), `SW9` BACK (2.80 V) and `SW7` UP(2) (2.88 V) read as
+logic high. A GPIO-level wake (`ext0`/`ext1`, light-sleep GPIO) therefore fires reliably only for `SW1`,
+`SW2` and the power button; waking on the other buttons needs the ADC awake
 or an extra "any press" line (e.g. a diode-OR to a spare RTC-capable GPIO) on a future revision. Both caps are placed at the
 ESP32 per the schematic annotations. The bottom-switch anchors are spaced 12 / 13 / 12 mm with a
 common actuator offset that preserves mirror symmetry (no placement asymmetry remains).
