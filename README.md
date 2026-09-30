@@ -84,8 +84,10 @@ you need depends on the case you use, and no case is supplied here. See
 ## Order an assembled board, step by step
 
 > [!CAUTION]
-> **This revision of the board has not been tested yet.** I placed the first order for Rev 1.0 on
-> 21 September 2026 and the boards have not come back. Until I have powered one up, charged a
+> **This revision of the board has not been tested yet.** I placed the first order, for Rev 1.0, on
+> 21 September 2026 and the boards have not come back. The files here are Rev 1.01: the same
+> circuit and parts, plus copper changes that only matter on a board cut down for a smaller display
+> (see [Cutting the board down](#cutting-the-board-down-for-a-smaller-display)). Until I have powered one up, charged a
 > cell on it, talked to it over USB and driven a panel from it, every circuit on it is a design,
 > not a proven product. If you order before that, you take on a real risk: a mistake I have not
 > found yet could mean a board that does not work, and the factory does not refund a board that
@@ -138,7 +140,7 @@ you need is in the `production/` folder. You upload exactly three files:
 
 | Upload this | What it is | Where it goes |
 |---|---|---|
-| `production/Silkscreen_Reader_PCB_1.0.zip` | the **Gerber** files: the board itself, meaning copper layers, outline and hole positions | the *Add Gerber file* box |
+| `production/Silkscreen_Reader_PCB_1.01.zip` | the **Gerber** files: the board itself, meaning copper layers, outline and hole positions | the *Add Gerber file* box |
 | `production/jlc_bom.csv` | the **BOM** (bill of materials): the shopping list of parts | the *Add BOM file* box |
 | `production/positions.csv` | the **CPL** (also called the centroid or pick-and-place file): where each part sits and which way it faces | the *Add CPL file* box |
 
@@ -148,7 +150,7 @@ Do not mix one of them with an older copy of another.
 ### Step 2: order the bare board
 
 1. Sign in at [jlcpcb.com](https://jlcpcb.com), click **Order now**, then **Add Gerber file** and
-   choose `Silkscreen_Reader_PCB_1.0.zip`.
+   choose `Silkscreen_Reader_PCB_1.01.zip`.
 2. The viewer draws the board. Confirm it says **2 layers** and about **60 × 111 mm**. If it does
    not, you uploaded the wrong file.
 3. Set **PCB Qty = 5**, **Thickness = 1.6 mm**, **Outer Copper Weight = 1 oz**. Surface finish and
@@ -388,6 +390,13 @@ If you do that:
   a frontlight from one. After the cut, UP(2) can serve as the power button instead: leave `R36`
   and `R73` unpopulated and populate `R72` and `R74`. The same instruction is printed on the
   schematic and on the board.
+- **On a board made before Rev 1.01, including my 21 September order, add two wires after the
+  cut.** The cut takes both 3V3 feeds to the charge-enable switch (`Q2`/`R81`) with it, so the
+  charger never turns on, and it leaves the power section's ground (`U3`, `U2`, `Q1`) joined to the
+  rest of the board only through one shell tab of the microSD socket. Wire `R40` pad 2 to `R81`
+  pad 2 (or bridge the two cut 3V3 stubs at the cut edge), and `C6` pad 2 to `C21` pad 2. With a
+  correctly oriented cell fitted, the TP4056's `CE` pin (pin 8) should then read 3.3 V. Rev 1.01
+  boards have a 3V3 link and ground stitching vias below the cut line and need neither wire.
 - Plan the cut before you order, so you can leave the parts you are cutting off out of the BOM.
   `J6`'s series resistors `R65`/`R68`/`R69` stay on the main board near the ESP32 but have nothing
   left to connect to, so they can be left out too.
@@ -453,7 +462,7 @@ What you need in order to design around it:
 | **Storage** | push-push microSD in 4-bit SDMMC, power-gated |
 | **Input** | 8 buttons on two ADC resistor ladders, a wake/power **button** (`SW10`, a wake input, not a hardware power switch; the 3.3 V rail is always live) and reset (`SW11`); a BOOT button footprint (`SW6`) is left unpopulated because USB-Serial-JTAG makes it unnecessary |
 | **RTC** | DS3231MZ (±5 ppm), VBAT-only mode; populated in the standard build, optional. A second footprint (`U14`, Micro Crystal RV-8263-C7) is DNP. Fit either, never both |
-| **Revision** | **Rev 1.0.** The revision label on both title blocks and in the name of the release zip changes only when a new board is fabricated; until then every change is folded into Rev 1.0. The design content is current to **2026-09-21**; the title-block date (2026-09-12) is when Rev 1.0 was opened. |
+| **Revision** | **Rev 1.01**, on both title blocks and in the name of the release zip. Rev 1.0 is the board I ordered on 21 September 2026 (commit `aeb5b39`). Rev 1.01 (30 September 2026) has the same circuit and parts; it adds a 3V3 link and ground stitching vias below the cut line, so a board cut down for a smaller display still charges and keeps a solid ground, and changes one word of the front silkscreen. Until Rev 1.01 is fabricated, further changes are folded into it. |
 | **Board** | 2-layer, 60.05 × 111.30 × 1.6 mm, 1 oz Cu; 184 references = 165 fitted + 11 DNP + 8 bare-copper (holes `H1` to `H6`, test pads `TP1`/`TP2`) |
 
 Connection and GPIO reference: **[docs/HARDWARE.md](docs/HARDWARE.md)**.
@@ -464,7 +473,7 @@ Connection and GPIO reference: **[docs/HARDWARE.md](docs/HARDWARE.md)**.
 
 | Word | What it means |
 |---|---|
-| **Gerber** | The standard file format for a bare circuit board: one file per copper, mask and silkscreen layer, plus the drill holes. Here they are zipped together in `production/Silkscreen_Reader_PCB_1.0.zip`. |
+| **Gerber** | The standard file format for a bare circuit board: one file per copper, mask and silkscreen layer, plus the drill holes. Here they are zipped together in `production/Silkscreen_Reader_PCB_1.01.zip`. |
 | **BOM** | Bill of materials: the list of every part on the board and how many of each. |
 | **CPL / centroid / pick-and-place** | Three names for the same file: where each part sits on the board, which side it is on, and which way it faces. Here, `production/positions.csv`. |
 | **PCBA** | Printed circuit board assembly: the service where the factory buys the parts and solders them on, rather than shipping a bare board. |
@@ -524,7 +533,7 @@ things that look like mistakes but are deliberate.
 **[Schematic PDF](docs/silkscreen_pcb_schematic.pdf)** (single A2 sheet) and
 **[PCB layout PDF](docs/silkscreen_pcb_layout.pdf)** (2 pages: the front, then the back as you
 see it). Both are plotted from the current source. The board images at the top are renders of the
-same files, not the release record.
+Rev 1.0 files, not the release record.
 
 ### Repository layout
 

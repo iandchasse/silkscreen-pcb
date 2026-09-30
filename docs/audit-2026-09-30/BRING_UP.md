@@ -1,7 +1,7 @@
 # Silkscreen mainboard: bench bring-up (2026-09-30)
 
 These are the checks that need a meter, a supply or a scope; software can't make them. Work in order and stop at the first wrong value.
-- **Board:** Rev 1.0 (`aeb5b39`), the boards from the 2026-09-21 order. Rev 1.01 (3edd0c8) has the same schematic and parts, and its copper changes only near the cut line, so it matters only in §10. Differences are marked **[1.01]**.
+- **Board:** Rev 1.0 (`aeb5b39`), the boards from the 2026-09-21 order. Rev 1.01 (2026-09-30) has the same schematic and parts, and its copper changes only near the cut line, so it matters only in §10. Differences are marked **[1.01]**.
 - **Coordinates:** KiCad board mm, front view (from netlist.ipc / positions.csv). Every part is on the back, so mirror x when you look at the back.
 - **Notation:** `ref.pin`. **[FW]** = needs firmware; unmarked steps work with any image or a blank module.
 - **Sources:** HW = docs/HARDWARE.md, AT = AUTHOR_TODO.md, FR = FINAL_REVIEW.md (both in docs/final-review-2026-09-19), RM = README.md, E/L/F = reports 07/08/09 of this audit, GND = reports 05/06. Probe points were checked against `production/netlist.ipc`.
@@ -150,14 +150,14 @@ The documented cut runs at y 61.86, x 84.42-104.24; the x3 build cuts at y 62.00
   - Either bridge the two cut 3V3 stubs at the cut edge (x 87.53 and 100.60), or run a wire of about 17 mm from a main 3V3 pad (`R40.2` (82.44, 73.50), `U3.5` (77.30, 83.20) or `C6.1` (75.10, 83.76)) to `Q2.2` (93.71, 87.31) or `R81.2` (94.90, 85.31).
   - Check: with a correctly oriented cell, `CE` (`U11.8`) = **3.3 V**.
   - **[1.01]** 3V3 is rerouted along y 64.2-65.1, so no wire is needed. Still check `CE`.
-- **GND wire (1.0, and 1.01 as of 3edd0c8).** After the cut, the power group (`U3.2`, `U2.1`, `Q1.3`, `C3`, `C4`, `C6`, `C25`, `C26`, `R16`, `R51`, `R77`, `H5`) meets main GND only through **one `J7` shell tab**.
+- **GND wire (boards made before Rev 1.01).** After the cut, the power group (`U3.2`, `U2.1`, `Q1.3`, `C3`, `C4`, `C6`, `C25`, `C26`, `R16`, `R51`, `R77`, `H5`) meets main GND only through **one `J7` shell tab**.
   - **Fit a short wire** from `C6.2` (75.10, 85.84, power-side GND) to `C21.2` (74.80, 80.34, main GND): 5.5 mm, both on the back (GND §2 of the audit).
   - `U3.2` (80.00, 84.15) to `U4.1` (52.24, 93.50) reads ≈0 Ω while J7's shell tab is soldered, so a meter cannot prove the copper is continuous; open means that tab joint is bad.
-  - **[1.01 with the planned stitching vias]** ≈0 Ω with no wire.
+  - **[1.01]** GND stitching vias below the cut join the two grounds, so no wire is needed.
 - **Power button (`SW10` is cut off).** Remove `R36` (46.5, 79.0) and `R73` (49.9, 79.0) **first**, then fit `R72` (10 k) and `R74` (0 Ω).
   - 3V3 to GND must not be a short.
   - `R76.1` should read 0 V idle and ≈3.0 V with UP(2) pressed (HW §9.2).
-- **Seal the cut edge.** Live nets reach it, including 3V3 at x ≈101.1 (a 2.1 mm stub on 1.01, 6.1 mm on 1.0) (E §4).
+- **Seal the cut edge.** Live nets reach it, including 3V3 at x ≈101.1 (about 2 mm on 1.01, 6.1 mm on 1.0) (E §4).
 - **`LED_SW` has no TVS** once `D3`/`D8` are cut off; U10's OVP (≤ 25.5 V) is the only limit.
 
 ## Not faults

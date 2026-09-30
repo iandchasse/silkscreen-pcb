@@ -3,6 +3,14 @@
 Audit date 2026-09-30 · Rev 1.0 = `aeb5b39` (ordered 2026-09-21; design and production files identical through `6871962`)
 · 1.01 = `3edd0c8` · KiCad 9.0.6.
 
+> **Update, later on 2026-09-30: §3 items 1–3 are done in Rev 1.01.** Five GND stitching vias were added below the
+> cut line, at (86.4, 68.8), (74.5, 72.3), (80.5, 92.3), (81.6, 74.5) and (99.2, 72.6). A copy trimmed at y 62 now shows
+> **0 unconnected** items, for 3V3 and for GND, and full DRC shows 0 unconnected, 0 parity and no new errors. The 1 µm
+> 3V3 stub is gone. Both title blocks say rev 1.01 (2026-09-30), so the release zip is now
+> `Silkscreen_Reader_PCB_1.01.zip`. A KiCad track cleanup in the same pass had deleted the ladder-side halves of the four
+> front-button solder-bridge tabs (§9.1.1 of `HARDWARE.md`); they were restored verbatim from `3edd0c8`. Where this
+> document says "1.01 = `3edd0c8`", read it as the first 1.01 commit.
+
 A quick full audit, deliberately **not** blind: it builds on the
 [2026-09-19 final review](../final-review-2026-09-19/FINAL_REVIEW.md) and its follow-up rounds 3–7 in
 [`AUTHOR_TODO.md`](../final-review-2026-09-19/AUTHOR_TODO.md), and checks that their conclusions still hold for the files

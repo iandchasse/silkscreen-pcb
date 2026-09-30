@@ -6,8 +6,8 @@
 	(paper "A2")
 	(title_block
 		(title "Silkscreen Reader PCB")
-		(date "2026-09-12")
-		(rev "1.0")
+		(date "2026-09-30")
+		(rev "1.01")
 		(company "idc LLC")
 		(comment 1 "Open-hardware e-reader base board")
 		(comment 2 "Licensed under CERN-OHL-S-2.0")

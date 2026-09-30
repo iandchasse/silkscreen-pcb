@@ -4,13 +4,15 @@ Active assembly workflow: **JLCPCB**, using KiCad **9.0.6** and the **Fabricatio
 for placements. Board: 2 layers, 60 × 111 mm, 1.6 mm thickness, 1 oz copper.
 
 **Read [DESIGN_REVIEW.md](../DESIGN_REVIEW.md) before releasing files.** It is the only
-engineering verdict/action list; the latest pre-order audit is in
-[`../docs/audit-2026-09-18/`](../docs/audit-2026-09-18/PREORDER_CONFIRMATION_AUDIT.md).
+engineering verdict/action list. The pre-order audit is in
+[`../docs/audit-2026-09-18/`](../docs/audit-2026-09-18/PREORDER_CONFIRMATION_AUDIT.md), the final review in
+[`../docs/final-review-2026-09-19/`](../docs/final-review-2026-09-19/FINAL_REVIEW.md), and the audit of the Rev 1.0
+order and of Rev 1.01 in [`../docs/audit-2026-09-30/`](../docs/audit-2026-09-30/AUDIT.md).
 The current source (with the USB-present reverse-battery gate, L1 47 µH, R14 2.2 Ω and C9 4.7 µF)
 has **184 references = 165 fitted + 11 DNP + 8 bare-copper** (H1–H6, TP1, TP2) as of 2026-09-21: the revision added
-the `U14` RTC alternate (DNP), the `F2` PPTC on `J6` pin 12, `R83` + `C34` on the DW01A (VCC filter and CS filter), mounting hole `H6`, and rescaled the `USB_STAT` ladder (`R17`/`R67`/`R70`/`R71`/`C23`) and `R57` for sleep current. The files in `production/` were regenerated on 2026-09-21 after those changes (see the table below); regenerate them again after any further schematic or PCB edit.
-The two previous orders (25 and 30 boards) predate the reverse-battery gate, the Q4/R37 changes and the
-slotted microSD land.
+the `U14` RTC alternate (DNP), the `F2` PPTC on `J6` pin 12, `R83` + `C34` on the DW01A (VCC filter and CS filter), mounting hole `H6`, and rescaled the `USB_STAT` ladder (`R17`/`R67`/`R70`/`R71`/`C23`) and `R57` for sleep current. The files in `production/` were regenerated on 2026-09-21 after those changes, and that set (`aeb5b39`) is what I ordered as Rev 1.0. For Rev 1.01 (2026-09-30: a 3V3 link and GND stitching vias below the cut line, one silkscreen word, the revision label) the Gerber zip and `netlist.ipc` were regenerated; the BOM and placement files did not change (see the table below). Regenerate them again after any further schematic or PCB edit.
+The two orders before Rev 1.0 (25 and 30 boards) predate the reverse-battery gate, the Q4/R37 changes and the
+slotted microSD land; the Rev 1.0 order of 2026-09-21 (five boards, two assembled) has all of them.
 
 The step-by-step JLCPCB upload flow and the optional/base part groups are in the root
 [README](../README.md#order-an-assembled-board-step-by-step).
@@ -29,7 +31,8 @@ Keep these together as one revision, including the accepted factory copies:
 
 | Record | Local file | Meaning |
 |---|---|---|
-| Gerbers/drills | `production/Silkscreen_Reader_PCB_1.0.zip` | Toolkit output, regenerated 2026-09-21 after the slot, QR code, `U14`, `F2`, `R83`, `C34`, `H6` and the `H5` move. Checked against the saved PCB the same day: identical coordinate operations on `B.Cu`, `F.Cu`, `B.Mask`, `B.Paste`, `F.Silkscreen` and `Edge.Cuts` versus a fresh `kicad-cli` export, six 2.2 mm mounting holes in the PTH drill file, 36 drawn paste regions for the FPC connectors. Re-verify after any board change |
+| Gerbers/drills | `production/Silkscreen_Reader_PCB_1.01.zip` | Toolkit output for Rev 1.01, regenerated 2026-09-30 after the 3V3 link, the GND stitching vias and the revision label (SHA-256 `b5dd45717a1f020ebb1ed955d8a57220b5b45561654b625995147a747c2d12c4`). Checked against the saved PCB the same day: every Gerber and both drill files match a fresh `kicad-cli` export apart from comment lines (`F.Cu` as an identical set of shapes), six 2.2 mm mounting holes in the PTH drill file, 36 drawn paste regions for the FPC connectors, and `netlist.ipc` matches a fresh IPC-D-356 export. Re-verify after any board change |
+| Rev 1.0 order | `aeb5b39` in git history (`production/Silkscreen_Reader_PCB_1.0.zip`, SHA-256 `e290d9f8c06ecd16648d669e4c9031dfae5897e00b27bb2fdbdec81dc83f471c`); the Toolkit run `production/backups/Silkscreen_Reader_PCB_1.0_2026-09-21_02-22-58.zip` — **local only** | The set ordered from JLCPCB on 2026-09-21, regenerated that day after the slot, QR code, `U14`, `F2`, `R83`, `C34`, `H6` and the `H5` move. Checked against the saved PCB: identical coordinate operations on `B.Cu`, `F.Cu`, `B.Mask`, `B.Paste`, `F.Silkscreen` and `Edge.Cuts` versus a fresh `kicad-cli` export, six 2.2 mm mounting holes in the PTH drill file, 36 drawn paste regions for the FPC connectors; re-checked in the 2026-09-30 audit |
 | Placement | `production/positions.csv` | Toolkit CPL: 165 rows, all bottom side; `U14`, `SW6`, `TP3`–`TP5` and the DNP resistors are absent, and so are the bare-copper `TP1`/`TP2` and `H1`–`H6` |
 | Factory BOM | `production/bom.csv` (+ `designators.csv`, `netlist.ipc`) | Toolkit BOM, populated from the footprints' `LCSC` field — 66 codes over 165 placements |
 | Upload BOM | `production/jlc_bom.csv` | **The single BOM to upload** (called `bom_JLC_upload_v4_optimized.csv` until 2026-09-21; the older brand-conservative `..._v3.csv` was deleted the same day). Every part verified against JLC's library (see `BOM.md`); every fitted reference's value and part code cross-checked against the schematic and against the Toolkit's `bom.csv` on 2026-09-21. DNP parts are listed with an empty part number so JLC skips them |

@@ -34,12 +34,12 @@ Successor to [de-link](https://de-link.me).
 > **KiCad 9.0.6**. The ordered module is **ESP32-S3-WROOM-1-N16R8**.
 > 184 references, 134 nets, single A2 sheet.
 >
-> **Rev 1.0.** The revision label — on both title blocks and in the name of the release zip — changes only when a new board is fabricated; until then every change is folded into Rev 1.0. The design content is current to **2026-09-21**; the title-block date (2026-09-12) is simply when Rev 1.0 was opened.
+> **Rev 1.01.** The revision label is on both title blocks and in the name of the release zip. Rev 1.0 is what was ordered on 2026-09-21 (commit `aeb5b39`). Rev 1.01 (2026-09-30) has the same circuit and parts; it adds a 3V3 link and ground stitching vias below the cut line (see the cut-line row in [§16](#16-design-notes--conventions)) and changes one word of the front silkscreen. Until Rev 1.01 is fabricated, further changes are folded into it; the title-block date (2026-09-30) is when it was opened.
 >
-> **Current full plots (2026-09-21):** [`silkscreen_pcb_schematic.pdf`](silkscreen_pcb_schematic.pdf)
+> **Current full plots (2026-09-30):** [`silkscreen_pcb_schematic.pdf`](silkscreen_pcb_schematic.pdf)
 > (schematic, one A2 sheet) and [`silkscreen_pcb_layout.pdf`](silkscreen_pcb_layout.pdf) (PCB layout: front view, then the back as you see it) are
-> plotted from the current source. The per-block images in `images/` were regenerated from the schematic plot
-> on the same date; if a block ever looks out of date, re-crop it from the PDF rather than trusting the picture.
+> plotted from the current source. The per-block images in `images/` were cropped from the 2026-09-21 schematic plot; the circuit
+> has not changed since, but if a block ever looks out of date, re-crop it from the PDF rather than trusting the picture.
 
 ---
 
@@ -1567,7 +1567,7 @@ All x/y figures are board (KiCad page) coordinates, the same frame the STEP and 
 | Antenna keep-out | x 44.24 … 50.60, y 93.30 … 112.00, **plus ~10 mm of air** — nothing conductive, no battery |
 | Display-flex slot | **47.04 × 1.30 mm** at x 51.26 … 98.30, y 141.20 … 142.50 |
 | Tongue-neck slot | **5.30 × 1.10 mm** at x 89.59 … 94.89, y 61.40 … 62.50 |
-| Cut line (optional shortening) | y = 61.86, x 84.42 … 104.24 — cutting here removes `J6` with its protection parts (`U8`, `CR2`, `CR3`, `D3`, `D8`, `F2`), `SW10` and mounting hole `H1`. `SW10` is the power button, so a shortened board **needs the UP(2)-as-power option** ([§9.2](#92-power-button): remove `R36`/`R73`, then fit `R72`/`R74`). Without it `PWR_BUTTON` sits at 0 V through `R76`, so with firmware that wakes only on the power button, as the current firmware does, the board leaves deep sleep only through the `SW11` reset (waking on `SW1`/`SW2`, [§9.1](#91-button-ladders), or on a timer would need firmware support) |
+| Cut line (optional shortening) | y = 61.86, x 84.42 … 104.24 (the x3 build cuts at y = 62.00) — cutting here removes `J6` with its protection parts (`U8`, `CR2`, `CR3`, `F2`), the front-light clamps `D3`/`D8`, `SW10` and mounting hole `H1`. Rev 1.01 keeps the rest of the board whole after the cut: a `B.Cu` 3V3 link at y ≈ 64.2–65.3 feeds the charge-enable switch `Q2`/`R81`, and GND stitching vias join the power-section ground (`U3`, `U2`, `Q1`) to the main ground. A board made before Rev 1.01 needs two wires after the cut: `R40` pad 2 to `R81` pad 2 (or bridge the two cut 3V3 stubs at x 87.53 and 100.60), and `C6` pad 2 to `C21` pad 2. `SW10` is the power button, so a shortened board **needs the UP(2)-as-power option** ([§9.2](#92-power-button): remove `R36`/`R73`, then fit `R72`/`R74`). Without it `PWR_BUTTON` sits at 0 V through `R76`, so with firmware that wakes only on the power button, as the current firmware does, the board leaves deep sleep only through the `SW11` reset (waking on `SW1`/`SW2`, [§9.1](#91-button-ladders), or on a timer would need firmware support) |
 | Status-LED window | (102.80, 118.34), back face |
 
 **Frontlight load.** The GDEQ bonded frontlights are V_f ≈ 15 V at I_f ≤ 15 mA per channel;
