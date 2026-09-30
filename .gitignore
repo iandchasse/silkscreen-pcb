@@ -33,6 +33,9 @@ docs/final-review-2026-09-19/repo_hygiene/digest.txt
 docs/final-review-2026-09-19/findings_digest.txt
 docs/final-review-2026-09-19/**/*.json
 
+# Audit (2026-09-30): the reports are tracked; the ~31 MB evidence pack (scripts, DRC JSON, netlists) is not
+docs/audit-2026-09-30/evidence/
+
 # Stray manual KiCad position export - production/positions.csv is the placement file
 placement/
 
