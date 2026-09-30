@@ -667,6 +667,24 @@ pull-up** — firmware should establish an inactive `CS` before clock activity a
 panel control levels in sleep (a `CS` pull-up is an optional next-revision improvement, not a
 wiring defect).
 
+> **First-article check — can `RST`/`BUSY` back-feed the module's flash supply in deep sleep?**
+> `IO47` (`RST`) and `IO48` (`BUSY`) are the S3's `SPICLK_P`/`SPICLK_N` pads. ESP32-S3 datasheet
+> v2.2 Table 2-1 gives their supply as `VDD_SPI`/`VDD3P3_CPU`, chosen by an eFuse bit (note 3;
+> ESP-IDF documents that bit for `GPIO33`–`GPIO37` only), and its note 4 has these two pins
+> running at the `VDD_SPI` voltage on the 1.8 V `R8V`/`R16V` chips — so `VDD_SPI` is the likely
+> supply. ESP-IDF powers `VDD_SPI`, the in-module flash/PSRAM supply, down in deep sleep. If these
+> pads do sit on `VDD_SPI` in this module, `R5` (10 kΩ to 3V3) and the SSD1677, which drives
+> `BUSY` HIGH throughout its own deep sleep, can feed that dead rail through the pads' protection
+> diodes: an estimated **100–300 µA**, roughly two to five times the whole sleep floor
+> ([§16](#16-design-notes--conventions)), and unverified. Check it on the first boards. In deep
+> sleep, measure across `R5` itself: it should read ≈0 V, and every 0.1 V is 10 µA flowing into
+> `IO47`. Deep-sleep current with the `J2` flex unplugged and plugged in should differ by only a
+> few µA (the panel's own deep-sleep draw is 2–6 µA); a larger gap points at the `BUSY` path, or
+> at a panel that never reached deep sleep (≈40–70 µA in its ordinary sleep mode). If either
+> shows up, a future revision moves `RST`/`BUSY` to pads powered from `VDD3P3_RTC` or
+> `VDD3P3_CPU` — ESP-IDF forces `VDD_SPI` off in deep sleep regardless of configuration, so there
+> is no simple firmware fix.
+
 **Every panel rail is decoupled**, with the HV rails explicitly rated **50 V**: `C13`–`C17`
 (4.7 µF/50 V), `C18`–`C20` (1 µF). **Keep the 50 V rating** on any substitution — effective
 capacitance under bias is a separate qualification. (Pin 5 is `VSH2`, not `VGH`; the RTC
@@ -871,7 +889,8 @@ Optional block for `-FT01C`-class panels with bonded capacitive touch.
 `J4` is a 6-pin 0.5 mm ZIF. **Default pins: `1 GND, 2 3V3, 3 RST, 4 INT, 5 SDA, 6 SCL`** — a
 standard I²C touch-controller interface. `TP_RST` (`IO11`) and `TP_INT` (`IO41`) are dedicated;
 SDA/SCL join the shared I²C bus (pull-ups `R47`/`R48` = 2.2 kΩ, sized for fast-mode with the
-extra FFC/header capacitance). `U7` (TPD4E1U06) provides ESD protection on the four signal lines.
+extra FFC/header capacitance). `U7` (TPD4E1U06) clamps connector pins 3–6, which in the default
+mapping are all four signal lines (`RST`, `INT`, `SDA`, `SCL`); pin 2, the supply, has no channel.
 
 ![Touch jumper mux](images/15b-touch-jumpers.png)
 
@@ -886,6 +905,12 @@ extra FFC/header capacitance). `U7` (TPD4E1U06) provides ESD protection on the f
 Also `R46`/`R52` (default SDA/SCL) vs `R45`/`R58` (swapped). **Choose exactly one option in each
 pair** — these are mutually exclusive wiring choices, not spare jumpers to fit together. Confirm
 the whole mapping against the specific panel before changing them.
+
+**The alternate option leaves `INT` without a board-level ESD clamp.** `U7`'s four channels sit on
+`J4` pins 3–6 only (`TP_RST`, `/PIN_4`, `/PIN_5`, `/PIN_6` in the netlist); nothing clamps pin 2.
+With `R43`/`R66` fitted, `TP_INT` lands on that unclamped pin 2, leaving only `IO41`'s on-chip
+protection, and 3V3 moves onto the clamped pin 4, where a clamp matters far less. The `SDA`/`SCL`
+swap is unaffected: both options keep them on pins 5 and 6.
 
 > **`TP_INT` on `IO41` is *not* an RTC-domain wake pin.** It cannot provide ordinary EXT0/EXT1
 > deep-sleep wake on the ESP32-S3 (light-sleep GPIO wake is a separate option). Do not confuse an
@@ -1038,14 +1063,31 @@ bottom-edge buttons carry these tabs.
 
 `SW10` connects `3V3` through `R62` (10 k) to `PWR_BUTTON` (`IO18`), with `R76` (100 k)
 pull-down: pressing gives ~3.00 V logic high, releasing a defined 0 V. Because 3V3 is always
-live, the power button is a **wake source**, not a true power switch — `IO18` is RTC-capable and
-can trigger `ext0` wake from deep sleep.
+live, the power button is a **wake source**, not a true power switch — `IO18` is RTC-capable, so
+it can wake the chip from deep sleep. It could serve as an `ext0` source, but the current firmware
+arms it as `ext1` (`ANY_HIGH`) instead: `ext0` keeps the RTC peripherals powered through deep
+sleep, while `ext1` lets them power down — ≈7 µA rather than ≈8 µA typical (ESP32-S3 datasheet
+v2.2, Table 5-10).
 
 `R73`/`R74` are 0 Ω configuration jumpers; **`R72` is 10 kΩ, not a 0 Ω link** (it is the series
 resistor for the alternate path, matching `R62`). Annotation: *"UP(2) can serve as a power button
 if R36/R73 are unpopulated and R72/R74 are populated."* In the reviewed build **`R36`/`R73` are
 fitted for normal `SW7`; `R72`/`R74` are DNP.** **Never fit both `R73` and `R74`** — that shorts
 the rails through the alternate link.
+
+**Never fit `R72` while `R36` is still fitted, either.** `SW7` pin 2 is one node shared by `R36`
+(to `BUTTON_ADC_2`) and `R72` (to `PWR_BUTTON`); pin 1 is the node that `R73` takes to GND and
+`R74` to 3V3 (netlist). With `R36` and `R72` both in, ladder 2's pull-up `R28` reaches `IO18`
+through `R36` + `R72`, so with nothing pressed `IO18` idles at **≈1.76 V**
+(3.3 V × 100k / (10k + 68k + 10k + 100k)) — inside the undefined input band (valid low ≤ 0.825 V,
+valid high ≥ 2.475 V, §9.1). If a given chip reads 1.76 V as high, it wakes straight back up every
+time it goes to sleep (a wake storm) and, awake, sees the button as held all the time, so presses
+do nothing; if it reads it as low, the button works with no noise margin at all. The same path
+pulls ladder 2's idle from 3.30 V to ≈3.12 V, drags the other side-button levels down by up to
+≈0.1 V and costs ≈18 µA of sleep current. **To make UP(2) the power button, remove `R36` and
+`R73` first, then fit `R72` and `R74`** — in that order, so a half-finished rework never sits in
+either the `R73`+`R74` short or the 1.76 V idle. A board shortened at the cut line loses `SW10`
+and needs this option (see the cut-line row in [§16](#16-design-notes--conventions)).
 
 ### 9.3 Boot & reset
 
@@ -1136,7 +1178,7 @@ What it exposes:
 | Frontlight | `LED_SW` (5), `W−` (6), `C−` (11) — drive external LED strips |
 
 **Pin ordering groups signals by voltage domain**, which matters on a 0.1" header a user can
-bridge with a solder whisker. `LED_SW` (pin 5) — the only net that can reach 24.5 V — is bounded
+bridge with a solder whisker. `LED_SW` (pin 5) — the only net that can reach 25.5 V — is bounded
 by `GND` (4), `W−` (6) and `C−` (11), all LED-domain or ground. No logic pin touches it.
 Likewise `P+` (raw cell) sits at the corner where its only neighbours are the LED returns.
 
@@ -1301,9 +1343,35 @@ if the firmware does them. This list is written for whoever ports firmware to th
 * **Recover the front light after an open-LED over-voltage event by taking `ADIM` low, not by
   re-applying PWM.** The driver latches off after three OVP trips (SNVSCN8 §7.3.6 / §7.4.2) and no
   amount of PWM restarts it: hold `PWM_LED` **LOW for > 2.5 ms** (use ≥ 3 ms) or power-cycle `VIN`.
-  Monitor `LED_MONIT` (`IO2`, ADC1_CH1) and shut the boost down before OVP is reached. **Never enable
-  the boost with `J3` unplugged** — an unplugged flex is an open load, and it is the ordinary
-  bring-up mistake.
+  Monitor `LED_MONIT` (`IO2`, ADC1_CH1) against a software trip below the 24.25 V minimum OVP — the
+  current firmware uses 23 V on `LED_SW`, 23 V × 120k / 1.12M ≈ 2.46 V at `IO2` — and treat a
+  reading above it as "no light connected": switch the light off (`ADIM` low) and leave it off
+  until the user asks again.
+* **Ideally the boost is never powered with no LED load, but doing so is safe on the standard
+  build.** With `J3` empty and nothing on `J6`, `U10` climbs to its own OVP (24.25–25.5 V), retries
+  twice as `LED_SW` sags by the 1 V OVP hysteresis, and then latches off. `D3` (SMAJ26A) keeps
+  ≈3 V of margin to its 28.9 V minimum breakdown even with some inductor overshoot past the OVP
+  level, so it passes only standoff leakage, and `C9` is rated 50 V. The software trip is not what
+  makes this safe — `U10`'s latch is: while the driver retries, `LED_SW` can sag to 23.25 V, only
+  ≈1 % above the 23 V trip, so firmware that samples slowly can miss an open load; sample
+  `LED_MONIT` quickly right after the enable. The README's TPS923611 swap
+  ([If the frontlight driver is out of stock](../README.md#if-the-frontlight-driver-is-out-of-stock))
+  is equally safe only with its SMAJ33A: the TPS923611's OVP (29.6–31.4 V) overlaps the SMAJ26A's
+  breakdown (28.9 V minimum), so with the stock `D3` the driver can push current into `D3` before
+  its own protection trips. Enable the boost only as part of a user action, as the current firmware
+  does — turning the light on, or restoring it on wake if the user enabled that — so a board with
+  no light sees at most one OVP latch-off per enable.
+* **After an open-load enable, turn the light off and wait about 10 s before plugging a light into
+  `J3` or `J6`.** `C9` is left charged near the OVP level, and its main discharge path is the
+  `LED_MONIT` divider (other leakage only speeds it up): τ ≈ `C9` × (`R39` + `R41`) =
+  4.7 µF × 1.12 MΩ ≈ 5.3 s at the nameplate value. At ≈24 V the 50 V 0805 X5R part keeps an
+  estimated 1–1.5 µF — less than §7's 1–2 µF, which is at the ≈15 V operating point — so the first
+  volts fall faster (τ under 2 s) and the decay slows toward the nameplate figure as the voltage
+  drops; 10 s is nearly two nameplate time constants. Plugging in sooner dumps `C9` through one
+  string. For the Silkscreen light attachment (200 Ω per string) that pulse is ≈47–53 mA from a
+  TPS923610 board and ≈71–77 mA from a TPS923611 one — under its LEDs' 80 mA pulse rating only by
+  estimate, since that rating is for 0.1 ms pulses; a light with no series resistor of its own
+  takes a larger pulse. If a light's own documentation asks for a longer wait, follow it.
 * **Front-light colour select (`COLOR_SEL`, `IO40`) — change colour only with the PWM duty at 0.**
   `Q5` takes `COLOR_SEL` directly while `Q6` takes it through `U12`'s inverter, so the two string
   switches have no guaranteed non-overlap; mid-transition the driver can momentarily see both strings
@@ -1314,7 +1382,8 @@ if the firmware does them. This list is written for whoever ports firmware to th
   the five external 10 kΩ bus pull-ups back-feed the card to about **3.2 V** through `R77` and the
   gate saves nothing.
 * **Deep-sleep wake sources are the RTC-capable pins `GPIO0`–`GPIO21` only.** The power button
-  (`PWR_BUTTON`, `IO18`) can wake the chip. `TP_INT` is on `IO41` and **cannot**, and the DS3231's
+  (`PWR_BUTTON`, `IO18`) can wake the chip; arm it as `ext1` (`ANY_HIGH`), not `ext0`, so the RTC
+  peripherals can power down in sleep (§9.2). `TP_INT` is on `IO41` and **cannot**, and the DS3231's
   `INT`/`SQW` pin is deliberately not routed — there is no alarm wake on this board, by design.
 * **Battery edge cases to tell users about.** A 0 V or protection-latched pack **will not start
   charging**: the Fix 4 charge-enable gate needs roughly **1.7 V at `J5`** in the worst case (`Q9`'s
@@ -1385,22 +1454,66 @@ without a respin.
 **Sleep current target.** No numeric spec — the goal is "as low as practical." Updated
 2026-09-18 to fold in Fix 4 (§3.3), and again 2026-09-21 when the `USB_STAT` ladder was rescaled
 ×10 (13.2 → 1.1 µA) and `R57` raised to 10 MΩ (≈3.7 → 0.4 µA) — about **15 µA saved, a fifth of
-the sleep floor, for the price of four resistor values and one capacitor**. Contributors now
-total roughly **60 µA typical, up to ~85 µA worst-case** — `TLV75533P` quiescent ~25 µA,
-`USB_STAT` ladder ~1 µA, ESP32-S3 deep-sleep ~8–13 µA, and the Fix 4 detector network ~10 µA
-(**not** the ≈3.4 µA in §3.3's earlier note — that figure only counted `R79`/`R80` pulling from
-the raw cell; `R81`/`R82` pull another ≈6.6 µA from the always-on 3V3 rail once a correct cell
-is detected: `/DET_NODE` sits at `B−` and `CE` sits at 3V3, so each 1 MΩ resistor drops a full
-3.3 V, `I = 3.3 V / 1 MΩ ≈ 3.3 µA` apiece). The LDO's own quiescent draw is now the largest
-single term, not a tied one. **Considered and declined:** raising `R79`–`R82` to cut this
-further trades directly against the leakage margin already flagged in
-[DESIGN_REVIEW.md](../DESIGN_REVIEW.md) §4 (the detector's logic levels are set against
-1–5 µA-class FET leakage at 1 MΩ; going higher makes that margin worse, not better) for a
-saving smaller than the LDO's own quiescent draw — not worth it. If deep-sleep current is ever
-worth chasing seriously, the LDO's always-on `EN` tied to `IN` (§3.5) is the bigger, more
-separable target. The board is designed so no other *avoidable* load remains: the SD card is
-power-gated, the LED driver drops to a sub-µA shutdown, and every monitoring divider is
-1 MΩ-class.
+the sleep floor as it then stood, for the price of four resistor values and one capacitor**.
+Re-itemized on 2026-09-30, part by part against the netlist and the firmware's sleep path; **none
+of it has been measured on a board yet.** Conditions: on battery with USB and any UART adapter
+unplugged, panel in its deep sleep, light off (`ADIM` held low), SD gated off, `U13` fitted, `J6`
+empty, no touch tail; typical at a 3.7 V cell and 25 °C, maximum at 4.2 V with datasheet maxima.
+
+| Contributor | Typ µA | Max µA | Basis |
+|---|---:|---:|---|
+| `U3` TLV75533P quiescent (`EN` tied to `IN`, §3.5) | 25 | 33 | datasheet; max at 85 °C |
+| Fix 4 detector: `R81` + `R82` from 3V3, `R79` + `R80` across the cell | 10.0 | 10.7 | calculated |
+| `U4` ESP32-S3 deep sleep, `ext1` wake, RTC peripherals off (§9.2) | 7 | 13 | datasheet typ (v2.2 Table 5-10); Espressif publishes no max, so 13 is a placeholder |
+| `U5` DW01A | 3 | 6 | datasheet (a generic DW01A sheet; the fitted clone's own sheet was not obtained) |
+| `LED_MONIT` divider `R39` + `R41`, fed from `LED_SW` through `U10`'s body diode (§7) | 2.9 | 3.4 | calculated; the body-diode drop is estimated |
+| `U13` DS3231MZ, VBAT-only | 2 | 3 | datasheet; temperature conversions included |
+| Panel (GDEQ0426T82) in deep sleep | 2 | 6 | panel datasheet |
+| `BAT_MONIT` divider `R12` + `R10` | 1.9 | 2.1 | calculated |
+| `U2` TPS2116 on battery (`VIN2` only) | 1.4 | 3.7 | datasheet |
+| `USB_STAT` ladder `R70` + `R17` (`ST` low) | 1.1 | 2.1 | calculated; the max assumes the unpowered TP4056 status pins clamp |
+| `U11` TP4056 `BAT` pin with `VCC` = 0 | 1 | 2 | datasheet |
+| `R56` + `R57` (`Q3` gate bias) | 0.4 | 0.4 | calculated |
+| `U12` 74LVC1G04, input low | 0.1 | 4 | datasheet (Nexperia; TI's limit is 10, the fitted clone is undocumented) |
+| `U10` TPS923610 in shutdown | 0.1 | 0.5 | datasheet; max at 85 °C |
+| Leakage: MCU pads, `Q4`, `Q7`, ESD/TVS parts, MLCCs | ≈0.1 | ≈5 | estimate; the max is mostly datasheet limits specified at far higher voltages than these parts see (`Q7` at −30 V, `Q4` at 24 V) |
+| **Total** | **≈58** | **≈91–95** | ≈56 µA typ without the panel; ≈91 once the `Q4`, `Q7` and ESD/TVS limits are discounted |
+
+That is ≈1.4 mAh a day typical and ≈2.3 mAh at the maximum. The maximum mixes 25 °C and 85 °C
+datasheet limits, so it is not a hot-case figure (the leakage terms rise steeply at 60–85 °C), and
+two terms are left out of it on purpose: the LDO's extra ground current at its real ≈20–40 µA load
+(TI characterises it at no load and from 1 mA up — ≈145 µA at 1 mA — with nothing in between; an
+estimated +0–20 µA, to be measured), and the possible `IO47`/`IO48` back-feed (an unverified
+100–300 µA; see the first-article check in [§6.1](#61-24-pin-e-paper-connector)). The Fix 4 row
+is `R79`/`R80` across the cell (≈3.4 µA) plus `R81`/`R82`, which each drop a full 3.3 V from the
+always-on rail once a correct cell is detected (`/DET_NODE` sits at `B−`, `CE` at 3V3: ≈3.3 µA
+apiece). §3.3's ≈7 µA — what keeps draining the cell after an over-discharge cutoff — is a subset
+of these rows (`R79`/`R80`, `R56`/`R57` and the DW01A), not an addition. The LDO's own quiescent
+draw is the largest single term.
+
+Two situations move the board well off that floor:
+
+- **A touch tail on `J4`.** `J4`'s 3V3 is not switched, so a connected FT6336U-class controller
+  adds **≈55 µA even hibernated** (datasheet typical at 2.8 V; no max), nearly doubling the floor.
+  Never sent to hibernate, it idles in its monitor mode at ≈220 µA, and holding `TP_RST` LOW
+  through sleep costs ≈1.1 mA (estimate: 3.3 V across the controller's internal ≈3 kΩ reset
+  pull-up) — so firmware should hibernate the controller and leave `TP_RST` high.
+- **A nearly empty cell.** Once `LDO_IN` falls below about 3.3–3.35 V the TLV75533P is in dropout
+  and its quiescent current climbs from 25 µA to ≈190–260 µA (datasheet typical curve, 25–85 °C).
+  Nothing on the board avoids that: a reader left in storage after a low-battery shutdown gets
+  there eventually, and from then on drains four to five times faster — so the firmware's
+  low-battery shutdown (§3.5) should leave the resting cell comfortably above that knee.
+
+**Considered and declined:** raising `R79`–`R82` to cut the Fix 4 term further trades directly
+against the leakage margin already flagged in [DESIGN_REVIEW.md](../DESIGN_REVIEW.md) §4 (the
+detector's logic levels are set against 1–5 µA-class FET leakage at 1 MΩ; going higher makes that
+margin worse, not better) for a saving smaller than the LDO's own quiescent draw — not worth it.
+If deep-sleep current is ever worth chasing seriously, the LDO's always-on `EN` tied to `IN`
+(§3.5) is the bigger, more separable target. Past that, the *avoidable* loads this re-itemization
+found are the `LED_MONIT` divider, which `LED_SW` keeps fed through the boost's body diode while
+the light is off (the ≈3 µA row above — the LED driver itself drops to a sub-µA shutdown), a touch
+controller on `J4`'s unswitched 3V3 (above), and possibly the §6.1 back-feed. The SD card is
+power-gated and every monitoring divider is 1 MΩ-class.
 
 **Enclosure.** My own enclosure is 3D-printed and is not published in this repository; the board is meant to be housed in
 anything. Implications for a custom case:
@@ -1414,7 +1527,7 @@ anything. Implications for a custom case:
   should clamp a screw onto. The two to respect most are on the battery side: `H5` (the `Q3`
   gate net, 2.1 mm from centre) and `H1` (the fused battery rail to `J6`, 2.3 mm). An M2
   cap-head or a nylon washer is fine everywhere.
-- A conductive case must not bridge the exposed high-voltage nets: `LED_SW` (up to 24.5 V) and
+- A conductive case must not bridge the exposed high-voltage nets: `LED_SW` (up to 25.5 V at OVP) and
   the panel's ±22 V rails are the ones to keep clear of metalwork.
 - **Keep the battery, screws and metal away from the antenna corner.** The ESP32-S3-WROOM-1's
   PCB antenna overhangs a cut-out in the board edge: the board is cut completely away underneath
@@ -1454,7 +1567,7 @@ All x/y figures are board (KiCad page) coordinates, the same frame the STEP and 
 | Antenna keep-out | x 44.24 … 50.60, y 93.30 … 112.00, **plus ~10 mm of air** — nothing conductive, no battery |
 | Display-flex slot | **47.04 × 1.30 mm** at x 51.26 … 98.30, y 141.20 … 142.50 |
 | Tongue-neck slot | **5.30 × 1.10 mm** at x 89.59 … 94.89, y 61.40 … 62.50 |
-| Cut line (optional shortening) | y = 61.86, x 84.42 … 104.24 — cutting here removes `J6` with its protection parts (`U8`, `CR2`, `CR3`, `D3`, `D8`, `F2`), `SW10` and mounting hole `H1` |
+| Cut line (optional shortening) | y = 61.86, x 84.42 … 104.24 — cutting here removes `J6` with its protection parts (`U8`, `CR2`, `CR3`, `D3`, `D8`, `F2`), `SW10` and mounting hole `H1`. `SW10` is the power button, so a shortened board **needs the UP(2)-as-power option** ([§9.2](#92-power-button): remove `R36`/`R73`, then fit `R72`/`R74`). Without it `PWR_BUTTON` sits at 0 V through `R76`, so with firmware that wakes only on the power button, as the current firmware does, the board leaves deep sleep only through the `SW11` reset (waking on `SW1`/`SW2`, [§9.1](#91-button-ladders), or on a timer would need firmware support) |
 | Status-LED window | (102.80, 118.34), back face |
 
 **Frontlight load.** The GDEQ bonded frontlights are V_f ≈ 15 V at I_f ≤ 15 mA per channel;
