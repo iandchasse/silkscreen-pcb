@@ -10,6 +10,11 @@ Audit date 2026-09-30 · Rev 1.0 = `aeb5b39` (ordered 2026-09-21; design and pro
 > `Silkscreen_Reader_PCB_1.01.zip`. A KiCad track cleanup in the same pass had deleted the ladder-side halves of the four
 > front-button solder-bridge tabs (§9.1.1 of `HARDWARE.md`); they were restored verbatim from `3edd0c8`. Where this
 > document says "1.01 = `3edd0c8`", read it as the first 1.01 commit.
+>
+> **2026-10-01: Rev 1.01 also gains `R84`** (1 Ω 0603 USB hot-plug damper in C2's ground leg, JLC Basic `C22936`) and
+> corrected placement rows for U2, U5, D2, D8, J4, J7 and U4 via FT offset fields (§3 item 4); the GND via at
+> (80.5, 92.3) moved to (80.075, 92.36), trim still 0 unconnected. 1.01's BOM and CPL were regenerated, so "unchanged"
+> below held on 2026-09-30 only.
 
 A quick full audit, deliberately **not** blind: it builds on the
 [2026-09-19 final review](../final-review-2026-09-19/FINAL_REVIEW.md) and its follow-up rounds 3–7 in

@@ -1,8 +1,8 @@
 # Silkscreen mainboard: bench bring-up (2026-09-30)
 
 These are the checks that need a meter, a supply or a scope; software can't make them. Work in order and stop at the first wrong value.
-- **Board:** Rev 1.0 (`aeb5b39`), the boards from the 2026-09-21 order. Rev 1.01 (2026-09-30) has the same schematic and parts, and its copper changes only near the cut line, so it matters only in §10. Differences are marked **[1.01]**.
-- **Coordinates:** KiCad board mm, front view (from netlist.ipc / positions.csv). Every part is on the back, so mirror x when you look at the back.
+- **Board:** Rev 1.0 (`aeb5b39`), the boards from the 2026-09-21 order. Rev 1.01 (2026-09-30) changes copper only near the cut line (§10); on 2026-10-01 it also gained `R84` (1 Ω in `C2`'s ground leg, §2, §3.2) and corrected CPL rows for seven parts (§1). Differences are marked **[1.01]**.
+- **Coordinates:** KiCad board mm, front view (from netlist.ipc / positions.csv). Every part is on the back, so mirror x when you look at the back. From 1.01, positions.csv moves `J4`, `J7` and `U4` to JLC's anchors; the coordinates here are KiCad's.
 - **Notation:** `ref.pin`. **[FW]** = needs firmware; unmarked steps work with any image or a blank module.
 - **Sources:** HW = docs/HARDWARE.md, AT = AUTHOR_TODO.md, FR = FINAL_REVIEW.md (both in docs/final-review-2026-09-19), RM = README.md, E/L/F = reports 07/08/09 of this audit, GND = reports 05/06. Probe points were checked against `production/netlist.ipc`.
 
@@ -15,7 +15,7 @@ These are the checks that need a meter, a supply or a scope; software can't make
   - A x1 (1 MΩ) scope probe is useless on these nodes.
 
 ## 1. Visual and orientation (unpowered; loupe or microscope)
-The Fabrication Toolkit corrects rotation only for SOT-23, SOIC and JST parts; everything else relied on JLC's preview (RM Step 6, F findings 1-3).
+The Fabrication Toolkit corrects rotation only for SOT-23, SOIC and JST parts; everything else relied on JLC's preview (RM Step 6, F findings 1-3). **[1.01]** positions.csv carries `FT Rotation Offset`/`FT Position Offset` corrections for `U2`, `U5`, `D2`, `D8`, `J4`, `J7` and `U4`; check them anyway.
 - **`D2`** (102.8, 118.3): pad 1 is the cathode (marked end); `D2.2` = `USB_VBUS`. Reversed means dark on USB: harmless, but the preview check missed it.
 - **Pin 1 vs silk:** `U2` (85.1, 86.2), `U5` (86.9, 76.6), `D8` (94.5, 55.3). JLC has corrected these before.
 - **`U10`** (49.5, 122.0): pin 1, plus the joints. Its pads are 0.229 mm wide vs TI's 0.30 mm (FR REC-B).
@@ -24,7 +24,7 @@ The Fabrication Toolkit corrects rotation only for SOT-23, SOIC and JST parts; e
   - Reversed D4-D6: no panel HV rails. Reversed D3: shorts `LDO_IN` through `L2` and U10's body diode (§2 catches this).
 - **`J4`** (92.5, 126.0): contacts on the pads. The CPL anchor is 0.73 mm off, which is 1.5 pitches if uncorrected.
 - **`U4`** (57.5, 102.5) and **`J7`** (63.05, 84.6): centred on their pads.
-- **Present:** late parts `R83` (88.4, 83.9), `C34`, `C7`, `F2` (AT rounds 4-5).
+- **Present:** late parts `R83` (88.4, 83.9), `C34`, `C7`, `F2` (AT rounds 4-5). **[1.01]** `R84` (80.1, 92.2), next to `C2`.
 - **Empty:** `R72`, `R74`, `SW6`, `U14`, `TP3`-`TP5`. **Fitted:** `R36`, `R73`. **Never fit `R73` and `R74` together** (HW §9.2).
 - **Solder:** `J1` (0.15 mm annular rings), the `U11` and `U4` thermal pads, and the THT joints on `J1`, `J5`, `J6` and the switches.
 - **`J5`** (94.85, 66.5): back silk `-  +  CHECK`, with `+` beside pad 2 (`B+`, y 65.5) and `-` beside pad 1 (`B-`, y 67.5) (L §3).
@@ -35,6 +35,7 @@ The Fabrication Toolkit corrects rotation only for SOT-23, SOIC and JST parts; e
 |---|---|---|---|
 | `USB_VBUS` | `U2.3` / `U11.4` / `C2.1` | climbs to ≈300-400 kΩ (`R38`+`R51` = 400 k ∥ IC pins) | < 1 kΩ: short in `CR1`, `C2`/`C25`, `U2` or `U11` |
 | `F1` | `F1.1` to `F1.2` | < 1 Ω | open: `F1` missing or unsoldered |
+| `R84` **[1.01]** | `R84.1` (81.01, 92.20) | ≈1 Ω (null the leads first) | open: `C2` is out of circuit. ≈0 Ω: `R84` bridged |
 | `P+` | `U2.6` / `U11.5` | ≈1-2 MΩ (`R12`+`R10` = 2 M) | < 10 kΩ: short on `P+` |
 | `LDO_IN` | `U3.1` (80.00, 83.20) | high, climbing; diode test reads OL or > 1.5 V | ≈1.0-1.4 V on diode test: `D3` reversed |
 | `3V3` | `U3.5` (77.30, 83.20) | > 1 kΩ, usually tens of kΩ or more, climbing (~60 µF) | < 100 Ω: bridge at `U4`, `U3` or a cap |
@@ -51,10 +52,13 @@ The Fabrication Toolkit corrects rotation only for SOT-23, SOIC and JST parts; e
 - **`CE` at 3.3 V with no cell:** the Fix 4 gate (`Q2`/`Q9`) is stuck on. Fit no cell until fixed (HW §3.3).
 - **Missing rails:** no `LDO_IN` points at `U2` rotation; `LDO_IN` but no 3V3 points at `U3`.
 
-**3.2 USB hot-plug transient (scope).**
-- **Set-up:** probe `USB_VBUS` at `U2.3`/`C2.1`; short, thick A-to-C cable; stiff 5 V source; trigger on the rise.
-- **Pass:** peak ≤ 6.0 V (the TPS2116 absolute maximum). `CR1` clamps only from 7.22 V, and the model's worst case is 6-7.4 V.
-- **Over 6 V:** record the source and cable; the next rev adds 1-1.5 Ω of damping (HW §3.1).
+**3.2 USB hot-plug transient (scope; revised 2026-10-01).** Only a source whose VBUS is already live at plug-in rings: USB-A chargers, PC ports, power banks on an A-to-C cable. USB-C chargers on C-to-C cables ramp VBUS after attach and don't overshoot.
+- **Set-up:** 10x probe on `USB_VBUS` (`U2` VIN1) at `C25.2` (86.23, 88.70), ground spring on `C25.1`; 20 MHz BW limit; single-shot, rising trigger at 5.6 V, 2 µs/div. Worst case: a low-ESR USB-A brick on a short, thick A-to-C cable, no cell.
+- **1.0 pass:** peak ≤ 6.0 V (the TPS2116 absolute maximum). `CR1` clamps only from 7.22 V.
+  - Modelled: typical (aluminium-cap) USB-A chargers at 5.0 V on 1 m cables ≤ ≈5.9 V (6.26 V on 20 AWG at 5.25 V); low-ESR bricks on 20-24 AWG cables 6.1-6.9 V; worst stack-up 7.95 V (TP4056 `VCC` 7.97 V vs its 8 V limit). `LDO_IN` stays ≤ ≈5.6 V.
+  - **Over 6 V:** record the source and cable. 6-7 V agrees with the models; 7 V or more means don't use that charger class with Rev 1.0 boards. No rework is needed (HW §3.1).
+- **[1.01] Pass: every peak ≤ 5.6 V** (`R84` = 1 Ω; modelled worst case 5.60 V). Optional channel 2 on the `R84`/`C2` junction, `R84.1` (81.01, 92.20): that voltage / 1 Ω is the damper current.
+- **[1.01] Switchover:** with a ≈3.0-3.4 V cell fitted, trigger falling on VIN1 (`C25.2`) at 4.0 V, channel 2 on `LDO_IN`. `R84` can deepen the existing VIN1 dip (≈3.3-3.8 V, ≈8 µs after plug-in) by up to ≈0.35 V. Chatter longer than ≈100 µs, or `LDO_IN` more than ≈0.2 V below the cell, is a new finding.
 
 **3.3 Battery input** (supply in place of the cell, USB unplugged): 3.80 V, limit 100 mA, + to `J5.2`.
 - **Pass:** current = §3.1 minus `D2`; `3V3` = 3.30 V; `J5.1`-GND a few mV.

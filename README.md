@@ -86,8 +86,10 @@ you need depends on the case you use, and no case is supplied here. See
 > [!CAUTION]
 > **This revision of the board has not been tested yet.** I placed the first order, for Rev 1.0, on
 > 21 September 2026 and the boards have not come back. The files here are Rev 1.01: the same
-> circuit and parts, plus copper changes that only matter on a board cut down for a smaller display
-> (see [Cutting the board down](#cutting-the-board-down-for-a-smaller-display)). Until I have powered one up, charged a
+> circuit plus one 1 Ω resistor (`R84`) that damps ringing on the USB input when a charger is
+> plugged in, corrected part positions in the placement file, and copper changes that only matter
+> on a board cut down for a smaller display (see
+> [Cutting the board down](#cutting-the-board-down-for-a-smaller-display)). Until I have powered one up, charged a
 > cell on it, talked to it over USB and driven a panel from it, every circuit on it is a design,
 > not a proven product. If you order before that, you take on a real risk: a mistake I have not
 > found yet could mean a board that does not work, and the factory does not refund a board that
@@ -256,13 +258,15 @@ dead end, just a slower one. In order of preference:
 
 You see a drawing of the board with every part on it. This is your last chance to catch a part
 that is rotated wrongly, and the factory's own checker has corrected several on this board before.
-A matched part code does not prove the part is the right way round.
+A matched part code does not prove the part is the right way round. Since 1 October 2026
+`positions.csv` carries those corrections for the parts below, so they should already look right;
+check them anyway.
 
 | Part | What to check |
 |---|---|
 | `D2` | The USB power LED. **Pad 1 is the cathode** (the marked end). Some part libraries use the opposite convention. |
 | `U2`, `U5`, `D8` | Small 3 to 8 pin chips whose rotation the factory has corrected before. |
-| `J4` | Its drawn outline sits 0.73 mm off its own pads; the pads are what matter. |
+| `J4` | The touch connector. KiCad's anchor sits 0.73 mm off its pads; the corrected row puts it on JLC's anchor, so it should sit on its pads. The pads are what matter. |
 | `U4`, `J7` | The ESP32 module and the microSD socket. Check they are centred on their pad patterns. |
 
 If something looks wrong, use the preview's rotate and move tools to fix it, and **save a
@@ -462,8 +466,8 @@ What you need in order to design around it:
 | **Storage** | push-push microSD in 4-bit SDMMC, power-gated |
 | **Input** | 8 buttons on two ADC resistor ladders, a wake/power **button** (`SW10`, a wake input, not a hardware power switch; the 3.3 V rail is always live) and reset (`SW11`); a BOOT button footprint (`SW6`) is left unpopulated because USB-Serial-JTAG makes it unnecessary |
 | **RTC** | DS3231MZ (±5 ppm), VBAT-only mode; populated in the standard build, optional. A second footprint (`U14`, Micro Crystal RV-8263-C7) is DNP. Fit either, never both |
-| **Revision** | **Rev 1.01**, on both title blocks and in the name of the release zip. Rev 1.0 is the board I ordered on 21 September 2026 (commit `aeb5b39`). Rev 1.01 (30 September 2026) has the same circuit and parts; it adds a 3V3 link and ground stitching vias below the cut line, so a board cut down for a smaller display still charges and keeps a solid ground, and changes one word of the front silkscreen. Until Rev 1.01 is fabricated, further changes are folded into it. |
-| **Board** | 2-layer, 60.05 × 111.30 × 1.6 mm, 1 oz Cu; 184 references = 165 fitted + 11 DNP + 8 bare-copper (holes `H1` to `H6`, test pads `TP1`/`TP2`) |
+| **Revision** | **Rev 1.01**, on both title blocks and in the name of the release zip. Rev 1.0 is the board I ordered on 21 September 2026 (commit `aeb5b39`). Rev 1.01 (30 September 2026) adds a 3V3 link and ground stitching vias below the cut line, so a board cut down for a smaller display still charges and keeps a solid ground, and changes one word of the front silkscreen. On 1 October 2026 it also gained `R84`, a 1 Ω 0603 resistor in series with the ground leg of `C2` (the 10 µF capacitor on `USB_VBUS`), which damps the ringing a USB-A charger or PC port can cause at plug-in, and `positions.csv` now carries the placement corrections for seven parts. Rev 1.0 boards need no rework; until one has been measured, power them from a USB-C charger or an ordinary USB-A charger or PC port rather than a fast-charge USB-A brick on a short, thick cable. Until Rev 1.01 is fabricated, further changes are folded into it. |
+| **Board** | 2-layer, 60.05 × 111.30 × 1.6 mm, 1 oz Cu; 185 references = 166 fitted + 11 DNP + 8 bare-copper (holes `H1` to `H6`, test pads `TP1`/`TP2`) |
 
 Connection and GPIO reference: **[docs/HARDWARE.md](docs/HARDWARE.md)**.
 
@@ -569,6 +573,9 @@ major version; newer file formats may not reopen in KiCad 9.
 For JLCPCB, use the KiCad **Fabrication Toolkit** plugin for the placement export: it applies JLC's
 part-rotation database and reads the `LCSC` field from the footprints (set by
 `fabrication/apply_part_fields.py`, see [fabrication/README.md](fabrication/README.md)).
+Seven parts (`U2`, `U5`, `D2`, `D8`, `J4`, `J7`, `U4`) also carry `FT Rotation Offset` or
+`FT Position Offset` fields, on both the schematic symbols and the footprints, for corrections the
+Toolkit does not make on its own, so every Toolkit run writes their corrected rows.
 **Regenerate the whole Toolkit set after every schematic or PCB save.** A stale `positions.csv`
 silently misses new parts.
 

@@ -1,19 +1,19 @@
 # Silkscreen — bills of materials
 
-Two BOMs are maintained, both generated from the schematic netlist (2026-09-18; cross-checked again 2026-09-21 at 184 references):
+Two BOMs are maintained, both generated from the schematic netlist (2026-09-18; cross-checked again 2026-09-21 at 184 references; `R84` added to both on 2026-10-01, 185 references):
 
 | BOM | Who it's for | File |
 |---|---|---|
 | **JLCPCB optimized (standard)** | anyone ordering assembled boards from JLCPCB — the cheapest *verified* parts at every position, checked against JLC's live library on 2026-09-17/18 | [`production/jlc_bom.csv`](../production/jlc_bom.csv) (named `bom_JLC_upload_v4_optimized.csv` until 2026-09-21) |
 | **Hand-build (DigiKey-style)** | building one or a few boards yourself from easily found Western-distributor parts (GCT MEM2075 microSD, APEM switches, Hirose, TI, onsemi, ADI…) | [`BOM_handbuild_digikey.csv`](BOM_handbuild_digikey.csv) |
 
-Population (all BOMs): **165 placed**, **11 DNP** (`TP3 TP4 TP5`, `R43 R45 R58 R66 R72 R74`, `SW6`, `U14`), 8 bare-copper refs
+Population (all BOMs): **166 placed**, **11 DNP** (`TP3 TP4 TP5`, `R43 R45 R58 R66 R72 R74`, `SW6`, `U14`), 8 bare-copper refs
 (`H1–H6`, `TP1`, `TP2`). The DNP set is flagged in both the schematic and the board, so the Fabrication
 Toolkit CPL agrees with the BOM. `U13` (DS3231MZ+) is populated and optional; `SW6` (APEM MJTP1243 BOOT button)
 is DNP because USB-Serial-JTAG makes it unnecessary. Never fit `R73` and `R74` together.
 
 Regenerate the Toolkit set after any schematic/PCB change — it must contain the six Fix 4 parts
-(`Q2 Q9 R79 R80 R81 R82`); the 2026-09-21 set does. The schematic and PCB now carry `MPN`, `Manufacturer` and
+(`Q2 Q9 R79 R80 R81 R82`); the 2026-10-01 set does. The schematic and PCB now carry `MPN`, `Manufacturer` and
 `LCSC` fields (written by `apply_part_fields.py` from [`part_fields.csv`](part_fields.csv), the source of truth for
 part numbers), and the Toolkit's `production/bom.csv` is exported from them. JLC's automatic matching is what put a
 reverse-mount LED on `D2` in the first order, so still check the placement preview.
@@ -135,7 +135,7 @@ loading fee. The model reproduces the line prices on both previous order exports
 | **`jlc_bom.csv`, as costed 2026-09-18 (26 Extended types)** | **$33.23** | **$22.70** | **$16.25** | **$12.61** |
 | …if JLC's fee is $3.00 instead of $1.50 | $41.03 | $26.60 | $17.55 | $13.00 |
 
-*Since this costing: `R14` (2026-09-20) and `C4`/`C6`/`C32` (2026-09-21) moved to Basic parts and the Extended PPTC `F2` was added - a net of one Extended type fewer, a few cents per board either way. A real quote for five boards with two assembled was $223.95 before shipping on 2026-09-21 (see the root README).*
+*Since this costing: `R14` (2026-09-20) and `C4`/`C6`/`C32` (2026-09-21) moved to Basic parts and the Extended PPTC `F2` was added - a net of one Extended type fewer, a few cents per board either way. `R84` (2026-10-01) is a Basic part at $0.0026 and adds no Extended type. A real quote for five boards with two assembled was $223.95 before shipping on 2026-09-21 (see the root README).*
 
 *Recomputed 2026-09-18 after the L1 (47 µH Sunltech), R14 (2.2 Ω) and C9 (4.7 µF) changes, from the current production `bom.csv` and live JLC prices; the Extended-type count is unchanged because L1 and R14 swap one Extended part for another and C9 joins the existing `C513770` line. The saving is mostly `L1` (≈ −$0.16/board).*
 
@@ -244,6 +244,7 @@ the unmatched-line fills. Its misses, now corrected in `jlc_bom.csv`:
 |--:|---|---|---|
 | 5 | R42 R44 R46 R52 R73 | 0 | `C21189` |
 | 1 | R27 | 0 (**0805**) | **`C17477`** — changed 2026-09-18 from 0603 `C21189`; UNI-ROYAL 0805W8F0000T5E, Basic, $0.0045; prime part Yageo RC0805JR-070RL. Battery-path jumper, carries the full load current |
+| 1 | R84 | **1** | **`C22936`** — UNI-ROYAL 0603WAF100KT5E, Basic, $0.0026, JLC stock 256,298 on 2026-10-01; prime part Yageo RC0603FR-071RL. Added 2026-10-01 in series with `C2`'s ground leg as a USB hot-plug damper; no DC current flows in it. Chosen over the hot-plug study's first pick, 0.51 Ω 0402 `C728429` (Extended), to avoid 0402 parts and a new Extended type; 1 Ω damps slightly less |
 | 5 | R60 R61 R63 R64 R83 | 100 | `C22775` — `R83` is the DW01A VCC filter resistor, added 2026-09-21 |
 | 2 | R16 R78 | 1k | `C21190` |
 | 1 | R59 | 2k | `C22975` |
@@ -278,7 +279,7 @@ the unmatched-line fills. Its misses, now corrected in `jlc_bom.csv`:
 | 7 | C7 C23 C24 C30 C31 C33 C36 | 0.1u | 0603 | `C14663` | Yageo CC0603KRX7R9BB104 50 V X7R (Basic) |
 | 7 | C5 C8 C21 C22 C25 C26 C37 | 1u | 0603 | `C15849` | Samsung CL10A105KB8NNNC 50 V X5R (Basic) |
 | 2 | C10 C12 | 4.7u | 0603 | `C19666` | Samsung CL10A475KO8NNNC 16 V X5R (Basic) |
-| 1 | C2 | 10u/25V | 0603 | `C96446` | Samsung CL10A106MA8NRNC **25 V** X5R (Basic) — the hot-plugged USB VBUS bulk cap; changed 2026-09-21 from the 10 V part |
+| 1 | C2 | 10u/25V | 0603 | `C96446` | Samsung CL10A106MA8NRNC **25 V** X5R (Basic) — the hot-plugged USB VBUS bulk cap; changed 2026-09-21 from the 10 V part. Since 2026-10-01 its ground leg runs through `R84` (1 Ω) |
 | 1 | C3 | 10u | 0603 | `C19702` | Samsung CL10A106KP8NNNC 10 V X5R (Basic) |
 | 3 | C18 C19 C20 | 1u/50V | 0805 | `C28323` | Samsung CL21B105KBFNNNE **50 V** X7R (Basic) |
 | 7 | C9 C11 C13 C14 C15 C16 C17 | 4.7u/50V | 0805 | `C513770` | Samwha CS2012X5R475K500NRE **50 V** X5R (`C9` moved here from the 1 µF line 2026-09-18) |

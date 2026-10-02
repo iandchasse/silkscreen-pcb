@@ -32,14 +32,15 @@ Successor to [de-link](https://de-link.me).
 >
 > Connection facts were re-checked against the KiCad netlist on **2026-09-21**; designed in
 > **KiCad 9.0.6**. The ordered module is **ESP32-S3-WROOM-1-N16R8**.
-> 184 references, 134 nets, single A2 sheet.
+> 185 references, 135 nets (with `R84`, added 2026-10-01), single A2 sheet.
 >
-> **Rev 1.01.** The revision label is on both title blocks and in the name of the release zip. Rev 1.0 is what was ordered on 2026-09-21 (commit `aeb5b39`). Rev 1.01 (2026-09-30) has the same circuit and parts; it adds a 3V3 link and ground stitching vias below the cut line (see the cut-line row in [§16](#16-design-notes--conventions)) and changes one word of the front silkscreen. Until Rev 1.01 is fabricated, further changes are folded into it; the title-block date (2026-09-30) is when it was opened.
+> **Rev 1.01.** The revision label is on both title blocks and in the name of the release zip. Rev 1.0 is what was ordered on 2026-09-21 (commit `aeb5b39`). Rev 1.01 (2026-09-30) adds a 3V3 link and ground stitching vias below the cut line (see the cut-line row in [§16](#16-design-notes--conventions)) and changes one word of the front silkscreen. On 2026-10-01 it gained one part, `R84` (1 Ω in series with `C2`'s ground leg, a USB hot-plug damper — [§3.1](#31-usb-c-input--protection)), and corrected JLC placement rows for seven parts (`D2`, `D8`, `U2`, `U5`, `J4`, `J7`, `U4`), now set by Fabrication Toolkit offset fields. Until Rev 1.01 is fabricated, further changes are folded into it; the title-block date (2026-09-30) is when it was opened.
 >
-> **Current full plots (2026-09-30):** [`silkscreen_pcb_schematic.pdf`](silkscreen_pcb_schematic.pdf)
+> **Current full plots (2026-10-01):** [`silkscreen_pcb_schematic.pdf`](silkscreen_pcb_schematic.pdf)
 > (schematic, one A2 sheet) and [`silkscreen_pcb_layout.pdf`](silkscreen_pcb_layout.pdf) (PCB layout: front view, then the back as you see it) are
-> plotted from the current source. The per-block images in `images/` were cropped from the 2026-09-21 schematic plot; the circuit
-> has not changed since, but if a block ever looks out of date, re-crop it from the PDF rather than trusting the picture.
+> plotted from the current source. The per-block images in `images/` were cropped from the 2026-09-21 schematic plot; the only
+> circuit change since is `R84`, which the charger crop (§3.2) and the full-sheet image (§2) do not show. If a block ever looks out of date, re-crop it from
+> the PDF rather than trusting the picture.
 
 ---
 
@@ -193,7 +194,10 @@ resistors (not one shared) is correct — it lets the source determine cable ori
 > datasheet states outright that *"No blocking diode is required due to the internal PMOSFET
 > architecture."* Both paths off `USB_VBUS` already block. `D1` also dropped 0.3–0.6 V and, at
 > the ~1 A `F1` passes, would have exceeded its own SOD-123 rating. With it gone, `F1` feeds
-> `USB_VBUS` directly and `R38` was raised to 300 k (§3.4), recovering that headroom.
+> `USB_VBUS` directly and `R38` was raised to 300 k (§3.4), recovering that headroom. A
+> series Schottky also damps hot-plug ringing (with de-link's 6.5–7 V input parts, it is what kept
+> de-link safe), and nothing else on this input did that; Rev 1.01's `R84` takes over the job (see
+> the `CR1` note below).
 
 **Shield handling:** `R1` (1 MΩ) ∥ `C1` (1 nF) from shell to GND. The classic arrangement —
 DC-isolates chassis from signal ground (breaking ground loops) while giving high-frequency
@@ -215,23 +219,48 @@ see [DESIGN_REVIEW.md](../DESIGN_REVIEW.md) §12), a full volt clear of the 5.5 
 may legally sit at.
 
 > **`CR1`'s breakdown voltage can't clamp a fast hot-plug ringing transient** the way it clamps
-> a genuine over-voltage fault — a stiff 5 V source hitting cable inductance and `USB_VBUS`'s
-> ~11 µF of bare ceramic can ring for tens of microseconds before `CR1` even reaches 7.22 V,
-> and a worst-case linear model puts that peak as high as ~6–7.4 V, above `TPS2116`'s 6 V
-> absolute maximum. This is a narrower, faster phenomenon than the sustained-fault question
-> above — the TP4056 datasheet names it directly (the TP4056 is not a TI part), recommending
-> 1–1.5 Ω of series damping
-> ahead of the bulk capacitor for exactly this reason — but it needs a fairly stiff/fast source
-> and a low-inductance cable at the same time, most real chargers have some soft-start, and
-> field experience on prior boards with a similar front end hasn't shown a problem. Treated as
-> a first-article scope check (probe `USB_VBUS` at hot-plug with a short, thick A-to-C cable),
-> not something worth spending design time on pre-emptively.
+> a genuine over-voltage fault. When a source whose VBUS is already live — a USB-A charger, PC
+> port or power bank on an A-to-C cable — is plugged in, the cable inductance rings against the
+> ceramics on `USB_VBUS`, `C2` (10 µF/25 V, the TP4056's input capacitor) and `C25` (1 µF, at
+> `U2`). The first peak arrives 6–9 µs after contact and lasts a few microseconds; it mostly
+> stays under `CR1`'s 7.22 V minimum breakdown, and even at the worst case `CR1` trims only
+> ~0.1 V. A USB-C charger on a C-to-C cable ramps VBUS up after attach and does not overshoot.
+> This is a narrower, faster phenomenon than the sustained-fault question above.
+>
+> A 2026-10-01 hot-plug study graded it **MEDIUM** on Rev 1.0. Typical USB-A chargers (aluminium
+> output capacitor) stay at or below ~5.9 V at a 5.0 V source on 1 m cables (6.26 V on 20 AWG at
+> 5.25 V); low-ESR fast-charge bricks with 20–24 AWG cables put **6.1–6.9 V on `U2`'s
+> `VIN1`/`MODE`** (6.0 V absolute maximum); the worst stack-up reaches **7.95 V**, with the
+> TP4056's `VCC` at 7.97 V against its 8 V limit. `LDO_IN` stays at or below ~5.2–5.6 V because
+> `U2` has not connected yet when the first peak arrives. de-link's clean record does not carry
+> over: its series Schottky and 6.5–7 V input parts are what kept it safe.
+>
+> **Rev 1.01 adds `R84` (1 Ω, 0603) in series with `C2`'s ground leg** (`C2` pin 2 → `R84` →
+> GND; Yageo `RC0603FR-071RL`, ordered at JLC as `C22936`, a UNI-ROYAL `0603WAF100KT5E`), which
+> turns `C2` into a damper — the kind of series resistor the TP4056 datasheet prescribes (it gives
+> 1.5 Ω, which the hot-plug study found too stiff on this board: `C25` then rings on its own).
+> `C25` still goes straight from `USB_VBUS` to GND. No DC current flows in `R84`, so
+> it costs no VBUS drop and nothing in sleep. With it the worst stack-up falls to **5.60 V** on
+> `VIN1`; only unrealistic ideal 5.5 V-source corners graze 6.11–6.65 V, for at most 0.9 µs.
+> 1 Ω is a little less damping than the 0.5–0.7 Ω optimum; it was chosen because it is 0603 (the
+> board has no 0402 parts) and a JLC Basic part. Inrush charge, charge start, load steps and
+> unplug are unchanged; the one side effect is that the existing battery-switchover dip
+> ([§3.4](#34-power-path-mux)) with a 3.0 V cell can be up to ~0.35 V deeper — bench-check it.
+>
+> **Rev 1.0 boards need no rework.** On them, prefer a USB-C charger, an ordinary USB-A charger
+> or a PC port, and avoid fast-charge USB-A bricks with short, thick cables until measured.
+> First-article check: probe `U2` `VIN1` at `C25`'s `USB_VBUS` pad with a ground spring, 20 MHz
+> bandwidth limit, 2 µs/div, single-shot rising trigger at 5.6 V. On Rev 1.01 every peak should
+> stay at or below 5.6 V, and the voltage at the `R84`/`C2` junction divided by 1 Ω is the
+> damper current. See [DESIGN_REVIEW.md](../DESIGN_REVIEW.md) §3 and §13.
 
 ---
 
 ### 3.2 Battery charger
 
 ![Charger](images/04-charger.png)
+
+*(This crop predates Rev 1.01's `R84`: `C2` now returns to GND through `R84`, 1 Ω — see §3.1.)*
 
 **`U11` `TP4056`-class (ESOP-8)** — a standalone linear Li-ion charger, 4.2 V float.
 
@@ -1613,7 +1642,7 @@ A handful of items look like errors in KiCad or in a fab's DFM check. They are d
 
 | Type | Count | Notable |
 |---|---:|---|
-| Resistors | 83 | all **0603** (except `R27`, 0805); incl. 15× 33 Ω series, 5× DNP 0 Ω config jumpers plus the DNP 10 kΩ `R72`, 4× Fix 4 (R79–R82), `R83` DW01A VCC filter |
+| Resistors | 84 | all **0603** (except `R27`, 0805); incl. 15× 33 Ω series, 5× DNP 0 Ω config jumpers plus the DNP 10 kΩ `R72`, 4× Fix 4 (R79–R82), `R83` DW01A VCC filter, `R84` 1 Ω USB hot-plug damper (Rev 1.01) |
 | Capacitors | 36 | 23× **0603**, 13× **0805** (HV / bulk — see below); 10× marked 50 V (`C9`, `C11`, `C13`–`C20`) |
 | ICs | 14 | see below; includes the **DNP** alternate RTC `U14` |
 | Switches | 11 | 8 ladder + power + reset (right-angle `TS365ZJ`) + boot `SW6` (APEM MJTP1243, **DNP** → 10 populated) |
@@ -1625,7 +1654,7 @@ A handful of items look like errors in KiCad or in a fab's DFM check. They are d
 | TVS | 3 | `CR1` SMF6.5CA (VBUS, SOD-123FL, LCSC `C19077501`); `CR2`/`CR3` TSD05CDYFR prime / DOWO SD05C-01FTG (`C5299440`) on 3V3 and on `J6`'s fused battery pin (`/P+_FUSE`) |
 | Inductors | 2 | 47 µH (charge pump, `L1`, changed 2026-09-18 from 22 µH), 10 µH (frontlight, `L2`, changed 2026-09-17 from 4.7 µH) |
 | Fuse | 2 | `F1` 0805L100WR 1 A PPTC on VBUS; `F2` 0805L075WR 0.75 A PPTC in series with `J6` pin 12 (both 0805) |
-| **Total** | **184** | standard build: 165 fitted + 11 DNP (TP3–TP5, R43/R45/R58/R66/R72/R74, SW6, U14) + 8 bare-copper refs (H1–H6, TP1, TP2); includes the six Fix 4 parts Q2/Q9/R79–R82 |
+| **Total** | **185** | standard build: 166 fitted + 11 DNP (TP3–TP5, R43/R45/R58/R66/R72/R74, SW6, U14) + 8 bare-copper refs (H1–H6, TP1, TP2); includes the six Fix 4 parts Q2/Q9/R79–R82 |
 
 **Passive case sizes.** The board standardised on **0603** for hand-solderability at the smallest
 comfortable size. **Thirteen capacitors remain 0805** because the value does not exist in 0603 or

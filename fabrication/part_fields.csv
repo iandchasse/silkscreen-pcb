@@ -59,6 +59,7 @@ R57,10M,RC0603FR-0710ML,Yageo,C7250,,UNI-ROYAL(Uniroyal Elec) 0603WAF1005T5E,"eq
 R67,510k,RC0603FR-07510KL,Yageo,C23192,,UNI-ROYAL(Uniroyal Elec) 0603WAF5103T5E,"equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF5103T5E), JLC Basic. USB_STAT ladder rescaled 2026-09-21 (was 56k)"
 R71,200k,RC0603FR-07200KL,Yageo,C25811,,UNI-ROYAL(Uniroyal Elec) 0603WAF2003T5E,"equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF2003T5E), JLC Basic. USB_STAT ladder rescaled 2026-09-21 (was 22k)"
 R72,10k,RC0603FR-0710KL,Yageo,C25804,yes,UNI-ROYAL(Uniroyal Elec) 0603WAF1002T5E,DNP option link; equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1002T5E)
+R84,1,RC0603FR-071RL,Yageo,C22936,,UNI-ROYAL(Uniroyal Elec) 0603WAF100KT5E,"equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF100KT5E), JLC Basic (JLC stock 256,298 on 2026-10-01). Added 2026-10-01 in Rev 1.01: 1 ohm in series with C2's ground leg, damps the USB hot-plug ringing of the cable inductance against C2"
 "SW1,SW2,SW3,SW4,SW5,SW7,SW8,SW9,SW10,SW11",SW_Push,MJTP1117,APEM,C557598,,SHOU HAN TS365ZJ,equivalent (SHOU HAN TS365ZJ)
 SW6,SW_Push,MJTP1243,APEM,,yes,,BOOT button; not needed (USB-Serial-JTAG). LCSC equivalents unverified: C382056 / C255782
 "TP3,TP4,TP5",TestPoint,,,,yes,,optional 1-pin 2.54 mm header
