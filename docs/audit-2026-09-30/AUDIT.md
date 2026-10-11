@@ -15,6 +15,11 @@ Audit date 2026-09-30 · Rev 1.0 = `aeb5b39` (ordered 2026-09-21; design and pro
 > corrected placement rows for U2, U5, D2, D8, J4, J7 and U4 via FT offset fields (§3 item 4); the GND via at
 > (80.5, 92.3) moved to (80.075, 92.36), trim still 0 unconnected. 1.01's BOM and CPL were regenerated, so "unchanged"
 > below held on 2026-09-30 only.
+>
+> **2026-10-10:** the two lines of the `J6` pinout table on the front silkscreen were swapped to match the
+> socket as seen from the display side (Rev 1.0 keeps the old order; HARDWARE.md §11). Only `F.Silkscreen`
+> changed. On 2026-10-11 five reference designators on the back silkscreen moved (`R16`, `R38`, `R56`, `R83`, `C34`),
+> again silkscreen only; zip SHA-256 `5215bd0c…`.
 
 A quick full audit, deliberately **not** blind: it builds on the
 [2026-09-19 final review](../final-review-2026-09-19/FINAL_REVIEW.md) and its follow-up rounds 3–7 in

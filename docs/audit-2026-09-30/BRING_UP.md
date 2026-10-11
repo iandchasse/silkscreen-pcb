@@ -1,7 +1,7 @@
 # Silkscreen mainboard: bench bring-up (2026-09-30)
 
 These are the checks that need a meter, a supply or a scope; software can't make them. Work in order and stop at the first wrong value.
-- **Board:** Rev 1.0 (`aeb5b39`), the boards from the 2026-09-21 order. Rev 1.01 (2026-09-30) changes copper only near the cut line (§10); on 2026-10-01 it also gained `R84` (1 Ω in `C2`'s ground leg, §2, §3.2) and corrected CPL rows for seven parts (§1). Differences are marked **[1.01]**.
+- **Board:** Rev 1.0 (`aeb5b39`), the boards from the 2026-09-21 order. **Its `J6` pinout table prints the two socket rows the other way round:** the bottom line (`GND 46 45 GND LED+ W-`) is the outer row; meter the pins before plugging anything into `J6` (HW §11). Rev 1.01 (2026-09-30) changes copper only near the cut line (§10); on 2026-10-01 it also gained `R84` (1 Ω in `C2`'s ground leg, §2, §3.2) and corrected CPL rows for seven parts (§1). Differences are marked **[1.01]**.
 - **Coordinates:** KiCad board mm, front view (from netlist.ipc / positions.csv). Every part is on the back, so mirror x when you look at the back. From 1.01, positions.csv moves `J4`, `J7` and `U4` to JLC's anchors; the coordinates here are KiCad's.
 - **Notation:** `ref.pin`. **[FW]** = needs firmware; unmarked steps work with any image or a blank module.
 - **Sources:** HW = docs/HARDWARE.md, AT = AUTHOR_TODO.md, FR = FINAL_REVIEW.md (both in docs/final-review-2026-09-19), RM = README.md, E/L/F = reports 07/08/09 of this audit, GND = reports 05/06. Probe points were checked against `production/netlist.ipc`.

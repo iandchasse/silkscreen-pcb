@@ -3,6 +3,8 @@
 > **Status, 2026-09-21.** This review describes the board as it stood on 2026-09-17/18. A later block-by-block pass — [docs/final-review-2026-09-19/](docs/final-review-2026-09-19/FINAL_REVIEW.md) — led to further changes that are **not** re-analysed here: `R83` + `C34` on the DW01A, PPTC `F2` on `J6` pin 12, the alternate RTC `U14` (DNP), mounting hole `H6`, the `USB_STAT` ladder rescaled ×10, `R57` 1 MΩ → 10 MΩ, `R15` 10 k → 1 MΩ, `C2` to a 25 V part and a wider VBUS trunk. Where this document and [HARDWARE.md](docs/HARDWARE.md) disagree on a value, HARDWARE.md is current. In particular §4's idle-drain arithmetic uses `R57` = 1 MΩ (≈4 µA through the gate divider); with 10 MΩ it is ≈0.4 µA.
 >
 > **2026-10-01 (Rev 1.01):** `R84` (1 Ω) was added in series with `C2`'s ground leg as a USB hot-plug damper (§3), and seven JLC placement rows were corrected with Fabrication Toolkit offset fields (§12).
+>
+> **2026-10-10 (Rev 1.01):** the two lines of `J6`'s pinout table on the front silkscreen were swapped so it reads the way the right-angle socket looks from the display side. Rev 1.0 boards print them the other way round ([HARDWARE.md §11](docs/HARDWARE.md#11-expansion-header)).
 
 **Authoritative review, 2026-09-17.** This document replaces the older review and the separate September 16 audit/follow-up reports. All conclusions and release actions live here. [HARDWARE.md](docs/HARDWARE.md) is the connection and firmware reference; the [audit folder](docs/audit-2026-09-16/) contains measurements, source records, images and scripts, not another verdict.
 

@@ -39,9 +39,7 @@ Setting them up for this board is closed-beta work, so there is **no firmware re
 yet**. Read [Firmware](#firmware) before you order.
 
 The complete picture of the project, the story behind it, the cost breakdown and the build
-configurator are on the project website. As of 21 September 2026 the website is still locked
-while I wait for the first boards. It opens, and this README links to it, as soon as I have
-tested a board in my hands.
+configurator are on the project website, [silkscreenreader.com](https://silkscreenreader.com).
 
 Everything about how the board works, pin by pin, is in one document:
 [docs/HARDWARE.md](docs/HARDWARE.md). It covers every circuit block, the GPIO map, what firmware
@@ -84,23 +82,17 @@ you need depends on the case you use, and no case is supplied here. See
 ## Order an assembled board, step by step
 
 > [!CAUTION]
-> **This revision of the board has not been tested yet.** I placed the first order, for Rev 1.0, on
-> 21 September 2026 and the boards have not come back. The files here are Rev 1.01: the same
-> circuit plus one 1 Ω resistor (`R84`) that damps ringing on the USB input when a charger is
-> plugged in, corrected part positions in the placement file, and copper changes that only matter
-> on a board cut down for a smaller display (see
-> [Cutting the board down](#cutting-the-board-down-for-a-smaller-display)). Until I have powered one up, charged a
-> cell on it, talked to it over USB and driven a panel from it, every circuit on it is a design,
-> not a proven product. If you order before that, you take on a real risk: a mistake I have not
-> found yet could mean a board that does not work, and the factory does not refund a board that
-> was built exactly as the files said. I will update this section as soon as the first boards are
-> checked out.
+> **The first boards have arrived, they work so far, and the closed beta is underway.** Only
+> surface-level checks have been done on them yet, so building one is still at your own risk. It
+> should be fine, but a mistake I have not found yet could mean a board that does not work, and
+> the factory does not refund a board that was built exactly as the files said. If you have
+> concerns or questions, join the [Discord](https://discord.gg/zCnKFt4Y4P) before you order.
 >
-> What you can do in the meantime, with no risk: order your screen panel and battery (see
-> [What you need besides the board](#what-you-need-besides-the-board)), and start on an enclosure
-> design from the STEP model in
-> [The board and your case](#the-board-and-your-case). The `#enclosure-design` channel on the
-> [Discord](https://discord.gg/zCnKFt4Y4P) is where case work is being shared and discussed.
+> Your screen panel and battery are not part of the board order: see
+> [What you need besides the board](#what-you-need-besides-the-board). You can start on an
+> enclosure design from the STEP model in
+> [The board and your case](#the-board-and-your-case); the `#enclosure-design` channel on the
+> Discord is where case work is being shared and discussed.
 
 You do not need KiCad and you do not need to know how a PCB is designed. A factory makes the
 board and solders every part onto it. You will be clicking through a web shop and uploading three
@@ -111,8 +103,8 @@ files that are already in this repository. Unfamiliar words are defined in
 > the panel variant and the optional blocks, estimates what the result costs, and gives you the
 > three upload files for exactly that build: the same Gerber zip, plus a BOM and CPL with the
 > parts you left off already removed (see [Choosing a configuration](#choosing-a-configuration)).
-> For the standard build they are byte-for-byte the files in `production/`. The website is not
-> open yet, and the steps below are the same either way.
+> For the standard build they are byte-for-byte the files in `production/`. The steps below are
+> the same either way.
 
 ### What it costs and how long it takes
 
@@ -358,6 +350,10 @@ Notes:
   it can go.
 - **An external light needs `J6`.** `J3` only mates a panel with a bonded light; for any other
   light, the frontlight group drives it through the header.
+- **Check `J6`'s pins with a meter before plugging anything in.** It is a right-angle socket on
+  the back, and the pinout on the front silkscreen shows the openings as you see them with the
+  display side toward you. **Rev 1.0 boards print its two rows the other way round.** See
+  [HARDWARE.md §11](docs/HARDWARE.md#11-expansion-header).
 - **Fit only one of the two touch pin-order options.** The default build fits `R42 R44 R46 R52`.
   The alternate wiring (`R43 R45 R58 R66`, DNP here) is for panels with the swapped pin order.
   Confirm the panel's pinout first.
@@ -420,8 +416,8 @@ First-power-up instructions come with it.
 
 **The board will never be locked.** You can flash any firmware you like over USB-C.
 
-Until the first Rev 1.0 boards check out, a board you order is one to build on. If you just want
-a reader to read on, wait for them to check out, or for the open-beta kits.
+A board you order is one to build on, and there is no firmware release for it yet. If you just
+want a reader to read on, wait for the open-beta kits.
 
 If you want to write firmware for it, [docs/HARDWARE.md](docs/HARDWARE.md) is the whole
 reference. The GPIO map is section 13, and section 13.1 lists what the board needs firmware to do:
@@ -459,14 +455,14 @@ What you need in order to design around it:
 |---|---|
 | **MCU** | ESP32-S3-WROOM-1 (**N16R8**, 16 MB flash / 8 MB octal PSRAM), native USB, no UART bridge |
 | **Display** | 24-pin 0.5 mm ZIF for SPI e-paper; primary target Good Display's 4.26" panels (`GDEY0426T82` plain, `GDEQ0426T82-*` variants); panel-driven charge pump generates the ±15 to 22 V rails |
-| **Frontlight** | TPS923610 constant-current boost, warm/cool selection through one GPIO and an inverter; the warm/cool blend has not been tested on hardware yet |
+| **Frontlight** | TPS923610 constant-current boost, warm/cool selection through one GPIO and an inverter |
 | **Touch** | Optional I²C capacitive touch (for `-FT01C`-class panels) with a 0 Ω pin-swap mux |
 | **Power** | USB-C in, TP4056 charger, DW01A + FS8205A cell protection, TPS2116 priority mux, TLV75533P 3V3 LDO |
 | **Battery** | Single-cell 4.2 V-charge Li-ion/LiPo on a JST-PH 2.0 mm 2-pin connector (`J5` pin 1 = negative) |
 | **Storage** | push-push microSD in 4-bit SDMMC, power-gated |
 | **Input** | 8 buttons on two ADC resistor ladders, a wake/power **button** (`SW10`, a wake input, not a hardware power switch; the 3.3 V rail is always live) and reset (`SW11`); a BOOT button footprint (`SW6`) is left unpopulated because USB-Serial-JTAG makes it unnecessary |
 | **RTC** | DS3231MZ (±5 ppm), VBAT-only mode; populated in the standard build, optional. A second footprint (`U14`, Micro Crystal RV-8263-C7) is DNP. Fit either, never both |
-| **Revision** | **Rev 1.01**, on both title blocks and in the name of the release zip. Rev 1.0 is the board I ordered on 21 September 2026 (commit `aeb5b39`). Rev 1.01 (30 September 2026) adds a 3V3 link and ground stitching vias below the cut line, so a board cut down for a smaller display still charges and keeps a solid ground, and changes one word of the front silkscreen. On 1 October 2026 it also gained `R84`, a 1 Ω 0603 resistor in series with the ground leg of `C2` (the 10 µF capacitor on `USB_VBUS`), which damps the ringing a USB-A charger or PC port can cause at plug-in, and `positions.csv` now carries the placement corrections for seven parts. Rev 1.0 boards need no rework; until one has been measured, power them from a USB-C charger or an ordinary USB-A charger or PC port rather than a fast-charge USB-A brick on a short, thick cable. Until Rev 1.01 is fabricated, further changes are folded into it. |
+| **Revision** | **Rev 1.01**, on both title blocks and in the name of the release zip. Rev 1.0 is the board I ordered on 21 September 2026 (commit `aeb5b39`). Rev 1.01 (30 September 2026) adds a 3V3 link and ground stitching vias below the cut line, so a board cut down for a smaller display still charges and keeps a solid ground, and changes one word of the front silkscreen. On 1 October 2026 it also gained `R84`, a 1 Ω 0603 resistor in series with the ground leg of `C2` (the 10 µF capacitor on `USB_VBUS`), which damps the ringing a USB-A charger or PC port can cause at plug-in, and `positions.csv` now carries the placement corrections for seven parts. On 10 October 2026 the two lines of the expansion header's pinout label were swapped to match the socket as seen from the display side; Rev 1.0 boards print them the other way round. Rev 1.0 boards need no rework; until one has been measured, power them from a USB-C charger or an ordinary USB-A charger or PC port rather than a fast-charge USB-A brick on a short, thick cable. Until Rev 1.01 is fabricated, further changes are folded into it. |
 | **Board** | 2-layer, 60.05 × 111.30 × 1.6 mm, 1 oz Cu; 185 references = 166 fitted + 11 DNP + 8 bare-copper (holes `H1` to `H6`, test pads `TP1`/`TP2`) |
 
 Connection and GPIO reference: **[docs/HARDWARE.md](docs/HARDWARE.md)**.

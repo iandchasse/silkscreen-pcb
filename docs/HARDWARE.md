@@ -34,9 +34,9 @@ Successor to [de-link](https://de-link.me).
 > **KiCad 9.0.6**. The ordered module is **ESP32-S3-WROOM-1-N16R8**.
 > 185 references, 135 nets (with `R84`, added 2026-10-01), single A2 sheet.
 >
-> **Rev 1.01.** The revision label is on both title blocks and in the name of the release zip. Rev 1.0 is what was ordered on 2026-09-21 (commit `aeb5b39`). Rev 1.01 (2026-09-30) adds a 3V3 link and ground stitching vias below the cut line (see the cut-line row in [§16](#16-design-notes--conventions)) and changes one word of the front silkscreen. On 2026-10-01 it gained one part, `R84` (1 Ω in series with `C2`'s ground leg, a USB hot-plug damper — [§3.1](#31-usb-c-input--protection)), and corrected JLC placement rows for seven parts (`D2`, `D8`, `U2`, `U5`, `J4`, `J7`, `U4`), now set by Fabrication Toolkit offset fields. Until Rev 1.01 is fabricated, further changes are folded into it; the title-block date (2026-09-30) is when it was opened.
+> **Rev 1.01.** The revision label is on both title blocks and in the name of the release zip. Rev 1.0 is what was ordered on 2026-09-21 (commit `aeb5b39`). Rev 1.01 (2026-09-30) adds a 3V3 link and ground stitching vias below the cut line (see the cut-line row in [§16](#16-design-notes--conventions)) and changes one word of the front silkscreen. On 2026-10-01 it gained one part, `R84` (1 Ω in series with `C2`'s ground leg, a USB hot-plug damper — [§3.1](#31-usb-c-input--protection)), and corrected JLC placement rows for seven parts (`D2`, `D8`, `U2`, `U5`, `J4`, `J7`, `U4`), now set by Fabrication Toolkit offset fields. On 2026-10-10 the two lines of the `J6` pinout table on the front silkscreen were swapped so it reads the way the socket looks ([§11](#11-expansion-header)). Until Rev 1.01 is fabricated, further changes are folded into it; the title-block date (2026-09-30) is when it was opened.
 >
-> **Current full plots (2026-10-01):** [`silkscreen_pcb_schematic.pdf`](silkscreen_pcb_schematic.pdf)
+> **Current full plots (schematic 2026-10-01, layout 2026-10-11):** [`silkscreen_pcb_schematic.pdf`](silkscreen_pcb_schematic.pdf)
 > (schematic, one A2 sheet) and [`silkscreen_pcb_layout.pdf`](silkscreen_pcb_layout.pdf) (PCB layout: front view, then the back as you see it) are
 > plotted from the current source. The per-block images in `images/` were cropped from the 2026-09-21 schematic plot; the only
 > circuit change since is `R84`, which the charger crop (§3.2) and the full-sheet image (§2) do not show. If a block ever looks out of date, re-crop it from
@@ -1192,10 +1192,24 @@ the standard build.
 
 | | 1 | 2 | 3 | 4 | 5 | 6 |
 |---|---|---|---|---|---|---|
-| **row 1** | GND | IO46 | IO45 | GND | LED_SW | W− |
+| **row 1** (far from the board) | GND | IO46 | IO45 | GND | LED_SW | W− |
 | | **7** | **8** | **9** | **10** | **11** | **12** |
-| **row 2** | 3V3 | SDA | IO3 | SCL | C− | P+ |
+| **row 2** (next to the board) | 3V3 | SDA | IO3 | SCL | C− | P+ |
 
+**Which socket is which.** `J6` is a right-angle socket on the back of the board, with its openings in
+the top edge. The row of solder holes nearer the edge (pins 7–12) feeds the socket row next to the board;
+the other row (pins 1–6) feeds the outer one. The front silkscreen prints the pinout as you see the
+openings with the display side toward you, looking down at the top edge: the top line,
+`GND 46 45 GND LED+ W-`, is the outer row (farther from you), the bottom line, `3V3 SDA 3 SCL C- BAT+`,
+is the row next to the board, and pin 1 (`GND`) is on the left. `LED+` is `LED_SW` and `BAT+` is the
+fused `P+`. Seen from the back or from beyond the edge, the rows or the left-to-right order reverse.
+
+> **Check before you plug anything in.** Rev 1.0 boards (the 2026-09-21 order) print that table with
+> its two lines the other way round: it maps the solder holes as seen from the front, so on those
+> boards the table's *bottom* line is the outer socket row. On any board, confirm with a meter first:
+> pins 1 and 4 beep to `GND` (any mounting-hole pad), pin 12 (`BAT+`) reads the cell voltage with a cell
+> fitted, and pin 7 (`3V3`) reads 3.3 V on a powered board. A mix-up puts up to 4.2 V on an accessory's
+> 3.3 V supply, or `LED_SW` (up to ≈25.5 V) on a logic pin.
 
 What it exposes:
 
