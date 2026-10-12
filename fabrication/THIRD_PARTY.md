@@ -38,9 +38,9 @@ Notes:
 - `MJTP1117` contributes only the **footprint** (and 3D model); its symbol is KiCad standard
   (`Switch:SW_Push`). `SW6` uses a KiCad-standard MJTP1243 footprint. `L1` uses the KiCad-standard footprint
   `Inductor_SMD:L_APV_ANR5040` (and its standard 3D model), so no third-party inductor files are shipped.
-- On 2026-09-18 unused vendored files were removed from the repository (the old `SRN3010C-100M` L1 footprint,
-  the TSD05/TPD4E1U06/FS8205A footprints and 3D models, and the legacy KiCad-5 `MJTP1117` files) because nothing
-  references them; re-download from the vendors above if you need them.
+- Only files the design references are vendored. The `SRN3010C-100M` footprint, the TSD05/TPD4E1U06/FS8205A
+  footprints and 3D models, and the legacy KiCad-5 `MJTP1117` files are not included; re-download from the
+  vendors above if you need them.
 - `J1` (USB-C) and every passive/IC not listed above use **standard KiCad libraries** — no
   third-party terms apply.
 - `J7`'s footprint `microSD_dualsource:microSD_PushPush_TFPUSH-MEM2075` is **project-built** in

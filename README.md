@@ -8,11 +8,10 @@ factory, add an e-paper display, a battery and a microSD card, and put it in a
 case of your own choosing. It is a 2-layer ESP32-S3 board with a 24-pin display connector,
 optional touch and frontlight, microSD and single-cell Li-ion/LiPo power.
 
-It is the successor to [de-link](https://de-link.me). This repository was the de-link project hub
-until September 2026; the hub's pages and photos are kept on the
-[`de-link-old`](https://github.com/iandchasse/silkscreen-pcb/tree/de-link-old) branch. I designed
-Silkscreen in KiCad 9.0.6, but
-**you do not need KiCad to order a board.** Every file a factory asks for is already in the
+It is the successor to [de-link](https://de-link.me). The de-link project hub's pages and photos
+are kept on the [`de-link-old`](https://github.com/iandchasse/silkscreen-pcb/tree/de-link-old)
+branch. I designed Silkscreen in KiCad 9, but
+**you do not need KiCad to order a board.** Every file a factory asks for is in the
 `production/` folder of this repository, ready to upload.
 
 | Back (all components) | Front (silkscreen art) |
@@ -54,13 +53,13 @@ The factory sends you a populated circuit board and nothing else. You also need:
 | Item | What to get |
 |---|---|
 | **Display panel** | One of the 4.26" Good Display variants: `GDEY0426T82` (plain), `GDEQ0426T82-T01C` (touch), `-FL01C` (frontlight), `-FT01C` (touch + frontlight). The panel you pick decides which optional parts you fit. See [Choosing a configuration](#choosing-a-configuration). |
-| **Battery** | A **single-cell** (3.7 V nominal / 4.2 V charged) Li-ion or LiPo pack fitted with a **JST-PH 2.0 mm, 2-pin** plug. Read the polarity note below before you plug it in. I use [this 500 mAh `503035` pack (5 × 30 × 35 mm, JST-PH 2.0)](https://www.amazon.com/dp/B0GDQLLF12). It fits the board's 38.75 × 30.50 mm battery bay snugly, with 0.5 mm to spare on the 30 mm side. The board charges at about 0.25 A as built, which is 0.5C for this pack. For a much smaller cell, lower the charge current by raising `R6` ([HARDWARE.md §3.2](docs/HARDWARE.md#32-battery-charger)). Listings change, so check the plug, the polarity and the size of whatever you buy. |
+| **Battery** | A **single-cell** (3.7 V nominal / 4.2 V charged) Li-ion or LiPo pack fitted with a **JST-PH 2.0 mm, 2-pin** plug. Read the polarity note below before you plug it in. I use [this 500 mAh `503035` pack (5 × 30 × 35 mm, JST-PH 2.0)](https://www.amazon.com/dp/B0GDQLLF12). It fits the board's 38.75 × 30.50 mm battery bay snugly. The board charges at about 0.25 A as built. For a much smaller cell, lower the charge current by raising `R6` ([HARDWARE.md §3.2](docs/HARDWARE.md#32-battery-charger)). Listings change, so check the plug, the polarity and the size of whatever you buy. |
 | **microSD card** | Any normal microSD card. The battery normally sits in the board's cut-out directly in front of the card slot, so you lift or slide the cell aside to put a card in or take one out. I designed it that way; the card is not meant to be swapped often. |
 | **USB-C cable** | A **data** cable, not a charge-only one, or the board will charge but never appear on your computer. |
 
 **Battery lead order.** On the board, `J5` pin 1 is battery **negative** and pin 2 is battery
 **positive**, and the board prints **- +** with the word **CHECK** right beside the connector's
-mouth. A pack's wire colours are a good guide (black is negative, red is positive), but there is
+mouth. A pack's wire colors are a good guide (black is negative, red is positive), but there is
 no industry standard for which side of a JST-PH plug each wire goes in: packs ship both ways
 round, and the two look identical in a photo. So before you plug a pack in, with USB unplugged,
 check that its black wire lines up with the **-** mark and its red wire with the **+**. If they are
@@ -82,11 +81,18 @@ you need depends on the case you use, and no case is supplied here. See
 ## Order an assembled board, step by step
 
 > [!CAUTION]
-> **The first boards have arrived, they work so far, and the closed beta is underway.** Only
-> surface-level checks have been done on them yet, so building one is still at your own risk. It
-> should be fine, but a mistake I have not found yet could mean a board that does not work, and
-> the factory does not refund a board that was built exactly as the files said. If you have
-> concerns or questions, join the [Discord](https://discord.gg/zCnKFt4Y4P) before you order.
+> **The boards work so far, and the closed beta is underway.** This board should work, but
+> building one is at your own risk: a mistake I have not found yet could mean a board that does
+> not work, and the factory does not refund a board that was built exactly as the files said. If
+> you have concerns or questions, join the [Discord](https://discord.gg/zCnKFt4Y4P) before you
+> order.
+>
+> **If your board has no `R84` resistor** (it was made from older files), power it from a USB-C
+> charger, an ordinary USB-A charger or a PC port rather than a fast-charge USB-A brick on a short,
+> thick cable ([HARDWARE.md §3.1](docs/HARDWARE.md#31-usb-c-input--protection)), check `J6`'s pins
+> with a meter ([§11](docs/HARDWARE.md#11-expansion-header)), and add two wires after a cut (see
+> [below](#cutting-the-board-down-for-a-smaller-display)). The files in `production/` add `R84`, a
+> 3V3 link and ground vias, and have not been built yet.
 >
 > Your screen panel and battery are not part of the board order: see
 > [What you need besides the board](#what-you-need-besides-the-board). You can start on an
@@ -102,9 +108,8 @@ files that are already in this repository. Unfamiliar words are defined in
 > **Or let the builder make the files.** The *Build one* page on the website walks you through
 > the panel variant and the optional blocks, estimates what the result costs, and gives you the
 > three upload files for exactly that build: the same Gerber zip, plus a BOM and CPL with the
-> parts you left off already removed (see [Choosing a configuration](#choosing-a-configuration)).
-> For the standard build they are byte-for-byte the files in `production/`. The steps below are
-> the same either way.
+> parts you left off removed (see [Choosing a configuration](#choosing-a-configuration)). For the
+> full build they are exactly the files in `production/`. The steps below are the same either way.
 
 ### What it costs and how long it takes
 
@@ -115,12 +120,11 @@ part types the factory has to fetch), so the price per assembled board falls qui
 more. The website's cost page breaks the cost down by order size and explains where each fee
 comes from.
 
-For scale, my own order on **21 September 2026** (no coupons, US delivery): five boards with two
+For scale, my own order (no coupons, US delivery): five boards with two
 assembled came to **$223.95** for boards, parts and assembly, and **$305.23** at checkout once
 shipping, US tariffs and tax were added. That is about $150 per working board at two, and the
 cost page puts the same build at roughly $77 per board with all five assembled and about $50 at
-ten. Prices, shipping and import charges move, so treat every figure as an expectation, not a
-promise.
+ten. Prices, shipping and import charges move, so treat every figure as an estimate.
 
 | | |
 |---|---|
@@ -148,13 +152,12 @@ Do not mix one of them with an older copy of another.
 2. The viewer draws the board. Confirm it says **2 layers** and about **60 × 111 mm**. If it does
    not, you uploaded the wrong file.
 3. Set **PCB Qty = 5**, **Thickness = 1.6 mm**, **Outer Copper Weight = 1 oz**. Surface finish and
-   solder-mask colour are your choice; nothing in this design needs a particular one.
+   solder-mask color are your choice; nothing in this design needs a particular one.
 4. Leave everything else at its default.
 5. Scroll the viewer to the board edges and check the USB-C cut-out, the microSD opening and the
-   two narrow slots on the outline are open, not filled. The long one (47.04 × 1.30 mm) is the
-   display-flex slot; the short one at the tongue neck is **5.30 × 1.10 mm**. Both are at or above
-   JLCPCB's 1.0 mm minimum routed-slot width, so neither should raise a design-for-manufacture
-   (DFM) message. (Earlier revisions had four 0.5 mm perforation slots there; those are gone.)
+   two narrow slots on the outline are open, not filled. The long one is the display-flex slot;
+   the short one is at the tongue neck. Both are wider than JLCPCB's 1.0 mm minimum routed-slot
+   width, so neither should raise a design-for-manufacture (DFM) message.
 
 ### Step 3: turn on assembly
 
@@ -188,9 +191,9 @@ for you, instead of shipping you a bare board.
 
 ### Step 5: check the parts the factory picked
 
-You get a table with one row per part. Most rows will already be matched.
+You get a table with one row per part. Most rows will be matched.
 
-- **Rows with a blank part number are meant to be blank.** Eleven references (`TP3 TP4 TP5`,
+- **Rows with a blank part number are meant to be blank.** These references (`TP3 TP4 TP5`,
   `R43 R45 R58 R66 R72 R74`, `SW6` and `U14`, the alternate clock chip; the board uses `U13`) are
   tagged *"DNP (standard build)"*. **DNP** means "do not populate": a spot on the board
   deliberately left empty. **Leave them unselected.**
@@ -204,7 +207,6 @@ You get a table with one row per part. Most rows will already be matched.
   Check its stock. If you are not fitting a frontlight panel, untick it along with the rest of the
   *Frontlight* group in [Choosing a configuration](#choosing-a-configuration). If you *are* fitting
   one and it is out of stock, see [If the frontlight driver is out of stock](#if-the-frontlight-driver-is-out-of-stock).
-  Stock may well be back by the time you order, so check first.
 - If you are deliberately leaving a block off, remove its parts from the BOM **and** the CPL, or
   untick them here.
 - Click **Next**.
@@ -249,35 +251,33 @@ dead end, just a slower one. In order of preference:
 ### Step 6: check the placement preview (do not skip this)
 
 You see a drawing of the board with every part on it. This is your last chance to catch a part
-that is rotated wrongly, and the factory's own checker has corrected several on this board before.
-A matched part code does not prove the part is the right way round. Since 1 October 2026
-`positions.csv` carries those corrections for the parts below, so they should already look right;
-check them anyway.
+that is rotated wrongly. A matched part code does not prove the part is the right way round.
+The parts below are the ones most often turned or offset in JLCPCB's preview; check them.
 
 | Part | What to check |
 |---|---|
 | `D2` | The USB power LED. **Pad 1 is the cathode** (the marked end). Some part libraries use the opposite convention. |
-| `U2`, `U5`, `D8` | Small 3 to 8 pin chips whose rotation the factory has corrected before. |
-| `J4` | The touch connector. KiCad's anchor sits 0.73 mm off its pads; the corrected row puts it on JLC's anchor, so it should sit on its pads. The pads are what matter. |
-| `U4`, `J7` | The ESP32 module and the microSD socket. Check they are centred on their pad patterns. |
+| `U2`, `U5`, `D8` | Small 3 to 8 pin chips. Check their rotation. |
+| `J4` | The touch connector. It should sit on its pads; the pads are what matter. |
+| `U4`, `J7` | The ESP32 module and the microSD socket. Check they are centered on their pad patterns. |
 
 If something looks wrong, use the preview's rotate and move tools to fix it, and **save a
 screenshot of the corrected preview**. Click **Next**.
 
 ### Step 7: through-hole parts, soldered by the factory or by you
 
-Thirteen parts have legs that pass through the board rather than sitting on its surface. That is
+Several parts have legs that pass through the board rather than sitting on its surface. That is
 **THT** (through-hole technology), as opposed to **SMD** (surface-mount) for everything else. They
 are the USB-C socket `J1`, the battery connector `J5`, the expansion header `J6` and the ten
 buttons `SW1` to `SW5` and `SW7` to `SW11`. They are already in the files you uploaded, so this is
 a choice, not extra work:
 
-- **Let the factory solder them.** JLCPCB charges a one-off hand-soldering fee (about $3.60 per
-  order) plus roughly $0.016 per joint, which is about **$1.20 per assembled board** on top of the
-  fee. It adds about a day. Confirm on the quote page that through-hole soldering
+- **Let the factory solder them.** JLCPCB charges a one-off hand-soldering fee plus a small amount
+  per joint, which comes to about **$1.20 per assembled board** on top of the fee. It adds about a
+  day. Confirm on the quote page that through-hole soldering
   appears as a line item.
-- **Solder them yourself.** You get the parts loose and put in 74 joints per board: the USB-C
-  shell pins, the JST battery connector, the 12-pin expansion header and ten buttons. The USB-C
+- **Solder them yourself.** You get the parts loose and solder them yourself: the USB-C
+  shell pins, the JST battery connector, the 12-pin expansion header and the buttons. The USB-C
   shell is the fiddly one. Worth doing if you own a decent iron and a fine tip; not worth it on a
   first board.
 
@@ -294,31 +294,29 @@ Nothing in the design is tied to JLCPCB. Upload files for other assemblers are k
 [`production/other_fabs/`](production/other_fabs/): a PCBWay BOM with KiCad's own placement file, a
 NextPCB BOM and centroid file in NextPCB's template (plus SMD-only and through-hole-only pairs in
 `split/`), and a bottom-side assembly drawing. They use the same Gerber zip as the JLCPCB order and
-are regenerated from the current design with:
+are generated from the design with:
 
 ```bash
 python fabrication/make_fab_files.py --split
 ```
 
 Know what you are taking on, though. **JLCPCB is the only factory I have ordered
-boards from so far.** My NextPCB attempt did not end in an order (what went wrong, and what it
-would have cost, is in [fabrication/NEXTPCB_REV0_NOTES.md](fabrication/NEXTPCB_REV0_NOTES.md)),
-and I have not tried PCBWay. Another factory is a fine choice if you prefer one. You will be doing
-the part matching, the rotation check and the back-and-forth with their engineers yourself,
-without a known-good order to compare against. Everything else in this guide assumes JLCPCB.
+boards from.** I have not ordered from NextPCB or PCBWay. Another factory is a fine choice if you
+prefer one. You will be doing the part matching, the rotation check and the back-and-forth with
+their engineers yourself, without a known-good order to compare against. Everything else in this
+guide assumes JLCPCB.
 
 ---
 
 ## Choosing a configuration
 
-The files in `production/` build the **full standard build**: every block fitted except the DNP
-options. The board is a **core** that is always fitted, plus add-on groups you can leave off. For
+The files in `production/` are the **full build**: every block fitted except the DNP options.
+The board is a **core** that is always fitted, plus add-on groups you can leave off. For
 a reduced configuration, download its files from the builder on the website, or do it by hand:
 delete the listed references from the BOM **and** the CPL and leave the pads empty.
 
-Each group lists every part that exists only to serve it, taken from the schematic netlist (rails
-and the shared I²C bus aside), so leaving a group off leaves nothing behind that does no work. The
-website's builder uses the same groups.
+Each group lists every part that exists only to serve it, so leaving a group off leaves nothing
+behind that does no work. The website's builder uses the same groups.
 
 | Group | References | Fit it when | Works without it? |
 |---|---|---|---|
@@ -328,7 +326,7 @@ website's builder uses the same groups.
 | **Frontlight connector** | `J3` | The panel has a bonded frontlight (`-FL01C`, `-FT01C`) | Yes: an external light connects through `J6` instead |
 | **Expansion header** | `J6`, `U8`, `CR2`, `CR3`, `F2`, and the GPIO series resistors `R65 R68 R69` | You want spare GPIO, I²C and the external-light output | Yes |
 | **Real-time clock** | `U13`, `C30` (or `U14` instead of `U13`) | You want accurate time | Yes: the reader runs without it, and it can be added later by hand |
-| **Alternate RTC** | `U14` (**DNP in every standard build**) | You want the cheaper clock instead of `U13` | Fit **either** `U13` **or** `U14`, never both |
+| **Alternate RTC** | `U14` (**not fitted in the full build**) | You want the cheaper clock instead of `U13` | Fit **either** `U13` **or** `U14`, never both |
 | **Side page-turn keys** | per key: `SW1`+`R61` (right-down), `SW4`+`R11` (right-up), `SW7`+`R36`+`R73` (left-up), `SW5`+`R35` (left-down); with any side key, the ladder's pull-up `R28` and filter `C28` | Your case has side keys | Yes: fit any subset |
 | **Bottom-row keys** | per key: `SW2`+`R60`, `SW3`+`R18`, `SW8`+`R19`, `SW9`+`R20`; with any bottom key, the ladder's pull-up `R4` and filter `C27` | Your case has bottom keys | Yes: fit any subset; with touch you can drop most keys |
 
@@ -352,15 +350,15 @@ Notes:
   light, the frontlight group drives it through the header.
 - **Check `J6`'s pins with a meter before plugging anything in.** It is a right-angle socket on
   the back, and the pinout on the front silkscreen shows the openings as you see them with the
-  display side toward you. **Rev 1.0 boards print its two rows the other way round.** See
-  [HARDWARE.md §11](docs/HARDWARE.md#11-expansion-header).
+  display side toward you. A board without `R84` prints its two rows the other way round, so
+  trust the meter, not the label. See [HARDWARE.md §11](docs/HARDWARE.md#11-expansion-header).
 - **Fit only one of the two touch pin-order options.** The default build fits `R42 R44 R46 R52`.
   The alternate wiring (`R43 R45 R58 R66`, DNP here) is for panels with the swapped pin order.
   Confirm the panel's pinout first.
 - Leaving a button off needs nothing else changed. Its ladder resistor then does nothing and can be
   left off with it, but fitting it is harmless. Keep a ladder's pull-up and filter (`R4`/`C27`
   bottom, `R28`/`C28` side) as long as any key on that ladder is fitted.
-- `SW6` (boot button) and `TP3`-`TP5` are DNP in every standard build. `R64` (100 Ω) is fitted
+- `SW6` (boot button) and `TP3`-`TP5` are not fitted in the full build. `R64` (100 Ω) is fitted
   but only connects `SW6`, so it does nothing unless you fit the boot button.
 - Per-board part totals are in [`fabrication/BOM.md`](fabrication/BOM.md).
 
@@ -385,18 +383,16 @@ If you do that:
   copper crossing it. Use a rotary tool (Dremel or similar) and cut along the marked line.
 - **You lose the expansion header `J6` with its protection parts (`U8`, `CR2`, `CR3`, `F2`), the
   power button `SW10`, mounting hole `H1` (five mounting points remain) and the two frontlight
-  clamps `D3`/`D8`**, which sit on that tongue. A cut board therefore runs its frontlight without
-  those two clamps; read [HARDWARE.md §7](docs/HARDWARE.md#7-frontlight-driver) before you drive
-  a frontlight from one. After the cut, UP(2) can serve as the power button instead: leave `R36`
-  and `R73` unpopulated and populate `R72` and `R74`. The same instruction is printed on the
-  schematic and on the board.
-- **On a board made before Rev 1.01, including my 21 September order, add two wires after the
-  cut.** The cut takes both 3V3 feeds to the charge-enable switch (`Q2`/`R81`) with it, so the
-  charger never turns on, and it leaves the power section's ground (`U3`, `U2`, `Q1`) joined to the
-  rest of the board only through one shell tab of the microSD socket. Wire `R40` pad 2 to `R81`
-  pad 2 (or bridge the two cut 3V3 stubs at the cut edge), and `C6` pad 2 to `C21` pad 2. With a
-  correctly oriented cell fitted, the TP4056's `CE` pin (pin 8) should then read 3.3 V. Rev 1.01
-  boards have a 3V3 link and ground stitching vias below the cut line and need neither wire.
+  clamps `D3`/`D8`**, which sit on that tongue. A cut board therefore runs its frontlight without those two clamps; read
+  [HARDWARE.md §7](docs/HARDWARE.md#7-frontlight-driver) before you drive a frontlight from one. After the cut, UP(2) can serve as the power button instead: leave `R36`
+  and `R73` unpopulated and populate `R72` and `R74`.
+- **Check your board before you cut.** A board with an `R84` resistor has a 3V3 link and ground
+  stitching vias below the cut line and needs no wires afterwards. A board without `R84` does: the
+  cut takes both 3V3 feeds to the charge-enable switch (`Q2`/`R81`) with it, so the charger never
+  turns on, and it leaves the power section's ground (`U3`, `U2`, `Q1`) joined to the rest of the
+  board only through one shell tab of the microSD socket. Wire `R40` pad 2 to `R81` pad 2 (or
+  bridge the two cut 3V3 stubs at the cut edge), and `C6` pad 2 to `C21` pad 2. With a correctly
+  oriented cell fitted, the TP4056's `CE` pin (pin 8) should then read 3.3 V.
 - Plan the cut before you order, so you can leave the parts you are cutting off out of the BOM.
   `J6`'s series resistors `R65`/`R68`/`R69` stay on the main board near the ESP32 but have nothing
   left to connect to, so they can be left out too.
@@ -416,8 +412,8 @@ First-power-up instructions come with it.
 
 **The board will never be locked.** You can flash any firmware you like over USB-C.
 
-A board you order is one to build on, and there is no firmware release for it yet. If you just
-want a reader to read on, wait for the open-beta kits.
+A board you order is one to build on. If you just want a reader to read on, wait for the
+open-beta kits.
 
 If you want to write firmware for it, [docs/HARDWARE.md](docs/HARDWARE.md) is the whole
 reference. The GPIO map is section 13, and section 13.1 lists what the board needs firmware to do:
@@ -461,9 +457,8 @@ What you need in order to design around it:
 | **Battery** | Single-cell 4.2 V-charge Li-ion/LiPo on a JST-PH 2.0 mm 2-pin connector (`J5` pin 1 = negative) |
 | **Storage** | push-push microSD in 4-bit SDMMC, power-gated |
 | **Input** | 8 buttons on two ADC resistor ladders, a wake/power **button** (`SW10`, a wake input, not a hardware power switch; the 3.3 V rail is always live) and reset (`SW11`); a BOOT button footprint (`SW6`) is left unpopulated because USB-Serial-JTAG makes it unnecessary |
-| **RTC** | DS3231MZ (±5 ppm), VBAT-only mode; populated in the standard build, optional. A second footprint (`U14`, Micro Crystal RV-8263-C7) is DNP. Fit either, never both |
-| **Revision** | **Rev 1.01**, on both title blocks and in the name of the release zip. Rev 1.0 is the board I ordered on 21 September 2026 (commit `aeb5b39`). Rev 1.01 (30 September 2026) adds a 3V3 link and ground stitching vias below the cut line, so a board cut down for a smaller display still charges and keeps a solid ground, and changes one word of the front silkscreen. On 1 October 2026 it also gained `R84`, a 1 Ω 0603 resistor in series with the ground leg of `C2` (the 10 µF capacitor on `USB_VBUS`), which damps the ringing a USB-A charger or PC port can cause at plug-in, and `positions.csv` now carries the placement corrections for seven parts. On 10 October 2026 the two lines of the expansion header's pinout label were swapped to match the socket as seen from the display side; Rev 1.0 boards print them the other way round. Rev 1.0 boards need no rework; until one has been measured, power them from a USB-C charger or an ordinary USB-A charger or PC port rather than a fast-charge USB-A brick on a short, thick cable. Until Rev 1.01 is fabricated, further changes are folded into it. |
-| **Board** | 2-layer, 60.05 × 111.30 × 1.6 mm, 1 oz Cu; 185 references = 166 fitted + 11 DNP + 8 bare-copper (holes `H1` to `H6`, test pads `TP1`/`TP2`) |
+| **RTC** | DS3231MZ (±5 ppm), VBAT-only mode; fitted in the full build, optional. A second footprint (`U14`, Micro Crystal RV-8263-C7) is DNP. Fit either, never both |
+| **Board** | 2-layer, 60.05 × 111.30 × 1.6 mm, 1 oz Cu |
 
 Connection and GPIO reference: **[docs/HARDWARE.md](docs/HARDWARE.md)**.
 
@@ -481,7 +476,7 @@ Connection and GPIO reference: **[docs/HARDWARE.md](docs/HARDWARE.md)**.
 | **SMD / SMT** | Surface-mount: parts that sit on top of the copper. Machine-placed. |
 | **THT** | Through-hole: parts whose legs go through the board and are soldered on the far side. |
 | **LCSC code** | The `C…` number identifying a part in JLCPCB's own warehouse, e.g. `C2913202` for the ESP32 module. The BOM you upload uses these. |
-| **Basic / Extended part** | JLCPCB's two stock classes. Extended parts carry a small one-off loading fee per part type, which is why the parts list has been tuned to use fewer of them. |
+| **Basic / Extended part** | JLCPCB's two stock classes. Extended parts carry a small one-off loading fee per part type. |
 | **DFM** | Design for manufacture: the factory's automated check, which may raise a note on your order. |
 | **Outer copper weight** | How thick the copper on the board is, in ounces per square foot. 1 oz is the normal default and is what this board is designed for. |
 | **Tooling holes** | Small extra holes the factory adds so its machines can hold the board during assembly. Let JLCPCB add them. |
@@ -532,8 +527,7 @@ things that look like mistakes but are deliberate.
 
 **[Schematic PDF](docs/silkscreen_pcb_schematic.pdf)** (single A2 sheet) and
 **[PCB layout PDF](docs/silkscreen_pcb_layout.pdf)** (2 pages: the front, then the back as you
-see it). Both are plotted from the current source. The board images at the top are renders of the
-Rev 1.0 files, not the release record.
+see it).
 
 ### Repository layout
 
@@ -550,32 +544,31 @@ production/                                           release upload files: JLCP
 LICENSE / NOTICE                                      CERN-OHL-S v2
 ```
 
-A plain `git clone` opens without missing libraries: every project library path is relative, all
-in-repo 3D models resolve, and everything else comes from KiCad's standard libraries (KiCad 9.0.x).
+A plain `git clone` opens without missing libraries: every project library path is relative, and
+everything else comes from KiCad's standard libraries.
 
 ### Bill of materials sources
 
-**[fabrication/BOM.md](fabrication/BOM.md)** is the current, netlist-derived sourcing reference:
-the optimized JLC build and the hand-build (DigiKey) list, with prices and the reasons for each
-swap. Both come from [`fabrication/part_fields.csv`](fabrication/part_fields.csv), which maps every
-reference to its prime manufacturer part number and its LCSC code. Accepted factory changes must
-still be frozen in the release records.
+**[fabrication/BOM.md](fabrication/BOM.md)** is the sourcing reference: the JLC build and the
+hand-build (DigiKey) list, with prices and the reasons for each swap. Both come from
+[`fabrication/part_fields.csv`](fabrication/part_fields.csv), which maps every reference to its
+prime manufacturer part number and its LCSC code.
 
 ### Regenerating the release files
 
-The project and the reviewed exports use **KiCad 9.0.6**. Keep a backup before saving with a newer
-major version; newer file formats may not reopen in KiCad 9.
+The project uses **KiCad 9**. Keep a backup before saving with a newer major version; newer file
+formats may not reopen in KiCad 9.
 
 For JLCPCB, use the KiCad **Fabrication Toolkit** plugin for the placement export: it applies JLC's
 part-rotation database and reads the `LCSC` field from the footprints (set by
 `fabrication/apply_part_fields.py`, see [fabrication/README.md](fabrication/README.md)).
-Seven parts (`U2`, `U5`, `D2`, `D8`, `J4`, `J7`, `U4`) also carry `FT Rotation Offset` or
+`U2`, `U5`, `D2`, `D8`, `J4`, `J7` and `U4` also carry `FT Rotation Offset` or
 `FT Position Offset` fields, on both the schematic symbols and the footprints, for corrections the
 Toolkit does not make on its own, so every Toolkit run writes their corrected rows.
 **Regenerate the whole Toolkit set after every schematic or PCB save.** A stale `positions.csv`
 silently misses new parts.
 
-Raw `kicad-cli` exports, as a cross-check only and not a replacement for the reviewed Toolkit set:
+Raw `kicad-cli` exports, as a cross-check only and not a replacement for the Toolkit set:
 
 ```bash
 kicad-cli pcb export gerbers -o fabrication/gerbers/ \

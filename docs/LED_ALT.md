@@ -1,16 +1,16 @@
 # Front-light driver alternate for U10 (TPS923610)
 
-**Status: study only. Nothing here is on the board.** Studied 2026-10-01 against Rev 1.01 (commit `5809233`) and firmware commit `5d58fdc0`. Stock and prices were fetched that day and must be re-checked before relying on them.
+**Status: study only. Nothing here is on the board.** Stock and prices change; re-check them before relying on this.
 
-This is a design reference for a future revision. It records why U10 needs an alternate, what the alternate has to satisfy, every part that was considered, and how the recommended option would be placed, routed, built and tested.
+This is a design reference for a possible change to the board. It records why U10 needs an alternate, what the alternate has to satisfy, every part that was considered, and how the recommended option would be placed, routed, built and tested.
 
 ---
 
 ## 1. Summary
 
-**The problem.** U10, the TPS923610DRLR front-light boost, had **2 pieces** at LCSC/JLC on 2026-10-01. Every part in its family is short as well: TPS923611 97, TPS923611LS 250, TPS923612 361, TPS923621 54. The closest TI twin, TPS61158, had 21. A JLC build therefore means pre-ordering U10 or Global Sourcing it.
+**The problem.** U10, the TPS923610DRLR front-light boost, is often at or near zero stock at LCSC/JLC. Every part in its family is short as well, and so is the closest TI twin, TPS61158. A JLC build therefore means pre-ordering U10 or Global Sourcing it.
 
-**Two studies were run:**
+**Two studies:**
 
 | Study | Constraint | Result |
 |---|---|---|
@@ -151,7 +151,7 @@ DigiKey MPN is the primary field; LCSC is an extra field.
 
 - **Package.** WSON-6 (TI DRV0006A), 0.65 mm pitch, exposed pad 1.0 × 1.6 mm, marking BZQ, MSL 2. Reflow only; a hand build needs hot air or a hotplate.
 - **C35 is 0402** because an 0603 does not fit between R4 and L2. It would be the board's first 0402. TI recommends 220 nF on COMP for most applications. Do not use 1 µF: it slews COMP about 4.5 times slower, which delays light-up and the open-load latch. 0.1 µF is untested.
-- **0402 vs the board's 0603 rule.** Every other passive is 0603 or larger, and `R84` was made 0603 rather than 0402 on 2026-10-01 for that reason. The alternate is JLC-assembled only, so an 0402 there is buildable, but it is the one exception to the rule (C38 would be a second). Keeping to 0603 means re-placing C35 (and C38) elsewhere on the COMP and VIN nets; that layout was not studied.
+- **0402 vs the board's 0603 rule.** Every other passive is 0603 or larger, and `R84` is 0603 rather than 0402 for that reason. The alternate is JLC-assembled only, so an 0402 there is buildable, but it is the one exception to the rule (C38 would be a second). Keeping to 0603 means re-placing C35 (and C38) elsewhere on the COMP and VIN nets; that layout was not studied.
 - **DigiKey.** TPS61160DRVR, cut tape 296-22942-1-ND, about $1.35 at quantity 1 (not checked against the live page).
 - **JLC footprint.** EasyEDA's `WSON-6_L2.0-W2.0-P0.65-TL-EP` has pin 1 top-left, the same as KiCad's, so no FT Rotation Offset is expected.
 
@@ -176,13 +176,13 @@ DigiKey MPN is the primary field; LCSC is an extra field.
 - **`fabrication/part_fields.csv` rows:**
   ```
   U15,TPS61160DRVR,TPS61160DRVR,Texas Instruments,C165143,yes,Texas Instruments TPS61160DRVR,"same part; DNP alternate to U10 (TPS923610) with D7 and C35 - fit U10 OR U15+D7+C35, never both. Alternate build needs firmware MIN_DUTY >= 3 LSB and the decay probe."
-  D7,B5819W,1N5819HW-7-F,Diodes Incorporated,C8598,yes,"Jiangsu Changjing Electronics Technology Co., Ltd. B5819W SL","equivalent (JCET B5819W); same part as D4-D6; U15 rectifier, DNP in the standard build"
-  C35,220n,CL05B224KO5NNNC,Samsung Electro-Mechanics,C16772,yes,Samsung Electro-Mechanics CL05B224KO5NNNC,"same part; U15 COMP capacitor (TI 220 nF), 0402 because 0603 does not fit between R4 and L2; DNP in the standard build"
+  D7,B5819W,1N5819HW-7-F,Diodes Incorporated,C8598,yes,"Jiangsu Changjing Electronics Technology Co., Ltd. B5819W SL","equivalent (JCET B5819W); same part as D4-D6; U15 rectifier, DNP in the full build"
+  C35,220n,CL05B224KO5NNNC,Samsung Electro-Mechanics,C16772,yes,Samsung Electro-Mechanics CL05B224KO5NNNC,"same part; U15 COMP capacitor (TI 220 nF), 0402 because 0603 does not fit between R4 and L2; DNP in the full build"
   ```
 
 ### 5.5 Placement and routing
 
-This layout was built and DRC-checked on a scripted copy of commit `5809233`. Coordinates are KiCad board mm, y down, all parts on B.Cu. If the area around U10 has changed since, re-derive them.
+This layout was built and DRC-checked on a scripted copy of the board. Coordinates are KiCad board mm, y down, all parts on B.Cu. If the area around U10 has changed since, re-derive them.
 
 **Why here.** A free-space scan of B.Cu around U10 (all pads, tracks and vias plus 0.2 mm clearance) found exactly one patch within 8 mm that takes a driver land: directly above L2, bounded by the antenna-notch board edge (y ≈ 113.5), the BUTTON_ADC_1 via (48.3, 113.7), the 3V3 via (49.5, 114.6) and the LED_SW run along y = 117.1. The other patches put SW 6 mm or more from L2.
 
@@ -237,22 +237,22 @@ Margins to watch:
 - **VIN decoupling.** U15.6 reaches C12 through about 12 mm of 0.25 mm track and two vias. TI wants the input capacitor close to VIN and GND, so this is not met. Try to fit C38 (1 µF 0402) between U15.6 and GND; only about 0.56 mm is free above U15, so it may not fit. If it does not, VIN ripple at 3.0 V becomes a bench gate (§7). UVLO is 2.5 V max falling, so a few hundred mV of dip at 3.0 V still clears it.
 - **Antenna.** U15 and the SW node sit about 1-3 mm from the U4 antenna keepout, against about 5.5 mm today. Check Wi-Fi/BLE RSSI with the light on.
 - **Thermal.** No vias in the EP, one beside it. Loss is about 20-35 mW (+2-3 °C), which is acceptable.
-- **Standard build (U15/D7/C35 empty).** The SW node gains about 2.7 mm² of copper (3.6 → 6.3 mm²) and about 0.1-0.3 pF. The empty FB, CTRL and VIN stubs sit on low-impedance or DC nodes. Electrically negligible.
+- **Full build (U15/D7/C35 empty).** The SW node gains about 2.7 mm² of copper (3.6 → 6.3 mm²) and about 0.1-0.3 pF. The empty FB, CTRL and VIN stubs sit on low-impedance or DC nodes. Electrically negligible.
 
 ### 5.7 Solder paste on the empty land (must be suppressed)
 
 **Finding.** The production `B_Paste` Gerber has apertures on DNP footprints: there are flashes at the DNP U14 pads (64.5, 116.7) and (63.2, 119.4) and at the DNP R43 pad (98.91, 137.2). The Fabrication Toolkit's DNP exclusion drops BOM and CPL rows only; it does not touch the paste layer. JLC cuts the stencil from that file.
 
 **Why it matters here:**
-- **Standard build, empty U15.** The SW pad is 0.20 mm from the GND pad. A bridge puts L2 (0.45 Ω) straight across LDO_IN to GND; the DW01A or the source trips and the board does not run.
+- **Full build, empty U15.** The SW pad is 0.20 mm from the GND pad. A bridge puts L2 (0.45 Ω) straight across LDO_IN to GND; the DW01A or the source trips and the board does not run.
 - **Alternate build, empty U10 (SOT-563, 0.5 mm pitch).** Paste can bridge SW-VOUT or VOUT-GND. LED_SW to GND is a VIN → L2 → D7 → GND path limited only by resistance.
 
 **Fix:**
-1. Give the empty-side driver footprints a solder-paste override that removes their apertures: Footprint Properties → Clearance overrides → solder paste relative clearance −100 %. Standard build: U15, D7, C35. Alternate build: U10 only, with U15/D7/C35 back to the default.
+1. Give the empty-side driver footprints a solder-paste override that removes their apertures: Footprint Properties → Clearance overrides → solder paste relative clearance −100 %. Full build: U15, D7, C35. Alternate build: U10 only, with U15/D7/C35 back to the default.
 2. Plot each build's own Gerber zip. The copper is identical; only the paste layer differs.
 3. Verify on the plotted `B_Paste` layer in GerbView that the empty land has no apertures. Do not assume the override works without looking.
 
-**Today's board.** U14 (RV-8263 SON-8, 0.9 mm pitch) has the same exposure: 0.25 mm pad gaps with SCL-SDA adjacent (pads 7-8) and SCL-GND across 0.35 mm (pads 7-2). It is lower risk than a WSON SW pad, but on Rev 1.0 boards inspect U14's empty land and meter SCL-SDA (expect about 4.4 kΩ through the two 2.2 kΩ pull-ups, not 0 Ω) and SCL-GND. If more alternates with tight pads are added, use the per-build paste control above on all of them.
+**Current board.** U14 (RV-8263 SON-8, 0.9 mm pitch) has the same exposure: 0.25 mm pad gaps with SCL-SDA adjacent (pads 7-8) and SCL-GND across 0.35 mm (pads 7-2). It is lower risk than a WSON SW pad, but on any board with U14 left empty, inspect its land and meter SCL-SDA (expect about 4.4 kΩ through the two 2.2 kΩ pull-ups, not 0 Ω) and SCL-GND. If more alternates with tight pads are added, use the per-build paste control above on all of them.
 
 ### 5.8 JLC CPL
 
@@ -308,7 +308,7 @@ These are proposals; line numbers refer to firmware commit `5d58fdc0`. No hardwa
 
 ### 5.11 BOM and builds
 
-**Standard build.** Nothing new to order. The toolkit writes DNP lines:
+**Full build.** Nothing new to order. The toolkit writes DNP lines:
 ```
 TPS61160DRVR  DNP (standard build),U15,WSON-6-1EP_2x2mm_P0.65mm_EP1x1.6mm,
 B5819W  DNP (standard build),D7,D_SOD-123,
@@ -328,7 +328,7 @@ B5819W  DNP (standard build),D7,D_SOD-123,
 
 DigiKey hand build: TPS61160DRVR (about $1.35 at 1), 4 × 1N5819HW-7-F, 1 × 220 nF 0402.
 
-### 5.12 Cost (JLC prices, 2026-10-01)
+### 5.12 Cost (JLC prices)
 
 | Per board, alternate build | 5 boards | 25 boards | 125 boards |
 |---|---|---|---|
@@ -349,7 +349,7 @@ DigiKey hand build: TPS61160DRVR (about $1.35 at 1), 4 × 1N5819HW-7-F, 1 × 220
 |---|---|---|
 | Alternate-build changes | U10 DNP; U15, D7, C35 fitted (3 placements) | U10 DNP; U15 fitted; **D3 → SMAJ28A** |
 | New part numbers | TPS61160DRVR, 220 nF 0402 | AP3036BKTR-G1, SMAJ28A |
-| Stock (2026-10-01) | 9,827 / 9,834; single source (TI); A-variant only 91 | 20,380 / 20,384 |
+| Stock | Ample, but single source (TI); the A variant is scarce | Ample |
 | Price per board | $0.28-0.49 incl. diode and capacitor | $0.17-0.22 |
 | JLC fee | $0 net | $0 net (SMAJ28A is Preferred) |
 | **Sleep (shutdown)** | **≤ 1 µA → floor about 58 µA** | 45 µA typ / 75 µA max → about 103 µA typ (**fails R28**) |
