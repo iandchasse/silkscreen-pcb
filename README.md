@@ -2,10 +2,10 @@
 
 **An open-source, open-hardware e-reader mainboard.**
 
-Silkscreen is a build-it-yourself e-reader. The name covers both this board and a reader built
-around it; this repository covers the mainboard. You order the board already assembled from a
-factory, add an e-paper display, a battery and a microSD card, and put it in a
-case of your own choosing. It is a 2-layer ESP32-S3 board with a 24-pin display connector,
+Silkscreen is an open e-paper development board. You can build a pocket reader around it,
+adapt its firmware or extend the electronics; this repository covers the mainboard. A factory
+can assemble the board for you, and you add a compatible e-paper display, battery, microSD card
+and case. It is a 2-layer ESP32-S3 board with a 24-pin display connector,
 optional touch and frontlight, microSD and single-cell Li-ion/LiPo power.
 
 It is the successor to [de-link](https://de-link.me). The de-link project hub's pages and photos
@@ -39,6 +39,7 @@ yet**. Read [Firmware](#firmware) before you order.
 
 The complete picture of the project, the story behind it, the cost breakdown and the build
 configurator are on the project website, [silkscreenreader.com](https://silkscreenreader.com).
+The current [site preview](https://de-link.me/silkscreen-test) includes the builder and beta plans.
 
 Everything about how the board works, pin by pin, is in one document:
 [docs/HARDWARE.md](docs/HARDWARE.md). It covers every circuit block, the GPIO map, what firmware
@@ -53,7 +54,7 @@ The factory sends you a populated circuit board and nothing else. You also need:
 | Item | What to get |
 |---|---|
 | **Display panel** | One of the 4.26" Good Display variants: `GDEY0426T82` (plain), `GDEQ0426T82-T01C` (touch), `-FL01C` (frontlight), `-FT01C` (touch + frontlight). The panel you pick decides which optional parts you fit. See [Choosing a configuration](#choosing-a-configuration). |
-| **Battery** | A **single-cell** (3.7 V nominal / 4.2 V charged) Li-ion or LiPo pack fitted with a **JST-PH 2.0 mm, 2-pin** plug. Read the polarity note below before you plug it in. I use [this 500 mAh `503035` pack (5 × 30 × 35 mm, JST-PH 2.0)](https://www.amazon.com/dp/B0GDQLLF12). It fits the board's 38.75 × 30.50 mm battery bay snugly. The board charges at about 0.25 A as built. For a much smaller cell, lower the charge current by raising `R6` ([HARDWARE.md §3.2](docs/HARDWARE.md#32-battery-charger)). Listings change, so check the plug, the polarity and the size of whatever you buy. |
+| **Battery** | A protected **single-cell** (3.7 V nominal / 4.2 V charged) Li-ion or LiPo pack fitted with a **JST-PH 2.0 mm, 2-pin** plug. Its manufacturer's limits must permit 4.2 V charging at the board's approximately 0.25 A charge current. Read the polarity note below before you plug it in. I use [this 500 mAh `503035` pack (5 × 30 × 35 mm, JST-PH 2.0)](https://www.amazon.com/dp/B0GDQLLF12). It fits the board's 38.75 × 30.50 mm battery bay snugly. If a cell requires a lower charge current, adjust `R6` and verify the resulting current against its specifications ([HARDWARE.md §3.2](docs/HARDWARE.md#32-battery-charger)). A matching size, plug or protection board alone does not establish compatibility. |
 | **microSD card** | Any normal microSD card. The battery normally sits in the board's cut-out directly in front of the card slot, so you lift or slide the cell aside to put a card in or take one out. I designed it that way; the card is not meant to be swapped often. |
 | **USB-C cable** | A **data** cable, not a charge-only one, or the board will charge but never appear on your computer. |
 
@@ -81,11 +82,15 @@ you need depends on the case you use, and no case is supplied here. See
 ## Order an assembled board, step by step
 
 > [!CAUTION]
-> **The boards work so far, and the closed beta is underway.** This board should work, but
+> **Silkscreen has working prototypes, and the closed beta is underway.** This board should work, but
 > building one is at your own risk: a mistake I have not found yet could mean a board that does
 > not work, and the factory does not refund a board that was built exactly as the files said. If
 > you have concerns or questions, join the [Discord](https://discord.gg/zCnKFt4Y4P) before you
 > order.
+>
+> Build your own board to participate; there is no email application. The builder supplies
+> the files for your configuration. Check its current firmware support and build instructions
+> before ordering.
 >
 > **If your board has no `R84` resistor** (it was made from older files), power it from a USB-C
 > charger, an ordinary USB-A charger or a PC port rather than a fast-charge USB-A brick on a short,
@@ -322,8 +327,8 @@ behind that does no work. The website's builder uses the same groups.
 |---|---|---|---|
 | **Core** (always) | Everything not listed below: ESP32-S3 `U4`, USB-C `J1`/`U6` and protection, charger `U11`, cell protection `U5`/`Q1`/`Q3`/`Q8`, power mux `U2`, LDO `U3` with its input capacitor `C4`, battery monitor, microSD `J7`/`Q7`/`U1`/`U9`, the 24-pin display connector `J2` with its charge pump and boost (`L1`, `Q4`, `D4`-`D6`, `R14`, ...), power button `SW10`, reset `SW11`, LED `D2`, and the I²C pull-ups `R47`/`R48` (shared by touch, clock and `J6`) | Always | This is the minimum working board |
 | **Touch** | `J4`, `U7`, jumpers `R42 R44 R46 R52` | The panel has a touch layer (`-T01C`, `-FT01C`) | Yes: omit the whole block on a non-touch panel |
-| **Frontlight** | driver `U10` with `L2`, input capacitor `C12` and output capacitor `C9`; current set `R37`; warm/cool select `Q5`, `Q6`, `U12` (with its decoupling `C24`) and `R75`; LED monitor `R39`, `R41`, `C31`; string bleeders `R49`, `R50`; output clamps `D3`, `D8` (`TP3`-`TP5` stay DNP) | The panel has a frontlight (`-FL01C`, `-FT01C`), or you want to drive an external light through `J6` | Yes: omit for a plain or touch-only panel |
-| **Frontlight connector** | `J3` | The panel has a bonded frontlight (`-FL01C`, `-FT01C`) | Yes: an external light connects through `J6` instead |
+| **Frontlight** | driver `U10` with `L2`, input capacitor `C12` and output capacitor `C9`; current set `R37`; warm/cool select `Q5`, `Q6`, `U12` (with its decoupling `C24`) and `R75`; LED monitor `R39`, `R41`, `C31`; string bleeders `R49`, `R50`; output clamps `D3`, `D8` (`TP3`-`TP5` stay DNP) | The panel has a frontlight (`-FL01C`, `-FT01C`), or you want to drive a compatible external light through `J6` or `J3` | Yes: omit if the panel has no bonded light and you do not want an external light |
+| **Frontlight connector** | `J3` | Fit with the frontlight driver, for a bonded panel light or compatible external-light flex PCB (in development) | Omit with the driver |
 | **Expansion header** | `J6`, `U8`, `CR2`, `CR3`, `F2`, and the GPIO series resistors `R65 R68 R69` | You want spare GPIO, I²C and the external-light output | Yes |
 | **Real-time clock** | `U13`, `C30` (or `U14` instead of `U13`) | You want accurate time | Yes: the reader runs without it, and it can be added later by hand |
 | **Alternate RTC** | `U14` (**not fitted in the full build**) | You want the cheaper clock instead of `U13` | Fit **either** `U13` **or** `U14`, never both |
@@ -335,7 +340,8 @@ Notes:
 - **The panel choice drives touch and frontlight.** The four 4.26" Good Display variants are
   `GDEY0426T82` (plain), `GDEQ0426T82-T01C` (touch), `-FL01C` (frontlight) and `-FT01C` (touch +
   frontlight).
-  Fit the touch parts only for a touch variant and the frontlight parts only for a light variant.
+  Fit the touch parts only for a touch variant. Fit the frontlight driver and `J3` for a light
+  variant, or keep both for a compatible external light on a plain or touch-only panel.
 - **`U8`, `CR2`, `CR3` and `F2` are `J6`'s own protection and come off with it.** `U8` protects only
   `J6` pins; `CR2` and `CR3` clamp the 3V3 and raw-battery pins where they leave the board, and the
   resettable fuse `F2` sits in series with that battery pin and feeds nothing else. The 33 Ω
@@ -346,8 +352,9 @@ Notes:
 - **`C12` belongs to the frontlight.** It is on the shared `LDO_IN` rail but sits beside `U10` as
   the driver's input capacitor; the LDO and power mux have their own, `C4`. Without the frontlight
   it can go.
-- **An external light needs `J6`.** `J3` only mates a panel with a bonded light; for any other
-  light, the frontlight group drives it through the header.
+- **An external light can use `J6` or `J3`.** A wired light connects through `J6`; `J3` can
+  connect a compatible external-light flex PCB, which is in development. With no bonded panel
+  light and no `J6`, that flex PCB is the planned connection. Removing the driver removes `J3` too.
 - **Check `J6`'s pins with a meter before plugging anything in.** It is a right-angle socket on
   the back, and the pinout on the front silkscreen shows the openings as you see them with the
   display side toward you. A board without `R84` prints its two rows the other way round, so
@@ -374,8 +381,13 @@ pin-hole in the case with a paperclip, not by a finger.
 
 ### Cutting the board down for a smaller display
 
-The back of the board is marked with a line showing where it can be shortened for a smaller panel.
-If you do that:
+The [builder preview](https://de-link.me/silkscreen-builder) provides separate experimental
+Gerbers for a board sized the same as XTEink X3. The factory makes its smaller outline; no cutting
+is required. Use those files for that build, rather than ordering a full-size board and cutting it.
+
+The modification below concerns an existing full-size board. It is not the builder’s assembly
+route. The back of the full-size board is marked with a line where it can be shortened. If you
+choose to modify one:
 
 - **Disconnect the battery first.** Battery positive runs across the cut line. Cutting into it
   with a pack connected can short the cell.
@@ -410,10 +422,12 @@ The plan is to bring the FreeInk SDK to the board, so that CrossPoint, CrossInk 
 Xteink X4 firmwares can add Silkscreen as a supported board, and to help maintain that support.
 First-power-up instructions come with it.
 
-**The board will never be locked.** You can flash any firmware you like over USB-C.
+**The design has no vendor firmware lock.** You can develop and flash compatible firmware over USB-C.
 
-A board you order is one to build on. If you just want a reader to read on, wait for the
-open-beta kits.
+A board you order is one to build on. Future open-beta evaluation kits are planned for
+development work, with purchase permission based on the intended work and requested quantity.
+These are not finished, ready-to-use readers. See the [open-beta plans](https://de-link.me/silkscreen-why#open-beta)
+for details when they are available; joining the mailing list does not reserve a kit or approve a purchase.
 
 If you want to write firmware for it, [docs/HARDWARE.md](docs/HARDWARE.md) is the whole
 reference. The GPIO map is section 13, and section 13.1 lists what the board needs firmware to do:
@@ -493,7 +507,11 @@ The hardware is licensed under the **CERN Open Hardware Licence Version 2, Stron
 - **If you distribute or sell a board based on this design, you must make your design source
   available under the same CERN-OHL-S v2 licence**, and pass on the copyright and licence notice,
   including any changes you made. That is what "strongly reciprocal" means.
-- There is **no warranty of any kind**. If you build one and it does not work, that is your risk.
+- **The licence includes a warranty disclaimer to the extent permitted by applicable law.**
+  Read section 6 of [LICENSE](LICENSE).
+
+These are permissions under the design licence; they do not replace applicable requirements for
+making, operating or selling hardware. Any kits supplied by me will have separate purchase terms.
 
 This is a plain-language summary, not legal advice; the licence text in [LICENSE](LICENSE) governs.
 

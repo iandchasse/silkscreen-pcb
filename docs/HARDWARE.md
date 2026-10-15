@@ -1,7 +1,7 @@
 # Silkscreen — Hardware Design Documentation
 
 **An open-source, open-hardware e-reader mainboard.**
-Display agnostic · case agnostic · firmware agnostic · battery agnostic.
+Compatible displays · adaptable cases · firmware development · single-cell power.
 
 Successor to [de-link](https://de-link.me).
 
@@ -73,10 +73,10 @@ Successor to [de-link](https://de-link.me).
 
 ## 1. What Silkscreen is
 
-Silkscreen is a **mainboard for e-ink development**. The goal is that one PCB should support
-essentially any 24-pin SPI e-paper panel, any battery, any enclosure, any button layout and
-any firmware — so that the interesting work (the display, the case, the software) is not
-gated on redesigning power and interface electronics every time.
+Silkscreen is a **mainboard for e-ink development**. It provides shared power and interface
+electronics for compatible displays, cells, controls and firmware, so projects can adapt the
+display, case and software without always starting with a new board. Each configuration still
+needs its own compatibility and assembly checks.
 
 **Primary target:** 4.26" `GDEQ0426T82` family
 - `GDEY0426T82` — plain (Good Display sells the plain panel under this number)
@@ -88,24 +88,24 @@ gated on redesigning power and interface electronics every time.
 `-T01C` touch, `-FL01C` front light, `-FT01C` both. Order by the full suffixed number, because
 the suffix is what decides which optional blocks you fit.
 
-**Also supports:** most 24-pin SPI e-paper panels, larger or smaller, given a suitable enclosure.
-A 24-pin connector alone does not establish compatibility — check the panel's pinout, drive
-requirements and voltage rails.
+**Other panels are development projects.** A 24-pin connector alone does not establish
+compatibility: check the panel's pinout, drive requirements, voltage rails, physical fit and
+firmware support. An adapter or board changes may be needed.
 
-### The four "agnostic" goals, and how the hardware delivers them
+### Adaptability goals and their limits
 
 | Goal | Mechanism |
 |---|---|
 | **Display agnostic** | Standard 24-pin 0.5 mm ZIF (`J2`) carrying SPI + the full HV rail set. The panel's own controller drives the charge pump, so the board adapts to the panel rather than the reverse. |
 | **Case agnostic** | Six `MountingHole_Pad`s; the buttons are grouped onto resistor ladders that cost only one pin per group, so a build can fit one edge, the other, both or neither — including the optional front-mounted bottom buttons of §9.1.1 — without changing the pin budget. |
 | **Firmware agnostic** | Nothing on the board requires a specific software stack. Every peripheral is a standard interface (SDMMC, SPI, I²C, ADC, native USB) with no board-specific handshake. |
-| **Battery agnostic** | On-board DW01A + FS8205A protection for a single 4.2 V-charge Li-ion/LiPo cell; a pack with its own protection also works — the two cascade. **Reverse-insertion tolerance is *not* established when USB is present** — verify cable polarity and see [DESIGN_REVIEW.md](../DESIGN_REVIEW.md) §4 before relying on it. |
+| **Compatible single-cell packs** | On-board DW01A + FS8205A protection for a single 4.2 V-charge Li-ion/LiPo cell; choose a protected pack whose charge limits, condition, polarity and fit suit the board. The two protection circuits cascade. **Reverse-insertion tolerance is *not* established when USB is present** — verify cable polarity and see [DESIGN_REVIEW.md](../DESIGN_REVIEW.md) §4 before relying on it. |
 
 ### Optional-by-design
 
 Several blocks are populated only if the chosen panel needs them:
 
-- **Frontlight** (`U10` boost and its support parts; `J3` only for a panel with a bonded light) — for a `-FL01C` / `-FT01C` panel, or to drive an external light through `J6`
+- **Frontlight** (`U10` boost, support parts and `J3`): for a `-FL01C` / `-FT01C` panel, or a compatible external light through `J6` or an external-light flex PCB on `J3`. That flex PCB is in development. Keep `J3` with the driver, including on a plain or touch-only panel.
 - **Touch** (`J4` + `U7`) — only for `-T01C` / `-FT01C` panels
 - **RTC** (`U13`, or `U14` as the alternate footprint) — always useful, but not required to boot (`U13` is populated in the full build; omit it if you don't need it)
 - **Expansion header** (`J6` + `U8`/`CR2`/`CR3`/`F2`) — omit the connector and its own protection parts together
@@ -327,10 +327,10 @@ reversed cell does not. The `Q8` arrangement comes from the EEVblog forum thread
 ["Pain and suffering getting the DW01 and 8205A protection circuit work right"](https://www.eevblog.com/forum/projects/pain-and-suffering-getting-the-dw01-and-8205a-protection-circuit-work-right/)
 — that is where the short link printed beside `Q8` on the schematic goes.
 
-> ### ⚠️ Reverse insertion is **not** safe with USB present
+> ### ⚠️ Reverse-polarity precautions and charger-enable mitigation
 >
-> There is a fault path that the "reverse-polarity protection" label does
-> not cover. **With USB powering the charger, `Q8` can turn on even with a reversed cell**;
+> **The series FETs alone do not establish reverse-insertion protection with USB present.**
+> With USB powering an enabled charger, `Q8` can turn on even with a reversed cell;
 > `Q3`'s body diode then leaves a path toward `B+`, and `U5` (VCC = `P+`, GND = `B−`) can be
 > driven with a strongly **reversed supply**. "`Q3` is off" does not establish isolation from
 > the charger, because a P-channel body diode conducts drain-to-source. Selecting USB in the
@@ -341,18 +341,17 @@ reversed cell does not. The `Q8` arrangement comes from the EEVblog forum thread
 > connecting, and disconnect USB during any battery work.** Do not describe the board as
 > providing bare-cell / USB-present reverse-insertion protection. **Mitigation:** the TP4056
 > `CE` pin is driven high only by a cell-polarity detector referenced to raw
-> `B−` (`Q9` BSS138 + `Q2` AO3401A + `R79`–`R82`, ≈10 µA idle — see below), so the charger — the
-> only thing that energizes the fault path — never runs into a reversed cell. Analysis, simulation and the wiring table are in
+> `B−` (`Q9` BSS138 + `Q2` AO3401A + `R79`–`R82`, ≈10 µA idle, see below). This circuit is
+> designed to inhibit charging with a reversed cell. Analysis, simulation and the wiring table are in
 > [DESIGN_REVIEW.md](../DESIGN_REVIEW.md) §4. **Do not test this by reversing a real LiPo** — use
 > a current-limited emulator.
 >
-> **One known limitation, accepted as-is:** the detector can only enable the charger while a correctly
+> **Charger enable limitation:** the detector can only enable the charger while a correctly
 > oriented cell shows above roughly 1–1.8 V at `J5`. A pack whose own protection IC has already
 > latched into over-discharge lockout (0 V at its terminals) or a bare cell drained past that
-> point cannot be revived by the on-board charger — it needs an external charger first. This is
-> judged an acceptable edge case for this board rather than something worth a hardware or
-> firmware mitigation; if firmware ever needs a rescue path, the node to drive is `Q2`'s gate
-> (`/DET_NODE`).
+> point cannot be charged by this circuit. A 0 V reading does not establish that a pack is safe
+> to recover. Follow the cell or pack manufacturer's handling instructions; do not bypass its
+> protection or try to recharge an unknown, damaged or deeply discharged cell.
 
 `J5` is a 2-pin battery connector: **pin 1 = `B−`, pin 2 = `B+`.** A matching connector housing
 does not guarantee cable polarity — check it electrically. Two resistor networks sit **outside**
@@ -360,7 +359,8 @@ the protection FETs, where the DW01A can never disconnect them, so they keep dra
 after an over-discharge cutoff: the `R56`+`R57` gate divider (~0.4 µA with `R57` at 10 MΩ)
 and the detector's `R79` (100 k) + `R80` (1 M) across the raw cell
 (~3.8 µA). That is **≈4 µA of resistors**, or ≈7 µA once the DW01A's own supply current is
-included. It is a safe number (years from 2.4 V to flat on a normal pack).
+included. This is a design estimate, not a qualified safe-storage duration. Follow the cell
+manufacturer's storage limits and check its condition and voltage before reuse.
 
 ---
 
@@ -826,9 +826,9 @@ The binding constraint on blend frequency is `C9` re-slew: on a color switch the
 `LED_SW` to the new string's forward voltage, and it can only *discharge* `C9` (= **4.7 µF/50 V**
 nameplate) through the LED current, so `t ≈ C9 × ΔV_f / I_LED`.
 
-> **Blending is a qualification item, not a solved recipe.**
-> **Start with fixed warm/cool selection.** Before enabling blending, measure ΔV_f between the
-> two strings and each branch's current and output voltage at full and low brightness, and derive
+> **Warm/cool blending has been demonstrated on prototypes.** When adapting the firmware or
+> using a different panel, measure ΔV_f between the two strings and each branch's current and
+> output voltage at full and low brightness, and derive
 > any needed blanking/dwell from those results. If ΔV_f turns out large, prefer reducing `C9`
 > over slowing `COLOR_SEL` into the flicker-visible region. (See [DESIGN_REVIEW.md](../DESIGN_REVIEW.md) §8.)
 >
