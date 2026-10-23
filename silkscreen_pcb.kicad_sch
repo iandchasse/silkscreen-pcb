@@ -6,8 +6,8 @@
 	(paper "A2")
 	(title_block
 		(title "Silkscreen Reader PCB")
-		(date "2026-09-30")
-		(rev "1.01")
+		(date "2026-10-22")
+		(rev "1.02")
 		(company "idc LLC")
 		(comment 1 "Open-hardware e-reader base board")
 		(comment 2 "Licensed under CERN-OHL-S-2.0")
@@ -12132,7 +12132,7 @@
 		)
 		(uuid "cccaf562-ae7e-437e-bb7d-0e4ea7e85a3e")
 	)
-	(text "R6 4.7kohm -> 255mA charge rate"
+	(text "R6 4.7kohm -> ~234mA charge rate"
 		(exclude_from_sim no)
 		(at 149.098 123.952 0)
 		(effects
@@ -12193,7 +12193,7 @@
 		)
 		(uuid "fc74d796-cf19-4e6e-a38e-335cfe16184e")
 	)
-	(text_box "TPS923 chip is a series LED boost converter. \nRecommended to run between 10kHz-25kHz via PWM_LED for brightness control.\nPWM_LED (ADIM) is also the ENABLE: first HIGH pulse must be >= 40 us (tADIM_EN), so hold HIGH >= 100 us\nbefore starting the PWM carrier; LOW for > 2.5 ms (tADIM_SD) shuts the driver down.\nReturn path for LEDs is toggled via COLOR_SEL for warm/cool selection.\nFeedback current is ~13.3mA tuned via R37. Reference datasheet to change as needed.\nLED_MONIT is analog signal that references 0-24.5V output on LED voltage. (ADC range from 0 to ~30V)\nInternal OVP should cut out at ~24V, but software protection should kick in and disable LED_ACTIVATE at safe voltage above known forward voltage (15V)\nAfter 3 OVP trips the driver LATCHES off: re-applying PWM will not restart it - hold PWM_LED LOW > 2.5 ms (or power-cycle).\nChange COLOR_SEL only with PWM duty at 0. Never enable with J3 unplugged."
+	(text_box "TPS923 chip is a series LED boost converter. \nRecommended to run between 10kHz-25kHz via PWM_LED for brightness control.\nPWM_LED (ADIM) is also the ENABLE: first HIGH pulse must be >= 40 us (tADIM_EN), so hold HIGH >= 100 us\nbefore starting the PWM carrier; LOW for > 2.5 ms (tADIM_SD) shuts the driver down.\nReturn path for LEDs is toggled via COLOR_SEL for warm/cool selection.\nFeedback current is ~13.3mA tuned via R37. Reference datasheet to change as needed.\nLED_MONIT is analog signal that references 0-24.5V output on LED voltage. (ADC range from 0 to ~30V)\nInternal OVP should cut out at ~24V, but software protection should kick in and disable PWM_LED at safe voltage above known forward voltage (15V)\nAfter 3 OVP trips the driver LATCHES off: re-applying PWM will not restart it - hold PWM_LED LOW > 2.5 ms (or power-cycle).\nChange COLOR_SEL only with PWM duty at 0. With no light connected, LED_MONIT (software trip ~23V) and the U10 OVP latch protect the driver; avoid enabling it with J3 and J6 empty."
 		(exclude_from_sim no)
 		(at 233.68 308.61 0)
 		(size 119.38 27.675)
@@ -21082,7 +21082,7 @@
 			)
 		)
 	)
-	(global_label "3V3"
+	(global_label "USB_VBUS"
 		(shape input)
 		(at 114.3 190.5 0)
 		(fields_autoplaced yes)
@@ -27237,7 +27237,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_USB:USB_C_Receptacle_GCT_USB4085"
+		(property "Footprint" "Connector_USB:USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal"
 			(at 36.83 45.72 0)
 			(effects
 				(font
@@ -27264,7 +27264,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "USB4085-GF-A"
+		(property "MPN" "USB4105-GF-A"
 			(at 33.02 45.72 0)
 			(effects
 				(font
@@ -27282,7 +27282,16 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C7095263"
+		(property "LCSC" "C2765186"
+			(at 33.02 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "FT Position Offset" "0,1.305"
 			(at 33.02 45.72 0)
 			(effects
 				(font
@@ -35073,7 +35082,7 @@
 				)
 			)
 		)
-		(property "Value" "100k"
+		(property "Value" "1M"
 			(at 92.71 201.93 90)
 			(effects
 				(font
@@ -35108,7 +35117,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "RC0603FR-07100KL"
+		(property "MPN" "RC0603FR-071ML"
 			(at 92.71 204.47 0)
 			(effects
 				(font
@@ -35126,7 +35135,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25803"
+		(property "LCSC" "C22935"
 			(at 92.71 204.47 0)
 			(effects
 				(font
@@ -35898,7 +35907,7 @@
 				)
 			)
 		)
-		(property "Value" "1M"
+		(property "Value" "100k"
 			(at 104.648 196.85 0)
 			(effects
 				(font
@@ -35933,7 +35942,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "RC0603FR-071ML"
+		(property "MPN" "RC0603FR-07100KL"
 			(at 107.95 195.58 0)
 			(effects
 				(font
@@ -35951,7 +35960,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C22935"
+		(property "LCSC" "C25803"
 			(at 107.95 195.58 0)
 			(effects
 				(font
@@ -38832,7 +38841,7 @@
 				)
 			)
 		)
-		(property "Value" "1M"
+		(property "Value" "10k"
 			(at 114.808 180.34 0)
 			(effects
 				(font
@@ -38867,7 +38876,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "RC0603FR-071ML"
+		(property "MPN" "RC0603FR-0710KL"
 			(at 118.11 179.07 0)
 			(effects
 				(font
@@ -38885,7 +38894,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C22935"
+		(property "LCSC" "C25804"
 			(at 118.11 179.07 0)
 			(effects
 				(font
@@ -41803,7 +41812,7 @@
 				)
 			)
 		)
-		(property "Value" "1M"
+		(property "Value" "10M"
 			(at 97.028 209.55 0)
 			(effects
 				(font
@@ -41838,7 +41847,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "RC0603FR-071ML"
+		(property "MPN" "RC0603FR-0710ML"
 			(at 100.33 208.28 0)
 			(effects
 				(font
@@ -41856,7 +41865,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C22935"
+		(property "LCSC" "C7250"
 			(at 100.33 208.28 0)
 			(effects
 				(font

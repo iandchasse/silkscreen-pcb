@@ -2,6 +2,8 @@
 
 > **Status: INFORMATIONAL REFERENCE ONLY — NOT QUEUED FOR ACTION.**
 > This document captures the Part IV regulatory certification roadmap (FCC, ISED, CE RED, UL/IEC 62368-1, IEC 62133-2, UN 38.3, EU Battery Regulation 2023/1542), pre-compliance test plan, and Crowd Supply commercial readiness evaluation for Silkscreen Rev 1.01 (`master` @ `80f70e9`). It is preserved for future reference and is **not** part of the active change queue in [`AUDIT.md`](./AUDIT.md).
+>
+> **Reviewed 2026-10-18:** the FCC ID (`2AC7Z-ESPS3WROOM1`), IC number (`21098-ESPS3WROOM1`) and the SAR-exemption arithmetic were checked and hold for the PCB-antenna ESP32-S3-WROOM-1 module. The model name in §2.4 is a placeholder and the §6 scores are subjective (both qualified inline).
 
 ---
 
@@ -50,8 +52,10 @@ Because Espressif's modular grant was evaluated for **Mobile** separation ($d \g
 * **Full-Power Path:** A single-band 2.4 GHz flat-phantom Body/Limb SAR measurement (`~$1,200–$2,000` at an Asian lab) allows unrestricted $+20\,\text{dBm}$ continuous TX.
 
 ### 2.4 Required Labeling String (PCB Silkscreen / Enclosure / E-Label per 47 CFR § 2.935)
+*The model name below is a placeholder: no model name has been assigned. The FCC ID and IC number are the ESP32-S3-WROOM-1 module's (PCB-antenna version) and were checked against the grantee listings.*
+
 ```text
-Silkscreen E-Reader Mainboard (Model: SS-REV1.01)
+Silkscreen E-Reader Mainboard (Model: <model name, to be assigned>)
 Contains FCC ID: 2AC7Z-ESPS3WROOM1
 Contains IC: 21098-ESPS3WROOM1
 CAN ICES-003(B) / NMB-003(B)
@@ -107,7 +111,9 @@ CAN ICES-003(B) / NMB-003(B)
 
 ---
 
-## 6. Crowd Supply Commercial Readiness Summary (Rev 1.01 As-Is: **8.5 / 10**)
+## 6. Crowd Supply Commercial Readiness Summary (Rev 1.01 As-Is; subjective: **8.5 / 10**)
+
+> **Read the scores as opinion.** No scoring method sits behind them, and checks on Rev 1.0 so far are surface-level (see the README's status note). "Ready without another board spin" is a judgment, not a test result.
 
 * **Dropping the "sawed-off board" marketing and leaving `J6` unpopulated** immediately removes all cut-edge burr hazards, floating cut-edge copper islands, and external header hot-plug/short risks at zero hardware cost.
 * **Electrical & Field Reliability (`9.0 / 10`), JLCPCB Turnkey Manufacturability (`8.5 / 10`), and Open-Source Documentation (`9.5 / 10`)** are ready for a Crowd Supply campaign today without another board spin.

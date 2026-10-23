@@ -96,8 +96,11 @@ you need depends on the case you use, and no case is supplied here. See
 > charger, an ordinary USB-A charger or a PC port rather than a fast-charge USB-A brick on a short,
 > thick cable ([HARDWARE.md §3.1](docs/HARDWARE.md#31-usb-c-input--protection)), check `J6`'s pins
 > with a meter ([§11](docs/HARDWARE.md#11-expansion-header)), and add two wires after a cut (see
-> [below](#cutting-the-board-down-for-a-smaller-display)). The files in `production/` add `R84`, a
-> 3V3 link and ground vias, and have not been built yet.
+> [below](#cutting-the-board-down-for-a-smaller-display)). The files in `production/` are Rev 1.02:
+> they add `R84`, a 3V3 link and ground vias, a 12-pad SMD USB-C socket in place of the
+> through-hole one, and a charge-enable gate fed from `USB_VBUS` (`R79` to `R82` changed), and have
+> not been built yet. (Files labelled Rev 1.01 were published on 2026-10-01 and never ordered;
+> Rev 1.02 replaces them.)
 >
 > Your screen panel and battery are not part of the board order: see
 > [What you need besides the board](#what-you-need-besides-the-board). You can start on an
@@ -143,7 +146,7 @@ you need is in the `production/` folder. You upload exactly three files:
 
 | Upload this | What it is | Where it goes |
 |---|---|---|
-| `production/Silkscreen_Reader_PCB_1.01.zip` | the **Gerber** files: the board itself, meaning copper layers, outline and hole positions | the *Add Gerber file* box |
+| `production/Silkscreen_Reader_PCB_1.02.zip` | the **Gerber** files: the board itself, meaning copper layers, outline and hole positions | the *Add Gerber file* box |
 | `production/jlc_bom.csv` | the **BOM** (bill of materials): the shopping list of parts | the *Add BOM file* box |
 | `production/positions.csv` | the **CPL** (also called the centroid or pick-and-place file): where each part sits and which way it faces | the *Add CPL file* box |
 
@@ -153,7 +156,7 @@ Do not mix one of them with an older copy of another.
 ### Step 2: order the bare board
 
 1. Sign in at [jlcpcb.com](https://jlcpcb.com), click **Order now**, then **Add Gerber file** and
-   choose `Silkscreen_Reader_PCB_1.01.zip`.
+   choose `Silkscreen_Reader_PCB_1.02.zip`.
 2. The viewer draws the board. Confirm it says **2 layers** and about **60 × 111 mm**. If it does
    not, you uploaded the wrong file.
 3. Set **PCB Qty = 5**, **Thickness = 1.6 mm**, **Outer Copper Weight = 1 oz**. Surface finish and
@@ -250,6 +253,11 @@ dead end, just a slower one. In order of preference:
    and `D3` can burn out. An SMAJ33A doesn't conduct until about 36.7 V, so the driver's protection
    trips first. Don't leave `D3` off instead: it protects the light connectors (`J3`, `J6`).
 
+   Treat this as the second choice. Its higher ceiling leaves `C9` charged to a higher voltage after an open-load
+   trip, so with one light string open and the other intact, a colour change dumps a larger pulse into the driver's
+   feedback pin. [HARDWARE.md §13.1](docs/HARDWARE.md#131-firmware-contract--things-the-board-needs-firmware-to-do)
+   lists the firmware rule that avoids it; if you can wait for a pre-order, do that instead.
+
    The **TPS923612** is not an option: it only comes in a 2 × 2 mm WSON (`DRV`) package, which
    doesn't fit this footprint.
 
@@ -263,7 +271,10 @@ The parts below are the ones most often turned or offset in JLCPCB's preview; ch
 |---|---|
 | `D2` | The USB power LED. **Pad 1 is the cathode** (the marked end). Some part libraries use the opposite convention. |
 | `U2`, `U5`, `D8` | Small 3 to 8 pin chips. Check their rotation. |
+| `U10` | The frontlight driver, 6 pins in two rows of 3. Pin 1 (`LDO_IN`) is the corner at (50.35, 121.50) in the KiCad file; pin 4 (`GND`) is diagonally opposite. |
+| `D3`–`D6` | The polarized diodes: the SMAJ26A (`D3`) and the three B5819W (`D4`, `D5`, `D6`). **Pad 1 is the cathode (the bar end) on all four.** |
 | `J4` | The touch connector. It should sit on its pads; the pads are what matter. |
+| `J1` | The USB-C socket: twelve small pads in a row, two pegs and four shield slots. It should sit on its pads with the opening facing the board edge. JLCPCB's library footprint has a different origin from KiCad's, so the placement file carries a 1.305 mm correction for it; check that it is not shifted and that the opening faces the board edge. |
 | `U4`, `J7` | The ESP32 module and the microSD socket. Check they are centered on their pad patterns. |
 
 If something looks wrong, use the preview's rotate and move tools to fix it, and **save a
@@ -273,18 +284,20 @@ screenshot of the corrected preview**. Click **Next**.
 
 Several parts have legs that pass through the board rather than sitting on its surface. That is
 **THT** (through-hole technology), as opposed to **SMD** (surface-mount) for everything else. They
-are the USB-C socket `J1`, the battery connector `J5`, the expansion header `J6` and the ten
-buttons `SW1` to `SW5` and `SW7` to `SW11`. They are already in the files you uploaded, so this is
+are the battery connector `J5`, the expansion header `J6` and the ten buttons `SW1` to `SW5` and
+`SW7` to `SW11`. They are already in the files you uploaded, so this is
 a choice, not extra work:
 
 - **Let the factory solder them.** JLCPCB charges a one-off hand-soldering fee plus a small amount
-  per joint, which comes to about **$1.20 per assembled board** on top of the fee. It adds about a
+  per joint, which comes to about **$0.90 per assembled board** on top of the fee. It adds about a
   day. Confirm on the quote page that through-hole soldering
   appears as a line item.
-- **Solder them yourself.** You get the parts loose and solder them yourself: the USB-C
-  shell pins, the JST battery connector, the 12-pin expansion header and the buttons. The USB-C
-  shell is the fiddly one. Worth doing if you own a decent iron and a fine tip; not worth it on a
-  first board.
+- **Solder them yourself.** You get the parts loose and solder them yourself: the JST battery
+  connector, the 12-pin expansion header and the buttons. Worth doing if you own a decent iron.
+  (The USB-C socket `J1` is an SMD part and is not in this list; on a hand-built board it is the
+  fiddly one, with twelve small pads and four shield tabs. Each pad has a 0.3 mm tail of bare copper behind
+  the socket for the iron, so keep the tip off the plastic. Solder the tabs too: they carry the
+  plugging force.)
 
 ### Step 8: pay, and keep the paperwork
 
@@ -397,14 +410,17 @@ choose to modify one:
   power button `SW10`, mounting hole `H1` (five mounting points remain) and the two frontlight
   clamps `D3`/`D8`**, which sit on that tongue. A cut board therefore runs its frontlight without those two clamps; read
   [HARDWARE.md §7](docs/HARDWARE.md#7-frontlight-driver) before you drive a frontlight from one. After the cut, UP(2) can serve as the power button instead: leave `R36`
-  and `R73` unpopulated and populate `R72` and `R74`.
-- **Check your board before you cut.** A board with an `R84` resistor has a 3V3 link and ground
-  stitching vias below the cut line and needs no wires afterwards. A board without `R84` does: the
-  cut takes both 3V3 feeds to the charge-enable switch (`Q2`/`R81`) with it, so the charger never
-  turns on, and it leaves the power section's ground (`U3`, `U2`, `Q1`) joined to the rest of the
-  board only through one shell tab of the microSD socket. Wire `R40` pad 2 to `R81` pad 2 (or
-  bridge the two cut 3V3 stubs at the cut edge), and `C6` pad 2 to `C21` pad 2. With a correctly
-  oriented cell fitted, the TP4056's `CE` pin (pin 8) should then read 3.3 V.
+  and `R73` unpopulated and populate `R72` and `R74`. Take `R62` off as well (or move it onto the `R72` pads, which
+  need a 10 kΩ): the cut leaves it on the main board with one pad on a sawn copper stub, and a burr that bridges the
+  stub to ground would hold the power-button input near 1.6 V, which the ESP32 does not read as a high.
+- **Check your board before you cut.** A board with an `R84` resistor has ground stitching vias
+  below the cut line and needs no wires afterwards: its charge-enable switch (`Q2`/`R81`) is fed
+  from `USB_VBUS`, not from 3V3, so the cut does not touch it. A board without `R84` does need
+  wires: the cut takes both 3V3 feeds to the charge-enable switch (`Q2`/`R81`) with it, so the
+  charger never turns on, and it leaves the power section's ground (`U3`, `U2`, `Q1`) joined to the
+  rest of the board only through one shell tab of the microSD socket. Wire `R40` pad 2 to `R81`
+  pad 2 (or bridge the two cut 3V3 stubs at the cut edge), and `C6` pad 2 to `C21` pad 2. With a
+  correctly oriented cell fitted, the TP4056's `CE` pin (pin 8) should then read 3.3 V.
 - Plan the cut before you order, so you can leave the parts you are cutting off out of the BOM.
   `J6`'s series resistors `R65`/`R68`/`R69` stay on the main board near the ESP32 but have nothing
   left to connect to, so they can be left out too.
@@ -482,7 +498,7 @@ Connection and GPIO reference: **[docs/HARDWARE.md](docs/HARDWARE.md)**.
 
 | Word | What it means |
 |---|---|
-| **Gerber** | The standard file format for a bare circuit board: one file per copper, mask and silkscreen layer, plus the drill holes. Here they are zipped together in `production/Silkscreen_Reader_PCB_1.01.zip`. |
+| **Gerber** | The standard file format for a bare circuit board: one file per copper, mask and silkscreen layer, plus the drill holes. Here they are zipped together in `production/Silkscreen_Reader_PCB_1.02.zip`. |
 | **BOM** | Bill of materials: the list of every part on the board and how many of each. |
 | **CPL / centroid / pick-and-place** | Three names for the same file: where each part sits on the board, which side it is on, and which way it faces. Here, `production/positions.csv`. |
 | **PCBA** | Printed circuit board assembly: the service where the factory buys the parts and solders them on, rather than shipping a bare board. |
@@ -580,7 +596,7 @@ formats may not reopen in KiCad 9.
 For JLCPCB, use the KiCad **Fabrication Toolkit** plugin for the placement export: it applies JLC's
 part-rotation database and reads the `LCSC` field from the footprints (set by
 `fabrication/apply_part_fields.py`, see [fabrication/README.md](fabrication/README.md)).
-`U2`, `U5`, `D2`, `D8`, `J4`, `J7` and `U4` also carry `FT Rotation Offset` or
+`U2`, `U5`, `D2`, `D8`, `J4`, `J7`, `U4` and `J1` also carry `FT Rotation Offset` or
 `FT Position Offset` fields, on both the schematic symbols and the footprints, for corrections the
 Toolkit does not make on its own, so every Toolkit run writes their corrected rows.
 **Regenerate the whole Toolkit set after every schematic or PCB save.** A stale `positions.csv`

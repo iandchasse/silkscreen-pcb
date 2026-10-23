@@ -19,7 +19,7 @@ D3,SMAJ26A,SMAJ26A,Littelfuse,C19077543,,hongjiacheng SMAJ26A,"standard part, ot
 D8,PESD2IVN-UX,PESD2IVN-UX,Nexperia,C42370512,,TECH PUBLIC PESD2IVN-UX,clone (TECH PUBLIC)
 F1,0805L100WR,0805L100WR,Littelfuse,C269106,,Brightking SMD0805B100TFT,equivalent (Brightking SMD0805B100TFT)
 F2,0805L075WR,0805L075WR,Littelfuse,C151146,,Littelfuse 0805L075WR,"same part; 0.75 A-hold PPTC in series with J6 pin 12 (raw battery +) only - NOT in the main battery path. Added 2026-09-21 (review HMI-01)"
-J1,USB_C_Receptacle,USB4085-GF-A,GCT,C7095263,,Global Connector Technology USB4085-GF-A,same part
+J1,USB_C_Receptacle,USB4105-GF-A,GCT,C2765186,,SHOU HAN TYPE-C 16PIN 2MD(073),equivalent (SHOU HAN TYPE-C 16PIN 2MD(073)); 12-pad hybrid land with pegs and plated shield slots; KiCad ships the GCT USB4105 footprint and the Shou Han drawing matches it within 0.02 mm; Hroparts TYPE-C-31-M-12 (C165948) is the alternate (see docs/audit-2026-10-15/J1_USB_C_OPTIONS.md)
 J2,FH34SRJ-24S-0.5SH_50_,FH34SRJ-24S-0.5SH(50),Hirose,C324726,,HRS(Hirose) FH34SRJ-24S-0.5SH(50),same part
 "J3,J4",FH34SRJ-6S-0.5SH_50_,FH34SRJ-6S-0.5SH(50),Hirose,C224194,,HRS(Hirose) FH34SRJ-6S-0.5SH(50),same part
 J5,Conn_01x02,S2B-PH-K-S(LF)(SN),JST,C48579993,,CJT(Changjiang Connectors) A2001WR-2P,clone (CJT A2001WR-2P)
@@ -31,9 +31,9 @@ Q1,FS8205A,FS8205A,EVVOSEMI,C2830320,,TECH PUBLIC FS8205A,"clone (TECH PUBLIC); 
 "Q2,Q3,Q7,Q8",AO3401A,AO3401A,Alpha & Omega Semiconductor,C15127,,Alpha & Omega Semicon AO3401A,same part
 Q4,IRLML6346TRPBF,IRLML6346TRPBF,Infineon,C67276,,Infineon Technologies IRLML6346TRPBF,same part - do not accept a clone
 "Q5,Q6,Q9",BSS138,BSS138LT1G,onsemi,C7420339,,hongjiacheng BSS138,clone (hongjiacheng BSS138)
-"R1,R10,R12,R15,R39,R49,R50,R70,R80,R81,R82",1M,RC0603FR-071ML,Yageo,C22935,,UNI-ROYAL(Uniroyal Elec) 0603WAF1004T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1004T5E)
+"R1,R10,R12,R15,R39,R49,R50,R70,R79",1M,RC0603FR-071ML,Yageo,C22935,,UNI-ROYAL(Uniroyal Elec) 0603WAF1004T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1004T5E)
 "R2,R3",5.1k,RC0603FR-075K1L,Yageo,C23186,,UNI-ROYAL(Uniroyal Elec) 0603WAF5101T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF5101T5E)
-"R4,R5,R7,R8,R9,R13,R28,R53,R54,R55,R56,R62",10k,RC0603FR-0710KL,Yageo,C25804,,UNI-ROYAL(Uniroyal Elec) 0603WAF1002T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1002T5E)
+"R4,R5,R7,R8,R9,R13,R28,R53,R54,R55,R56,R62,R82",10k,RC0603FR-0710KL,Yageo,C25804,,UNI-ROYAL(Uniroyal Elec) 0603WAF1002T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1002T5E)
 R6,4.7k,RC0603FR-074K7L,Yageo,C23162,,UNI-ROYAL(Uniroyal Elec) 0603WAF4701T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF4701T5E)
 R11,12k,RC0603FR-0712KL,Yageo,C22790,,UNI-ROYAL(Uniroyal Elec) 0603WAF1202T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1202T5E)
 R14,2.2,RC0603FR-072R2L,Yageo,C22939,,UNI-ROYAL(Uniroyal Elec) 0603WAF220KT5E,"equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF220KT5E, JLC Basic, 2.2 ohm 1% 0603, +/-400 ppm/C vs Yageo +/-200); LCSC code changed 2026-09-20 from C112307 (the Yageo part itself, JLC stock fell to 12). Value changed 2026-09-18 from 3 Yageo RC0603FR-073RL/C22356394 to match SSD1677 reference design alongside L1"
@@ -49,12 +49,12 @@ R35,33k,RC0603FR-0733KL,Yageo,C4216,,UNI-ROYAL(Uniroyal Elec) 0603WAF3302T5E,equ
 R36,68k,RC0603FR-0768KL,Yageo,C23231,,UNI-ROYAL(Uniroyal Elec) 0603WAF6802T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF6802T5E)
 R37,15,RC0603FR-0715RL,Yageo,C22810,,UNI-ROYAL(Uniroyal Elec) 0603WAF150JT5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF150JT5E)
 R38,300k,RC0603FR-07300KL,Yageo,C23024,,UNI-ROYAL(Uniroyal Elec) 0603WAF3003T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF3003T5E)
-"R40,R51,R75,R76,R77,R79",100k,RC0603FR-07100KL,Yageo,C25803,,UNI-ROYAL(Uniroyal Elec) 0603WAF1003T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1003T5E)
+"R40,R51,R75,R76,R77,R81",100k,RC0603FR-07100KL,Yageo,C25803,,UNI-ROYAL(Uniroyal Elec) 0603WAF1003T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1003T5E)
 R41,120k,RC0603FR-07120KL,Yageo,C25808,,UNI-ROYAL(Uniroyal Elec) 0603WAF1203T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1203T5E)
 "R43,R45,R58,R66,R74",0,RC0603JR-070RL,Yageo,C21189,yes,UNI-ROYAL(Uniroyal Elec) 0603WAF0000T5E,DNP option link; equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF0000T5E)
 "R47,R48",2.2k,RC0603FR-072K2L,Yageo,C4190,,UNI-ROYAL(Uniroyal Elec) 0603WAF2201T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF2201T5E)
 R59,2k,RC0603FR-072KL,Yageo,C22975,,UNI-ROYAL(Uniroyal Elec) 0603WAF2001T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF2001T5E)
-R57,10M,RC0603FR-0710ML,Yageo,C7250,,UNI-ROYAL(Uniroyal Elec) 0603WAF1005T5E,"equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1005T5E), JLC Basic. Q3 gate bleed raised from 1M 2026-09-21 to cut 3.3 uA of standing battery drain; R56 (10k) still sets the gate"
+"R57,R80",10M,RC0603FR-0710ML,Yageo,C7250,,UNI-ROYAL(Uniroyal Elec) 0603WAF1005T5E,"equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1005T5E), JLC Basic. Q3 gate bleed raised from 1M 2026-09-21 to cut 3.3 uA of standing battery drain; R56 (10k) still sets the gate. R80 (Q9 gate divider, low side) raised from 1M in Rev 1.02 together with R79 (100k to 1M), same 1:10 ratio, to cut 3.0 uA of idle drain (docs/audit-2026-10-15/SCH-2_CHARGE_ENABLE.md section 8)"
 "R60,R61,R63,R64,R83",100,RC0603FR-07100RL,Yageo,C22775,,UNI-ROYAL(Uniroyal Elec) 0603WAF1000T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1000T5E)
 R67,510k,RC0603FR-07510KL,Yageo,C23192,,UNI-ROYAL(Uniroyal Elec) 0603WAF5103T5E,"equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF5103T5E), JLC Basic. USB_STAT ladder rescaled 2026-09-21 (was 56k)"
 R71,200k,RC0603FR-07200KL,Yageo,C25811,,UNI-ROYAL(Uniroyal Elec) 0603WAF2003T5E,"equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF2003T5E), JLC Basic. USB_STAT ladder rescaled 2026-09-21 (was 22k)"

@@ -50,7 +50,7 @@ These come from the TPS923610 datasheet (TI SNVSCN8A), the board netlist, the L2
 | R22 H | OVP window | rising ≥ 22.7 V (highest string); an open load must hold ≥ 23.3 V for the firmware's 23 V probe; OVP max plus overshoot < 28.9 V (SMAJ26A minimum breakdown). S: ≤ 26.0 V and ≤ 27.07 V (ADC full scale) | 24.25-25.5 V, 1 V hysteresis |
 | R23/R24 H | Recovery | hiccup, or a latch cleared by EN LOW ≤ 3 ms or by UVLO; survives FB = 0 and an output short | hiccup ×3, then latch cleared by ADIM LOW |
 | R25-R27 S | Current limit, fsw, soft start | ILIM ≥ 0.5 A (≤ 1.3 A preferred); fsw ≥ 300 kHz; soft-start peak ≤ about 1 A | 1.6-2.1 A, 1.1 MHz |
-| R28 H | Shutdown current (LDO_IN is always on) | ≤ 1 µA typ / ≤ 5 µA max, against a sleep floor of about 58 µA | 0.13 / 0.25 µA |
+| R28 H | Shutdown current (LDO_IN is always on) | ≤ 1 µA typ / ≤ 5 µA max, against a sleep floor of about 48 µA | 0.13 / 0.25 µA |
 | R29 H | Off-state output | LED_SW below string conduction (≤ about 5.2 V) | body diode, about VIN - 0.5 V |
 
 Firmware behaviour the driver must work with, unchanged unless stated:
@@ -81,7 +81,7 @@ Firmware behaviour the driver must work with, unchanged unless stated:
 Parts with a built-in rectifier but 0-36 pieces in stock: SGM3725/3726/3727/3749C/3750, FAN5341/5343/5345, MIC2290/2291/2297, LM3503, LT3465A/3466/3491, MAX1561/1599, RT4532, MP3306/3309C, NCP5007, AW9961, TPS61150A and the non-B AP3036.
 
 **AP3036BKTR-G1 in short.** SOT-23-6, pins 1 CTRL, 2 VOUT, 3 VIN, 4 SW, 5 GND, 6 FB (Diodes DS37004). It works with R37, L2, C9, C12 and the existing firmware sequence. What it costs:
-- **Sleep.** It draws 45 µA typ / 75 µA max in shutdown from LDO_IN, which is always on. The sleep floor rises from about 58 µA to about 103 µA typ: +1.1 mAh/day. This fails R28.
+- **Sleep.** It draws 45 µA typ / 75 µA max in shutdown from LDO_IN, which is always on. The sleep floor rises from about 48 µA to about 93 µA typ: +1.1 mAh/day. This fails R28.
 - **OVP.** About 29.5 V with no guaranteed limits, which is above SMAJ26A's 28.9 V. On AP3036B boards D3 must become **SMAJ28A (C19077545, JLC Preferred)**. Never SMAJ33A: its breakdown reaches 40.6 V, above the AP3036B's 38 V SW abs max. Keep SMAJ26A on TPS923610 boards, because SMAJ28A's 34.4 V maximum breakdown is above the TPS923610's 32 V abs max.
 - **Dimming.** At 25 kHz the lowest one or two steps (perhaps up to six) are dark. The floor is somewhere between a few tens of µA and about 0.7 mA. It needs a firmware minimum duty set on the bench.
 - **Smaller costs.** LED current ±6 % (12.5-14.1 mA). 3.1 mA quiescent while lit. The datasheet circuit uses 22 µH and 0.22 µF, so 10 µH and C9 need a stability check. Max duty is 90 % min against about 88 % needed. After an open-load trip LED_SW sits near 29.5 V, so `RAIL_WAIT_MAX_US` should rise to 5 s.
@@ -352,7 +352,7 @@ DigiKey hand build: TPS61160DRVR (about $1.35 at 1), 4 × 1N5819HW-7-F, 1 × 220
 | Stock | Ample, but single source (TI); the A variant is scarce | Ample |
 | Price per board | $0.28-0.49 incl. diode and capacitor | $0.17-0.22 |
 | JLC fee | $0 net | $0 net (SMAJ28A is Preferred) |
-| **Sleep (shutdown)** | **≤ 1 µA → floor about 58 µA** | 45 µA typ / 75 µA max → about 103 µA typ (**fails R28**) |
+| **Sleep (shutdown)** | **≤ 1 µA → floor about 48 µA** | 45 µA typ / 75 µA max → about 93 µA typ (**fails R28**) |
 | **OVP vs D3** | **25-27 V on SW, guaranteed, latching; D3 stays SMAJ26A** | about 29.5 V typ clamp, no limits; needs SMAJ28A |
 | Dimming floor | 26-39 µA nominal (2-3 LSB); not guaranteed below 10 % duty | 1-2 LSB dark; floor from tens of µA to about 0.7 mA |
 | LED current tolerance | ±2 % (12.9-13.7 mA) | ±6 % (12.5-14.1 mA) |
@@ -447,7 +447,7 @@ Use it only after measuring OVP on 10 or more units. It needs its own land and l
 - If the bench shows SW ringing toward 35 V (38 V abs max), add 0.22 µF/50 V at U15 VOUT, alternate build only.
 - Its pin k+3 matches the AP3019AKTR-G1's pin k, so an AP3019A rotated 180° fits the same land; it needs a ≤ 2 kHz firmware build and dims far worse.
 
-**Pin-compatible on U10 itself, small runs only.** TPS923611LSDRLR (250 pcs) with D3 = SMAJ33A keeps the sleep current and the deep dimming. It fails only the stock rule.
+**Pin-compatible on U10 itself, small runs only.** TPS923611LSDRLR (250 pcs) with D3 = SMAJ33A keeps the sleep current and the deep dimming. It fails only the stock rule. Pre-ordering the TPS923610 is still the better choice: the TPS923611's higher OVP (29.6-31.4 V) also enlarges the pulse a charged C9 can push into FB when one string is open ([HARDWARE.md §13.1](HARDWARE.md#131-firmware-contract--things-the-board-needs-firmware-to-do)).
 
 ---
 

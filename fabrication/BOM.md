@@ -28,6 +28,7 @@ slightly dearer Basic part is often cheaper overall. The table lists the cost sw
 
 | Ref(s) | Alternative | **Used** | Why |
 |---|---|---|---|
+| `J1` | GCT USB4085-GF-A `C7095263`, through-hole, $1.04 and 20 joints hand-soldered by the factory | **SHOU HAN TYPE-C 16PIN 2MD(073) `C2765186`**, SMD, 832k in stock, $0.075 @20 (prime/DigiKey part: GCT USB4105-GF-A, $0.80) | 12-pad hybrid land with pegs and plated shield slots, machine-placed: **−$1.60 / −$1.29 / −$1.12 per board at 5 / 30 / 150 boards**, and 20 fewer through-hole joints. Hroparts `C165948` fits the same land. [`docs/audit-2026-10-15/J1_USB_C_OPTIONS.md`](../docs/audit-2026-10-15/J1_USB_C_OPTIONS.md) |
 | `U13` | DS3231MZ+ `C722467` cut tape, $3.53, **373 in stock** | **DS3231MZ+TRL `C107410`**, $2.44, 11k stock | identical ADI part on reel — **−$1.10/board**, removes a stock risk |
 | `Q2 Q3 Q7 Q8` | AO3419 `C88053`, Extended, 2.4k stock | **AO3401A `C15127`**, **Basic**, 441k stock | same price; −30 V P-ch, 85 mΩ @ 2.5 V vs 140 mΩ, Vgs(th) ≈ −0.9 V — a drop-in improvement for these load switches; no feeder fee. The schematic Value on Q2/Q3/Q7/Q8 reads AO3401A (same SOT-23 pinout) |
 | `D4 D5 D6` | B5819W `C64885`, Extended | **B5819W SL `C8598`**, **Basic** | +$0.03/board on the part, −$1.50/order in fees — cheaper below ~55 boards, and a Basic part never needs a feeder |
@@ -53,12 +54,13 @@ stock risk. `R15` (GDR pull-down) is 1 M to match Good Display's reference circu
 §8.2, R1 = 1 M); it is in the existing 1 M group.
 
 **Parts with thin JLC stock:** TPS923610DRLR `C52919131` (order promptly or consign), A2541HWR-2x6P `C5333437`,
-SLW5040S470MST `C206267`, PESD2IVN-UX `C42370512`, USB4085-GF-A `C7095263`, IRLML6346TRPBF `C67276`.
+SLW5040S470MST `C206267`, PESD2IVN-UX `C42370512`, IRLML6346TRPBF `C67276`.
 
 **If TPS923610 is out of stock:** JLC says restocking is unpredictable. For a frontlight build: (1) pre-order it through JLC
 Parts Manager (any account; lead time only), or (2) fit **TPS923611DRLR for U10 *and* SMAJ33A for D3**
 together. The TPS923611 has the same DRL footprint and pinout but a ~30 V output ceiling, above the
-SMAJ26A's 28.9 V breakdown. Full steps are in the README under *If the frontlight driver is out of stock*.
+SMAJ26A's 28.9 V breakdown. Prefer (1): the higher ceiling also lets a charged `C9` push a larger pulse into `FB` when
+one light string is open (HARDWARE.md §13.1). Full steps are in the README under *If the frontlight driver is out of stock*.
 TPS923612 is WSON (DRV) only and doesn't fit.
 
 ### L2: 10 µH
@@ -97,9 +99,12 @@ saturation) clears the 0.8 A soft-start limit and the ≈0.2 A running peak. It 
 **Bench check on an existing board (5 minutes):** swap L2, run from 3.7 V, and compare supply current at 100 %,
 25 % and 10 % ADIM duty against the table. Also confirm clean start-up and a steady `LED_SW` at 1 % duty.
 
-**Savings that need a footprint change:** a $0.10 THT USB-C exists (HDGC 1.0-B-16P `C2915479`,
-staggered-pin 16P) against the $1.04 GCT — worth $0.93/board if its land is adopted; a Basic red 0805 LED
-(NationStar `C84256`, $0.013) if `D2` becomes 0805.
+**`J1`'s footprint change is in the files:** the 12-pad SMD USB-C receptacles (Shou Han `C2765186`, about $0.06–0.08;
+Korean Hroparts `TYPE-C-31-M-12` `C165948`, about $0.13–0.19; LCSC prices, 2026-10-20) cost a fraction of the $1.04
+through-hole GCT and are machine-placed instead of hand-soldered by the factory (about $0.33/board of through-hole
+labor for 20 joints); see `docs/audit-2026-10-15/J1_USB_C_OPTIONS.md`. (An earlier version of this note named HDGC
+1.0-B-16P `C2915479` as a $0.10 THT USB-C; that part is a 1 mm FFC connector, not a USB-C receptacle.)
+**Savings that still need a footprint change:** a Basic red 0805 LED (NationStar `C84256`, $0.013) if `D2` becomes 0805.
 
 ### C9: 4.7 µF
 
@@ -129,19 +134,19 @@ loading fee.
 
 | Per board, parts + fees | 5 boards | 10 | 30 | 100 |
 |---|--:|--:|--:|--:|
-| a brand-conservative BOM (28 Extended types) | $36.40 | $24.78 | $17.62 | $13.72 |
-| **`jlc_bom.csv` (26 Extended types)** | **$33.23** | **$22.70** | **$16.25** | **$12.61** |
-| …if JLC's fee is $3.00 instead of $1.50 | $41.03 | $26.60 | $17.55 | $13.00 |
+| a brand-conservative BOM (28 Extended types) | $36.78 | $26.17 | $17.86 | $13.74 |
+| **`jlc_bom.csv` (25 Extended types)** | **$32.48** | **$23.03** | **$15.58** | **$11.94** |
+| …if JLC's fee is $3.00 instead of $1.50 | $39.98 | $26.78 | $16.83 | $12.32 |
 
-*The costed `jlc_bom.csv` row is a few cents per board off the current BOM: `R14` and `C4`/`C6`/`C32` are Basic parts, the Extended PPTC `F2` is added (a net of one Extended type fewer), and `R84` is a Basic part at $0.0026 that adds no Extended type. A real quote for five boards with two assembled was $223.95 before shipping (see the root README).*
+*Re-run 2026-10-23 on the current `jlc_bom.csv` (166 placed references, 67 part numbers) with JLC's library prices fetched that day, so `J1` is the SMD Shou Han `C2765186` ($0.15 / $0.11 / $0.09 / $0.08 a board at 5 / 10 / 30 / 100 boards) and `R79`–`R82` have their new values. Every SMD line is bought with 3 % + 4 pieces of spares, through-hole parts exactly; Extended parts pay $1.50 per type, Basic and Preferred (`C16581`, `C19077501`, `C19077543`, `C22810`, `C7420339`) pay nothing. The brand-conservative row is the same BOM with the swaps in the table above put back (`J1`, `U13`, `Q2 Q3 Q7 Q8`, `D3`–`D6`, `F1`, `CR1`–`CR3`, `C9`, `C11`, `C13`–`C17`, `L1`, `L2`; `CR1` costed as the SD05C `C907858`). These are estimates: JLC may buy a different number of spares, and prices and stock move. A real quote for five boards with two assembled was $223.95 before shipping (see the root README).*
 
-Where the money goes at 30 boards (optimized, $16.25/board): ESP32-S3-WROOM-1-N16R8 $4.03 · DS3231MZ+ $2.71 ·
-USB-C receptacle $1.04 · TPS923610 $0.59 · ten TS365ZJ switches $0.52 · CCTC 22 µF ×3 $0.40 · TPS2116 $0.27 ·
-Hirose FH34SRJ-24S $0.31 · fees $1.30 · everything else ≈ $5. Consigning the module and the RTC removes $6.74.
+Where the money goes at 30 boards (optimized, $15.58/board): ESP32-S3-WROOM-1-N16R8 $4.89 · DS3231MZ+ $3.20 ·
+TPS923610 $0.63 · three Samsung 22 µF `C45783` $0.59 · ten TS365ZJ switches $0.51 · TPS2116 $0.31 · Hirose FH34SRJ-24S $0.29 ·
+USB-C receptacle $0.09 · fees $1.25 · everything else ≈ $3.8. Consigning the module and the RTC removes $8.19 (the two lines and their fees).
 
 **PCB + assembly** is not in those files: a 30-board order came to about $624 total against about $338 of parts, i.e.
 ≈ **$9.5/board** for PCB, SMT, hand-soldered THT and setup at that quantity (roughly $15–20/board at 5 boards,
-where the fixed setup dominates). All-in at 30 boards ≈ **$26/board**.
+where the fixed setup dominates). That quote predates the SMD `J1`, which takes about $0.33 of factory hand-soldering (20 joints) out of each board. All-in at 30 boards ≈ **$25/board**.
 
 **Hand-build** (one board, DigiKey-style parts): budget ≈ **$66 in parts** at live DigiKey single-piece prices, mostly on two lines (`U13` DS3231MZ+ is $13.85 and the ten MJTP1117 switches are $6.13) — before the
 PCB (≈$5–10 each at qty 5) and your time. TP4056 and DW01A are LCSC-only and cheap enough to order alongside;
@@ -179,7 +184,7 @@ Three further choices are in the BOM for cost, against a brand-conservative alte
 
 | Qty | Refs | Value | JLC/LCSC | MPN / manufacturer | Notes |
 |--:|---|---|---|---|---|
-| 4 | Q2 Q3 Q7 Q8 | AO3401A | `C15127` | AOS AO3401A P-ch (Basic) | Q3/Q8 battery series, Q7 SD power switch, Q2 3V3→CE pass (cell-polarity detector) |
+| 4 | Q2 Q3 Q7 Q8 | AO3401A | `C15127` | AOS AO3401A P-ch (Basic) | Q3/Q8 battery series, Q7 SD power switch, Q2 USB_VBUS→CE pass (cell-polarity detector) |
 | 3 | Q5 Q6 Q9 | BSS138 | `C7420339` | hongjiacheng BSS138 N-ch (Preferred) | Q5/Q6 frontlight string select, Q9 cell-polarity detector (source → B−) |
 | 1 | Q4 | IRLML6346TRPBF | `C67276` | Infineon IRLML6346TRPBF N-ch | EPD charge-pump switch — genuine Infineon, do not accept a clone |
 | 1 | Q1 | FS8205A | `C2830320` | TECH PUBLIC FS8205A | dual N-FET, cell protection |
@@ -199,7 +204,7 @@ Three further choices are in the BOM for cost, against a brand-conservative alte
 
 | Qty | Refs | Value | JLC/LCSC | MPN / manufacturer | Notes |
 |--:|---|---|---|---|---|
-| 1 | J1 | USB_C_Receptacle | `C7095263` | GCT USB4085-GF-A, THT | confirm THT soldering is in the JLC job |
+| 1 | J1 | USB_C_Receptacle | `C2765186` | SHOU HAN TYPE-C 16PIN 2MD(073), 12-pad SMD with pegs and plated shield slots; prime part GCT USB4105-GF-A (same land); alternate Hroparts TYPE-C-31-M-12 `C165948` | check its position and rotation in the placement preview |
 | 1 | J2 | FH34SRJ-24S-0.5SH_50_ | `C324726` | Hirose FH34SRJ-24S-0.5SH(50) | 24-pin e-paper FPC |
 | 2 | J3 J4 | FH34SRJ-6S-0.5SH_50_ | `C224194` | Hirose FH34SRJ-6S-0.5SH(50) | frontlight (J3), touch (J4) |
 | 1 | J5 | Conn_01x02 | `C48579993` | CJT A2001WR-2P (JST PH 2-pin right-angle equivalent) | battery; pin 1 = B−, pin 2 = B+ |
@@ -237,7 +242,7 @@ Three further choices are in the BOM for cost, against a brand-conservative alte
 | 1 | R6 | 4.7k | `C23162` |
 | 2 | R2 R3 | 5.1k | `C23186` |
 | 1 | R18 | 5.6k | `C23189` |
-| 12 | R4 R5 R7 R8 R9 R13 R28 R53 R54 R55 R56 R62 | 10k | `C25804` |
+| 13 | R4 R5 R7 R8 R9 R13 R28 R53 R54 R55 R56 R62 R82 | 10k | `C25804` — `R82` is the `CE` pull-down (10k since Rev 1.02) |
 | 1 | R11 | 12k | `C22790` |
 | 1 | R37 | 15 | `C22810` |
 | 1 | R19 | 20k | `C4184` |
@@ -245,14 +250,14 @@ Three further choices are in the BOM for cost, against a brand-conservative alte
 | 1 | R35 | 33k | `C4216` |
 | 1 | R20 | 56k | `C23206` |
 | 1 | R36 | 68k | `C23231` |
-| 6 | R40 R51 R75 R76 R77 R79 | 100k | `C25803` |
+| 6 | R40 R51 R75 R76 R77 R81 | 100k | `C25803` — `R81` is the `Q2` gate pull-up from `USB_VBUS` (100k since Rev 1.02) |
 | 1 | R41 | 120k | `C25808` |
 | 1 | R71 | **200k** | **`C25811`** — `USB_STAT` ladder, scaled for sleep current; Basic |
 | 1 | R38 | 300k | `C23024` |
 | 1 | R67 | **510k** | **`C23192`** — `USB_STAT` ladder; Basic |
-| 11 | R1 R10 R12 R15 R39 R49 R50 R70 R80 R81 R82 | 1M | `C22935` |
+| 9 | R1 R10 R12 R15 R39 R49 R50 R70 R79 | 1M | `C22935` — `R79` is the detector's top divider resistor (1M since Rev 1.02) |
 | 1 | R17 | **2M** | **`C22976`** — `USB_STAT` ladder; Basic |
-| 1 | R57 | **10M** | **`C7250`** — `Q3` gate bleed; 10M cuts ≈3.3 µA of permanent battery drain compared with 1M; Basic |
+| 2 | R57 R80 | **10M** | **`C7250`** — `R57` is the `Q3` gate bleed (10M cuts ≈3.3 µA of permanent battery drain compared with 1M); `R80` is the detector's bottom divider resistor (10M since Rev 1.02, ≈3.0 µA less); Basic |
 
 ### Capacitors
 
@@ -288,7 +293,7 @@ JLC build; search DigiKey/Mouser by the manufacturer part number.
 | Refs | Part | Note |
 |---|---|---|
 | J7 | GCT MEM2075-00-140-01-A | push-push, fits the slotted dual-source land |
-| J1 | GCT USB4085-GF-A | THT USB-C |
+| J1 | GCT USB4105-GF-A | 12-pad SMD USB-C (hand-solder the pads and the four shield slots) |
 | J2, J3/J4 | Hirose FH34SRJ-24S-0.5SH(50), FH34SRJ-6S-0.5SH(50) | |
 | J5, J6 | JST S2B-PH-K-S(LF)(SN), Sullins PPPC062LJBN-RC | |
 | SW1–SW5, SW7–SW11 / SW6 | APEM MJTP1117 / MJTP1243 (DNP) | |

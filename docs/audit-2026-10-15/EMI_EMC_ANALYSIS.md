@@ -2,6 +2,10 @@
 
 > **Status: INFORMATIONAL REFERENCE ONLY — NOT QUEUED FOR ACTION.**
 > This document captures the Part III board-level electromagnetic compatibility (EMC), return-path, switching-loop, 2.4 GHz RF keepout, and IEC 61000-4-2 ESD analysis extracted from `silkscreen_pcb.kicad_pcb` (`master` @ `80f70e9`, Rev 1.01). It is preserved as an engineering reference for future revisions or pre-compliance testing and is **not** part of the active change queue in [`AUDIT.md`](./AUDIT.md).
+>
+> **Reviewed 2026-10-18:** the footprint, track and via counts, per-net lengths, cut-line crossings and part coordinates were re-checked against the board and reproduce; two figures are corrected inline (the `B.Cu` net count and the `J3`→`J6` stub length). The loop areas, impedances and resonances are first-order estimates from the layout, not measurements.
+>
+> **Board changes since:** the figures are for `80f70e9`. On 2026-10-22 the `J1` land was replaced and the four long edge traces were re-routed (each about 1.8 mm longer: `LED_SW` 181.31 mm, `W-` 174.71 mm, `C-` 190.26 mm, `I2C_SDA` 182.70 mm), the `J1` shield became a ring of slot links instead of the 20.40 mm trace to `C1`, and the board has 1,757 segments and 200 vias.
 
 ---
 
@@ -12,7 +16,7 @@ Because `silkscreen_pcb.kicad_pcb` ($h = 1.60\,\text{mm}$ FR-4 core, $\varepsilo
 
 | Layer | Footprints | Track Segments | Total Track Length | Nets Routed | `GND` Pour Islands (`filled_polygon`) |
 |---|---:|---:|---:|---:|---:|
-| **`B.Cu`** (Component & Primary Routing) | 181 | 1,298 | **2,200.26 mm** | 91 | 53 islands |
+| **`B.Cu`** (Component & Primary Routing) | 181 | 1,298 | **2,200.26 mm** | 114 | 53 islands |
 | **`F.Cu`** (Bezel Face & Secondary Routing) | 8 | 437 | **1,493.83 mm** | 46 | 16 islands |
 | **Total** | **189** | **1,735** | **3,694.08 mm** | — | — |
 
@@ -55,10 +59,10 @@ Because `silkscreen_pcb.kicad_pcb` ($h = 1.60\,\text{mm}$ FR-4 core, $\varepsilo
   * `TPS_SW_NODE` (`3031_SW`) is routed 100% on `B.Cu` in 2 segments totaling **`2.495 mm`** (`3.820 mm²` total pad+trace area) over unbroken `F.Cu` `GND` ($C_{\text{par}} \approx 0.093\,\text{pF}$).
   * Output commutation loop (`U10.6 [SW] → U10.5 [VOUT] → C9.2 → C9.1 [GND] → U10.4 [GND]`): `C9.1` `(46.759, 123.825)` is `2.31 mm` from `U10.4` `(48.649, 122.500)` on `B.Cu`, joined directly by a priority-1 solid-connect (`connect_pads yes`) `B.Cu` `GND` zone (`X=[46.7, 49.1], Y=[122.5, 124.9]`). Loop perimeter = **`7.79 mm`**, enclosed area = **`2.43 mm²`** ($L \approx 2.1\,\text{nH}$).
   * Input loop (`C12 → L2 → U10.6 → U10.4 → C12`): Perimeter = **`13.48 mm`**, enclosed area = **`10.02 mm²`**.
-* **150 mm Board-Perimeter Stub (`J3` → `J6`):**
+* **~175–190 mm Board-Perimeter Stub (`J3` → `J6`):**
   * While the frontlight FPC `J3` `(54.24, 126.00)` sits only `6 mm` from `U10`, `LED_SW` (`179.52 mm`), `W-` (`172.93 mm`), and `C-` (`188.47 mm`) also route on `F.Cu` along the bottom and right edges of the PCB to `J6` `(98.90, 47.97)`.
-  * When `J6` is left open, this `~150 mm` branch acts as an open-circuit $\lambda/4$ stub antenna with quarter-wave resonance at:
-    $$f_{\lambda/4} = \frac{c}{4 L_{\text{stub}} \sqrt{\varepsilon_{\text{eff}}}} \approx \mathbf{219\text{–}275\,\text{MHz}}$$
+  * When `J6` is left open, this `~175–190 mm` branch (shortest copper paths: `W-` 172.8 mm, `C-` 182.2 mm) acts as an open-circuit $\lambda/4$ stub antenna with quarter-wave resonance at:
+    $$f_{\lambda/4} = \frac{c}{4 L_{\text{stub}} \sqrt{\varepsilon_{\text{eff}}}} \approx \mathbf{220\text{–}250\,\text{MHz}}$$
 
 ### 2.2 E-Paper Inductive Boost / Charge Pump (`L1`, `Q4`, `R14`, `D4`–`D6`, `C11`, `C14`, `C16`)
 * **`dV/dt` Node (`EINK_SW`):** `15.38 mm` total trace length on `B.Cu`, `11.93 mm²` net copper area (`3.08 mm²` trace + `9.55 mm²` pads `L1.1`, `C11.2`, `D5.2`, `Q4.3`), backed 100% by solid `F.Cu` `GND` ($C_{\text{tot}} \approx 0.9\,\text{pF}$).
@@ -95,8 +99,8 @@ Because `silkscreen_pcb.kicad_pcb` ($h = 1.60\,\text{mm}$ FR-4 core, $\varepsilo
 
 ## 5. Reference Priority List (If Future EMC-Hardening Spin Is Ever Desired)
 
-1. Set `U4` keepout to `(copperpour not_allowed)` on `F.Cu`/`B.Cu`, widen the `Edge.Cuts` antenna notch laterally by $\ge 5\text{–}10\,\text{mm}$, reroute the `X = 52.20 mm` `F.Cu` `3V3` trace east of `U4`, and place `GND` vias beside `U4.1` and `U4.40`.
-2. Gate or isolate the `150 mm` `J3`→`J6` `LED_SW`/`W-`/`C-` traces at `J3` (or drop `J6` frontlight pins) and add `100 pF` C0G RF bypass caps at `J3`.
+1. *(2026-10-18: of the four items, only the pour flag is free. The keepout is the rule area inside the `U4` footprint (`x` 30–51, `y` 92.5–112.5); `2.2 mm²` of `GND` pour per layer sits inside it, mostly the strips beside the notch. On a scratch copy, disallowing pour there refilled cleanly: the same DRC findings, 0 unconnected. A board-level rule area with only "Copper fills" ticked has the same effect.)* Set `U4` keepout to `(copperpour not_allowed)` on `F.Cu`/`B.Cu`, widen the `Edge.Cuts` antenna notch laterally by $\ge 5\text{–}10\,\text{mm}$, reroute the `X = 52.20 mm` `F.Cu` `3V3` trace east of `U4`, and place `GND` vias beside `U4.1` and `U4.40`.
+2. Gate or isolate the `~175–190 mm` `J3`→`J6` `LED_SW`/`W-`/`C-` traces at `J3` (or drop `J6` frontlight pins) and add `100 pF` C0G RF bypass caps at `J3`.
 3. Move `R14` north beside `Q4.S`, move `C14`/`C16`/`D6` beside `D5`/`D4`/`C11`, and route `PREVGH`/`PREVGL` on `B.Cu` to keep `F.Cu` unbroken under the EPD cap bank.
 4. Move `U1` and pull-ups `R8`/`R9`/`R53`–`R55` adjacent to `J7` to eliminate SDMMC star-stubs.
 5. Upgrade `C1` (`J1` shield) to a 1–2 kV MLCC (or `0 Ω` direct bond) with a wide pour and add stitching vias along `DP`/`DN`.

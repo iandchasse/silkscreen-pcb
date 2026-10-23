@@ -1,7 +1,7 @@
 # Silkscreen mainboard: bench bring-up (2026-09-30)
 
 These are the checks that need a meter, a supply or a scope; software can't make them. Work in order and stop at the first wrong value.
-- **Board:** Rev 1.0 (`aeb5b39`), the boards from the 2026-09-21 order. **Its `J6` pinout table prints the two socket rows the other way round:** the bottom line (`GND 46 45 GND LED+ W-`) is the outer row; meter the pins before plugging anything into `J6` (HW §11). Rev 1.01 (2026-09-30) changes copper only near the cut line (§10); on 2026-10-01 it also gained `R84` (1 Ω in `C2`'s ground leg, §2, §3.2) and corrected CPL rows for seven parts (§1). Differences are marked **[1.01]**.
+- **Board:** Rev 1.0 (`aeb5b39`), the boards from the 2026-09-21 order. **Its `J6` pinout table prints the two socket rows the other way round:** the bottom line (`GND 46 45 GND LED+ W-`) is the outer row; meter the pins before plugging anything into `J6` (HW §11). Rev 1.01 (2026-09-30) changes copper only near the cut line (§10); on 2026-10-01 it also gained `R84` (1 Ω in `C2`'s ground leg, §2, §3.2) and corrected CPL rows for seven parts (§1). Differences are marked **[1.01]**. Rev 1.02 (2026-10-22), the current files, also has the 12-pad SMD `J1`, the charge-enable gate fed from `USB_VBUS` and new `R79`-`R82` values; Rev 1.01 was never built, so its markers apply to 1.02 too, and the checks that change again are marked **[1.02]**.
 - **Coordinates:** KiCad board mm, front view (from netlist.ipc / positions.csv). Every part is on the back, so mirror x when you look at the back. From 1.01, positions.csv moves `J4`, `J7` and `U4` to JLC's anchors; the coordinates here are KiCad's.
 - **Notation:** `ref.pin`. **[FW]** = needs firmware; unmarked steps work with any image or a blank module.
 - **Sources:** HW = docs/HARDWARE.md, AT = AUTHOR_TODO.md, FR = FINAL_REVIEW.md (both in docs/final-review-2026-09-19), RM = README.md, E/L/F = reports 07/08/09 of this audit, GND = reports 05/06. Probe points were checked against `production/netlist.ipc`.
@@ -41,7 +41,7 @@ The Fabrication Toolkit corrects rotation only for SOT-23, SOIC and JST parts; e
 | `3V3` | `U3.5` (77.30, 83.20) | > 1 kΩ, usually tens of kΩ or more, climbing (~60 µF) | < 100 Ω: bridge at `U4`, `U3` or a cap |
 | `LDO_IN`-`3V3` | `U3.1` to `U3.5` | not ≈0 Ω | ≈0 Ω: `U3` bridged |
 | `LED_SW` | `U10.5` / `TP3` | ≈1.1 MΩ (`R39`+`R41`) | low: `D3` or `C9` short |
-| `B+`-`B-` | `J5.2` (red) to `J5.1` | **≈0.99 MΩ** (`R79`+`R80` 1.1 M ∥ `R57`+`R56` 10.01 M; a meter with a high test voltage may read lower) | ≈10 MΩ: `R79`/`R80` open, so Fix 4 is dead and the board never charges. ≈1.1 MΩ: `R56`/`R57` open. < 100 kΩ: something across the cell |
+| `B+`-`B-` | `J5.2` (red) to `J5.1` | **≈0.99 MΩ** (`R79`+`R80` 1.1 M ∥ `R57`+`R56` 10.01 M; a meter with a high test voltage may read lower) | ≈10 MΩ: `R79`/`R80` open, so Fix 4 is dead and the board never charges. ≈1.1 MΩ: `R56`/`R57` open. < 100 kΩ: something across the cell. **[1.02]** ≈5.24 MΩ (`R79`+`R80` 11 M ∥ 10.01 M); ≈10 MΩ with `R79`/`R80` open, ≈11 MΩ with `R56`/`R57` open |
 | `B-`-GND | `U3.2` (red) to `J5.1` | open: the FS8205A is off unpowered (the reverse polarity may show a diode via `U5`/`R16`) | ≈0 Ω: `Q1` shorted or bridged, so the protection is bypassed |
 
 ## 3. First power (bench supply, current-limited)
@@ -70,11 +70,11 @@ The Fabrication Toolkit corrects rotation only for SOT-23, SOIC and JST parts; e
 ## 4. Battery only: rails and back-feed (USB cable and UART adapter unplugged)
 - **`USB_VBUS`** `U2.3`/`U11.4` **≈0 V**, and **`D2` dark** (≈0 mV across `R59`; 0.2 V = 0.1 mA).
   - 2-3 V, or a faint glow, is back-feed into the unpowered TP4056. The likely path is `CE`, which `Q2` drives to 3V3 on battery.
-  - It blows the sleep budget. Next rev: feed `Q2`/`R81` from `USB_VBUS` (E §5, AT §F, FR §03).
+  - It blows the sleep budget. Next rev: feed `Q2`/`R81` from `USB_VBUS` (E §5, AT §F, FR §03); **[1.02]** done.
 - **`USB_STAT`** `C23.1` **2.20 V** (≈2.06 V on a 10 MΩ DMM).
   - 0.7-1.2 V: the unpowered TP4056 clamps `CHRG`/`STDBY`, so firmware can't tell battery from USB (E §5).
   - 3.3 V: `ST` is not asserting (`U2.8`/`R17`).
-- **`CE`** `U11.8` ≈3.3 V is **expected** on battery (this is `R82`'s 3.3 µA). 0 V with a good cell means Fix 4 (`Q9`, `R79`/`R80`) misses the cell: no charging.
+- **`CE`** `U11.8` ≈3.3 V is **expected** on battery (this is `R82`'s 3.3 µA). 0 V with a good cell means Fix 4 (`Q9`, `R79`/`R80`) misses the cell: no charging. **[1.02]** `CE` is ≈0 V on battery (`Q2`'s source is `USB_VBUS`); check the cell-presence gate on USB instead: `CE` ≈ `USB_VBUS` with a good cell, and the charger starts.
 - **`BAT_MONIT`** `C8.1` (68.22, 90.36) = `P+`/2 (HW §3.6).
 - **Light off:** `LED_SW` (`TP3`) ≈ `LDO_IN` minus a diode drop, and `LED_MONIT` `C31.1` (55.36, 114.50) ≈ 0.107 × that. Normal (HW §7).
 - **[FW, deep sleep] `IO47`/`IO48` back-feed into `VDD_SPI` (HW §6.1):**
@@ -100,7 +100,7 @@ The Fabrication Toolkit corrects rotation only for SOT-23, SOIC and JST parts; e
 ## 6. Sleep current [FW]
 - **Firmware state:** `ext1` wake on `IO18`; panel in deep sleep; `ADIM` low; SD gated with the bus parked; touch hibernated with `TP_RST` high.
 - **Set-up:** meter in series with the cell + lead. USB and UART unplugged, `J6` empty, no touch tail, `U13` fitted. Short the meter during boot (tens to hundreds of mA).
-- **Expect:** ≈58 µA typ (3.7 V, 25 °C), ≈91-95 µA max (4.2 V), ≈56 µA without the panel (HW §16). Log at 3.7 and 4.2 V. AT §F's 73 µA is superseded.
+- **Expect:** ≈58 µA typ (3.7 V, 25 °C), ≈91-95 µA max (4.2 V), ≈56 µA without the panel (HW §16). Log at 3.7 and 4.2 V. AT §F's 73 µA is superseded. **[1.02]** ≈48 µA typ, ≈81-85 µA max, ≈46 µA without the panel.
 - **Outside the budget:**
   - `U3`'s extra ground current at its real load: +0-20 µA.
   - A cell below 3.3-3.35 V: +190-260 µA (LDO dropout).
