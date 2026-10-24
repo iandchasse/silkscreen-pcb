@@ -93,7 +93,8 @@ loop on TI's characterized operating point at the 1–2 mV FB levels of deep dim
 
 Part choice: `C88532` has the same measured Rac as the 1.0 mm HBU-100M (`C2042741`, $0.11, 1.6k stock) with lower
 DCR (450 vs 580 mΩ), 13× the stock and 40 % lower price; its guaranteed Isat (1.0 A, 1.3 A typ, soft
-saturation) clears the 0.8 A soft-start limit and the ≈0.2 A running peak. It is 1.2 mm tall — lower than the
+saturation) clears the 0.8 A soft-start limit and the ≈0.2 A running peak. Its rated current is the lower of
+Isat and the 40 K temperature-rise current: 0.85 A (1.0 A typ). It is 1.2 mm tall — lower than the
 0805 capacitor (`C9`) beside it. Same 2.5 × 2.0 mm land.
 
 **Bench check on an existing board (5 minutes):** swap L2, run from 3.7 V, and compare supply current at 100 %,

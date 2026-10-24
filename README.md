@@ -555,6 +555,10 @@ walks through every block of the schematic, explains why each part is there and 
 was chosen for, gives the GPIO and connector maps, and ends with the design conventions and the
 things that look like mistakes but are deliberate.
 
+Failures reported from the field, with the owner's account, photos, measurements and what they
+mean for the design (including whether the question is still open on the current revision), are
+logged in [docs/BOARD_FAILURES.md](docs/BOARD_FAILURES.md).
+
 ### Plots and renders
 
 ![Silkscreen full schematic](docs/images/full-capture.png)
@@ -570,6 +574,7 @@ silkscreen_pcb.kicad_pro / .kicad_sch / .kicad_pcb   KiCad 9 project
 sym-lib-table / fp-lib-table                          project-local library tables (${KIPRJMOD}-relative, resolve after a plain clone)
 KiCad/9.0/3rdparty/                                   vendored symbols/footprints/3D models actually used by the design
 docs/HARDWARE.md                                      hardware documentation
+docs/BOARD_FAILURES.md, docs/board-failures/          field-reported failures: account, photos, measurements, design scrutiny
 docs/mechanical/                                      board STEP model for case design
 docs/images/                                          schematic block crops, full sheet, board renders
 docs/silkscreen_pcb_schematic.pdf / _layout.pdf       schematic and PCB plots

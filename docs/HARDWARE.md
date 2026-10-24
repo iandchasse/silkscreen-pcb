@@ -33,6 +33,8 @@ Successor to [de-link](https://de-link.me).
 > **Full plots:** [`silkscreen_pcb_schematic.pdf`](silkscreen_pcb_schematic.pdf)
 > (schematic, one A2 sheet) and [`silkscreen_pcb_layout.pdf`](silkscreen_pcb_layout.pdf) (PCB layout: front view, then the back as you see it) are
 > plotted from the current source. The per-block images in `images/` are crops of the schematic plot; the charger crop (§3.2) and the full-sheet image (§2) do not show `R84`.
+>
+> **Field-reported failures** (the owner's account, photos, measurements, and what they mean for the design, including on Rev 1.02) are logged in [`BOARD_FAILURES.md`](BOARD_FAILURES.md).
 
 ---
 
@@ -888,8 +890,10 @@ transients at the connector and `D8` (PESD2IVN-UX) protects the return lines. `U
 
 > **USB plug-in with a low cell.** With the light off and a depleted cell (≈3.0 V), `U2` moves `LDO_IN` to 5.0 V in
 > about 8 µs (its `VOUT` is already above 1 V, so there is no soft-start). That 2 V step into `L2` (10 µH) and `C9`
-> (4.7 µF; `Z0` ≈ 1.5–1.6 Ω) gives a damped current pulse of about 0.9–0.97 A in simulation, inside `L2`'s 1.0 A
-> rating, and charges `C9`, and so `LED_SW`, to about 5.3–5.8 V through the high-side body diode. With the light
+> (4.7 µF; `Z0` ≈ 1.5–1.6 Ω) gives a damped current pulse of about 0.9–0.97 A in simulation, just under `L2`'s
+> guaranteed 1.0 A saturation current (1.3 A typ). Its rated current is lower, 0.85 A (1.0 A typ), because it is
+> set by the 40 K temperature rise, a continuous-current limit that a microsecond pulse does not approach. The
+> pulse charges `C9`, and so `LED_SW`, to about 5.3–5.8 V through the high-side body diode. With the light
 > on, `C9` sits near the string voltage (≈15 V), the body diode is reverse-biased and the step does nothing. This
 > is a simulation, not a measurement: scope `LED_SW` and the `L2` current at plug-in on a built board to confirm it.
 
