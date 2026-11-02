@@ -17,7 +17,7 @@ A conclusion is called *established* only when it rests on measured or derived f
 
 | Case | Revision | Reported | Symptom | Status |
 |---|---|---|---|---|
-| [1](#case-1-rev-10-frontlight-boost-fault) | 1.0, assembled by JLCPCB | 2026-10-23 | Smoke and charring at `L2`, `U10` and `C9` on a USB power-up with the battery unplugged | Open: the board is being returned for analysis |
+| [1](#case-1-rev-10-frontlight-boost-fault) | 1.0, assembled by JLCPCB | 2026-10-23 | Smoke and charring at `L2`, `U10` and `C9` on a USB power-up with the battery unplugged | Open: failed part found (`U10`'s low-side switch, shorted) and the board repaired; why the switch failed is not known |
 | [2](#case-2-rev-10-hot-fault-near-the-usb-c-port-while-flashing) | 1.0, assembled by JLCPCB | 2026-10-26 (event about three weeks earlier) | Flash stopped, board no longer enumerated, area around the USB-C port very hot, 4.2 V at over 0.8 A, no battery | Open: board unpowered since, passive checks not yet done |
 
 ---
@@ -29,10 +29,10 @@ A conclusion is called *established* only when it rests on measured or derived f
 | **Revision** | 1.0 (files published 2026-09-21), assembled by JLCPCB |
 | **Reported** | 2026-10-23 |
 | **Outcome** | Smoke and charring at `L2`, `U10` and `C9`, starting 30–60 s after a USB-C cable was connected with the battery unplugged. The cable was removed. No fire or injury was mentioned in the report. |
-| **Board state** | Case open, battery disconnected, not powered again as far as reported. Being sent to the maintainer for failure analysis. |
-| **Status** | **Open.** The initiating cause has not been identified. |
-| **Established** | A low-resistance path (≈6–7 Ω) to ground on the `L2` / `U10` SW-pin side of the frontlight boost. The USB input (`F1`), `C9` and the LED output net are intact. The battery pack is neither latched nor over-discharged (3.26 V). |
-| **Not established** | What started the fault (`U10`, `C12` or a conductive char path); why the 67 W charger did not power the board overnight; why the browser flasher could not authenticate the board. |
+| **Board state** | With the maintainer since 2026-10-28. Analysed on the bench, `U10` replaced and `L2` refitted; the board powers up from USB and runs reflashed firmware (section 3.1). |
+| **Status** | **Open.** The failed part is identified: `U10`'s internal low-side switch, shorted from `SW` to `GND`. Why it failed has not been established. |
+| **Established** | `U10`'s low-side switch is shorted `SW` to `GND` at ≈7 Ω, the same in both polarities, measured on the removed part; its `VIN` pin is not shorted. Nothing else on the `LDO_IN` / SW-node network is shorted: `L2`, `C12`, `C4`, `U2`, `U3`, the `LDO_IN` trace and the board laminate are clear. The USB input (`F1`), the CC pull-downs, `C9` and the LED output net are intact. The ESP32 and its USB path work. The battery pack is neither latched nor over-discharged (3.26 V). |
+| **Not established** | Why `U10`'s low-side switch failed (a weak or damaged part, or overstress in operation); why the 67 W charger did not power the board overnight. |
 
 ### 1. What the owner reported
 
@@ -101,6 +101,66 @@ healthy boards (section 7).
 | 7 | `C9`, upper end (`LED_SW`) to ground | Starts high, settles at ≈0.6 MΩ | ≈1.1 MΩ (`R39` + `R41`), lower with `U10`'s own pin loading in parallel | `LED_SW` is not shorted. |
 | 8 | `C9`, capacitance | 4.7 µF | 4.7 µF nominal | `C9` is intact. |
 
+#### 3.1 Bench analysis of the returned board
+
+**Measured** by the maintainer on 2026-10-28 with a multimeter resolving 0.1 Ω and about 1 mV, board
+unpowered unless stated, battery, SD card and frontlight flex removed. The healthy column was read
+from a Rev 1.0 board of the same build where a value is given.
+
+| # | Measurement | Failed board | Healthy board | What it shows |
+|---|---|---|---|---|
+| B1 | `LDO_IN` (`C12` pad 2) to `GND`, both polarities | ≈7 Ω both ways | MΩ or open | The fault. Resistive: no junction in the path. |
+| B2 | `LDO_IN` at `C4` (beside `U2`) to `GND` | ≈7 Ω | | The same net, 56 mm away. |
+| B3 | `C4` pad 1 to `C12` pad 2 | 0.0 Ω | 0.0 Ω | The `LDO_IN` trace and via are intact. |
+| B4 | `L2`, end to end | 0.3 Ω | 0.3 Ω | `L2` is intact. |
+| B5 | `U10` pin 3 (`FB`) to `GND` | 15 Ω | | `R37` and the FB pin are intact. |
+| B6 | `U10` pin 2 (`ADIM`) to `GND` | 588 kΩ | 615 kΩ | `ADIM` and the ESP32's IO42 are intact. |
+| B7 | `LED_SW` (`C9` pad 2) to `GND` | ≈1.2 MΩ | | `R39` + `R41`: the LED output is intact. The ≈0.6 MΩ of section 3 was probably read before it settled. |
+| B8 | `3V3` to `GND`; diode mode, red on `3V3` | ≈5.5 kΩ; ≈0.4 V | ≈300 kΩ; ≈1.4 V | Not a 3V3 fault. The meter current runs through the body diode of `U3`'s pass element into the `LDO_IN` short (**inferred**). |
+| B9 | `USB_VBUS` to `GND` | ≈266 kΩ | ≈300 kΩ | Not shorted. |
+| B10 | `CC1` (`R3`) and `CC2` (`R2`) to `GND` | 5.1 kΩ each | 5.1 kΩ each | The CC pull-downs are intact, so they do not explain the 67 W charger (section 4.4). |
+
+*Locating the fault with an injected current.* An AA cell in series with 100 Ω fed `LDO_IN` at
+`C4` pad 1, returning at `C4` pad 2, so that the `LDO_IN` trace (≈0.11 Ω) and `L2` act as current
+sensors. No IC on the net operates at that voltage.
+
+| # | Measurement | Reading | What it shows |
+|---|---|---|---|
+| B11 | Across the 100 Ω; `C12` pad 2 to pad 1 | 1.4 V (14 mA); 100 mV | 7.1 Ω, matching B1. |
+| B12 | Along the `LDO_IN` trace, `C4` pad 1 to `C12` pad 2 | ≈2 mV | ≈1.5 mV expected for the whole current: the fault is at the frontlight end. `C4`, `U2` and `U3` are cleared. |
+| B13 | Across `L2`, pad 1 to pad 2 | ≈2 mV | 4–6 mV if all the current flowed through `L2`, 0 if none. Not decisive at this resolution; settled by B14. |
+
+*Isolating parts.*
+
+| # | Measurement | Reading | What it shows |
+|---|---|---|---|
+| B14 | `L2` removed: pad 2 land (SW node) to `GND`; pad 1 land (`LDO_IN`) to `GND` | ≈7 Ω; ≈7 kΩ one polarity, ≈5.4 kΩ the other, ≈0.5 V in diode mode | The short is on the SW node. The `LDO_IN` side shows junction behaviour only (see below). |
+| B15 | `U10` removed, on the part: pin 6 (`SW`) to pin 4 (`GND`); pin 1 (`VIN`) to pin 4 | ≈7 Ω; open | `U10`'s low-side switch is shorted. `VIN` is not damaged. |
+
+*Repair.* A new TPS923610DRLR was fitted and the original `L2` refitted. Powered from USB with no
+battery, `3V3` was stable and nothing was shorted, so the SW node no longer reads low with the new
+part: the laminate under `L2` and `U10` is not a conductive path. The firmware did not respond until
+download mode was forced by holding BOOT; after a reflash the board runs. Frontlight operation and
+temperature after the repair have not been recorded yet.
+
+**What this establishes:**
+
+- The fault element was `U10`'s internal low-side switch, shorted `SW` to `GND` at ≈7 Ω
+  (**measured**). With USB attached, current ran `LDO_IN` → `L2` → `SW` → the shorted switch →
+  `GND`, with nothing limiting it below `F1`'s 1 A hold (section 6.1, item 3). The charred `L2` pad
+  is the SW-node end of that path (**inferred**).
+- Nothing else on the `LDO_IN` / SW-node network was damaged (**measured**: B3–B6, B12, B14, B15 and
+  the repair).
+- The ESP32 and its USB path are intact (**measured**: the reflash). The browser flasher's failure
+  in section 1, step 5, therefore points to a missing or corrupt application image rather than
+  hardware: with no running application to answer it, the board is reachable only in download
+  mode (**inferred**).
+- Not established: why the low-side switch failed. The removed part has not been examined for an
+  overstress, crack or ESD signature. The `LDO_IN` junction reading in B14 was not compared with a
+  healthy board in the same polarity; `U10`'s `VIN` is ruled out (B15), which leaves the protection
+  diodes of `U2` and `U3`, normal on a healthy board (**inferred**). The board works after the
+  repair, so it is not consequential.
+
 ### 4. What the evidence shows
 
 ![Frontlight driver schematic](images/10-led-driver.png)
@@ -151,7 +211,8 @@ healthy boards (section 7).
   before smoke (**inferred**).
 - The charring is on `L2`'s SW-node pad, next to `U10` pin 6, and the readings (6–7 Ω there, 7 Ω at
   the other pad) are consistent with a short on the SW side. At this meter resolution they do not
-  prove it (**inferred**; to be confirmed by isolating the parts, section 7).
+  prove it (**inferred**). The bench analysis confirmed it: the short is `U10`'s low-side switch
+  (section 3.1).
 - The frontlight was probably on during those 30–60 s, because it is restored at boot by default
   (**derived**). The earlier boots on the computer would have restored it too.
 
@@ -159,9 +220,11 @@ healthy boards (section 7).
 
 - Why the 67 W charger did not power the board (`D2` dark). Charger, cable, a low-load shut-off and a
   compatibility problem with this board are all possible. A bench test is pending (section 7).
-- What started the input-side fault.
-- Why the flasher could not authenticate the board. A flat pack on a weak port, brown-outs or
-  corrupted state could each do it. Not investigated.
+- Why `U10`'s low-side switch failed. The failed part is identified (section 3.1); the cause is not.
+- Why the flasher could not authenticate the board. Largely answered in section 3.1: the ESP32 and
+  its USB path are intact and the board reflashed in download mode, which points to a missing or
+  corrupt application image (**inferred**). The CC pull-downs measure 5.1 kΩ, so they do not explain
+  the charger either.
 - Whether the final plug-in was on the computer or the wall charger, and whether `F1` tripped
   during the event. It is resettable, so its reading days later does not say (section 4.6).
 - What happened between the last logged wake and the dead morning, and whose board the end of the
@@ -305,7 +368,7 @@ the 4.7 µH it replaced was the TDK
 | 6 | Blend mode | Colour select at 10 kHz, default warmth 50%. Documented as unvalidated; `L2` saturates (about 1.0 A) below `U10`'s 1.6–2.1 A limit ([HARDWARE.md §7](HARDWARE.md#7-frontlight-driver)). | Cannot be excluded | Unchanged |
 | 7 | Charging and low-battery behaviour | Not implicated in the fault. It explains the dead-looking morning: a low pack with no USB gives no message. | Usability gap | Charge-enable gate now fed from `USB_VBUS`; same behaviour |
 | 8 | USB-C source compatibility | `D2` was dark on a 67 W PD charger over C–C and lit on a computer. No design cause identified. | Open | Same CC network (`J1` is now an SMD receptacle). Open. |
-| 9 | Assembly, parts, handling | JLCPCB-assembled. `U10` is a 0.5 mm-pitch SOT-563 with `SW`, `VOUT` and `GND` on adjacent pins, and is often out of stock at JLC ([BOM.md](../fabrication/BOM.md)); how this board's `U10` was sourced is to be confirmed. The owner opened the case before the failure (ESD, flexing). | Open, pending failure analysis | Same parts and process. Open. |
+| 9 | Assembly, parts, handling | JLCPCB-assembled. `U10` is a 0.5 mm-pitch SOT-563 with `SW`, `VOUT` and `GND` on adjacent pins, and is often out of stock at JLC ([BOM.md](../fabrication/BOM.md)); how this board's `U10` was sourced is to be confirmed. The owner opened the case before the failure (ESD, flexing). | `U10` confirmed as the failed part (section 3.1); its source and the failure mechanism are open | Same parts and process. Open. |
 
 #### 6.2 Rev 1.02 (current)
 
@@ -326,11 +389,14 @@ tested.
 
 #### 6.3 Verdict as of the last update
 
-- **Initiating fault: not identified.** On the evidence so far it is more likely a component,
-  assembly or handling defect than a condition the schematic mishandles. The fault is on a net
-  running inside its ratings; it appeared progressively, at the first power-up after the board had
-  been opened and handled; and it sits at `U10`, a part with an open sourcing question. This is a
-  lean, not a finding.
+- **Failed part: identified.** `U10`'s internal low-side switch shorted `SW` to `GND` (section 3.1).
+  Nothing else on the branch was damaged.
+- **Why it failed: not identified.** A weak or damaged part (a defect, ESD while the case was open,
+  a bad lot) and overstress in operation both remain. On the evidence so far the first is more
+  likely: the branch runs inside its ratings, the fault appeared at the first power-up after the
+  board had been opened and handled, and `U10` has an open sourcing question. The design question
+  that would point at overstress is `L2` saturating below `U10`'s switch current limit (section
+  6.1, item 6). This is a lean, not a finding.
 - **Severity: a design weakness.** One defect on this branch was able to run to smoke, because
   nothing limits current below `F1`'s 1 A hold (item 3). This applies to Rev 1.0 and Rev 1.02
   alike.
@@ -341,7 +407,10 @@ tested.
     scope shows the plug-in surge or blend-mode stress above a rating: design.
   - The 67 W charger repeatedly fails to power a healthy board: input circuit or compatibility.
 
-#### 6.4 Mitigation options studied (none adopted)
+#### 6.4 Mitigation options studied
+
+**Adopted for the next revision (decided 2026-11-02):** the thermally placed PTC below, plus PTCs on the touch, `J6`
+pin 7 and e-paper branches and a `DW01A` sense resistor. See [NEXT_REVISION.md](NEXT_REVISION.md).
 
 **Inline PTC on the boost feed** (studied 2026-10-26). A resettable fuse in series with the feed to
 `L2`, `C12` and `U10` `VIN`: no GPIO, no standby current, about $0.16 of parts. It would contain a
@@ -422,33 +491,91 @@ restores Rev 1.02 behaviour.
 at its worst-case 3.5 Ω (chip input about 2.7 V at 0.17 A and 2.4 V at 0.25 A, with a 3.4 V cell).
 The 0603L010 protects a wider window but needs the lower top level and a bench start-up check.
 
+*Against the measured short* (added 2026-10-29). Section 3.1 found a ≈7 Ω short. A PTC is sure to
+trip on it only if V / (7 Ω + 0.56 Ω + its own post-reflow resistance) reaches its trip current. For
+the 0603L010 (0.30 A, up to 6.0 Ω) that needs 4.07 V; for the 0603L020 it is not guaranteed even on
+USB. Across the polymer parts checked (Littelfuse 0603L, Bourns MF-FSMF, -PSMF, -NSMF, -MSMF, -USMF)
+resistance × trip current² is 0.45–0.94 W, and the parts nearest the best trip current for this
+fault (about 0.27 A) sit at 0.53–0.55 W, which puts the best possible guarantee for 7 Ω at about
+4.0 V; the best part found guarantees it from 4.07 V. No PTC covers the lower half of the cell's
+range by that current-based arithmetic, which the electro-thermal model below shows to be too
+pessimistic. The Bourns MF-NSMF012/48X (1206)
+matches the 0603L010's coverage and holds 69 mA up to about 70 °C instead of 50 °C. Mounting a PTC
+on copper shared with `L2`/`U10` lowers its trip current in a fault, but that is not a guarantee.
+
+**Latching electronic fuse** (studied 2026-10-29, [audit-2026-10-29/BOOST_EFUSE.md](audit-2026-10-29/BOOST_EFUSE.md)).
+A discrete fuse in the boost feed, no GPIO and no BGA: a 2.7 Ω sense resistor, the AO3401A already on
+the BOM as the switch, three SOT-23 transistors forming a sense stage and a latch, and a 470 nF delay
+capacitor; 14 parts. In 2 451 LTspice runs (generic models, behavioural `U10`) it trips on the 7 Ω
+`SW` short from a 3.0 V cell to USB at −20 to 60 °C in 5–14 ms with at most about 11 mJ in the short,
+also on `C12` and `LED_SW` shorts, and did not trip on any power-up, USB plug-in or unplug, or
+modelled light start. A short it misses dissipates at most 0.47–0.90 W at 25 °C. It costs 67–243 mV
+of drop and about 1 nA of standby current; after a trip it stays latched until battery and USB are
+removed. Open before adopting: the light's real start-up current, a pulse-rated sense resistor, and
+board space. Fourteen parts is too many for the board, so it is kept as the reference design only.
+
+**4-part current limiter** (studied 2026-10-29, [audit-2026-10-29/BOOST_LIMITER.md](audit-2026-10-29/BOOST_LIMITER.md)).
+A 2.7 Ω sense resistor, the AO3401A, one MMBT3906 and a 1 MΩ gate pull-down: the transistor turns on
+at about 0.5 V across the resistor and holds the branch at 0.17–0.20 A (25 °C), at any supply
+voltage. In 774 LTspice runs it holds the 7 Ω `SW` short to 0.23–0.25 W in the short from a 3.0 V cell
+to USB, keeps `LDO_IN` up, draws no standby current and cannot trip by mistake. It does not switch
+off: a held short drains a 500 mAh cell in about 2 h and heats the AO3401A by up to 0.56 W (case 1
+short on USB) or 0.81 W (dead short on USB), so the FET needs copper and the transistor should sit
+against it. If the light's start-up current is above the limit, `U10` stutters through UVLO at turn-on.
+Open before adopting: that start-up current, and the FET's temperature on the board's copper.
+Four parts was still more than wanted.
+
+**Thermally placed PTC** (studied 2026-10-29, [audit-2026-10-29/PTC_THERMAL.md](audit-2026-10-29/PTC_THERMAL.md)).
+One Bourns MF-FSMF010X-2 (0603, 0.10 A hold / 0.30 A trip; JLC `C210355`, DigiKey
+118-MF-FSMF010X-2CT-ND; DigiKey stock unconfirmed on 2026-11-02, alternate MF-PSMF010X-2 0805 stocked at
+both, see [PROTECTION_FOLLOWUP.md](audit-2026-10-29/PROTECTION_FOLLOWUP.md)) between `LDO_IN` and a new net `LED_VIN` carrying `C12`,
+`L2` pin 1 and `U10` `VIN`, placed close to `U10` on thermally light pads. An electro-thermal model,
+with the PTC fitted to its datasheet and a swept generic board, shows the current-based arithmetic
+above was too pessimistic: a PTC trips on its own I²R heating, and the high-resistance parts that pass
+the least current heat the most. With the case 1 short (7 Ω inside `U10`) at 25 °C it trips at every
+supply from a 3.0 V cell to USB in 0.9–5.1 s, leaving 0.02–0.09 W in the short (against 1.0–2.75 W)
+and `U10` at 88 °C or less. Limits: at −20 °C it does not trip from a 3.0 V cell; 10 Ω shorts need
+3.4 V and 15 Ω shorts 4.2 V at 25 °C; tripped, it sits at 100–112 °C passing 50–115 mA. Keeping the
+PTC thermally isolated matters more than coupling it to `U10`. At 100 % duty a 6 Ω part can drop `U10`
+into UVLO from a cell of 3.7 V or less; the 50 % cap is fine. *Lean, not a decision:* this PTC, after
+the bench test in that study.
+
 ### 7. Open items
 
-- **Failure analysis of the returned board.** Photograph both sides under magnification. First
-  characterise the fault: from a supply limited to 0.3 A, drive 1 V, 3 V and 5 V between `L2` pad 1
-  and ground, cold and again after a minute, and compare V/I with the 6–7 Ω reading (section 4.6).
-  Then put 5 V from a current-limited supply (about 100 mA) into `LDO_IN` and read the drop across
-  `L2`: about
-  50 mV means current flows through `L2` (fault on the SW side), about 0 means the `LDO_IN` side or a
-  bridged `L2`. Then lift `L2`, then `C12`, then `U10`, remeasuring each time, and open the failed
-  part. Do not power the board from a stiff supply.
+- **Remaining work on the returned board.** Record frontlight operation after the repair (each
+  level, both colours and blend, and `U10`'s temperature after a soak). Photograph the removed
+  `U10`'s marking and both faces, and compare the marking with a `U10` from a healthy board of the
+  same build. Optionally have it decapsulated: widespread melting over the low-side switch points to
+  overstress, a localised pinhole at a pin to ESD or a defect. Compare `LDO_IN` to ground in both
+  polarities and in diode mode with a healthy board (section 3.1, B14).
 - **Source of `U10`.** Date code and lot, and how it reached the JLC build (stock, pre-order, global
   sourcing or consignment).
-- **Screening of other boards.** `LDO_IN` to ground should be 100 kΩ or more and `LED_SW` to ground
-  about 0.6–1.1 MΩ; record idle current at 5 V from a current-limited supply with the light off and
+- **Screening of other boards.** `LDO_IN` to ground should be 100 kΩ or more (in circuit this also
+  covers the SW node, joined to it through `L2`) and `LED_SW` to ground about 1.1–1.2 MΩ; record idle current at 5 V from a current-limited supply with the light off and
   on; soak the light for an hour or two in blend and in a single colour with a thermal camera.
 - **Scope measurements.** The plug-in and battery hot-plug surge (`L2` current, `LED_SW`) and the SW
   node in blend mode, which are the two unmeasured items in section 6.1.
 - **Charger compatibility.** Connect a board to a 67 W PD wall charger over C–C and watch `D2` at
   plug-in and again after the board sleeps.
 - **From the owner.** The source of the final plug-in; whether the frontlight or screen was on during
-  the 30–60 s; any smell or discolouration when the case was first opened; the `L2` readings again
-  with decimals and the probes swapped; and the questions at the end of section 4.5 (when the
+  the 30–60 s; any smell or discolouration when the case was first opened; and the questions at the
+  end of section 4.5 (when the
   battery log was copied, whether the card was in another board, which firmware ran the font
   download).
-- **Options under evaluation (no decision).** A current limit on the boost branch sized for its
-  normal draw of about 0.1 A (an inline PTC, section 6.4); a low-battery message before the board
-  sleeps; a documentation note that a low pack with no USB looks like a dead board.
+- **Boost-branch current limit: decided 2026-11-02** ([NEXT_REVISION.md](NEXT_REVISION.md)). The
+  thermally placed MF-FSMF010X-2 PTC is adopted (section 6.4, [PTC_THERMAL.md](audit-2026-10-29/PTC_THERMAL.md)).
+  Before ordering, run that study's bench test: a 6.8 Ω stand-in for `U10`'s short at 3.0–5.0 V, and the light at
+  100 % for 30 minutes from 3.0 V. The 4-part limiter ([BOOST_LIMITER.md](audit-2026-10-29/BOOST_LIMITER.md)) is the
+  fallback. Also: a low-battery message before the board sleeps; a documentation note that a low pack with no USB
+  looks like a dead board.
+- **Board-wide fault containment: decided 2026-11-02** ([NEXT_REVISION.md](NEXT_REVISION.md);
+  [DURABILITY_AUDIT.md](audit-2026-10-29/DURABILITY_AUDIT.md), follow-up
+  [PROTECTION_FOLLOWUP.md](audit-2026-10-29/PROTECTION_FOLLOWUP.md)).
+  - **Battery path:** the battery-fed rails have the largest unprotected window, shorts of about 2.6 Ω and up at up to about 5 W. A PTC at `R27` does not work there. A 68 mΩ `DW01A` sense resistor plus `C34` raised to 0.1 µF cuts that to 3.0 W.
+  - **3V3 branches:** the 3V3 rail relies on `U3`'s current limit (case 2). The frontlight's PTC part goes in place of `R42` (touch supply), in series with `J6` pin 7 (20 mA budget), and on the e-paper feed, which `J2` shares.
+  - **microSD:** firmware keeps the card off after a brownout during SD use, since no PTC fits.
+  - **Charging:** `R6` = 10 kΩ halves the charger's heat.
+  - **Measurements:** 13 front-side test pads. Measure the coincident battery peak before committing to the sense resistor.
 
 ### 8. What to send with a failure report
 
@@ -481,6 +608,25 @@ stiff source; if it must be powered for diagnosis, use a bench supply set to 5 V
   row added to section 5.
 - **2026-10-28.** Section 4.3 no longer says 0.75 A is below any USB source's limit (a USB 2.0 port
   is specified for 0.5 A). Case 2 opened below.
+- **2026-10-28.** The board was received and analysed on the bench (section 3.1): `U10`'s low-side
+  switch is shorted `SW` to `GND` at ≈7 Ω, and nothing else on the boost input is damaged. `U10`
+  was replaced and `L2` refitted; reflashed in download mode, the board runs. Status, the verdict
+  (section 6.3) and the open items (section 7) updated.
+- **2026-10-29.** Section 6.4: PTCs checked against the measured 7 Ω short (none guarantees a trip
+  below about 4.0 V), and a latching electronic fuse designed and simulated
+  ([audit-2026-10-29/BOOST_EFUSE.md](audit-2026-10-29/BOOST_EFUSE.md)). At 14 parts it was too large;
+  a 4-part current limiter was simulated next ([BOOST_LIMITER.md](audit-2026-10-29/BOOST_LIMITER.md)),
+  then a single thermally placed PTC with an electro-thermal model
+  ([PTC_THERMAL.md](audit-2026-10-29/PTC_THERMAL.md)), which is now the lean. A board-wide durability and
+  fault-containment audit followed ([DURABILITY_AUDIT.md](audit-2026-10-29/DURABILITY_AUDIT.md)).
+- **2026-11-02.** Protection follow-up ([PROTECTION_FOLLOWUP.md](audit-2026-10-29/PROTECTION_FOLLOWUP.md)):
+  - **Cheap wins:** the touch and `J6` PTCs were simulated and priced.
+  - **Battery path:** a PTC was rejected in favour of a `DW01A` sense resistor.
+  - **microSD:** no PTC fits; firmware keeps the card off instead.
+  - **Charging:** `R6` = 10 kΩ recommended.
+  - **Diagnosis:** probe nets and test pads listed.
+  - **Sourcing:** JLC stock figures corrected (MF-FSMF010X-2 has 26 658, not about 70 700). DigiKey stock for it is unconfirmed; MF-PSMF010X-2 is the alternate stocked at both.
+  - **Decided for the next revision:** the frontlight, touch, `J6` pin 7 and e-paper PTCs, with `J2` sharing the e-paper PTC; the 68 mΩ `DW01A` sense resistor with `C34` raised to 0.1 µF; `R6` = 10 kΩ; and 13 front-side test pads clear of the artwork (follow-up sections 7–8).
 
 ---
 

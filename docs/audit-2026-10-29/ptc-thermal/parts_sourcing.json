@@ -1,0 +1,920 @@
+{
+ "ptc": {
+  "MF-FSMF010X-2": {
+   "size": "0603",
+   "lcsc_pn": "C210355",
+   "jlc_library_type": "Extended",
+   "jlc_stock": 26658,
+   "jlc_unit_price_usd": 0.058,
+   "jlc_price_at_100_usd": 0.0484,
+   "digikey_pn": "MF-FSMF010X-2CT-ND",
+   "digikey_stock": 0,
+   "digikey_price_qty1": null,
+   "digikey_price_qty100": null,
+   "digikey_currency": "USD"
+  },
+  "MF-FSMF020X-2": {
+   "size": "0603",
+   "lcsc_pn": "C210356",
+   "jlc_library_type": "Extended",
+   "jlc_stock": 17491,
+   "jlc_unit_price_usd": 0.0519,
+   "jlc_price_at_100_usd": 0.0437,
+   "digikey_pn": "MF-FSMF020X-2CT-ND",
+   "digikey_stock": 54345,
+   "digikey_price_qty1": 0.49,
+   "digikey_price_qty100": 0.2846,
+   "digikey_currency": "USD"
+  },
+  "MF-FSMF025X-2": {
+   "size": "0603",
+   "lcsc_pn": "C720655",
+   "jlc_library_type": "Extended",
+   "jlc_stock": 3382,
+   "jlc_unit_price_usd": 0.0494,
+   "jlc_price_at_100_usd": 0.0406,
+   "digikey_pn": "118-MF-FSMF025X-2CT-ND",
+   "digikey_stock": 12481,
+   "digikey_price_qty1": 0.96,
+   "digikey_price_qty100": 0.5614,
+   "digikey_currency": "USD"
+  },
+  "MF-FSMF050X-2": {
+   "size": "0603",
+   "lcsc_pn": "C210357",
+   "jlc_library_type": "Extended",
+   "jlc_stock": 68555,
+   "jlc_unit_price_usd": 0.0547,
+   "jlc_price_at_100_usd": 0.0429,
+   "digikey_pn": "MF-FSMF050X-2CT-ND",
+   "digikey_stock": 37000,
+   "digikey_price_qty1": 0.51,
+   "digikey_price_qty100": 0.2988,
+   "digikey_currency": "USD"
+  },
+  "MF-PSMF010X-2": {
+   "size": "0805",
+   "lcsc_pn": "C116171",
+   "jlc_library_type": "Extended",
+   "jlc_stock": 95608,
+   "jlc_unit_price_usd": 0.0517,
+   "jlc_price_at_100_usd": 0.0422,
+   "digikey_pn": "MF-PSMF010X-2CT-ND",
+   "digikey_stock": 31469,
+   "digikey_price_qty1": 0.38,
+   "digikey_price_qty100": 0.2216,
+   "digikey_currency": "USD"
+  },
+  "MF-PSMF020X-2": {
+   "size": "0805",
+   "lcsc_pn": "C89657",
+   "jlc_library_type": "Extended",
+   "jlc_stock": 13057,
+   "jlc_unit_price_usd": 0.0521,
+   "jlc_price_at_100_usd": 0.0521,
+   "digikey_pn": "MF-PSMF020X-2CT-ND",
+   "digikey_stock": 18450,
+   "digikey_price_qty1": 0.31,
+   "digikey_price_qty100": 0.179,
+   "digikey_currency": "EUR"
+  },
+  "MF-PSMF035X-2": {
+   "size": "0805",
+   "lcsc_pn": "C116172",
+   "jlc_library_type": "Extended",
+   "jlc_stock": 14758,
+   "jlc_unit_price_usd": 0.0361,
+   "jlc_price_at_100_usd": 0.0361,
+   "digikey_pn": "MF-PSMF035X-2CT-ND",
+   "digikey_stock": 12359,
+   "digikey_price_qty1": 0.5,
+   "digikey_price_qty100": 0.2951,
+   "digikey_currency": "USD"
+  },
+  "MF-PSMF050X-2": {
+   "size": "0805",
+   "lcsc_pn": "C116170",
+   "jlc_library_type": "Extended",
+   "jlc_stock": 23808,
+   "jlc_unit_price_usd": 0.0389,
+   "jlc_price_at_100_usd": 0.0389,
+   "digikey_pn": "MF-PSMF050X-2CT-ND",
+   "digikey_stock": 21726,
+   "digikey_price_qty1": 0.57,
+   "digikey_price_qty100": 0.3319,
+   "digikey_currency": "CAD"
+  },
+  "MF-PSMF075X-2": {
+   "size": "0805",
+   "lcsc_pn": "C116173",
+   "jlc_library_type": "Extended",
+   "jlc_stock": 12132,
+   "jlc_unit_price_usd": 0.0475,
+   "jlc_price_at_100_usd": 0.0475,
+   "digikey_pn": "MF-PSMF075X-2CT-ND",
+   "digikey_stock": 24861,
+   "digikey_price_qty1": 0.38,
+   "digikey_price_qty100": 0.2216,
+   "digikey_currency": "USD"
+  },
+  "0805L100WR": {
+   "size": "0805",
+   "lcsc_pn": "C80270",
+   "jlc_library_type": "Extended",
+   "jlc_stock": 5786,
+   "jlc_unit_price_usd": 0.1359,
+   "jlc_price_at_100_usd": 0.1065,
+   "digikey_pn": "F2774CT-ND",
+   "digikey_stock": 13209,
+   "digikey_price_qty1": 1.14,
+   "digikey_price_qty100": 0.6691,
+   "digikey_currency": "USD"
+  },
+  "0805L110WR": {
+   "size": "0805",
+   "lcsc_pn": "C468889",
+   "jlc_library_type": "Extended",
+   "jlc_stock": 7718,
+   "jlc_unit_price_usd": 0.1377,
+   "jlc_price_at_100_usd": 0.1082,
+   "digikey_pn": "F6725CT-ND",
+   "digikey_stock": 5377,
+   "digikey_price_qty1": 1.14,
+   "digikey_price_qty100": 0.6691,
+   "digikey_currency": "USD"
+  },
+  "MF-NSMF020X-2": {
+   "size": "1206",
+   "lcsc_pn": "C210358",
+   "jlc_library_type": "Extended",
+   "jlc_stock": 6001,
+   "jlc_unit_price_usd": 0.0445,
+   "jlc_price_at_100_usd": 0.0347,
+   "digikey_pn": "MF-NSMF020X-2CT-ND",
+   "digikey_stock": 28782,
+   "digikey_price_qty1": 0.85,
+   "digikey_price_qty100": 0.4998,
+   "digikey_currency": "USD"
+  },
+  "MF-NSMF075-2": {
+   "size": "1206",
+   "lcsc_pn": "C89653",
+   "jlc_library_type": "Extended",
+   "jlc_stock": 10901,
+   "jlc_unit_price_usd": 0.0498,
+   "jlc_price_at_100_usd": 0.0498,
+   "digikey_pn": "MF-NSMF075-2CT-ND",
+   "digikey_stock": 22774,
+   "digikey_price_qty1": 0.32,
+   "digikey_price_qty100": 0.19,
+   "digikey_currency": "USD"
+  },
+  "MF-NSMF110-2": {
+   "size": "1206",
+   "lcsc_pn": "C89654",
+   "jlc_library_type": "Extended",
+   "jlc_stock": 10114,
+   "jlc_unit_price_usd": 0.0373,
+   "jlc_price_at_100_usd": 0.0373,
+   "digikey_pn": "MF-NSMF110-2CT-ND",
+   "digikey_stock": 44447,
+   "digikey_price_qty1": 0.41,
+   "digikey_price_qty100": 0.303,
+   "digikey_currency": "USD"
+  },
+  "1206L035YR": {
+   "size": "1206",
+   "lcsc_pn": "C99562",
+   "jlc_library_type": "Extended",
+   "jlc_stock": 7018,
+   "jlc_unit_price_usd": 0.0583,
+   "jlc_price_at_100_usd": 0.0468,
+   "digikey_pn": "F2111CT-ND",
+   "digikey_stock": 16406,
+   "digikey_price_qty1": 0.56,
+   "digikey_price_qty100": 0.249,
+   "digikey_currency": "USD"
+  },
+  "1206L075THYR": {
+   "size": "1206",
+   "lcsc_pn": "C99563",
+   "jlc_library_type": "Extended",
+   "jlc_stock": 15713,
+   "jlc_unit_price_usd": 0.0525,
+   "jlc_price_at_100_usd": 0.0419,
+   "digikey_pn": "F3370CT-ND",
+   "digikey_stock": 12969,
+   "digikey_price_qty1": 0.64,
+   "digikey_price_qty100": 0.3734,
+   "digikey_currency": "USD"
+  },
+  "1206L110THYR": {
+   "size": "1206",
+   "lcsc_pn": "C126818",
+   "jlc_library_type": "Extended",
+   "jlc_stock": 20561,
+   "jlc_unit_price_usd": 0.0604,
+   "jlc_price_at_100_usd": 0.0478,
+   "digikey_pn": "F3371CT-ND",
+   "digikey_stock": 70794,
+   "digikey_price_qty1": 0.65,
+   "digikey_price_qty100": 0.3809,
+   "digikey_currency": "USD"
+  }
+ },
+ "resistors": [
+  {
+   "mpn": "0805W4F680MT5E",
+   "manufacturer": "UNI-ROYAL",
+   "size": "0805",
+   "resistance_ohm": 0.068,
+   "tolerance": "1%",
+   "technology": "thick film",
+   "power_rating_w": 0.25,
+   "power_rating_note": "at 70 C ambient, derated above",
+   "rated_current_a": 1.917,
+   "tcr": "+/-800 ppm/C",
+   "operating_temp": "-55..155 C",
+   "short_time_overload": "Short-time overload (datasheet 4.13): 2.5 x RCWV (=sqrt(P*R)) or max overload voltage (0805: 300 V, 1206: 400 V), whichever less, for 5 s; dR <= +/-(1%+0.05 ohm). Equivalent to 6.25 x rated power for 5 s at these low R values.",
+   "datasheet_source": "UNI-ROYAL \"Thick Film Chip Resistors 01005..2512 Series\" data sheet (via LCSC) https://datasheet.lcsc.com/lcsc/1912112237_UNI-ROYAL-Uniroyal-Elec-0805W4F680MT5E_C52472.pdf",
+   "lcsc_pn": "C52472",
+   "jlc_verified_title": "0805W4F680MT5E | UNI-ROYAL(Uniroyal Elec) | JLCPCB",
+   "jlc_title_ok": true,
+   "jlc_library_type": "Extended",
+   "jlc_stock": 2443,
+   "jlc_unit_price_usd": 0.0092,
+   "jlc_price_at_100_usd": 0.0092,
+   "jlc_price_tiers": [
+    {
+     "qty": 1,
+     "usd": 0.0092
+    },
+    {
+     "qty": 1000,
+     "usd": 0.0075
+    },
+    {
+     "qty": 5000,
+     "usd": 0.0057
+    },
+    {
+     "qty": 10000,
+     "usd": 0.0051
+    },
+    {
+     "qty": 50000,
+     "usd": 0.0046
+    },
+    {
+     "qty": 100000,
+     "usd": 0.0043
+    }
+   ],
+   "jlc_url": "https://jlcpcb.com/partdetail/C52472",
+   "jlc_description": "-55℃~+155℃ 150V 250mW 68mΩ Thick Film Resistor ±1% ±800ppm/℃ 0805 Chip Resistor - Surface Mount ROHS",
+   "jlc_checked": "2026-11-02 (live fetch)",
+   "digikey_pn": null,
+   "digikey_stock": null,
+   "digikey_price_qty1": null,
+   "digikey_price_qty100": null,
+   "digikey_currency": null,
+   "digikey_source_url": null,
+   "digikey_data_source": "via search (web_search; DigiKey blocks direct fetch 403)",
+   "digikey_equivalent": {
+    "mpn": "RL0805FR-7W0R068L",
+    "digikey_pn": "13-RL0805FR-7W0R068LCT-ND",
+    "digikey_stock": 15288,
+    "price_qty1": 0.53,
+    "price_qty100": 0.2046,
+    "source_url": "https://www.digikey.com/en/products/detail/yageo/RL0805FR-7W0R068L/5924973",
+    "note": "JLC has this Yageo MPN as C327058 but stock only 3",
+    "data_source": "via search"
+   },
+   "stocked_at_both": false,
+   "flags": [
+    "exact MPN not stocked at DigiKey (DigiKey-stocked equivalent: RL0805FR-7W0R068L)"
+   ],
+   "notes": "DigiKey: via search: UNI-ROYAL MPN not listed at DigiKey"
+  },
+  {
+   "mpn": "0805W4F820MT5E",
+   "manufacturer": "UNI-ROYAL",
+   "size": "0805",
+   "resistance_ohm": 0.082,
+   "tolerance": "1%",
+   "technology": "thick film",
+   "power_rating_w": 0.25,
+   "power_rating_note": "at 70 C ambient, derated above",
+   "rated_current_a": 1.746,
+   "tcr": "+/-800 ppm/C",
+   "operating_temp": "-55..155 C",
+   "short_time_overload": "Short-time overload (datasheet 4.13): 2.5 x RCWV (=sqrt(P*R)) or max overload voltage (0805: 300 V, 1206: 400 V), whichever less, for 5 s; dR <= +/-(1%+0.05 ohm). Equivalent to 6.25 x rated power for 5 s at these low R values.",
+   "datasheet_source": "UNI-ROYAL \"Thick Film Chip Resistors 01005..2512 Series\" data sheet (via LCSC) https://www.lcsc.com/datasheet/lcsc_datasheet_1810301116_UNI-RO",
+   "lcsc_pn": "C247599",
+   "jlc_verified_title": "0805W4F820MT5E | UNI-ROYAL(Uniroyal Elec) | JLCPCB",
+   "jlc_title_ok": true,
+   "jlc_library_type": "Extended",
+   "jlc_stock": 50,
+   "jlc_unit_price_usd": 0.0088,
+   "jlc_price_at_100_usd": 0.0088,
+   "jlc_price_tiers": [
+    {
+     "qty": 1,
+     "usd": 0.0088
+    },
+    {
+     "qty": 500,
+     "usd": 0.007
+    },
+    {
+     "qty": 1500,
+     "usd": 0.006
+    },
+    {
+     "qty": 5000,
+     "usd": 0.0054
+    },
+    {
+     "qty": 25000,
+     "usd": 0.0049
+    },
+    {
+     "qty": 50000,
+     "usd": 0.0046
+    }
+   ],
+   "jlc_url": "https://jlcpcb.com/partdetail/C247599",
+   "jlc_description": "-55℃~+155℃ 150V 250mW 82mΩ Thick Film Resistor ±1% ±800ppm/℃ 0805 Chip Resistor - Surface Mount ROHS",
+   "jlc_checked": "2026-11-02 (live fetch)",
+   "digikey_pn": null,
+   "digikey_stock": null,
+   "digikey_price_qty1": null,
+   "digikey_price_qty100": null,
+   "digikey_currency": null,
+   "digikey_source_url": null,
+   "digikey_data_source": "via search (web_search; DigiKey blocks direct fetch 403)",
+   "digikey_equivalent": {
+    "mpn": "RL0805FR-7W0R082L",
+    "digikey_pn": "13-RL0805FR-7W0R082LCT-ND",
+    "digikey_stock": 3900,
+    "price_qty1": 0.53,
+    "price_qty100": 0.2046,
+    "source_url": "https://www.digikey.com/en/products/detail/yageo/RL0805FR-7W0R082L/5924974",
+    "note": "JLC has this Yageo MPN as C859796 but stock 0; DigiKey stock \"~3,900\"",
+    "data_source": "via search"
+   },
+   "stocked_at_both": false,
+   "flags": [
+    "JLC stock <100",
+    "exact MPN not stocked at DigiKey (DigiKey-stocked equivalent: RL0805FR-7W0R082L)"
+   ],
+   "notes": "DigiKey: via search: UNI-ROYAL MPN not listed at DigiKey"
+  },
+  {
+   "mpn": "RL0805FR-7W0R1L",
+   "manufacturer": "YAGEO",
+   "size": "0805",
+   "resistance_ohm": 0.1,
+   "tolerance": "1%",
+   "technology": "thick film",
+   "power_rating_w": 0.25,
+   "power_rating_note": "at 70 C ambient, derated above",
+   "rated_current_a": 1.581,
+   "tcr": "+/-600 ppm/C",
+   "operating_temp": "-55..125 C (high-power 7W rating)",
+   "short_time_overload": "Short-time overload (IEC60115-1 4.13), RL high power (7W suffix): 5 x rated power for 5 s, dR +/-(2%+0.5 mOhm) (as parsed from datasheet table)",
+   "datasheet_source": "YAGEO \"RL series, Chip Resistor Surface Mount\" product spec V.2 (2017-06-01) (via LCSC) https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/1811141240_YAGEO-RL0805FR-7W0R1L_C327057.pdf",
+   "lcsc_pn": "C327057",
+   "jlc_verified_title": "RL0805FR-7W0R1L | YAGEO | JLCPCB",
+   "jlc_title_ok": true,
+   "jlc_library_type": "Extended",
+   "jlc_stock": 51346,
+   "jlc_unit_price_usd": 0.0219,
+   "jlc_price_at_100_usd": 0.0219,
+   "jlc_price_tiers": [
+    {
+     "qty": 1,
+     "usd": 0.0219
+    },
+    {
+     "qty": 500,
+     "usd": 0.0179
+    },
+    {
+     "qty": 1500,
+     "usd": 0.0158
+    },
+    {
+     "qty": 5000,
+     "usd": 0.0145
+    },
+    {
+     "qty": 25000,
+     "usd": 0.0133
+    },
+    {
+     "qty": 50000,
+     "usd": 0.0127
+    }
+   ],
+   "jlc_url": "https://jlcpcb.com/partdetail/C327057",
+   "jlc_description": "100mΩ 250mW Thick Film Resistor ±1% ±600ppm/℃ 0805 Chip Resistor - Surface Mount ROHS",
+   "jlc_checked": "2026-11-02 (live fetch)",
+   "digikey_pn": "311-0.1LUCT-ND",
+   "digikey_stock": 1372,
+   "digikey_price_qty1": 0.52,
+   "digikey_price_qty100": 0.198,
+   "digikey_currency": "USD",
+   "digikey_source_url": "https://www.digikey.com/en/products/detail/yageo/RL0805FR-7W0R1L/2827681",
+   "digikey_data_source": "via search (web_search; DigiKey blocks direct fetch 403)",
+   "digikey_equivalent": null,
+   "stocked_at_both": true,
+   "flags": [],
+   "notes": null
+  },
+  {
+   "mpn": "RL0805FR-7W0R12L",
+   "manufacturer": "YAGEO",
+   "size": "0805",
+   "resistance_ohm": 0.12,
+   "tolerance": "1%",
+   "technology": "thick film",
+   "power_rating_w": 0.25,
+   "power_rating_note": "at 70 C ambient, derated above",
+   "rated_current_a": 1.443,
+   "tcr": "+/-600 ppm/C",
+   "operating_temp": "-55..125 C (high-power 7W rating)",
+   "short_time_overload": "Short-time overload (IEC60115-1 4.13), RL high power (7W suffix): 5 x rated power for 5 s, dR +/-(2%+0.5 mOhm) (as parsed from datasheet table)",
+   "datasheet_source": "YAGEO \"RL series, Chip Resistor Surface Mount\" product spec V.2 (2017-06-01) (via LCSC) https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2404241506_YAGEO-RL0805FR-7W0R12L_C859798.pdf",
+   "lcsc_pn": "C859798",
+   "jlc_verified_title": "RL0805FR-7W0R12L | YAGEO | JLCPCB",
+   "jlc_title_ok": true,
+   "jlc_library_type": "Extended",
+   "jlc_stock": 0,
+   "jlc_unit_price_usd": 0.0146,
+   "jlc_price_at_100_usd": 0.0146,
+   "jlc_price_tiers": [
+    {
+     "qty": 1,
+     "usd": 0.0146
+    },
+    {
+     "qty": 10,
+     "usd": 0.0146
+    },
+    {
+     "qty": 12,
+     "usd": 0.0146
+    },
+    {
+     "qty": 200,
+     "usd": 0.0057
+    },
+    {
+     "qty": 500,
+     "usd": 0.0055
+    },
+    {
+     "qty": 1000,
+     "usd": 0.0054
+    }
+   ],
+   "jlc_url": "https://jlcpcb.com/partdetail/C859798",
+   "jlc_description": "-55℃~+125℃ 120mΩ 250mW Thick Film Resistor ±1% ±600ppm/℃ 0805 Chip Resistor - Surface Mount ROHS",
+   "jlc_checked": "2026-11-02 (live fetch)",
+   "digikey_pn": "RL0805FR-7W0R12L-ND",
+   "digikey_stock": 0,
+   "digikey_price_qty1": null,
+   "digikey_price_qty100": null,
+   "digikey_currency": "USD",
+   "digikey_source_url": "https://www.digikey.com/en/products/detail/yageo/RL0805FR-7W0R12L/5924976",
+   "digikey_data_source": "via search (web_search; DigiKey blocks direct fetch 403)",
+   "digikey_equivalent": {
+    "mpn": null,
+    "digikey_pn": null,
+    "digikey_stock": null,
+    "price_qty1": null,
+    "price_qty100": null,
+    "source_url": null,
+    "note": "Search found NO DigiKey-stocked 0.12 ohm 0805 >=0.25 W 1% part (ERJ-6BWFR12V, CSR0805FTR120 also out of stock). Options: use 1206 (RL1206FR-070R12L) or 0805 1/8 W 0805W8F120LT5E (JLC C36235, 4048 stock)",
+    "data_source": "via search"
+   },
+   "stocked_at_both": false,
+   "flags": [
+    "JLC stock <100",
+    "exact MPN not stocked at DigiKey"
+   ],
+   "notes": "DigiKey: not stocked at DigiKey (factory lead time ~20 wk; reel price ~$0.0729 @5000)"
+  },
+  {
+   "mpn": "1206W4F680MT5E",
+   "manufacturer": "UNI-ROYAL",
+   "size": "1206",
+   "resistance_ohm": 0.068,
+   "tolerance": "1%",
+   "technology": "thick film",
+   "power_rating_w": 0.25,
+   "power_rating_note": "at 70 C ambient, derated above",
+   "rated_current_a": 1.917,
+   "tcr": "+/-800 ppm/C",
+   "operating_temp": "-55..155 C",
+   "short_time_overload": "Short-time overload (datasheet 4.13): 2.5 x RCWV (=sqrt(P*R)) or max overload voltage (0805: 300 V, 1206: 400 V), whichever less, for 5 s; dR <= +/-(1%+0.05 ohm). Equivalent to 6.25 x rated power for 5 s at these low R values.",
+   "datasheet_source": "UNI-ROYAL \"Thick Film Chip Resistors 01005..2512 Series\" data sheet (via LCSC) https://www.lcsc.com/datasheet/lcsc_datasheet_1810301110_UNI-ROYAL-Uniroyal-Elec-1206W4F680MT5E_C127713.pdf",
+   "lcsc_pn": "C127713",
+   "jlc_verified_title": "1206W4F680MT5E | UNI-ROYAL(Uniroyal Elec) | JLCPCB",
+   "jlc_title_ok": true,
+   "jlc_library_type": "Extended",
+   "jlc_stock": 451,
+   "jlc_unit_price_usd": 0.0097,
+   "jlc_price_at_100_usd": 0.0097,
+   "jlc_price_tiers": [
+    {
+     "qty": 1,
+     "usd": 0.0097
+    },
+    {
+     "qty": 500,
+     "usd": 0.0076
+    },
+    {
+     "qty": 1500,
+     "usd": 0.0064
+    },
+    {
+     "qty": 5000,
+     "usd": 0.0057
+    },
+    {
+     "qty": 25000,
+     "usd": 0.0051
+    },
+    {
+     "qty": 50000,
+     "usd": 0.0048
+    }
+   ],
+   "jlc_url": "https://jlcpcb.com/partdetail/C127713",
+   "jlc_description": "-55℃~+155℃ 200V 250mW 68mΩ Thick Film Resistor ±1% ±800ppm/℃ 1206 Chip Resistor - Surface Mount ROHS",
+   "jlc_checked": "2026-11-02 (live fetch)",
+   "digikey_pn": null,
+   "digikey_stock": null,
+   "digikey_price_qty1": null,
+   "digikey_price_qty100": null,
+   "digikey_currency": null,
+   "digikey_source_url": null,
+   "digikey_data_source": "via search (web_search; DigiKey blocks direct fetch 403)",
+   "digikey_equivalent": {
+    "mpn": "RL1206FR-070R068L",
+    "digikey_pn": "311-.068LWCT-ND",
+    "digikey_stock": 23000,
+    "price_qty1": 0.33,
+    "price_qty100": 0.1091,
+    "source_url": "https://www.digikey.com/en/products/detail/yageo/RL1206FR-070R068L/3885414",
+    "note": "same as the separate RL1206FR-070R068L row",
+    "data_source": "via search"
+   },
+   "stocked_at_both": false,
+   "flags": [
+    "exact MPN not stocked at DigiKey (DigiKey-stocked equivalent: RL1206FR-070R068L)"
+   ],
+   "notes": "DigiKey: via search: UNI-ROYAL MPN not listed at DigiKey; UNI-ROYAL datasheet table lists 1206 R<0.1 ohm as 1/3 W; MPN code W4 and JLC say 1/4 W - use 0.25 W"
+  },
+  {
+   "mpn": "RL1206FR-070R068L",
+   "manufacturer": "YAGEO",
+   "size": "1206",
+   "resistance_ohm": 0.068,
+   "tolerance": "1%",
+   "technology": "thick film",
+   "power_rating_w": 0.25,
+   "power_rating_note": "at 70 C ambient, derated above",
+   "rated_current_a": 1.917,
+   "tcr": "+/-1000 ppm/C",
+   "operating_temp": "-55..155 C",
+   "short_time_overload": "Short-time overload (IEC60115-1 4.13), RL standard power: 2.5 x rated voltage for 5 s (= 6.25 x rated power), dR +/-(2%+0.5 mOhm) (as parsed from datasheet table)",
+   "datasheet_source": "YAGEO \"RL series, Chip Resistor Surface Mount\" product spec V.2 (2017-06-01) (via LCSC) https://www.lcsc.com/datasheet/lcsc_datasheet_1811151427_YAGEO-RL1206FR-070R068L_C327066.pdf",
+   "lcsc_pn": "C327066",
+   "jlc_verified_title": "RL1206FR-070R068L | YAGEO | JLCPCB",
+   "jlc_title_ok": true,
+   "jlc_library_type": "Extended",
+   "jlc_stock": 4731,
+   "jlc_unit_price_usd": 0.0291,
+   "jlc_price_at_100_usd": 0.0291,
+   "jlc_price_tiers": [
+    {
+     "qty": 1,
+     "usd": 0.0291
+    },
+    {
+     "qty": 200,
+     "usd": 0.024
+    },
+    {
+     "qty": 600,
+     "usd": 0.021
+    },
+    {
+     "qty": 5000,
+     "usd": 0.0194
+    },
+    {
+     "qty": 10000,
+     "usd": 0.0179
+    },
+    {
+     "qty": 20000,
+     "usd": 0.0171
+    }
+   ],
+   "jlc_url": "https://jlcpcb.com/partdetail/C327066",
+   "jlc_description": "-55℃~+155℃ 250mW 68mΩ Thick Film Resistor ±1% ±1000ppm/℃ 1206 Chip Resistor - Surface Mount ROHS",
+   "jlc_checked": "2026-11-02 (live fetch)",
+   "digikey_pn": "311-.068LWCT-ND",
+   "digikey_stock": 23000,
+   "digikey_price_qty1": 0.33,
+   "digikey_price_qty100": 0.1091,
+   "digikey_currency": "USD",
+   "digikey_source_url": "https://www.digikey.com/en/products/detail/yageo/RL1206FR-070R068L/3885414",
+   "digikey_data_source": "via search (web_search; DigiKey blocks direct fetch 403)",
+   "digikey_equivalent": null,
+   "stocked_at_both": true,
+   "flags": [],
+   "notes": "DigiKey: stock given as \"over 23,000\"; PN from a separate search"
+  },
+  {
+   "mpn": "RL1206FR-070R082L",
+   "manufacturer": "YAGEO",
+   "size": "1206",
+   "resistance_ohm": 0.082,
+   "tolerance": "1%",
+   "technology": "thick film",
+   "power_rating_w": 0.25,
+   "power_rating_note": "at 70 C ambient, derated above",
+   "rated_current_a": 1.746,
+   "tcr": "+/-1000 ppm/C",
+   "operating_temp": "-55..155 C",
+   "short_time_overload": "Short-time overload (IEC60115-1 4.13), RL standard power: 2.5 x rated voltage for 5 s (= 6.25 x rated power), dR +/-(2%+0.5 mOhm) (as parsed from datasheet table)",
+   "datasheet_source": "YAGEO \"RL series, Chip Resistor Surface Mount\" product spec V.2 (2017-06-01) (via LCSC) https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2304140030_YAGEO-RL1206FR-070R082L_C705560.pdf",
+   "lcsc_pn": "C705560",
+   "jlc_verified_title": "RL1206FR-070R082L | YAGEO | JLCPCB",
+   "jlc_title_ok": true,
+   "jlc_library_type": "Extended",
+   "jlc_stock": 3554,
+   "jlc_unit_price_usd": 0.0253,
+   "jlc_price_at_100_usd": 0.0253,
+   "jlc_price_tiers": [
+    {
+     "qty": 1,
+     "usd": 0.0253
+    },
+    {
+     "qty": 200,
+     "usd": 0.0197
+    },
+    {
+     "qty": 600,
+     "usd": 0.0166
+    },
+    {
+     "qty": 5000,
+     "usd": 0.0148
+    },
+    {
+     "qty": 10000,
+     "usd": 0.0132
+    },
+    {
+     "qty": 20000,
+     "usd": 0.0124
+    }
+   ],
+   "jlc_url": "https://jlcpcb.com/partdetail/C705560",
+   "jlc_description": "-55℃~+155℃ 250mW 82mΩ Thick Film Resistor ±1% ±1000ppm/℃ 1206 Chip Resistor - Surface Mount ROHS",
+   "jlc_checked": "2026-11-02 (live fetch)",
+   "digikey_pn": "13-RL1206FR-070R082LCT-ND",
+   "digikey_stock": 4100,
+   "digikey_price_qty1": 0.33,
+   "digikey_price_qty100": 0.1091,
+   "digikey_currency": "USD",
+   "digikey_source_url": "https://www.digikey.com/en/products/detail/yageo/RL1206FR-070R082L/3885411",
+   "digikey_data_source": "via search (web_search; DigiKey blocks direct fetch 403)",
+   "digikey_equivalent": null,
+   "stocked_at_both": true,
+   "flags": [],
+   "notes": "DigiKey: stock given as \"~4,100-8,200\""
+  },
+  {
+   "mpn": "1206W4F100LT5E",
+   "manufacturer": "UNI-ROYAL",
+   "size": "1206",
+   "resistance_ohm": 0.1,
+   "tolerance": "1%",
+   "technology": "thick film",
+   "power_rating_w": 0.25,
+   "power_rating_note": "at 70 C ambient, derated above",
+   "rated_current_a": 1.581,
+   "tcr": "+/-800 ppm/C",
+   "operating_temp": "-55..155 C",
+   "short_time_overload": "Short-time overload (datasheet 4.13): 2.5 x RCWV (=sqrt(P*R)) or max overload voltage (0805: 300 V, 1206: 400 V), whichever less, for 5 s; dR <= +/-(1%+0.05 ohm). Equivalent to 6.25 x rated power for 5 s at these low R values.",
+   "datasheet_source": "UNI-ROYAL \"Thick Film Chip Resistors 01005..2512 Series\" data sheet (via LCSC) https://www.lcsc.com/datasheet/lcsc_datasheet_2205311900_UNI-ROYAL-Uniroyal-Elec-1206W4F100LT5E_C25334.pdf",
+   "lcsc_pn": "C25334",
+   "jlc_verified_title": "1206W4F100LT5E | UNI-ROYAL(Uniroyal Elec) | JLCPCB",
+   "jlc_title_ok": true,
+   "jlc_library_type": "Basic",
+   "jlc_stock": 652192,
+   "jlc_unit_price_usd": 0.0082,
+   "jlc_price_at_100_usd": 0.0082,
+   "jlc_price_tiers": [
+    {
+     "qty": 1,
+     "usd": 0.0082
+    },
+    {
+     "qty": 500,
+     "usd": 0.0067
+    },
+    {
+     "qty": 1500,
+     "usd": 0.0059
+    },
+    {
+     "qty": 5000,
+     "usd": 0.0047
+    },
+    {
+     "qty": 25000,
+     "usd": 0.0043
+    },
+    {
+     "qty": 50000,
+     "usd": 0.0041
+    }
+   ],
+   "jlc_url": "https://jlcpcb.com/partdetail/C25334",
+   "jlc_description": "-55℃~+155℃ 100mΩ 200V 250mW Thick Film Resistor ±1% ±800ppm/℃ 1206 Chip Resistor - Surface Mount ROHS",
+   "jlc_checked": "2026-11-02 (live fetch)",
+   "digikey_pn": null,
+   "digikey_stock": null,
+   "digikey_price_qty1": null,
+   "digikey_price_qty100": null,
+   "digikey_currency": null,
+   "digikey_source_url": null,
+   "digikey_data_source": "via search (web_search; DigiKey blocks direct fetch 403)",
+   "digikey_equivalent": {
+    "mpn": "RL1206FR-070R1L",
+    "digikey_pn": "311-0.1LWCT-ND",
+    "digikey_stock": 45000,
+    "price_qty1": 0.23,
+    "price_qty100": 0.093,
+    "source_url": "https://octopart.com/part/yageo-group/RL1206FR-070R1L",
+    "note": "DigiKey figures cited via Octopart; stock \"over 45,000\"; JLC has this Yageo MPN as C364357 (stock 69)",
+    "data_source": "via search"
+   },
+   "stocked_at_both": false,
+   "flags": [
+    "exact MPN not stocked at DigiKey (DigiKey-stocked equivalent: RL1206FR-070R1L)"
+   ],
+   "notes": "DigiKey: via search: UNI-ROYAL MPN not listed at DigiKey"
+  },
+  {
+   "mpn": "1206W4F120LT5E",
+   "manufacturer": "UNI-ROYAL",
+   "size": "1206",
+   "resistance_ohm": 0.12,
+   "tolerance": "1%",
+   "technology": "thick film",
+   "power_rating_w": 0.25,
+   "power_rating_note": "at 70 C ambient, derated above",
+   "rated_current_a": 1.443,
+   "tcr": "+/-800 ppm/C",
+   "operating_temp": "-55..155 C",
+   "short_time_overload": "Short-time overload (datasheet 4.13): 2.5 x RCWV (=sqrt(P*R)) or max overload voltage (0805: 300 V, 1206: 400 V), whichever less, for 5 s; dR <= +/-(1%+0.05 ohm). Equivalent to 6.25 x rated power for 5 s at these low R values.",
+   "datasheet_source": "UNI-ROYAL \"Thick Film Chip Resistors 01005..2512 Series\" data sheet (via LCSC) https://www.lcsc.com/datasheet/lcsc_datasheet_2205311900_UNI-ROYAL-Uniroyal-Elec-1206W4F120LT5E_C24435.pdf",
+   "lcsc_pn": "C24435",
+   "jlc_verified_title": "1206W4F120LT5E | UNI-ROYAL(Uniroyal Elec) | JLCPCB",
+   "jlc_title_ok": true,
+   "jlc_library_type": "Extended",
+   "jlc_stock": 78436,
+   "jlc_unit_price_usd": 0.0069,
+   "jlc_price_at_100_usd": 0.0069,
+   "jlc_price_tiers": [
+    {
+     "qty": 1,
+     "usd": 0.0069
+    },
+    {
+     "qty": 500,
+     "usd": 0.0056
+    },
+    {
+     "qty": 1500,
+     "usd": 0.0048
+    },
+    {
+     "qty": 5000,
+     "usd": 0.0043
+    },
+    {
+     "qty": 25000,
+     "usd": 0.004
+    },
+    {
+     "qty": 50000,
+     "usd": 0.0037
+    }
+   ],
+   "jlc_url": "https://jlcpcb.com/partdetail/C24435",
+   "jlc_description": "-55℃~+155℃ 120mΩ 200V 250mW Thick Film Resistor ±1% ±800ppm/℃ 1206 Chip Resistor - Surface Mount ROHS",
+   "jlc_checked": "2026-11-02 (live fetch)",
+   "digikey_pn": null,
+   "digikey_stock": null,
+   "digikey_price_qty1": null,
+   "digikey_price_qty100": null,
+   "digikey_currency": null,
+   "digikey_source_url": null,
+   "digikey_data_source": "via search (web_search; DigiKey blocks direct fetch 403)",
+   "digikey_equivalent": {
+    "mpn": "RL1206FR-070R12L",
+    "digikey_pn": "311-.12LWCT-ND",
+    "digikey_stock": 11200,
+    "price_qty1": 0.28,
+    "price_qty100": 0.0912,
+    "source_url": "https://www.digikey.com/en/products/detail/yageo/RL1206FR-070R12L/3886036",
+    "note": "same as the separate RL1206FR-070R12L row",
+    "data_source": "via search"
+   },
+   "stocked_at_both": false,
+   "flags": [
+    "exact MPN not stocked at DigiKey (DigiKey-stocked equivalent: RL1206FR-070R12L)"
+   ],
+   "notes": "DigiKey: via search: UNI-ROYAL MPN not listed at DigiKey"
+  },
+  {
+   "mpn": "RL1206FR-070R12L",
+   "manufacturer": "YAGEO",
+   "size": "1206",
+   "resistance_ohm": 0.12,
+   "tolerance": "1%",
+   "technology": "thick film",
+   "power_rating_w": 0.25,
+   "power_rating_note": "at 70 C ambient, derated above",
+   "rated_current_a": 1.443,
+   "tcr": "+/-600 ppm/C",
+   "operating_temp": "-55..155 C",
+   "short_time_overload": "Short-time overload (IEC60115-1 4.13), RL standard power: 2.5 x rated voltage for 5 s (= 6.25 x rated power), dR +/-(2%+0.5 mOhm) (as parsed from datasheet table)",
+   "datasheet_source": "YAGEO \"RL series, Chip Resistor Surface Mount\" product spec V.2 (2017-06-01) (via LCSC) https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2304140030_YAGEO-RL1206FR-070R12L_C309629.pdf",
+   "lcsc_pn": "C309629",
+   "jlc_verified_title": "RL1206FR-070R12L | YAGEO | JLCPCB",
+   "jlc_title_ok": true,
+   "jlc_library_type": "Extended",
+   "jlc_stock": 7989,
+   "jlc_unit_price_usd": 0.0324,
+   "jlc_price_at_100_usd": 0.0324,
+   "jlc_price_tiers": [
+    {
+     "qty": 1,
+     "usd": 0.0324
+    },
+    {
+     "qty": 200,
+     "usd": 0.0268
+    },
+    {
+     "qty": 600,
+     "usd": 0.0238
+    },
+    {
+     "qty": 5000,
+     "usd": 0.0217
+    },
+    {
+     "qty": 10000,
+     "usd": 0.0201
+    },
+    {
+     "qty": 20000,
+     "usd": 0.0192
+    }
+   ],
+   "jlc_url": "https://jlcpcb.com/partdetail/C309629",
+   "jlc_description": "-55℃~+155℃ 120mΩ 250mW Thick Film Resistor ±1% ±600ppm/℃ 1206 Chip Resistor - Surface Mount ROHS",
+   "jlc_checked": "2026-11-02 (live fetch)",
+   "digikey_pn": "311-.12LWCT-ND",
+   "digikey_stock": 11200,
+   "digikey_price_qty1": 0.28,
+   "digikey_price_qty100": 0.0912,
+   "digikey_currency": "USD",
+   "digikey_source_url": "https://www.digikey.com/en/products/detail/yageo/RL1206FR-070R12L/3886036",
+   "digikey_data_source": "via search (web_search; DigiKey blocks direct fetch 403)",
+   "digikey_equivalent": null,
+   "stocked_at_both": true,
+   "flags": [],
+   "notes": "DigiKey: stock \"over 11,200\""
+  }
+ ],
+ "meta": {
+  "generated": "2026-11-02",
+  "jlc": "verified via https://jlcpcb.com/partdetail/<C#> (title contains MPN; stock = overseasStockCount of main component record)",
+  "digikey": "via web_search only (direct fetch 403)"
+ }
+}
