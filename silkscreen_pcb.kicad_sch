@@ -17213,6 +17213,16 @@
 		)
 		(uuid "ff023d60-0c5e-4845-b0a1-7e57ef1a545b")
 	)
+	(wire
+		(pts
+			(xy 264.16 257.81) (xy 267.97 257.81)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ccf7501f-2c75-5968-ae44-ac20642da1db")
+	)
 	(label "PIN_5"
 		(at 259.08 388.62 270)
 		(effects
@@ -17502,6 +17512,16 @@
 			(justify left bottom)
 		)
 		(uuid "f90efdd1-624e-46cd-a569-a857a6538e79")
+	)
+	(label "LED_VIN"
+		(at 287.02 248.92 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "10fb647a-e2a8-5a12-a030-9b5c82ad4b0e")
 	)
 	(global_label "CC1"
 		(shape input)
@@ -18385,7 +18405,7 @@
 	)
 	(global_label "LDO_IN"
 		(shape input)
-		(at 275.59 257.81 180)
+		(at 264.16 257.81 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -18395,7 +18415,7 @@
 		)
 		(uuid "33905991-4da7-47cd-a020-b1c9ab8a332f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 266.0733 257.81 0)
+			(at 254.6433 257.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20092,7 +20112,7 @@
 			)
 		)
 	)
-	(global_label "3V3"
+	(global_label "EINK_3V3"
 		(shape input)
 		(at 96.52 288.29 0)
 		(fields_autoplaced yes)
@@ -20104,7 +20124,7 @@
 		)
 		(uuid "a009dbbd-970f-4656-b784-e50a39138a20")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 103.0128 288.29 0)
+			(at 108.0527 288.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20334,24 +20354,24 @@
 			)
 		)
 	)
-	(global_label "3V3"
+	(global_label "EINK_3V3"
 		(shape input)
-		(at 146.05 284.48 90)
+		(at 140.97 287.02 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
 		(uuid "ac692428-07e1-4c82-9aaa-f4c4882c038e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 146.05 277.9872 90)
+			(at 129.4373 287.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -21016,7 +21036,7 @@
 			)
 		)
 	)
-	(global_label "3V3"
+	(global_label "J6_3V3"
 		(shape input)
 		(at 436.88 101.6 180)
 		(fields_autoplaced yes)
@@ -21028,7 +21048,7 @@
 		)
 		(uuid "d23ad10c-b05f-4a32-ba5e-6821b1a425fb")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 430.3872 101.6 0)
+			(at 427.3633 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21345,7 +21365,7 @@
 			)
 		)
 	)
-	(global_label "3V3"
+	(global_label "J6_3V3"
 		(shape input)
 		(at 398.78 52.07 180)
 		(fields_autoplaced yes)
@@ -21357,7 +21377,7 @@
 		)
 		(uuid "f12a41c9-dd50-4b02-858c-4196555dc4cc")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 392.2872 52.07 0)
+			(at 389.2633 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21604,6 +21624,94 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "3V3"
+		(shape input)
+		(at 429.26 62.23 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "aaf79ff0-c0c6-5587-89bc-de8537821725")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 422.7672 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "J6_3V3"
+		(shape input)
+		(at 436.88 62.23 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "822ce3f8-2628-57e3-ab8d-fdac132a90d2")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 446.3967 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "3V3"
+		(shape input)
+		(at 91.44 279.4 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "cf5f76b9-bec1-5094-8018-f1f1f9a05485")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 84.9472 279.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "EINK_3V3"
+		(shape input)
+		(at 99.06 279.4 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "3bc0205d-b3bd-5296-a0ec-94248baf13c3")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 110.5927 279.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -23466,7 +23574,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
+		(lib_id "Device:Polyfuse")
 		(at 318.77 369.57 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -23474,7 +23582,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1591b330-8906-49c7-b648-436543c56571")
-		(property "Reference" "R42"
+		(property "Reference" "F4"
 			(at 318.77 367.284 90)
 			(effects
 				(font
@@ -23482,7 +23590,7 @@
 				)
 			)
 		)
-		(property "Value" "0"
+		(property "Value" "MF-FSMF010X-2"
 			(at 318.77 371.602 90)
 			(effects
 				(font
@@ -23490,7 +23598,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Fuse:Fuse_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
 			(at 318.77 371.348 90)
 			(effects
 				(font
@@ -23508,7 +23616,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor"
+		(property "Description" "Resettable fuse, polymeric positive temperature coefficient"
 			(at 318.77 369.57 0)
 			(effects
 				(font
@@ -23517,7 +23625,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "RC0603JR-070RL"
+		(property "MPN" "MF-FSMF010X-2"
 			(at 318.77 369.57 0)
 			(effects
 				(font
@@ -23526,7 +23634,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer" "Yageo"
+		(property "Manufacturer" "Bourns"
 			(at 318.77 369.57 0)
 			(effects
 				(font
@@ -23535,7 +23643,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C21189"
+		(property "LCSC" "C210355"
 			(at 318.77 369.57 0)
 			(effects
 				(font
@@ -23553,7 +23661,7 @@
 		(instances
 			(project "silkscreen_pcb"
 				(path "/2fbd4c8f-b784-4d80-b374-4947df99a9bf"
-					(reference "R42")
+					(reference "F4")
 					(unit 1)
 				)
 			)
@@ -32843,7 +32951,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4.7k"
+		(property "Value" "10k"
 			(at 142.24 110.4899 0)
 			(effects
 				(font
@@ -32879,7 +32987,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "RC0603FR-074K7L"
+		(property "MPN" "RC0603FR-0710KL"
 			(at 139.7 109.22 0)
 			(effects
 				(font
@@ -32897,7 +33005,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C23162"
+		(property "LCSC" "C25804"
 			(at 139.7 109.22 0)
 			(effects
 				(font
@@ -46129,6 +46237,294 @@
 			(project "silkscreen_pcb"
 				(path "/2fbd4c8f-b784-4d80-b374-4947df99a9bf"
 					(reference "R9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:Polyfuse")
+		(at 271.78 257.81 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ae6a4a29-b645-55e5-931b-91b18d984f94")
+		(property "Reference" "F3"
+			(at 271.78 261.62 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MF-FSMF010X-2"
+			(at 271.78 264.16 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Fuse:Fuse_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
+			(at 276.86 256.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 271.78 257.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resettable fuse, polymeric positive temperature coefficient"
+			(at 271.78 257.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MF-FSMF010X-2"
+			(at 271.78 257.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "Bourns"
+			(at 271.78 257.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C210355"
+			(at 271.78 257.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0acdd118-9385-5c1a-8d49-0577e4f810ba")
+		)
+		(pin "2"
+			(uuid "7f71734b-add8-5c84-bc27-bc02785ba0ff")
+		)
+		(instances
+			(project "silkscreen_pcb"
+				(path "/2fbd4c8f-b784-4d80-b374-4947df99a9bf"
+					(reference "F3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:Polyfuse")
+		(at 433.07 62.23 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c9259b84-4c63-500f-8b6e-02c0440ead7c")
+		(property "Reference" "F5"
+			(at 433.07 55.88 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MF-FSMF010X-2"
+			(at 433.07 58.42 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Fuse:Fuse_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
+			(at 438.15 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 433.07 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resettable fuse, polymeric positive temperature coefficient"
+			(at 433.07 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MF-FSMF010X-2"
+			(at 433.07 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "Bourns"
+			(at 433.07 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C210355"
+			(at 433.07 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "96354117-c01b-5eee-b880-747d583e7c09")
+		)
+		(pin "2"
+			(uuid "7916ca11-3d1d-5014-b223-ac047d8dd10f")
+		)
+		(instances
+			(project "silkscreen_pcb"
+				(path "/2fbd4c8f-b784-4d80-b374-4947df99a9bf"
+					(reference "F5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:Polyfuse")
+		(at 95.25 279.4 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6b18e7b4-68cd-5671-ab08-c702ce1e33b0")
+		(property "Reference" "F6"
+			(at 95.25 273.05 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MF-FSMF010X-2"
+			(at 95.25 275.59 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Fuse:Fuse_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
+			(at 100.33 278.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 95.25 279.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resettable fuse, polymeric positive temperature coefficient"
+			(at 95.25 279.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MF-FSMF010X-2"
+			(at 95.25 279.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "Bourns"
+			(at 95.25 279.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C210355"
+			(at 95.25 279.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e252a098-b85b-513a-92f9-3f8614af48fd")
+		)
+		(pin "2"
+			(uuid "1f2b8564-168f-58a7-b306-babf24a50635")
+		)
+		(instances
+			(project "silkscreen_pcb"
+				(path "/2fbd4c8f-b784-4d80-b374-4947df99a9bf"
+					(reference "F6")
 					(unit 1)
 				)
 			)

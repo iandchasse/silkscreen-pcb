@@ -791,6 +791,18 @@
       {
         "netclass": "Power",
         "pattern": "SD_VDD"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "/LED_VIN"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "J6_3V3"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "EINK_3V3"
       }
     ]
   },
