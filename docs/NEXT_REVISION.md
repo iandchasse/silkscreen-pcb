@@ -255,6 +255,19 @@ R85,0.068,RL1206FR-070R068L,Yageo,C327066,,YAGEO RL1206FR-070R068L,"same part; D
 | **F5** | Flag "frontlight commanded on but `LED_MONIT` ≈ 0" | The signature of a tripped N1 |
 | **F6** | Keep the 50 % brightness cap; allow 100 % only above about 3.8 V on battery | With N1, a high-resistance PTC can put `U10` into UVLO at 100 % from a low cell |
 | **F7** | Show a low-battery message before the boot-time check sleeps the board | Case 1's "dead" morning |
+| **F8** | Don't overlap Wi-Fi TX bursts with SD writes or a panel refresh. Lower the Wi-Fi TX power, and keep Wi-Fi off below about 3.7 V on battery | Coincident peaks can exceed the 500 mA LDO and brown out 3V3 at mid to low charge (independent review M-2) |
+| **F9** | Put the touch controller (FT6336U) in hibernate before deep sleep | It is always powered: +220 µA in its power-on monitor mode against a 50 µA sleep budget (L-18) |
+| **F10** | Shut down at ≥ 3.3 V on battery, together with F7 | Protects cycle life, and delays a pack's own protection locking out in storage (I-6, M-5) |
+| **F11** | Decode `USB_STAT` from bench readings, including with VBUS absent | The battery-only level depends on how the unpowered TP4056's status pins behave (L-4) |
+| **F12** | If `R35`/`R36` change (section 10), move the ladder 2 thresholds with them | UP(2) sits at 2.877 V, at the edge of the ADC's calibrated range (L-5) |
+
+F8–F12 come from the independent review ([TRIAGE.md](independent-review-2026-11-03/TRIAGE.md)).
+[BOARD_REVIEW §4.8](independent-review-2026-11-03/BOARD_REVIEW.md#48-firmware-obligations-imposed-by-the-hardware) lists
+the other obligations the hardware puts on firmware:
+- `ADIM` timing;
+- `COLOR_SEL` changes only at zero duty;
+- SD pins low before `SD_VDD` goes off;
+- `EPD_RST` kept high in sleep.
 
 ## 5. Documentation to update with the implementation
 
@@ -310,6 +323,17 @@ predicts each result from the datasheets and the board's copper, and says which 
 - The frontlight runs normally at each level and in blend mode.
 - Measure `EINK_3V3` current and ripple at `J2` pins 15/16 during a full refresh (the panel's logic supply now sits behind `F6`).
 
+**From the independent review (2026-11-03;** [BOARD_REVIEW §7](independent-review-2026-11-03/BOARD_REVIEW.md#7-bench-tests-for-the-suspected-items) **has the set-ups):**
+
+- **M-5, pack wake:** use a pack of the kind actually fitted. Let its own protection lock out by discharging it below its
+  cut-off, then plug USB in. If it does not wake, the board needs a USB-time override of the cell detector (section 10).
+- **L-3, mux chatter:** feed a 4.75 V source through a long, thin cable with a 0.7 A load. Check whether the TPS2116
+  toggles between inputs.
+- **L-4, `USB_STAT` with VBUS absent:** read the level firmware will see (F11).
+- **L-11, SD switch-on dip:** measure 3V3 at `C32` when `SD_ACTIVATE` powers the card. If it dips by more than 0.2 V, set
+  `R78` to 10–22 kΩ.
+- **Reverse polarity:** run the review's §7.17 cases before deciding on `Q3` (section 10).
+
 **Process (any board, any revision):** after rework, wash off the flux. This matters most around `U10`/`L2`/`C9`, `J2` pins 18–24 and `J3`, where 17–40 V sits across 0.20–0.27 mm gaps ([TRACE_AUDIT.md §2.2](audit-2026-11-03/TRACE_AUDIT.md#22-spacing-against-voltage)).
 
 ## 7. Considered and not adopted
@@ -353,7 +377,7 @@ The rest is recorded here for reference. None of it is decided.
 
 | ID | Item | Why it matters | What it takes | Details |
 |---|---|---|---|---|
-| C1 | NTC on the TP4056 `TEMP` pin, which is grounded today | **Needed before a safety evaluation.** IEC 62368-1 M.4.2 wants charging stopped when the cell is too hot, and portable equipment is tested beyond its rated ambient | 5.6 kΩ / 120 kΩ divider plus a 10 kΩ NTC, for about 0–45 °C. Placement is the hard part: on the board at (86.5, 61.5) with about 35 mm of trace to `U11`, a 3-wire pack, or an NTC on leads. The NTC is a JLC Extended part (Z6). An off-board NTC that is not connected stops all charging (Z7) | [§3.6](audit-2026-11-03/CERT_REVIEW_AUDIT.md#36-c1-charge-temperature) |
+| C1 | NTC on the TP4056 `TEMP` pin, which is grounded today. The TP4056 also has no charge timer (independent review H-1) | **Needed before a safety evaluation.** IEC 62368-1 M.4.2 wants charging stopped when the cell is too hot, and portable equipment is tested beyond its rated ambient | A 5.6 kΩ / 120 kΩ divider plus a 10 kΩ NTC gives about 0–45 °C. Placement is the hard part. The only free on-board spot, (86.5, 61.5), is on the snap-off arm, above the cut line, so a cut board or the 3.68″ build would lose it. Use an NTC on leads or a 3-wire pack. Add a firmware-controlled charge-enable override for a charge timer; it also fixes M-5 (section 10). The NTC is a JLC Extended part (Z6). An off-board NTC that is not connected stops all charging (Z7) | [§3.6](audit-2026-11-03/CERT_REVIEW_AUDIT.md#36-c1-charge-temperature), [TRIAGE](independent-review-2026-11-03/TRIAGE.md) |
 | B1, Z3 | Antenna clearance | GND pour sits about 1 mm from the antenna's sides. Espressif, and KiCad 9's footprint for the module, keep 15 mm clear, which would flag 11 parts here | Step 1: clear the pour from the notch arms (contained). Step 2: move `SW5` and the frontlight block, a re-layout done with the enclosure | [§3.3](audit-2026-11-03/CERT_REVIEW_AUDIT.md#33-b1-and-z3-the-antenna-clearance) |
 | B3 | Frontlight boost 6.5–10 mm from the antenna | Possible Wi-Fi desense | Measure range and throughput with the light at full and off first. The fix is B1 step 2 | [§3.5](audit-2026-11-03/CERT_REVIEW_AUDIT.md#35-b3-b4-a4-not-for-103) |
 | B4 | Panel capacitors at their `J2` pins (now 5–17 mm away) | Closer to the reference circuit | No legal spots without moving parts (TRACE_AUDIT T5/T9). Check `EINK_3V3` ripple on the first boards (§6) | [§3.5](audit-2026-11-03/CERT_REVIEW_AUDIT.md#35-b3-b4-a4-not-for-103) |
@@ -373,3 +397,25 @@ The rest is recorded here for reference. None of it is decided.
 - **Z4, labels.** E-labels are allowed for e-readers, but the box still needs "Contains FCC ID: 2AC7Z-ESPS3WROOM1" and
   "Contains IC: 21098-ESPS3WROOM1", or the host's own IDs if Z2 ends there.
 - **RoHS.** The README now rules out leaded HASL (Z1). Keep the board house's RoHS statement with the technical file.
+
+## 10. Independent review items for later (recorded 2026-11-03)
+
+These come from the independent board review, [BOARD_REVIEW.md](independent-review-2026-11-03/BOARD_REVIEW.md), as
+triaged in [TRIAGE.md](independent-review-2026-11-03/TRIAGE.md).
+- **Already on the `1.03` branch:** the four cheap fixes (TRIAGE section 4).
+- **Covered elsewhere:** firmware items in §4 (F8–F12), bench items in §6, and H-1 under C1 in §9.
+
+The rest is recorded here for reference. None of it is decided.
+
+| ID | Item | Why it matters | What it takes |
+|---|---|---|---|
+| M-5 | The charger cannot wake a pack whose own protection has locked out: the cell detector sees about 0 V | After a week or two in storage the device can look dead, and USB does nothing | If the §6 bench check confirms it: force charge-enable for a few seconds after USB plug-in (an RC pulse), or the firmware-driven override from C1. `IO3`, today only on `J6`, could drive it if the header gives it up |
+| M-4 | No input over-voltage protection, and `CR1` sits ahead of `F1` | A non-compliant 9–12 V source kills `U2`/`U3`/`U10` and burns `CR1` | A 5 V OVP switch or eFuse (≥ 20 V tolerant, trip about 6 V) ahead of `U2`/`U11`. Until then, the docs say "5 V USB-C chargers only" |
+| M-2 (hardware) | 3V3 headroom under coincident peaks | Brown-outs at mid to low charge | Only if the §6 peak measurement shows the LDO limiting: TLV757P (1 A, same SOT-23-5; check the pin-out), remove `Q3` (L-8), widen the 0.25 mm battery tracks |
+| L-8 | `Q3` adds 50–70 mΩ and no protection; `Q8` alone blocks a reversed cell | Path resistance (M-2) | After the reverse-polarity bench test: remove `Q3` (0 Ω), or flip it for real redundancy |
+| L-3 | The power mux may chatter on a weak USB source | Brief input switching | If the bench shows it: hysteresis from `ST` to `PR1`, or a lower threshold through `R38` |
+| L-11 | SD switch-on dip on 3V3 | Possible brown-out at card power-up | If above 0.2 V: `R78` → 10–22 kΩ (value only) |
+| L-5 | Ladder 2's UP(2) level is at the ADC's calibrated limit | Misread power key on cut boards | `R36` 47k and `R35` 27k, together with F12 |
+| L-15 | The e-paper boost loop is about 39 mm², and GDR/RESE run 36 mm | EMI while the panel refreshes | After a pre-scan: a 1 µF/50 V capacitor at `D5`, and GDR/RESE routed as a pair |
+| L-16 | Tact-switch frames are floating, and the button lines have no TVS | ESD at the buttons | Tie the frame pads to GND (footprint and schematic) |
+| L-17 | Some DNP option pairs short rails if both parts are fitted | Builder error | 3-pad solder jumpers |

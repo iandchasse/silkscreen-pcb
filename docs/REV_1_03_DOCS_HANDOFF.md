@@ -62,6 +62,10 @@ is the engineering hand-over; this note covers only the docs.
 - BOARD_FAILURES.md's meter-check row 4.
 - HARDWARE.md's header note has a temporary bridge sentence (section 3.1).
 
+The design files also fixed two notes after the independent review:
+- the back-silk touch-option note now says "unpopulate F4,R44,46,52";
+- the schematic's `R6` note now gives the 10k charge current.
+
 ## 3. Tasks by file
 
 ### 3.1 `docs/HARDWARE.md`
@@ -158,6 +162,25 @@ is the engineering hand-over; this note covers only the docs.
   - Mark case 1's "design gap" as addressed once 1.03 boards are built and tested, not before.
   - Case 2's "lift `L1`/`C10`" steps can point to the PTC millivolt method for 1.03 boards.
 - **`docs/REV_1_03_STATUS.md`:** tick the docs item in §9 and §11 when done.
+
+### 3.7 From the independent review
+
+These documentation items come from [TRIAGE.md](independent-review-2026-11-03/TRIAGE.md):
+
+- **M-4, README and HARDWARE.md §3.1:** "5 V USB-C chargers only". There is no input over-voltage protection, so a fixed
+  9/12 V supply kills the board.
+- **M-6, HARDWARE.md §8:** the alternate touch mapping removes `F4`, `R44`, `R46` and `R52`, and fits `R43`, `R45`, `R58`
+  and `R66`. Fit a PTC (MF-FSMF010X-2) on `R66`'s pads, not a 0 Ω link.
+- **L-6, HARDWARE.md §4 / README:** fit `SW6` (APEM MJTP1243) if you flash firmware that can turn off USB-Serial-JTAG.
+- **L-7, HARDWARE.md §11 and the `J6` pinout table:**
+  - accessories must not drive IO45 or IO46 during reset;
+  - pin 12 (P+, fused by `F2`) sits next to pin 11 (C−).
+- **L-13, HARDWARE.md §16:** washers or standoffs at the mounting holes at most Ø4.4 mm, or nylon.
+- **L-17, BOM.md and README:** list every DNP pair that must not be fitted together: `R73`/`R74`, `R66`/`R44`,
+  `R45`/`R46` and `R52`/`R58`.
+- **I-3, README:** an operating range of 0–50 °C, set by the panel.
+- **H-2, README cutting section:** pour-free areas now keep ground about 1 mm from P+ and 3V3 at the cut, both layers.
+  Keep the deburr, check and seal steps.
 
 ## 4. Production files (a separate job that README depends on)
 

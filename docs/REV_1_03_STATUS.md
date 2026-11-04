@@ -78,6 +78,19 @@ why, what is parked, how it was checked, and what to do next.
   - **Wording:** HARDWARE.md §3.1 and §16, and the README's surface finish.
   - **Not done:** B6 and the rest, recorded in [NEXT_REVISION.md §9](NEXT_REVISION.md#9-certification-readiness-items-for-later-recorded-2026-11-03).
   - **Checks:** DRC as before plus one starved thermal on a `J1` shell tab (front only; it is bonded on both layers), ERC unchanged. 15 teardrops removed, re-added later (section 10, step 9).
+- **Independent review** (2026-11-03), [independent-review-2026-11-03/](independent-review-2026-11-03/BOARD_REVIEW.md):
+  - **The review:** a block-by-block review, from the design files and datasheets only. No Critical findings; 2 High,
+    6 Medium.
+  - **The triage:** [TRIAGE.md](independent-review-2026-11-03/TRIAGE.md) re-rates every finding with this project's
+    context.
+  - **Four cheap fixes applied:**
+    - pour-free areas about 1 mm around P+ and 3V3 at the cut line, on both layers (H-2);
+    - the back-silk touch-option note now names `F4` instead of `R42` (M-6);
+    - the schematic `R6` note gives the 10k charge current (L-1);
+    - a second GND via at `U10` pin 4 (L-14).
+  - **Checks:** DRC and ERC identical to before; no track changed, so no teardrops to redo.
+  - **Filed:** firmware, bench and next-revision items in NEXT_REVISION §4, §6 and §10; documentation items in the
+    hand-off.
 - **DRC:** 0 errors; the 7 footprint-inherent ones now pass under footprint-scoped rules. 0 unconnected; parity clean. ERC unchanged (46).
 
 The board diff in git is about 7,000 lines because KiCad re-serialises the refilled GND pours. The structural diff is
@@ -311,6 +324,10 @@ soft-termination reading rests on an older catalog copy. Samsung's open-mode des
     - the 8 return vias;
     - `Rev 1.03 2026-11-03` on the back at (87.1, 138.8);
     - `J1`'s four shell tabs on GND in both pours, with `R1`/`C1` gone.
+11. Look over the independent-review fixes ([TRIAGE.md §4](independent-review-2026-11-03/TRIAGE.md#4-applied-on-2026-11-03)):
+    - the two pour-free rule areas at the cut line (x 86.2–88.6 and 98.85–102.45, y 60.8–63.1, both layers);
+    - the GND via at (48.76, 123.10) beside `U10` pin 4;
+    - the back-silk note at (91.7, 136.2), now "unpopulate F4,R44,46,52".
 
 ## 11. Decisions needed
 
@@ -321,6 +338,7 @@ soft-termination reading rests on an older catalog copy. Samsung's open-mode des
 Settled on 2026-11-03:
 - The revision is bumped to 1.03 and printed on the back silkscreen (certification review A2).
 - The certification review's cheap set is applied; B6 and the rest are recorded for later ([CERT_REVIEW_AUDIT.md §6](audit-2026-11-03/CERT_REVIEW_AUDIT.md#6-applied-on-2026-11-03)).
+- The independent review is triaged. Its four do-now fixes are applied, and the rest is filed in NEXT_REVISION §4, §6 and §10 ([TRIAGE.md](independent-review-2026-11-03/TRIAGE.md)).
 - N7 is placed on the board (section 6).
 - N10 is left as is (section 7).
 - Soft-termination MLCCs are skipped (section 8).

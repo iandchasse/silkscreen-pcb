@@ -12142,7 +12142,7 @@
 		)
 		(uuid "cccaf562-ae7e-437e-bb7d-0e4ea7e85a3e")
 	)
-	(text "R6 4.7kohm -> ~234mA charge rate"
+	(text "R6 10kohm -> ~110-130mA charge rate"
 		(exclude_from_sim no)
 		(at 149.098 123.952 0)
 		(effects
