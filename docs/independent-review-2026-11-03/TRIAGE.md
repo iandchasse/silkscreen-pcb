@@ -4,7 +4,7 @@
 and datasheets only, by design. This triage adds the context the reviewer did not have: the earlier audits, the
 owner's decisions, the case 1 failure history and the bench plan. Each finding gets my severity, a proposed fix, its
 difficulty, and a verdict on whether it is worth addressing. **Status:** the four do-now fixes are applied, and the rest
-is filed (section 4).
+is filed (section 4). Section 5 updates the status on 2026-11-04, after the BQ21040 charger swap closed H-1.
 
 **Scales.**
 
@@ -53,7 +53,7 @@ is filed (section 4).
 | L-2 | Low | Low | Coincident-peak and trip measurement | 1 | 10 | Bench (already planned) |
 | L-3 | Low | Low | Weak source and long cable on the bench. If the mux chatters, add hysteresis (resistor from `ST` to `PR1`) or lower the threshold with `R38` | 1 → 2 | 10 → 8 | Bench first |
 | L-11 | Low | Low | Measure the 3V3 dip on `SD_ACTIVATE`. If it exceeds 0.2 V, change `R78` from 1 kΩ to 10–22 kΩ | 1 | 10 | Bench, then a value change |
-| L-8 | Low | Low | Reverse-polarity bench test, then decide on `Q3` (remove or flip) | 2 | 8 | Bench; next revision |
+| L-8 | Low | Low | Reverse-polarity bench test, then decide on `Q3`. **Decided 2026-11-04: keep `Q3`/`Q8` as they are**; the owner's boards start and run fine (section 5.1) | 2 | 8 | Accept |
 | L-6 | Low | Low | Document: fit `SW6` if you flash firmware that can turn off USB-JTAG | 1 | 10 | Document |
 | L-7 | Low | Low | Header rules: don't drive IO45/IO46 at reset; pin 12 (P+) sits next to C− | 1 | 10 | Document |
 | L-13 | Low | Low | Washer or standoff of at most Ø4.4 mm, or nylon | 1 | 10 | Document (HARDWARE.md §16 half says it) |
@@ -197,7 +197,9 @@ what it sees. Low; bench plus firmware.
 - **Fix:** `R36` 47k and `R35` 27k recentre it, but firmware thresholds must change with them (difficulty 2).
 - **Verdict:** do it only together with a firmware update. Until then, check the raw readings on a board.
 
-**L-8: `Q3` adds resistance but no protection.**
+**L-8: `Q3` adds resistance but no protection.** *Corrected on 2026-11-04 (section 5): `Q3` and `Q8` were added for
+different jobs, and the "flip it" option below does not work. Decided the same day: no change, because the owner's
+boards start and run fine (section 5.1).*
 
 - **Reviewer's analysis:** `Q8` alone blocks a reversed cell, and `Q3`'s body diode conducts in the fault direction.
 - **Why not act now:** reverse polarity is safety-relevant and the original intent of `Q3` is not recorded, so change
@@ -373,3 +375,120 @@ The owner approved the plan in section 3. It was applied on a scratch copy with 
   - H-1's new constraints in §9's C1 row;
   - the next-revision items in a new §10.
 - **REV_1_03_DOCS_HANDOFF.md:** the documentation items, in §3.7.
+
+## 5. Status on 2026-11-04
+
+The owner adopted the BQ21040 charger in place of the TP4056 ([REV_1_03_STATUS §14](../REV_1_03_STATUS.md#14-bq21040-charger-2026-11-04)).
+This table records what that change and the discussion around it moved. Every finding not listed stands as in sections 1–4.
+
+| ID | Now | What is left |
+|---|---|---|
+| **H-1** | **Done in 1.03.** `U11` is a BQ21040 with a 10 kΩ NTC (`TH1`) on `TS`: charging only between about 0 and 41 °C at `TH1`, a 30 min pre-charge and a 10 h fast-charge timer, and an open NTC stops charging. The timer is in the chip, so no firmware override is needed for it | `TH1` measures the board, not the cell: the spots near the cell needed a 66 mm `TS` route. Log both through a charge for a lab, or move the NTC to the cell in a later revision (NEXT_REVISION §9, C1) |
+| **M-2** | Re-rated **Low.** The owner sees no trouble with Wi-Fi during SD writes and refreshes. The 355 mA in the budget is continuous TX at 21 dBm; real TX is bursty, and the margin only runs out near an empty cell | F8 stands. One bench check: feed `J5` at 3.4 V through 0.2 Ω and run the worst overlap. TLV757P only if that shows the LDO limiting |
+| **M-4** | Narrower. `U11` now survives a 9–12 V source: rated 30 V, it stops charging above 6.6 V | `U2` (6.0 V absolute maximum) and everything behind it are still exposed. Keep "5 V USB-C chargers only"; the OVP switch only has to protect `U2` now |
+| **M-5** | Unchanged by the swap: the detector now holds `TS` low instead of `CE`, by the same mechanism. HARDWARE.md §3.3 already documents the limitation, with handling guidance ("Charger enable limitation") | Bench with the packs actually used. If they don't wake, an RC pulse that holds `Q2` off for a few seconds after plug-in (next revision) |
+| L-1 | Superseded. With the BQ21040 the current is 540 / `R6`, so `R6` is 4.7 kΩ again for the same 105–125 mA. The schematic note says so | — |
+| L-4 | TI specifies the BQ21040's pins high-impedance when unpowered, so the on-battery level should be the designed 2.20 V. F11 is rewritten for the new decode: the 0.55 V "complete" level is gone, and firmware uses `P+` to tell "full" from "stopped" | Read the level once on a 1.03 board |
+| L-9 | Still accepted. With the cell pulled while charging, the BQ21040's battery detection cycles `J5` between 3.8 and 4.2 V, still limited to 105–125 mA | — |
+| L-12 | The gap is now at least 20 mV: the BQ21040 regulates at 4.23 V at most | — |
+| L-8 | **Accepted as is (owner, 2026-11-04):** the boards start and run fine. The research behind it is in [section 5.1](#51-l-8-what-q3-and-q8-do). `Q8` is meant as the DW01A's load switch from the EEVblog thread its note links, but it is fitted the other way round to that thread's circuit, so start-up relies on `C34` (0.1 µF in 1.03, 2.2 nF on the working Rev 1.0 boards). By the same orientation `Q8` is what blocks a reversed cell. "Flip `Q3`" is withdrawn | None. If a board ever shuts off on battery after an overload and stays off, plugging in USB resets the DW01A (documented in the hand-off) |
+
+**Still open after this update:**
+
+- **Bench:**
+  - M-1: the light at 100 % for 30 min;
+  - M-2: the check above;
+  - M-3: range and throughput;
+  - M-5: pack wake;
+  - L-2: the DW01A trip margin;
+  - L-3: mux chatter;
+  - L-4: the on-battery level;
+  - L-11: the SD switch-on dip;
+  - the charger checks on the first 1.03 boards (NEXT_REVISION §6).
+- **Firmware:** F6 (M-1), F8 (M-2), F9 (L-18), F10 (I-6), F11 (L-4), F12 (L-5).
+- **Next revision:** M-4, M-5, L-5 (with F12), L-15 (after a pre-scan), L-16 and L-17; M-2's hardware only on data.
+- **Documentation:** the hand-off's §3.7 items, and its §3.8 for the charger.
+
+
+### 5.1 L-8: what `Q3` and `Q8` do
+
+Researched on 2026-11-04, after the owner pointed out that the two parts were added for different reasons.
+
+**Decision (owner, 2026-11-04): no change.** The owner's boards start and run fine, so `Q3`, `Q8`, `R56` and `R83` stay
+as they are. The analysis and the change below are kept for reference only.
+
+**What each part is for.**
+
+- **`Q3`:** reverse-polarity protection. The schematic labels it "Reverse polarity protection".
+- **`Q8`:** the DW01A's load switch. Its schematic note links the EEVblog thread
+  ["Pain and suffering getting the DW01 and 8205A protection circuit work right"](https://www.eevblog.com/forum/projects/pain-and-suffering-getting-the-dw01-and-8205a-protection-circuit-work-right/).
+  Post #20 there proposes a P-FET on the battery's positive side with its gate on circuit ground, so the load stays off
+  until the DW01's FETs connect ground. Its example circuit ([imgur MrKNLnB](https://imgur.com/MrKNLnB.png)) wires a BSS84
+  with the **source on the battery**, the **drain on VCC** and the gate on circuit ground. The DW01 is powered straight
+  from the cell.
+
+**Why a DW01 built into a board needs that switch** (Fortune DW01-G Rev 1.1, §11; the fitted PUOLOP DW01A's sheet gives
+no description, but its timing diagram 3 shows the same release):
+
+- **Normal condition:** both FETs are on only while `CS` sits between the charger-detect level (about −0.7 V) and 0.15 V.
+- **Over-current recovery:** the trip *"returns to the normal mode when the load is released or the impedance between
+  BATT+ and BATT− is larger than 500 kΩ"*.
+- **First connection:** *"When a battery is connected to DW01-G for the first time, it may not enter the normal
+  condition (dischargeable may not be enabled). In this case, short the CS and VSS pins or connect to a charger."*
+- **The cause on a board** (thread, post #20): until the FETs connect ground, the load pulls circuit ground up toward the
+  cell, `CS` reads that as over-current, and the board's own load is never "released". A switch that drops the load
+  while ground is open lets the DW01A reach, and return to, its normal condition. Then the switch turns on and current
+  flows.
+
+**As built, `Q8` is the other way round to that circuit.** Its source is on `P+` (the load) and its drain faces the
+battery through `R27`/`Q3`. A P-FET's body diode runs drain → source, so:
+
+- **Thread's orientation:** the diode blocks battery → load, and with the channel off the load really is disconnected.
+- **`Q8`'s orientation:** the diode conducts battery → load, so the load stays connected whether `Q8` is on or off. Its
+  channel only turns on once ground is already connected (it then removes the diode drop). The DW01A never sees its load
+  released.
+- **Side effect:** that same orientation is the textbook reverse-polarity P-FET (drain toward the battery, source to the
+  load, gate to ground). So `Q8`, not `Q3`, is what blocks a reversed cell, as DESIGN_REVIEW §4 found. It holds while
+  `P+` stays near ground; the charger-enable gate covers the USB case.
+- **`Q3`:** faces the way the thread's FET does, but its gate goes to `B−`, the cell's own negative. It is on whenever a
+  cell is in, so it does neither job.
+
+**What that means on this board.**
+
+- **Start-up without USB:** relies on `C34` alone. That is the thread's other fix, a capacitor from `CS` to `BAT−`;
+  `C34` is 0.1 µF since N8, against the thread's 1–2 nF minimum. The thread found it less reliable than the FET:
+  *"sometimes I would have to pop the battery in, then out, then in again"*. BENCH_THEORY §3.4 checked only the inrush
+  spike.
+- **After an over-current trip on battery:** the board should stay off until USB is plugged in (charger detection), or
+  until the cell is re-plugged. Its standby load (about 50–80 µA, roughly 45–75 kΩ) is far below 500 kΩ, and the
+  regulator's 25 µA alone is about 150 kΩ. This raises the stakes of L-2: a coincident peak that trips the DW01A leaves
+  the device dead until it is plugged in.
+- **The DW01A's supply:** it comes from `P+` through `R83`. At insertion it sees the cell minus `Q8`'s diode drop until
+  ground connects.
+
+**For reference, not planned: how the DW01A would get its load switch.** The smallest change uses the parts already
+fitted:
+
+- **Tie `Q3`'s gate to circuit ground:** move `R56`'s lower end from `B−` to GND. `Q3` already has its source on the
+  battery, so it becomes exactly the thread's FET. `Q8` keeps blocking reversed cells.
+- **Power `U5` from the battery side:** move `R83` from `P+` to `B+`, as the thread's circuit and the datasheet's typical
+  application do. Otherwise switching the load off would also switch the DW01A off.
+- **Trade-offs to test before adopting it:**
+  - after a trip the board retries automatically, so a persistent fault gets repeated short-circuit pulses instead of
+    staying off;
+  - `U5` sits across a reversed cell through `R83`, about 30 mA into its substrate diode, which `Q8` shields today when
+    USB is absent.
+- **Bench:** the reverse-polarity cases (with an emulator), insertion without USB, trip and recovery on battery, and
+  charging an over-discharged cell.
+- **Other options:**
+  - turn `Q8` around and make `Q3` a detector-driven reverse-polarity switch (DESIGN_REVIEW §4), a bigger change;
+  - keep the board as it is;
+  - remove `Q3`, which only saves its 50–70 mΩ.
+
+**Optional checks, only if the behaviour ever matters (Rev 1.0 boards have `C34` = 2.2 nF):**
+
+1. **Insertion:** answered in practice. The owner's boards start every time a cell is connected.
+2. **Trip and recovery:** put a current-limited bench supply (about 3.8 V, limit about 3 A) in place of the cell. Load
+   `P+` to GND with about 1 Ω (a 5 W part) for a fraction of a second. With the path's 0.3–0.5 Ω that is about 2.5 A,
+   above the 0.83–1.68 A trip window. Then remove the load and check whether the board comes back by itself or only when
+   USB is plugged in.

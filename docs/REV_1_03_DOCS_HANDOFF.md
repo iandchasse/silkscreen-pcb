@@ -2,6 +2,7 @@
 
 **For:** whoever updates the user-facing documentation and images for Rev 1.03, an agent or a person.
 **Written:** 2026-11-03, with the commit that brought the `1.03` design files up to date. **Branch:** `1.03`.
+**Updated:** 2026-11-04 for the BQ21040 charger (section 3.8).
 
 The Rev 1.03 design work is finished and checked, but the user docs and images still describe Rev 1.02. This note
 lists what changed, what to update in each file, and how to check the result. [REV_1_03_STATUS.md](REV_1_03_STATUS.md)
@@ -47,11 +48,12 @@ is the engineering hand-over; this note covers only the docs.
 | N6 | The panel's logic supply (`J2` pins 15/16, `C22`) is on `EINK_3V3`, behind `F6` | as above |
 | N7 | DW01A current sense: `R85` ∥ `R86`, two 0.1 Ω 1206 resistors (`C25334`, JLC Basic), 50 mΩ from `Q1` pin 3 (`/B-_SENSE`) to GND. About 62 mΩ with the copper, so the trip window is 0.83–1.68 A with JLC's PUOLOP DW01A | [REV_1_03_STATUS §6](REV_1_03_STATUS.md#6-n7-and-n8-schematic-and-board), [BENCH_THEORY §3.2](audit-2026-11-03/BENCH_THEORY.md#32-the-sense-path-as-placed) |
 | N8 | `C34`: 2.2 nF → 0.1 µF | as above |
-| N9 | `R6`: 4.7k → 10k. The charge current drops from about 0.23–0.26 A to about 0.11–0.13 A, and `U11`'s heat halves | [NEXT_REVISION N9](NEXT_REVISION.md#n9-r6-from-47k-to-10k) |
+| N9 | `R6`: 4.7k → 10k. The charge current drops from about 0.23–0.26 A to about 0.11–0.13 A, and `U11`'s heat halves. **Superseded on 2026-11-04:** with the BQ21040, `R6` is 4.7k again for the same 105–125 mA (see "Charger" below) | [NEXT_REVISION N9](NEXT_REVISION.md#n9-r6-from-47k-to-10k) |
 | N10 | Closed: `C36`/`C37` stay where they are | [REV_1_03_STATUS §7](REV_1_03_STATUS.md#7-n10-closed-left-as-is) |
 | N11 | Dropped: there are no front test pads (no TP6–TP18) | — |
 | `U10` footprint | TI's DRL0006A example land, `U_DRL0006A_6L_TI-LAND`, in `KiCad/9.0/3rdparty/TPS923610DRLR/KiCADv6/footprints.pretty/` | [TRACE_AUDIT §1c](audit-2026-11-03/TRACE_AUDIT.md#1c-u10-on-tis-example-land-pattern) |
 | USB-C shell | Tied straight to GND: `J1`'s four shell tabs sit in both GND pours. `R1` and `C1`, formerly 1 MΩ ∥ 1 nF, are gone | [CERT_REVIEW_AUDIT §6](audit-2026-11-03/CERT_REVIEW_AUDIT.md#6-applied-on-2026-11-03) |
+| Charger (2026-11-04) | `U11` is TI's BQ21040 (SOT-23-6) in place of the TP4056, with a 10 kΩ NTC (`TH1`, 0603, on the board at (100.6, 93.0)) on `TS`: charging only between about 0 and 41 °C at `TH1`, 30 min pre-charge and 10 h fast-charge timers, 6.6 V input OVP. `Q2` (now a BSS138) gates `TS` instead of `CE`; `R6` 4.7k, `R82` 200k, `R71` removed. `USB_STAT` loses its 0.55 V "complete" level | [REV_1_03_STATUS §14](REV_1_03_STATUS.md#14-bq21040-charger-2026-11-04), section 3.8 |
 | Revision | Title blocks read Rev 1.03 / 2026-11-03. The back silkscreen prints "Rev 1.03 2026-11-03" at (87.1, 138.8), from the title block | as above |
 | Layout | Trace-audit fixes, `F3`'s pour keep-out, mounting-hole and edge clearances, stitching and return vias, the `C33`/`R7` swap at `U4`, teardrops (862), and reference designators (uniform 0.5 mm, 67 moved, `F5`/`F6` shown) | [TRACE_AUDIT §1–1f](audit-2026-11-03/TRACE_AUDIT.md), CERT_REVIEW_AUDIT §6 |
 | DRC rules | New `silkscreen_pcb.kicad_dru`: pour pull-back from the switch nodes and high-voltage nets, plus footprint-scoped rules. `J1`'s peg holes and `J3`'s pitch now pass under these rules instead of project-file exclusions | TRACE_AUDIT §1, §1b, §1c |
@@ -73,8 +75,9 @@ The design files also fixed two notes after the independent review:
 - **Header note** (around line 31):
   - Make it describe Rev 1.03.
   - Fold the 1.0/1.01/1.02 differences into a short revision history, and add 1.02 → 1.03 from section 2.
+    [CHANGELOG.md](CHANGELOG.md) has the full list from the Rev 1.0 order.
   - Drop the "catches up in the 1.03 documentation pass" bridge sentence.
-- **§3.2:** `R6` = 10k and the new charge current (N9), and anything derived from it (charge time, `U11` heat).
+- **§3.2:** rewritten for the BQ21040 (section 3.8). N9's 10k no longer applies: `R6` is 4.7k again.
 - **§3.3:**
   - The sense pair `R85` ∥ `R86`, `C34` = 0.1 µF and the trip window.
   - The probe point for the sense voltage is `R85` pad 1, about 54 mV per amp across `R85`. N11's TP7 was dropped.
@@ -90,7 +93,7 @@ The design files also fixed two notes after the independent review:
   - Re-check the mounting-hole notes.
   - Update "Things that look like mistakes and are not": the `.kicad_dru` rules, and the 6 starved thermals, including
     `J1`'s top-left shell tab on F.Cu.
-- **Search the whole file** for changed parts and values: `R42`, `R1`, `C1`, `4.7k`, 2.2 nF next to `C34`, `166`, `185`,
+- **Search the whole file** for changed parts and values: `R42`, `R1`, `C1`, `TP4056`, 2.2 nF next to `C34`, `166`, `185`,
   `1.02`.
 - **NEXT_REVISION §5 is out of date in three places.** It asks for:
   - a test-pad table, which is void because N11 was dropped;
@@ -108,10 +111,12 @@ The design files also fixed two notes after the independent review:
     alternate.
   - New `R85, R86`: 0.1 Ω 1206, RL1206FR-070R1L, `C25334`, Basic.
   - `C34` leaves the 2.2n line and joins the 0.1u `C14663` line.
-  - `R6` joins the 10k `C25804` line, and the 4.7k line (`C23162`) goes.
+  - `R6` stays on its 4.7k line (`C23162`), as in Rev 1.02: the charger swap undid N9's move to 10k.
   - `R42` leaves the 0 Ω line, `R1` leaves the 1M line, and the 1n `C1` line goes.
+  - The charger's lines: section 3.8.
 - **Extended parts and fees:** re-derive them. NEXT_REVISION §2 says "two new Extended parts" (+$6 per order), but N7
-  ended up with a Basic part, so the PTC is probably the only new Extended type. Check `part_fields.csv` against JLC.
+  ended up with a Basic part, so the PTC is probably the only new Extended type from N1–N9. The charger swap adds two
+  more (`U11` and `TH1`) and drops the TP4056, a JLC Preferred part. Check `part_fields.csv` against JLC.
 - **The hand-build CSV:** the same changes, with DigiKey part numbers.
 
 ### 3.3 `README.md`
@@ -181,6 +186,79 @@ These documentation items come from [TRIAGE.md](independent-review-2026-11-03/TR
 - **I-3, README:** an operating range of 0–50 °C, set by the panel.
 - **H-2, README cutting section:** pour-free areas now keep ground about 1 mm from P+ and 3V3 at the cut, both layers.
   Keep the deburr, check and seal steps.
+- **L-8, HARDWARE.md §3.3** ("Reverse-polarity intent: `Q3` + `Q8`"): say what each part is for and what it does as
+  built ([TRIAGE §5.1](independent-review-2026-11-03/TRIAGE.md#51-l-8-what-q3-and-q8-do)). The owner keeps the circuit as
+  it is (2026-11-04), so this is description, not a change.
+  - `Q8` is the DW01A's load switch from the EEVblog thread, fitted the other way round to that thread's circuit. The
+    DW01A's start-up relies on `C34`, which works on the owner's boards.
+  - By the same orientation, `Q8` is the part that blocks a reversed cell. `Q3`'s body diode faces into `B+`, so it
+    doesn't.
+  - User note for HARDWARE.md and the README troubleshooting text: if the board ever shuts off on battery after an
+    overload and stays off, plugging in USB resets the battery protection.
+
+### 3.8 From the BQ21040 charger swap (2026-11-04)
+
+`U11` is now TI's BQ21040 with an NTC; [REV_1_03_STATUS §14](REV_1_03_STATUS.md#14-bq21040-charger-2026-11-04) has the
+numbers and their sources (TI SLUSCE2D). The schematic's own notes are already updated.
+
+- **HARDWARE.md §3.1:**
+  - `C2` is "the charger's input capacitor", no longer the TP4056's.
+  - The hot-plug paragraph's "the TP4056's `VCC` at 7.97 V against its 8 V limit" no longer applies: the BQ21040 is rated
+    30 V and stops charging above 6.6 V. `U2`'s 6.0 V limit is still the reason for `R84`.
+  - M-4 (section 3.7): the charger now survives a 9–12 V source, but `U2` and what it feeds do not, so "5 V USB-C
+    chargers only" stays.
+- **HARDWARE.md §3.2,** rewrite for the BQ21040:
+  - pins: `TS` (1), `OUT` (2) to `P+`, `CHG` (3) to `CHRG` and `R67`, `ISET` (4) to `R6`, GND (5), `VIN` (6) from
+    `USB_VBUS`;
+  - `R6` = 4.7k: I = 540 / `R6`, 105–125 mA, about 5 h for 500 mAh; pre-charge at 20 % below 2.5 V; termination at
+    10 %;
+  - regulation 4.2 V ±1 % (4.16–4.23 V); top-ups start below 4.04–4.16 V;
+  - timers: 30 min pre-charge and 10 h fast charge, counting at half speed in thermal regulation or input DPM. Above
+    about 1000 mAh a charge may not finish inside 10 h at 115 mA; `R6` = 3.9k (about 140 mA) restores the margin;
+  - input: rated 30 V, OVP at 6.6 V, input DPM at 4.24–4.46 V, UVLO 3.15–3.45 V;
+  - `TS` with `TH1` and `R82`: the window (about 0–41 °C at `TH1`), the fail-safe for an open NTC, where `TH1` sits
+    and why;
+  - heat: about 0.28 W worst case, a 37 °C rise;
+  - replace the pin table and the "`TEMP` grounded disables cell-temperature monitoring" warning.
+- **HARDWARE.md §3.3:** the detector now drives `TS`, not `CE`. `Q2` is a BSS138 N-FET (gate `/DET_NODE`, drain `TS`,
+  source GND), and `R82` is 200k on `TS`. Update the mitigation paragraph ("the TP4056 `CE` pin is driven high only
+  by…"), its parts list (`Q2` AO3401A → BSS138) and the "Charger enable limitation" note: same mechanism, now through
+  `TS`.
+- **HARDWARE.md §3.7:**
+  - `R71` and `STDBY` are gone, and with them the 0.55 V and 0.51 V rows.
+  - New states: 3.30 V with `CHG` off, 2.20 V on battery, 1.11 V charging, 0.95 V charging on a weak source.
+  - Explain that `CHG` marks only the first charge after plug-in or cell insertion, and how firmware uses `P+` for the
+    3.30 V cases.
+  - Replace the no-battery-blink paragraph: a cell pulled with USB in now reads a steady 3.3 V, with `P+` cycling
+    3.8–4.2 V.
+  - Drop the caution about the two lowest levels being too close to separate.
+- **HARDWARE.md §13.1:** the `USB_STAT` bullets, as in NEXT_REVISION F11. Remove the 0.35–0.70 V "complete" window and the
+  blink caution; add the `P+` decode.
+- **HARDWARE.md §16:**
+  - the sleep-budget row for the ladder ("the max assumes the unpowered TP4056 status pins clamp"): TI specifies the
+    BQ21040's pins high-impedance when unpowered (§8.3.1);
+  - `U11` draws at most 1 µA from the cell when unpowered;
+  - recount the parts table (`R71` out, an NTC in).
+- **Search HARDWARE.md and README.md** for `TP4056`, `STDBY`, `CE`, `PROG`, `TEMP`, `ESOP`, `R71`, `234 mA`, `0.25 A`,
+  `0.23–0.25 A`, and 10k next to `R6`.
+- **README:** the charger's name; about 115 mA and 5 h for 500 mAh; charging between about 0 and 41 °C, measured on the
+  board.
+- **BOM.md and `BOM_handbuild_digikey.csv`:**
+  - `U11`: BQ21040DBVR (`C202311`, Extended); drop the "TP4056 Preferred" note;
+  - new `TH1`: Murata NCP18XH103F03RB (`C13564`, Extended);
+  - `R6` on its 4.7k line (`C23162`);
+  - `R82` on the 200k line (`C25811`) that `R71` used;
+  - `Q2` on the BSS138 line (`C7420339`);
+  - `R71` gone.
+  - The population stays 169 + 11 + 8 = 188.
+  - Re-derive the cost model. The charging block came to about +$0.20 per board at 500 boards, +$0.30 at 100, +$0.45 at
+    30 and +$1.15 at 5, Extended fees included.
+- **Images:**
+  - `04-charger`: `U11`, `R6`, `TH1` and the notes;
+  - `17-usb-status`: no `R71`, the new note;
+  - whichever block image shows `Q2`/`R82` (the charge-enable gate);
+  - `full-capture.png`;
+  - the bottom render.
 
 ## 4. Production files (a separate job that README depends on)
 
@@ -193,13 +271,15 @@ headless run of the plugin.
 2. **`production/jlc_bom.csv`, edited by hand:**
    - add the new PTC line;
    - take `R42` out;
-   - move `R6` into the 10k line;
+   - leave `R6` on its 4.7k line (the charger swap undid N9's move to 10k);
    - add the `R85`/`R86` line;
    - move `C34` into the 0.1u line;
    - take `R1` out of the 1M line;
-   - remove the `C1` line.
+   - remove the `C1` line;
+   - the charger: the `U11` line becomes BQ21040DBVR (`C202311`); add a `TH1` line (`C13564`); move `R82` from the 10k
+     line to the 200k line (`C25811`) and take `R71` out of that line; move `Q2` from the AO3401A line to the BSS138 line.
 3. **Other fabs:** run `python fabrication/make_fab_files.py`, which writes `production/other_fabs/`.
-4. **Placement:** check `F3`–`F6`, `R85`/`R86` and `U10` in JLC's placement preview, including the new footprint's rotation.
+4. **Placement:** check `F3`–`F6`, `R85`/`R86`, `U10`, `U11` (now SOT-23-6) and `TH1` in JLC's placement preview, including the new footprints' rotation.
 5. **Then** update README's file names and its "Rev 1.02" notes.
 
 ## 5. Checks before finishing
@@ -212,10 +292,10 @@ headless run of the plugin.
   - DRC: 0 errors. Warnings: 31 `silk_edge_clearance`, 10 `silk_over_copper`, 3 `silk_overlap` and 6 `starved_thermal`,
     plus 4 excluded `track_dangling` (the button stubs).
   - 0 unconnected; schematic parity clean.
-  - ERC: 46 warnings.
-  - 862 teardrops.
-- **Stale strings:** search the living docs for `1.02`, `166`, `185`, `R42`, `` `R1` ``, `` `C1` ``, `4.7k`, `C327066`,
-  `TP7` and `C23162`.
+  - ERC: 46 warnings at hand-off; 45 after the charger swap.
+  - 862 teardrops at hand-off; 860 after the charger swap (re-run on 2026-11-04). Read the count from the board.
+- **Stale strings:** search the living docs for `1.02`, `166`, `185`, `R42`, `` `R1` ``, `` `C1` ``, `C327066`, `TP7`,
+  `TP4056`, `STDBY`, `R71`, `234 mA` and `0.25 A`. `4.7k` and `C23162` are `R6`'s again, so they are no longer stale.
 - **Links and anchors:** every relative link and `#anchor` in `README.md`, `docs/*.md`, `docs/audit-*/*.md` and
   `fabrication/*.md` must resolve. This is the check used so far (GitHub-style anchors):
 

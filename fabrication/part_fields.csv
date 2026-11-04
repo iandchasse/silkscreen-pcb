@@ -28,12 +28,13 @@ J7,Micro_SD_Card,MEM2075-00-140-01-A,GCT,C393941,,SHOU HAN TF PUSH,"DIFFERENT PA
 L1,47uH,TYS5040470M-10,Laird,C206267,,Sunltech SLW5040S470MST,"equivalent (Sunltech SLW5040S470MST, same 5x5x4mm shielded case); changed 2026-09-18 from 22u VLS3012HBX-220M/C350879 to match SSD1677 reference design; footprint also changed to Inductor_SMD:L_APV_ANR5040"
 L2,10u,VLS252012HBX-100M-1,TDK,C88532,,TDK VLS252012HBX-100M-1,same part
 Q1,FS8205A,FS8205A,EVVOSEMI,C2830320,,TECH PUBLIC FS8205A,"clone (TECH PUBLIC); Manufacturer corrected 2026-09-18 from Fortune Semiconductor — Fortune's own FS8205A is TSSOP-8 only, their SOT-23-6 part is named FS8205 (no A); EVVOSEMI genuinely makes SOT-23-6 FS8205A, DigiKey PN 26220994"
-"Q2,Q3,Q7,Q8",AO3401A,AO3401A,Alpha & Omega Semiconductor,C15127,,Alpha & Omega Semicon AO3401A,same part
+"Q3,Q7,Q8",AO3401A,AO3401A,Alpha & Omega Semiconductor,C15127,,Alpha & Omega Semicon AO3401A,same part
 Q4,IRLML6346TRPBF,IRLML6346TRPBF,Infineon,C67276,,Infineon Technologies IRLML6346TRPBF,same part - do not accept a clone
-"Q5,Q6,Q9",BSS138,BSS138LT1G,onsemi,C7420339,,hongjiacheng BSS138,clone (hongjiacheng BSS138)
+"Q2,Q5,Q6,Q9",BSS138,BSS138LT1G,onsemi,C7420339,,hongjiacheng BSS138,clone (hongjiacheng BSS138)
 "R10,R12,R15,R39,R49,R50,R70,R79",1M,RC0603FR-071ML,Yageo,C22935,,UNI-ROYAL(Uniroyal Elec) 0603WAF1004T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1004T5E)
 "R2,R3",5.1k,RC0603FR-075K1L,Yageo,C23186,,UNI-ROYAL(Uniroyal Elec) 0603WAF5101T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF5101T5E)
-"R4,R5,R6,R7,R8,R9,R13,R28,R53,R54,R55,R56,R62,R82",10k,RC0603FR-0710KL,Yageo,C25804,,UNI-ROYAL(Uniroyal Elec) 0603WAF1002T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1002T5E)
+"R4,R5,R7,R8,R9,R13,R28,R53,R54,R55,R56,R62",10k,RC0603FR-0710KL,Yageo,C25804,,UNI-ROYAL(Uniroyal Elec) 0603WAF1002T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1002T5E)
+R6,4.7k,RC0603FR-074K7L,Yageo,C23162,,UNI-ROYAL(Uniroyal Elec) 0603WAF4701T5E,"equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF4701T5E), JLC Basic. BQ21040 ISET: 540 / 4.7k = 115 mA (105-125 mA)"
 R11,12k,RC0603FR-0712KL,Yageo,C22790,,UNI-ROYAL(Uniroyal Elec) 0603WAF1202T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1202T5E)
 R14,2.2,RC0603FR-072R2L,Yageo,C22939,,UNI-ROYAL(Uniroyal Elec) 0603WAF220KT5E,"equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF220KT5E, JLC Basic, 2.2 ohm 1% 0603, +/-400 ppm/C vs Yageo +/-200); LCSC code changed 2026-09-20 from C112307 (the Yageo part itself, JLC stock fell to 12). Value changed 2026-09-18 from 3 Yageo RC0603FR-073RL/C22356394 to match SSD1677 reference design alongside L1"
 "R16,R78",1k,RC0603FR-071KL,Yageo,C21190,,UNI-ROYAL(Uniroyal Elec) 0603WAF1001T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1001T5E)
@@ -56,7 +57,7 @@ R59,2k,RC0603FR-072KL,Yageo,C22975,,UNI-ROYAL(Uniroyal Elec) 0603WAF2001T5E,equi
 "R57,R80",10M,RC0603FR-0710ML,Yageo,C7250,,UNI-ROYAL(Uniroyal Elec) 0603WAF1005T5E,"equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1005T5E), JLC Basic. Q3 gate bleed raised from 1M 2026-09-21 to cut 3.3 uA of standing battery drain; R56 (10k) still sets the gate. R80 (Q9 gate divider, low side) raised from 1M in Rev 1.02 together with R79 (100k to 1M), same 1:10 ratio, to cut 3.0 uA of idle drain (docs/audit-2026-10-15/SCH-2_CHARGE_ENABLE.md section 8)"
 "R60,R61,R63,R64,R83",100,RC0603FR-07100RL,Yageo,C22775,,UNI-ROYAL(Uniroyal Elec) 0603WAF1000T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1000T5E)
 R67,510k,RC0603FR-07510KL,Yageo,C23192,,UNI-ROYAL(Uniroyal Elec) 0603WAF5103T5E,"equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF5103T5E), JLC Basic. USB_STAT ladder rescaled 2026-09-21 (was 56k)"
-R71,200k,RC0603FR-07200KL,Yageo,C25811,,UNI-ROYAL(Uniroyal Elec) 0603WAF2003T5E,"equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF2003T5E), JLC Basic. USB_STAT ladder rescaled 2026-09-21 (was 22k)"
+R82,200k,RC0603FR-07200KL,Yageo,C25811,,UNI-ROYAL(Uniroyal Elec) 0603WAF2003T5E,"equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF2003T5E), JLC Basic. BQ21040 TS pull-down: an open thermistor then reads cold (no charge) instead of entering the no-sensor mode (TI: 237k)"
 R72,10k,RC0603FR-0710KL,Yageo,C25804,yes,UNI-ROYAL(Uniroyal Elec) 0603WAF1002T5E,DNP option link; equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1002T5E)
 R84,1,RC0603FR-071RL,Yageo,C22936,,UNI-ROYAL(Uniroyal Elec) 0603WAF100KT5E,"equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF100KT5E), JLC Basic (JLC stock 256,298 on 2026-10-01). Added 2026-10-01 in Rev 1.01: 1 ohm in series with C2's ground leg, damps the USB hot-plug ringing of the cable inductance against C2"
 "R85,R86",0.1,RL1206FR-070R1L,Yageo,C25334,,UNI-ROYAL(Uniroyal Elec) 1206W4F100LT5E,"equivalent (UNI-ROYAL 1206W4F100LT5E, JLC Basic); two 0.1 ohm 1% 0.25 W 1206 in parallel = 50 mOhm DW01A over-current sense from Q1 pin 3 (B-_SENSE) to GND (docs/NEXT_REVISION.md N7). C34 = 0.1 uF goes with it (N8)"
@@ -69,7 +70,8 @@ U3,TLV75533PDBV,TLV75533PDBVR,Texas Instruments,C404027,,Texas Instruments TLV75
 U4,ESP32-S3-WROOM-1,ESP32-S3-WROOM-1-N16R8,Espressif Systems,C2913202,,Espressif Systems ESP32-S3-WROOM-1-N16R8,same part
 U5,DW01A,DW01A,Fortune Semiconductor,C351410,,PUOLOP DW01A,clone (PUOLOP)
 U10,TPS923610DRLR,TPS923610DRLR,Texas Instruments,C52919131,,Texas Instruments TPS923610DRLR,same part
-U11,TP4056-42-ESOP8,TP4056-42-ESOP8,NanJing Top Power (TOPPOWER),C16581,,TOPPOWER(Nanjing Extension Microelectronics) TP4056-42-ESOP8,same part (original maker)
+U11,BQ21040DBVR,BQ21040DBVR,Texas Instruments,C202311,,Texas Instruments BQ21040DBVR,"same part. Li-ion linear charger: NTC 0-45 C on TS, 10 h safety timer, 30 V input with 6.6 V OVP (replaces TP4056, 2026-11-04)"
 U12,74LVC1G04,"74LVC1G04GV,125",Nexperia,C53185133,,MDD(Microdiode Semiconductor) 74LVC1G04GV,clone (MDD)
 U13,DS3231MZ,DS3231MZ+TRL,Analog Devices,C107410,,Analog Devices Inc./Maxim Integrated DS3231MZ+TRL,same part
 U14,RV-8263-C7,RV-8263-C7-32.768KHZ-20PPM-TA-QA,Micro Crystal,C5137460,yes,Micro Crystal RV-8263-C7-32.768KHZ-20PPM-TA-QA,"same part; DNP alternative to U13 - fit ONE RTC or none (I2C 0x51 vs 0x68, no conflict). Custom symbol in KiCad/9.0/3rdparty/RV-8263-C7 (pin 3 = CLKOE, tied to GND). JLC stock thin (472 on 2026-09-21), Extended"
+TH1,10k,NCP18XH103F03RB,Murata Electronics,C13564,,muRata NCP18XH103F03RB,"same part. NTC 10k 1% B3380 0603, board-ambient sensor on the open right side, BQ21040 TS (charges 0-45 C); JLC Extended"

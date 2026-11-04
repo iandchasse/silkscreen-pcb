@@ -8,21 +8,24 @@ parity, ERC, netlist diff, Fabrication Toolkit dry run), and the designer has si
 (`R85`/`R86`, teardrops). Production files and docs are not regenerated; the docs pass is handed off in
 [REV_1_03_DOCS_HANDOFF.md](REV_1_03_DOCS_HANDOFF.md). The title blocks read Rev 1.03 (2026-11-03), and the back
 silkscreen prints it. At the 2026-11-03 commit, the board passes DRC with 0 errors (the known warnings only), 0
-unconnected and clean parity, ERC is at 46, and it has 862 teardrops.
+unconnected and clean parity, ERC is at 46, and it has 862 teardrops. On 2026-11-04 the TP4056 charger was replaced by
+TI's BQ21040 with an NTC ([section 14](#14-bq21040-charger-2026-11-04)): DRC is unchanged, ERC is at 45, and the
+teardrops were re-added the same day (860).
 
 This is the hand-over note. It covers what changed, where it deviates from [NEXT_REVISION.md](NEXT_REVISION.md) and
-why, what is parked, how it was checked, and what to do next.
+why, what is parked, how it was checked, and what to do next. The whole change list from the Rev 1.0 order to 1.03,
+with an order-readiness note, is in [CHANGELOG.md](CHANGELOG.md).
 
 ## 1. What is on this branch
 
 | File | Change |
 |---|---|
-| `silkscreen_pcb.kicad_sch` | `F3`, `F5`, `F6` added; `R42` became `F4`; `3V3` and `LDO_IN` labels split and renamed; `R6` = 10k. Later: `R1`/`C1` removed and `J1`'s shield tied to GND, title block 1.03 (certification review A1/A2) |
+| `silkscreen_pcb.kicad_sch` | `F3`, `F5`, `F6` added; `R42` became `F4`; `3V3` and `LDO_IN` labels split and renamed; `R6` = 10k. Later: `R1`/`C1` removed and `J1`'s shield tied to GND, title block 1.03 (certification review A1/A2). 2026-11-04: `U11` is a BQ21040 with the NTC `TH1`, `Q2` a BSS138, `R6` 4.7k, `R82` 200k, `R71` removed (section 14) |
 | `silkscreen_pcb.kicad_pcb` | footprints, nets and copper as in section 2; zones refilled |
 | `silkscreen_pcb.kicad_pro` | three Power net-class patterns for the new nets (`/LED_VIN`, `J6_3V3`, `EINK_3V3`); nothing else, the DRC exclusions are untouched |
 | `silkscreen_pcb.kicad_dru` | **new (2026-11-03):** custom DRC rules. GND pours at least 0.5 mm from the SW nets, and other nets' vias at least 0.4 mm from the two switch nodes ([TRACE_AUDIT.md §1](audit-2026-11-03/TRACE_AUDIT.md#1-changes-made-in-this-pass-u10-corner-case-1-follow-up)). Then pours 0.3 mm from the panel rails and 0.25 mm from the LED-cathode pads, and the `J3`/`J1` footprint rules ([§1b](audit-2026-11-03/TRACE_AUDIT.md#1b-free-fixes-applied-after-the-audit)). Then the `U10` pad-pitch rule ([§1c](audit-2026-11-03/TRACE_AUDIT.md#1c-u10-on-tis-example-land-pattern)) |
 | `KiCad/9.0/3rdparty/TPS923610DRLR/` | **new footprint (2026-11-03):** `footprints.pretty/U_DRL0006A_6L_TI-LAND.kicad_mod`, TI's DRL0006A example land for `U10`. The symbol library `2026-09-06_02-10-40.kicad_sym` adds it to `U10`'s footprint filter. The Ultra Librarian footprints are untouched ([§1c](audit-2026-11-03/TRACE_AUDIT.md#1c-u10-on-tis-example-land-pattern)) |
-| `fabrication/part_fields.csv` | one new PTC row; `R42` and `R6` moved to other rows. Later: `R1` and `C1` removed |
+| `fabrication/part_fields.csv` | one new PTC row; `R42` and `R6` moved to other rows. Later: `R1` and `C1` removed. 2026-11-04: the charger rows (section 14) |
 | `docs/REV_1_03_STATUS.md` | this file |
 
 **2026-11-03 additions on the working copy (uncommitted):**
@@ -91,7 +94,11 @@ why, what is parked, how it was checked, and what to do next.
   - **Checks:** DRC and ERC identical to before; no track changed, so no teardrops to redo.
   - **Filed:** firmware, bench and next-revision items in NEXT_REVISION §4, §6 and §10; documentation items in the
     hand-off.
-- **DRC:** 0 errors; the 7 footprint-inherent ones now pass under footprint-scoped rules. 0 unconnected; parity clean. ERC unchanged (46).
+- **BQ21040 charger** (2026-11-04, [section 14](#14-bq21040-charger-2026-11-04)): `U11` is TI's BQ21040 (SOT-23-6) in
+  place of the TP4056, with a 10 kΩ NTC (`TH1`) on its `TS` pin. That closes C1 / H-1: charging only between about 0
+  and 41 °C, plus 30 min pre-charge and 10 h fast-charge timers. `Q2`, now a BSS138, gates `TS` instead of `CE`. `R6`
+  4.7k, `R82` 200k, `R71` removed. DRC identical, ERC 45; teardrops re-added afterwards (860).
+- **DRC:** 0 errors; the 7 footprint-inherent ones now pass under footprint-scoped rules. 0 unconnected; parity clean. ERC 46, and 45 after the charger swap.
 
 The board diff in git is about 7,000 lines because KiCad re-serialises the refilled GND pours. The structural diff is
 small (section 5).
@@ -282,9 +289,10 @@ soft-termination reading rests on an older catalog copy. Samsung's open-mode des
 
 ## 9. Not done yet
 
+- **Teardrops after the charger swap:** done on 2026-11-04 (section 10, step 12); 860 now.
 - **Production files:** `production/` is still Rev 1.02. Regenerate with the Fabrication Toolkit after the layout is reviewed,
-  edit `production/jlc_bom.csv` by hand (new PTC group, `R42` out, `R6` into the 10k group, `R1` out of the 1M group, `C1`
-  out), check the new footprints in JLC's placement preview, and rebuild the layout and schematic PDFs.
+  edit `production/jlc_bom.csv` by hand (new PTC group, `R42` out, `R1` out of the 1M group, `C1` out, and the charger
+  lines of section 14), check the new footprints in JLC's placement preview, and rebuild the layout and schematic PDFs.
 - **Docs and images:** handed off. [REV_1_03_DOCS_HANDOFF.md](REV_1_03_DOCS_HANDOFF.md) lists every user-facing change since
   Rev 1.02, the task for each file (HARDWARE.md, README, BOM.md, THIRD_PARTY.md, the images and PDFs) and the checks.
   The certification audit's three wording fixes are done ([CERT_REVIEW_AUDIT.md §4](audit-2026-11-03/CERT_REVIEW_AUDIT.md#4-documentation-fixes-queued)):
@@ -294,7 +302,7 @@ soft-termination reading rests on an older catalog copy. Samsung's open-mode des
 - **Revision label:** both title blocks now read 1.03 / 2026-11-03, and the back silkscreen prints `Rev ${REVISION} ${ISSUE_DATE}`.
   The README, HARDWARE.md's header note and the `production/` file names still say 1.02 until the docs pass and the
   regenerated production files.
-- **Firmware items F3–F7** in NEXT_REVISION §4 are untouched.
+- **Firmware items F3–F7** in NEXT_REVISION §4 are untouched. F11 now describes the BQ21040's `USB_STAT` decode.
 - **Pre-order measurements** from NEXT_REVISION §6 (frontlight PTC bench test, sense-resistor trial, the coincident-peak
   measurement) have not been done. [audit-2026-11-03/BENCH_THEORY.md](audit-2026-11-03/BENCH_THEORY.md) predicts their
   results from the datasheets and a copper model of this board. Of them, the PTC test (on a 1.03 board) and the
@@ -328,12 +336,24 @@ soft-termination reading rests on an older catalog copy. Samsung's open-mode des
     - the two pour-free rule areas at the cut line (x 86.2–88.6 and 98.85–102.45, y 60.8–63.1, both layers);
     - the GND via at (48.76, 123.10) beside `U10` pin 4;
     - the back-silk note at (91.7, 136.2), now "unpopulate F4,R44,46,52".
+12. Look over the charger swap ([section 14](#14-bq21040-charger-2026-11-04)), then put the teardrops back:
+    - `U11` (SOT-23-6; pin 1, `TS`, at (83.15, 93.45)) and its four short routes;
+    - the `TS` run from `U11` past `R82` and `Q2` to `TH1` at (100.6, 93.0), which passes between `U11`'s pad rows and
+      between `F1`'s pads;
+    - the three new GND vias, at `U11` pin 5, `Q2` pin 2 and `TH1` pin 2;
+    - then re-run the teardrop command and refill.
+
+    **Done 2026-11-04:** the designer re-ran the teardrop command; the zones were then refilled (until a refill, new
+    teardrops are unclipped, and DRC shows about 145 clearance errors against neighbouring copper). The board has 860
+    teardrops: against `3c5f234`, 21 around the old charger parts went, 17 came on the new ones, and the L-14 GND via
+    beside `U10` gained two. The other 813 are unchanged.
 
 ## 11. Decisions needed
 
 - **Production files:** who regenerates them (section 9; [REV_1_03_DOCS_HANDOFF.md §4](REV_1_03_DOCS_HANDOFF.md#4-production-files-a-separate-job-that-readme-depends-on)). The docs pass is handed off.
-- **For later, recorded for reference:** the certification items not done in 1.03, including where the charge-temperature
-  NTC goes (C1) and how far to take the antenna clearance (B1) ([NEXT_REVISION.md §9](NEXT_REVISION.md#9-certification-readiness-items-for-later-recorded-2026-11-03)).
+- **For later, recorded for reference:** the certification items not done in 1.03, including how far to take the antenna
+  clearance (B1) ([NEXT_REVISION.md §9](NEXT_REVISION.md#9-certification-readiness-items-for-later-recorded-2026-11-03)).
+  The charge-temperature item C1 is done (section 14).
 
 Settled on 2026-11-03:
 - The revision is bumped to 1.03 and printed on the back silkscreen (certification review A2).
@@ -344,6 +364,10 @@ Settled on 2026-11-03:
 - Soft-termination MLCCs are skipped (section 8).
 - T3 and T18 are accepted as they are. T12 is already done: the board has a cut-out under the antenna. T5 and T9 are left as is ([TRACE_AUDIT.md §1e](audit-2026-11-03/TRACE_AUDIT.md#1e-owner-review-of-the-open-items-2026-11-03)).
 - T20 (`F3` keep-out), T17 (hole clearances) and T10 (right edge) are applied ([TRACE_AUDIT.md §1f](audit-2026-11-03/TRACE_AUDIT.md#1f-layout-fixes-applied-after-the-review-2026-11-03)).
+
+Settled on 2026-11-04:
+- The TP4056 is replaced by TI's BQ21040 with a board-mounted NTC (owner's choice of "option B" after a cost and
+  specification comparison; section 14). The NTC sits on the board as an ambient sensor, not at the cell.
 
 ## 12. How the edit was made
 
@@ -369,3 +393,118 @@ All scripts lived in a scratch folder and are not in the repo; the approach, if 
   audit's "case 2 = 3V3 rail" wording needs the same caveat.
 - NEXT_REVISION §3 N7 still describes the 68 mΩ part first. The chosen 50 mΩ pair is its "No extra Extended fee" bullet, and
   the `C327066` stock note is in section 6 here.
+
+## 14. BQ21040 charger (2026-11-04)
+
+**Why.** The independent review's H-1 and the certification audit's C1: the TP4056 ran with `TEMP` grounded, so nothing
+stopped charging in heat or cold, and it has no safety timer. The owner chose to replace it with TI's BQ21040 ("option B")
+rather than keep it and add an NTC divider ("option A"), after a cost and specification comparison. The swap was built on
+a scratch copy, reviewed by the owner in KiCad, and copied in with KiCad closed.
+
+**What the BQ21040 brings** (TI SLUSCE2D):
+
+- a 10 kΩ NTC input (`TS`) with fixed thresholds, nominally 0 °C and 45 °C;
+- a 30 min pre-charge timer and a 10 h fast-charge timer;
+- a 30 V input rating, with charging stopped above 6.6 V (OVP);
+- 4.2 V ±1 % regulation (4.16–4.23 V);
+- at most 1 µA from the cell into `OUT` while USB is absent (the TP4056: under 2 µA).
+
+It is a JLC Extended part (`C202311`). The charging block costs about $0.20 more per board at 500 boards, $0.30 at 100,
+$0.45 at 30 and $1.15 at 5, Extended fees included.
+
+**Pins that moved nets** (pin-to-net diff of the netlists exported from `3c5f234` and from this schematic):
+
+| Pins | From | To |
+|---|---|---|
+| `U11` (ESOP-8 → SOT-23-6) | 1 GND (`TEMP`), 2 `Net-(U11-PROG)`, 3 GND, 4 `USB_VBUS`, 5 `P+`, 6 `STDBY`, 7 `CHRG`, 8 `CE`, 9 GND (pad) | 1 `TS`, 2 `P+` (`OUT`), 3 `CHRG` (`CHG`), 4 `Net-(U11-ISET)`, 5 GND, 6 `USB_VBUS` (`VIN`) |
+| `Q2` pins 2, 3 | `USB_VBUS`, `CE` | GND, `TS` |
+| `R6` pin 1 | `Net-(U11-PROG)` | `Net-(U11-ISET)` |
+| `R82` pin 2 | `CE` | `TS` |
+| `TH1` | new | pin 1 `TS`, pin 2 GND |
+| `R71` | `STDBY` to `USB_STAT` | removed |
+
+That is all 17 pin changes. The `CE` and `STDBY` nets are gone. `Q2`'s gate stays on `/DET_NODE`, which `R81` still pulls
+up to `USB_VBUS`.
+
+**Parts** (`part_fields.csv`):
+
+- **`U11`:** BQ21040DBVR (TI, `C202311`) on `SOT-23-6_Handsoldering`, the footprint the board's other SOT-23-6 parts use.
+- **`TH1`:** 10 kΩ 1 % NTC, B3380 (Murata NCP18XH103F03RB, `C13564`, Extended), 0603 because the board has no 0402 parts.
+- **`R6`:** 4.7k (`C23162`, Basic). The current is K_ISET / `R6`, with K_ISET 490–590 AΩ: 104–126 mA, about 115 mA. That
+  is the current N9 set with the TP4056 and 10k, so N9's intent stands with a different value.
+- **`R82`:** 200k (`C25811`, Basic; the line `R71` used). It is the `TS` pull-down, below.
+- **`Q2`:** BSS138 (`C7420339`), on the `Q5`/`Q6`/`Q9` line. The AO3401A line keeps `Q3`, `Q7` and `Q8`.
+- **`R71`:** removed.
+- **Population:** unchanged at 188 references (169 fitted, 11 DNP, 8 bare copper): `R71` out, `TH1` in. Two more Extended
+  types (`U11` and `TH1`); the TP4056 was a JLC Preferred part.
+
+**How it works on this board.**
+
+- **Charge enable.** Pulling `TS` to near 0 V (below about 76 mV) disables the BQ21040. `Q2`, now an N-FET (gate
+  `/DET_NODE`, drain `TS`, source GND), holds `TS` low until `Q9` sees a correctly oriented cell. It replaces the `CE`
+  drive, so the reverse-polarity mitigation of HARDWARE.md §3.3 works as before, and so does its known limitation: a
+  pack in protection lockout reads 0 V and is not charged (M-5).
+- **Temperature.** `TS` biases `TH1` with 50 µA. With `R82` in parallel, charging runs between about 0 and 41 °C at
+  `TH1` (typical; −2 to +2 °C at the cold end and 38 to 44 °C at the hot end over the datasheet tolerances; TI's 0 °C and
+  45 °C are nominal for this kind of NTC). Charging resumes about 2 °C inside each limit.
+- **Fail-safe.** `R82` makes an open or missing `TH1` read as cold, so nothing charges. Without it, `TS` would float up
+  into TI's no-sensor mode (TTDM), which also turns off the timers and termination. It costs about 3 °C at the cold end,
+  the trade TI describes for its suggested 237 kΩ. 200 kΩ leaves more margin below the TTDM threshold: holding 1.525 V
+  across it takes 7.6 µA, more than the 4–6.5 µA the pin folds back to.
+- **Where `TH1` sits.** On the board at (100.6, 93.0), east of `F1`, as an ambient sensor. Spots at the battery bay's
+  edge would need a 66 mm `TS` route with four vias around the board's east side, and the `J5` area has no room for an
+  0603 plus its ground via. While charging, `TH1` reads an estimated 1–3 °C above the cell.
+- **Status output.** `CHG` (open drain) is low only during the charge that starts at USB plug-in, at cell insertion
+  (releasing `TS` counts) or when a flat cell enters pre-charge. Later top-ups, which start when the cell falls below
+  4.04–4.16 V, run with `CHG` off (SLUSCE2D §8.3.6, §8.4.10, Table 1). `CHG` also stays low if that first charge pauses for
+  temperature.
+  - **Plug-in at any charge level** shows as charging: every power-up starts a charge (TI Figure 7). On a full cell
+    that charge ends within about a minute, or a few minutes for a cell that has rested for hours (§8.4.11).
+  - **`USB_STAT`** now has three levels: 2.20 V on battery, 1.11 V charging (0.95 V when a weak source has pushed the
+    mux onto the battery), and 3.30 V with `CHG` off. The 0.55 V "complete" level went with `STDBY`.
+  - **Firmware** separates the 3.30 V cases with `P+` = 2 × `BAT_MONIT` (NEXT_REVISION F11). TI specifies all pins
+    high-impedance when USB is absent (§8.3.1), so the on-battery level should be the designed 2.20 V (L-4).
+  - **Cell pulled while USB is in:** the charger's own output keeps the detector released, as with the TP4056. Its
+    battery-detect routine then cycles `P+` between 4.2 V and 3.8 V in 25 ms steps, which `BAT_MONIT` averages to about
+    4.0 V.
+- **Input.** `C2` (10 µF) with its `R84` damper and `C25` are unchanged. TI asks for 1 µF at `VIN`; none was added,
+  because a plain ceramic there would undo the hot-plug tuning of `C2`/`R84`/`C25` (HARDWARE.md §3.1), and the 30 V-rated
+  BQ21040 does not need it. `U2`'s 6.0 V limit is still the reason for `R84`.
+- **Heat.** (5.25 − 3.0) V × 0.125 A ≈ 0.28 W at the start of a fast charge. At TI's 131 °C/W that is about a 37 °C rise,
+  far below the 125 °C regulation point.
+- **Timer and cell size.** At 115 mA a 500 mAh cell charges in about 5 h. A cell above about 1000 mAh may not finish
+  inside the 10 h timer; `R6` = 3.9k (about 140 mA) restores the margin.
+
+**Layout.** Scripted as in section 12: pcbnew for the edits, the grid router for the new copper.
+
+- **Placement:** `U11` at (84.10, 94.80), 270°, on B.Cu. `TS`, `OUT` and `CHG` are on its north row; `VIN`, GND and
+  `ISET` on its south row. `TH1` at (100.6, 93.0), 0°, on B.Cu.
+- **Removed:** the 34 tracks and vias of the old nets, and the 19 teardrops on the changed pads.
+- **New copper,** all on B.Cu:
+  - `TS`, about 21 mm with no vias: `U11` → `R82` → `Q2`'s drain, and a branch from that run to `TH1`. It passes
+    between `U11`'s pad rows and between `F1`'s pads.
+  - `OUT` → `C3` and `VIN` → the `USB_VBUS` copper at `C2`, both 0.3 mm. `ISET` → `R6`, and `CHG` → the existing `CHRG`
+    run to `R67`.
+  - `R81`'s `USB_VBUS` link, which used to run through `Q2`'s old source pad, is re-made around it.
+  - The `USB_STAT` junction at `R67`/`R17` keeps `R71`'s old track as a plain joint.
+  - Three GND vias, at `U11` pin 5, `Q2` pin 2 and `TH1` pin 2, each at least 0.2 mm outside its pad's mask opening.
+- **References:** `U11` and `TH1` on B.Silkscreen in the board's 0.5 mm style.
+
+**Checks** (on the files in the repo, KiCad 9.0.6):
+
+| Check | Result |
+|---|---|
+| DRC with parity | 0 errors. The warnings are identical to `3c5f234`'s: 31 `silk_edge_clearance`, 10 `silk_over_copper`, 3 `silk_overlap`, 6 `starved_thermal`, 4 excluded `track_dangling`. 0 unconnected; parity clean |
+| ERC | 45, was 46: the four-way junction at `R71`'s old node is gone |
+| Netlist | 188 components before and after; the pin-to-net diff is exactly the table above |
+| Part fields | `apply_part_fields.py` dry run: 180 parts matched, 0 to update |
+| Teardrops | 860, was 862: the designer re-ran the command after the swap. 21 around the old charger parts went, 17 came on the new ones, and the L-14 GND via beside `U10` gained two; zones refilled. DRC as above |
+| Renders | before/after crops of the charger area, `TH1`/`Q2` and the schematic, checked by eye |
+
+**Still to do:**
+
+- Bench on the first 1.03 boards (NEXT_REVISION §6): the charge current, the `TS` window, the `USB_STAT` levels, `TH1`
+  against the cell's temperature, and the hot-plug check.
+- Firmware: F11, the new `USB_STAT` decode.
+- Docs: [REV_1_03_DOCS_HANDOFF.md §3.8](REV_1_03_DOCS_HANDOFF.md#38-from-the-bq21040-charger-swap-2026-11-04). Production
+  files: §4 there.

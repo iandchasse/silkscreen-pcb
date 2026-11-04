@@ -187,6 +187,8 @@ Each heading below is a stable link target (for example `docs/NEXT_REVISION.md#n
 - **Change:** value only. The charge current drops from about 0.23–0.26 A to about 0.11–0.13 A, and `U11`'s heat halves.
 - **BOM:** `R6` joins the existing 10 kΩ line (`C25804`), and the 4.7 kΩ line (`C23162`) is removed.
 - **Docs:** update HARDWARE.md §3.2.
+- **Superseded in 1.03 (2026-11-04):** `U11` is now a BQ21040, whose current is 540 / `R6`. `R6` is 4.7 kΩ again
+  (`C23162`) and gives the same 105–125 mA ([REV_1_03_STATUS §14](REV_1_03_STATUS.md#14-bq21040-charger-2026-11-04)).
 
 ### N10: Move C36 and C37
 
@@ -258,7 +260,7 @@ R85,0.068,RL1206FR-070R068L,Yageo,C327066,,YAGEO RL1206FR-070R068L,"same part; D
 | **F8** | Don't overlap Wi-Fi TX bursts with SD writes or a panel refresh. Lower the Wi-Fi TX power, and keep Wi-Fi off below about 3.7 V on battery | Coincident peaks can exceed the 500 mA LDO and brown out 3V3 at mid to low charge (independent review M-2) |
 | **F9** | Put the touch controller (FT6336U) in hibernate before deep sleep | It is always powered: +220 µA in its power-on monitor mode against a 50 µA sleep budget (L-18) |
 | **F10** | Shut down at ≥ 3.3 V on battery, together with F7 | Protects cycle life, and delays a pack's own protection locking out in storage (I-6, M-5) |
-| **F11** | Decode `USB_STAT` from bench readings, including with VBUS absent | The battery-only level depends on how the unpowered TP4056's status pins behave (L-4) |
+| **F11** | Decode `USB_STAT` for the BQ21040 (Rev 1.03): 1.80–2.60 V on battery; 0.80–1.35 V charging. Above 2.6 V `CHG` is off: split it with `P+` = 2 × `BAT_MONIT`. About 4.0 V or more is full, near 0 V is no cell, and a cell present below about 4.0 V is a stopped charge (10 h timer, input above 6.6 V, or `TS` out of range). Confirm the levels on a board, including with VBUS absent | `CHG` marks only the charge started by plug-in or cell insertion, and the 0.55 V "complete" level went with `STDBY` ([REV_1_03_STATUS §14](REV_1_03_STATUS.md#14-bq21040-charger-2026-11-04)). TI specifies the pins high-impedance when unpowered, so the on-battery level should be 2.20 V (L-4) |
 | **F12** | If `R35`/`R36` change (section 10), move the ladder 2 thresholds with them | UP(2) sits at 2.877 V, at the edge of the ADC's calibrated range (L-5) |
 
 F8–F12 come from the independent review ([TRIAGE.md](independent-review-2026-11-03/TRIAGE.md)).
@@ -322,6 +324,13 @@ predicts each result from the datasheets and the board's copper, and says which 
 - The touch, `J6` accessory and SD all work through their PTCs.
 - The frontlight runs normally at each level and in blend mode.
 - Measure `EINK_3V3` current and ripple at `J2` pins 15/16 during a full refresh (the panel's logic supply now sits behind `F6`).
+- **Charger (`U11`, BQ21040, [REV_1_03_STATUS §14](REV_1_03_STATUS.md#14-bq21040-charger-2026-11-04)):**
+  - the charge current with a meter in series with the cell: 105–125 mA in the constant-current phase;
+  - `USB_STAT` at 1.11 V while the first charge runs and about 3.3 V once it ends, with `P+` then between 4.04 and 4.2 V;
+  - the `TS` window: warm `TH1` with hot air until charging stops (about 41 °C at `TH1`) and check it resumes as it cools
+    (about 39 °C); freeze spray for the cold end (about 0 °C); with `TH1` not fitted, nothing charges;
+  - log `TH1` and the cell's temperature through a full charge, the evidence C1 needs (§9);
+  - repeat the hot-plug check of HARDWARE.md §3.1: `VIN1` stays at or below 5.6 V.
 
 **From the independent review (2026-11-03;** [BOARD_REVIEW §7](independent-review-2026-11-03/BOARD_REVIEW.md#7-bench-tests-for-the-suspected-items) **has the set-ups):**
 
@@ -329,10 +338,11 @@ predicts each result from the datasheets and the board's copper, and says which 
   cut-off, then plug USB in. If it does not wake, the board needs a USB-time override of the cell detector (section 10).
 - **L-3, mux chatter:** feed a 4.75 V source through a long, thin cable with a 0.7 A load. Check whether the TPS2116
   toggles between inputs.
-- **L-4, `USB_STAT` with VBUS absent:** read the level firmware will see (F11).
+- **L-4, `USB_STAT` with VBUS absent:** read the level firmware will see (F11). Expect 2.20 V on a 1.03 board (the
+  BQ21040's pins are high-impedance when unpowered); on a Rev 1.0 board it depends on the TP4056.
 - **L-11, SD switch-on dip:** measure 3V3 at `C32` when `SD_ACTIVATE` powers the card. If it dips by more than 0.2 V, set
   `R78` to 10–22 kΩ.
-- **Reverse polarity:** run the review's §7.17 cases before deciding on `Q3` (section 10).
+- **L-8 (`Q3`/`Q8`):** no bench test needed. Decided 2026-11-04 to keep the circuit as it is, because the owner's boards start and run fine ([TRIAGE §5.1](independent-review-2026-11-03/TRIAGE.md#51-l-8-what-q3-and-q8-do)).
 
 **Process (any board, any revision):** after rework, wash off the flux. This matters most around `U10`/`L2`/`C9`, `J2` pins 18–24 and `J3`, where 17–40 V sits across 0.20–0.27 mm gaps ([TRACE_AUDIT.md §2.2](audit-2026-11-03/TRACE_AUDIT.md#22-spacing-against-voltage)).
 
@@ -373,11 +383,11 @@ See [DURABILITY_AUDIT §3.5](audit-2026-10-29/DURABILITY_AUDIT.md#35-already-pro
 
 From the audit of the external certification-readiness review, [CERT_REVIEW_AUDIT.md](audit-2026-11-03/CERT_REVIEW_AUDIT.md).
 The cheap set is on the `1.03` branch: A1, A2, B2, B5, B7's return vias, and the X2/X3/Z1 wording ([CERT_REVIEW_AUDIT §6](audit-2026-11-03/CERT_REVIEW_AUDIT.md#6-applied-on-2026-11-03)).
-The rest is recorded here for reference. None of it is decided.
+C1 followed on 2026-11-04 with the BQ21040 charger. The rest is recorded here for reference; none of it is decided.
 
 | ID | Item | Why it matters | What it takes | Details |
 |---|---|---|---|---|
-| C1 | NTC on the TP4056 `TEMP` pin, which is grounded today. The TP4056 also has no charge timer (independent review H-1) | **Needed before a safety evaluation.** IEC 62368-1 M.4.2 wants charging stopped when the cell is too hot, and portable equipment is tested beyond its rated ambient | A 5.6 kΩ / 120 kΩ divider plus a 10 kΩ NTC gives about 0–45 °C. Placement is the hard part. The only free on-board spot, (86.5, 61.5), is on the snap-off arm, above the cut line, so a cut board or the 3.68″ build would lose it. Use an NTC on leads or a 3-wire pack. Add a firmware-controlled charge-enable override for a charge timer; it also fixes M-5 (section 10). The NTC is a JLC Extended part (Z6). An off-board NTC that is not connected stops all charging (Z7) | [§3.6](audit-2026-11-03/CERT_REVIEW_AUDIT.md#36-c1-charge-temperature), [TRIAGE](independent-review-2026-11-03/TRIAGE.md) |
+| C1 | Charge temperature limit and charge timer (independent review H-1). **Done in 1.03 (2026-11-04):** `U11` is a BQ21040 with a 10 kΩ NTC (`TH1`) on `TS`, in place of the TP4056 with `TEMP` grounded | **Needed before a safety evaluation.** IEC 62368-1 M.4.2 wants charging stopped when the cell is too hot, and portable equipment is tested beyond its rated ambient | **Done:** charging runs between about 0 and 41 °C at `TH1` (−2…+2 °C and 38…44 °C over tolerances), with a 30 min pre-charge and a 10 h fast-charge timer, and an open NTC stops charging. **Left:** `TH1` sits on the board at (100.6, 93.0), not at the cell, because the spots near the cell needed a 66 mm `TS` route. For a lab, log the cell against `TH1` through a charge (§6), or move the NTC to the cell (leads or a 3-wire pack) in a later revision. The firmware charge-enable override this row used to ask for is no longer needed for the timer; M-5 still wants one (section 10) | [REV_1_03_STATUS §14](REV_1_03_STATUS.md#14-bq21040-charger-2026-11-04), [§3.6](audit-2026-11-03/CERT_REVIEW_AUDIT.md#36-c1-charge-temperature), [TRIAGE](independent-review-2026-11-03/TRIAGE.md) |
 | B1, Z3 | Antenna clearance | GND pour sits about 1 mm from the antenna's sides. Espressif, and KiCad 9's footprint for the module, keep 15 mm clear, which would flag 11 parts here | Step 1: clear the pour from the notch arms (contained). Step 2: move `SW5` and the frontlight block, a re-layout done with the enclosure | [§3.3](audit-2026-11-03/CERT_REVIEW_AUDIT.md#33-b1-and-z3-the-antenna-clearance) |
 | B3 | Frontlight boost 6.5–10 mm from the antenna | Possible Wi-Fi desense | Measure range and throughput with the light at full and off first. The fix is B1 step 2 | [§3.5](audit-2026-11-03/CERT_REVIEW_AUDIT.md#35-b3-b4-a4-not-for-103) |
 | B4 | Panel capacitors at their `J2` pins (now 5–17 mm away) | Closer to the reference circuit | No legal spots without moving parts (TRACE_AUDIT T5/T9). Check `EINK_3V3` ripple on the first boards (§6) | [§3.5](audit-2026-11-03/CERT_REVIEW_AUDIT.md#35-b3-b4-a4-not-for-103) |
@@ -403,16 +413,17 @@ The rest is recorded here for reference. None of it is decided.
 These come from the independent board review, [BOARD_REVIEW.md](independent-review-2026-11-03/BOARD_REVIEW.md), as
 triaged in [TRIAGE.md](independent-review-2026-11-03/TRIAGE.md).
 - **Already on the `1.03` branch:** the four cheap fixes (TRIAGE section 4).
-- **Covered elsewhere:** firmware items in §4 (F8–F12), bench items in §6, and H-1 under C1 in §9.
+- **Covered elsewhere:** firmware items in §4 (F8–F12), bench items in §6, and H-1, done in 1.03 with the BQ21040
+  (C1 in §9).
 
 The rest is recorded here for reference. None of it is decided.
 
 | ID | Item | Why it matters | What it takes |
 |---|---|---|---|
-| M-5 | The charger cannot wake a pack whose own protection has locked out: the cell detector sees about 0 V | After a week or two in storage the device can look dead, and USB does nothing | If the §6 bench check confirms it: force charge-enable for a few seconds after USB plug-in (an RC pulse), or the firmware-driven override from C1. `IO3`, today only on `J6`, could drive it if the header gives it up |
-| M-4 | No input over-voltage protection, and `CR1` sits ahead of `F1` | A non-compliant 9–12 V source kills `U2`/`U3`/`U10` and burns `CR1` | A 5 V OVP switch or eFuse (≥ 20 V tolerant, trip about 6 V) ahead of `U2`/`U11`. Until then, the docs say "5 V USB-C chargers only" |
+| M-5 | The charger cannot wake a pack whose own protection has locked out: the cell detector sees about 0 V | After a week or two in storage the device can look dead, and USB does nothing | If the §6 bench check confirms it: force the charger on for a few seconds after USB plug-in (an RC pulse that holds `Q2` off), or a firmware-driven override. `IO3`, today only on `J6`, could drive it if the header gives it up. The BQ21040 swap does not change the mechanism (the detector now holds `TS` low instead of `CE`), and HARDWARE.md §3.3 already documents the limitation, with handling guidance |
+| M-4 | No input over-voltage protection ahead of `U2`, and `CR1` sits ahead of `F1` | A non-compliant 9–12 V source kills `U2`/`U3`/`U10` and burns `CR1`. Since 2026-11-04 `U11` survives it: the BQ21040 is rated 30 V and stops charging above 6.6 V | A 5 V OVP switch or eFuse (≥ 20 V tolerant, trip about 6 V) ahead of `U2`. Until then, the docs say "5 V USB-C chargers only" |
 | M-2 (hardware) | 3V3 headroom under coincident peaks | Brown-outs at mid to low charge | Only if the §6 peak measurement shows the LDO limiting: TLV757P (1 A, same SOT-23-5; check the pin-out), remove `Q3` (L-8), widen the 0.25 mm battery tracks |
-| L-8 | `Q3` adds 50–70 mΩ and no protection; `Q8` alone blocks a reversed cell | Path resistance (M-2) | After the reverse-polarity bench test: remove `Q3` (0 Ω), or flip it for real redundancy |
+| L-8 | `Q3` and `Q8` in the battery path. `Q8` is the DW01A's load switch from the EEVblog thread, fitted the other way round to that thread's circuit; by that orientation it is what blocks a reversed cell | — | **Decided 2026-11-04: no change.** The owner's boards start and run fine. The analysis and a reference change are in [TRIAGE §5.1](independent-review-2026-11-03/TRIAGE.md#51-l-8-what-q3-and-q8-do) |
 | L-3 | The power mux may chatter on a weak USB source | Brief input switching | If the bench shows it: hysteresis from `ST` to `PR1`, or a lower threshold through `R38` |
 | L-11 | SD switch-on dip on 3V3 | Possible brown-out at card power-up | If above 0.2 V: `R78` → 10–22 kΩ (value only) |
 | L-5 | Ladder 2's UP(2) level is at the ADC's calibrated limit | Misread power key on cut boards | `R36` 47k and `R35` 27k, together with F12 |
