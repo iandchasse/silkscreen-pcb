@@ -1,0 +1,8603 @@
+{
+ "current": {
+  "tracks": {
+   "VBUS_PRE_FUSE": {
+    "I": 1.0,
+    "I_fault": 1.95,
+    "why": "F1 hold / trip",
+    "w_needed_20C": 0.197,
+    "w_min": 0.4,
+    "dT_at_wmin": 6.2,
+    "dT_fault_at_wmin": 28.5,
+    "length_by_width": {
+     "0.4": 24.6
+    },
+    "under_len": 0,
+    "under": []
+   },
+   "USB_VBUS": {
+    "I": 1.0,
+    "I_fault": 1.95,
+    "why": "F1 hold / trip",
+    "w_needed_20C": 0.197,
+    "w_min": 0.25,
+    "dT_at_wmin": 13.5,
+    "dT_fault_at_wmin": 61.7,
+    "length_by_width": {
+     "0.25": 57.0,
+     "0.4": 19.5
+    },
+    "under_len": 0,
+    "under": []
+   },
+   "LDO_IN": {
+    "I": 1.0,
+    "I_fault": 1.95,
+    "why": "U2 output, whole board on USB",
+    "w_needed_20C": 0.197,
+    "w_min": 0.25,
+    "dT_at_wmin": 13.5,
+    "dT_fault_at_wmin": 61.7,
+    "length_by_width": {
+     "0.25": 72.8,
+     "0.4": 1.4
+    },
+    "under_len": 0,
+    "under": []
+   },
+   "P+": {
+    "I": 1.0,
+    "I_fault": 1.8,
+    "why": "cell path; fault = N7 trip max",
+    "w_needed_20C": 0.197,
+    "w_min": 0.25,
+    "dT_at_wmin": 13.5,
+    "dT_fault_at_wmin": 51.5,
+    "length_by_width": {
+     "0.25": 0.8,
+     "0.3": 3.6,
+     "0.4": 61.7
+    },
+    "under_len": 0,
+    "under": []
+   },
+   "B+": {
+    "I": 1.0,
+    "I_fault": 1.8,
+    "why": "cell path",
+    "w_needed_20C": 0.197,
+    "w_min": 0.4,
+    "dT_at_wmin": 6.2,
+    "dT_fault_at_wmin": 23.7,
+    "length_by_width": {
+     "0.4": 30.3
+    },
+    "under_len": 0,
+    "under": []
+   },
+   "Net-(Q3-D)": {
+    "I": 1.0,
+    "I_fault": 1.8,
+    "why": "cell path",
+    "w_needed_20C": 0.197,
+    "w_min": 0.25,
+    "dT_at_wmin": 13.5,
+    "dT_fault_at_wmin": 51.5,
+    "length_by_width": {
+     "0.25": 8.4
+    },
+    "under_len": 0,
+    "under": []
+   },
+   "Net-(Q8-D)": {
+    "I": 1.0,
+    "I_fault": 1.8,
+    "why": "cell path",
+    "w_needed_20C": 0.197,
+    "w_min": 0.25,
+    "dT_at_wmin": 13.5,
+    "dT_fault_at_wmin": 51.5,
+    "length_by_width": {
+     "0.25": 3.0
+    },
+    "under_len": 0,
+    "under": []
+   },
+   "B-": {
+    "I": 1.0,
+    "I_fault": 1.8,
+    "why": "cell return",
+    "w_needed_20C": 0.197,
+    "w_min": 0.4,
+    "dT_at_wmin": 6.2,
+    "dT_fault_at_wmin": 23.7,
+    "length_by_width": {
+     "0.4": 39.4
+    },
+    "under_len": 0,
+    "under": []
+   },
+   "/B-_SENSE": {
+    "I": 1.0,
+    "I_fault": 1.8,
+    "why": "cell return through R85/R86",
+    "w_needed_20C": 0.197,
+    "w_min": 0.2,
+    "dT_at_wmin": 19.5,
+    "dT_fault_at_wmin": 74.3,
+    "length_by_width": {
+     "0.2": 6.4,
+     "0.5": 7.0
+    },
+    "under_len": 0,
+    "under": []
+   },
+   "/P+_FUSE": {
+    "I": 0.75,
+    "I_fault": 1.5,
+    "why": "F2 hold / trip",
+    "w_needed_20C": 0.133,
+    "w_min": 0.4,
+    "dT_at_wmin": 3.2,
+    "dT_fault_at_wmin": 15.7,
+    "length_by_width": {
+     "0.4": 28.6
+    },
+    "under_len": 0,
+    "under": []
+   },
+   "3V3": {
+    "I": 0.87,
+    "I_fault": 0.87,
+    "why": "U3 current limit (max)",
+    "w_needed_20C": 0.163,
+    "w_min": 0.25,
+    "dT_at_wmin": 9.9,
+    "dT_fault_at_wmin": 9.9,
+    "length_by_width": {
+     "0.25": 294.8
+    },
+    "under_len": 0,
+    "under": []
+   },
+   "SD_VDD": {
+    "I": 0.2,
+    "I_fault": 0.87,
+    "why": "card bursts",
+    "w_needed_20C": 0.021,
+    "w_min": 0.25,
+    "dT_at_wmin": 0.3,
+    "dT_fault_at_wmin": 9.9,
+    "length_by_width": {
+     "0.25": 39.2
+    },
+    "under_len": 0,
+    "under": []
+   },
+   "EINK_3V3": {
+    "I": 0.1,
+    "I_fault": 0.3,
+    "why": "F6 hold; boost start-up peak",
+    "w_needed_20C": 0.008,
+    "w_min": 0.25,
+    "dT_at_wmin": 0.1,
+    "dT_fault_at_wmin": 0.9,
+    "length_by_width": {
+     "0.25": 48.7
+    },
+    "under_len": 0,
+    "under": []
+   },
+   "EINK_SW": {
+    "I": 0.3,
+    "I_fault": 0.3,
+    "why": "boost start-up peak",
+    "w_needed_20C": 0.037,
+    "w_min": 0.2,
+    "dT_at_wmin": 1.3,
+    "dT_fault_at_wmin": 1.3,
+    "length_by_width": {
+     "0.2": 15.1
+    },
+    "under_len": 0,
+    "under": []
+   },
+   "/RESE": {
+    "I": 0.3,
+    "I_fault": 0.3,
+    "why": "boost sense",
+    "w_needed_20C": 0.037,
+    "w_min": 0.2,
+    "dT_at_wmin": 1.3,
+    "dT_fault_at_wmin": 1.3,
+    "length_by_width": {
+     "0.2": 36.6
+    },
+    "under_len": 0,
+    "under": []
+   },
+   "/LED_VIN": {
+    "I": 0.3,
+    "I_fault": 0.3,
+    "why": "F3 trip",
+    "w_needed_20C": 0.037,
+    "w_min": 0.25,
+    "dT_at_wmin": 0.9,
+    "dT_fault_at_wmin": 0.9,
+    "length_by_width": {
+     "0.25": 10.0
+    },
+    "under_len": 0,
+    "under": []
+   },
+   "TPS_SW_NODE": {
+    "I": 1.0,
+    "I_fault": 2.1,
+    "why": "inductor peak / U10 switch limit",
+    "w_needed_20C": 0.197,
+    "w_min": 0.2,
+    "dT_at_wmin": 19.5,
+    "dT_fault_at_wmin": 105.5,
+    "length_by_width": {
+     "0.2": 0.4,
+     "0.35": 1.2
+    },
+    "under_len": 0,
+    "under": []
+   },
+   "LED_SW": {
+    "I": 0.1,
+    "I_fault": 0.1,
+    "why": "LED strings",
+    "w_needed_20C": 0.008,
+    "w_min": 0.2,
+    "dT_at_wmin": 0.1,
+    "dT_fault_at_wmin": 0.1,
+    "length_by_width": {
+     "0.2": 181.3
+    },
+    "under_len": 0,
+    "under": []
+   },
+   "W-": {
+    "I": 0.1,
+    "I_fault": 0.1,
+    "why": "LED string",
+    "w_needed_20C": 0.008,
+    "w_min": 0.2,
+    "dT_at_wmin": 0.1,
+    "dT_fault_at_wmin": 0.1,
+    "length_by_width": {
+     "0.2": 174.7
+    },
+    "under_len": 0,
+    "under": []
+   },
+   "C-": {
+    "I": 0.1,
+    "I_fault": 0.1,
+    "why": "LED string",
+    "w_needed_20C": 0.008,
+    "w_min": 0.2,
+    "dT_at_wmin": 0.1,
+    "dT_fault_at_wmin": 0.1,
+    "length_by_width": {
+     "0.2": 190.3
+    },
+    "under_len": 0,
+    "under": []
+   },
+   "J6_3V3": {
+    "I": 0.1,
+    "I_fault": 0.3,
+    "why": "F5",
+    "w_needed_20C": 0.008,
+    "w_min": 0.25,
+    "dT_at_wmin": 0.1,
+    "dT_fault_at_wmin": 0.9,
+    "length_by_width": {
+     "0.25": 45.6
+    },
+    "under_len": 0,
+    "under": []
+   },
+   "PREVGH": {
+    "I": 0.02,
+    "I_fault": 0.02,
+    "why": "gate rail",
+    "w_needed_20C": 0.001,
+    "w_min": 0.25,
+    "dT_at_wmin": 0.0,
+    "dT_fault_at_wmin": 0.0,
+    "length_by_width": {
+     "0.25": 22.5
+    },
+    "under_len": 0,
+    "under": []
+   },
+   "PREVGL": {
+    "I": 0.02,
+    "I_fault": 0.02,
+    "why": "gate rail",
+    "w_needed_20C": 0.001,
+    "w_min": 0.25,
+    "dT_at_wmin": 0.0,
+    "dT_fault_at_wmin": 0.0,
+    "length_by_width": {
+     "0.25": 17.2
+    },
+    "under_len": 0,
+    "under": []
+   }
+  },
+  "vias": {
+   "VBUS_PRE_FUSE": {
+    "I": 1.0,
+    "I_fault": 1.95,
+    "vias": 4,
+    "groups": [
+     {
+      "at": [
+       95.949,
+       108.8
+      ],
+      "n": 2,
+      "A_per_via": 0.5,
+      "A_fault_per_via": 0.97
+     },
+     {
+      "at": [
+       95.156,
+       103.395
+      ],
+      "n": 2,
+      "A_per_via": 0.5,
+      "A_fault_per_via": 0.97
+     }
+    ]
+   },
+   "USB_VBUS": {
+    "I": 1.0,
+    "I_fault": 1.95,
+    "vias": 6,
+    "groups": [
+     {
+      "at": [
+       87.5,
+       91.8
+      ],
+      "n": 2,
+      "A_per_via": 0.5,
+      "A_fault_per_via": 0.97
+     },
+     {
+      "at": [
+       88.3,
+       106.7
+      ],
+      "n": 2,
+      "A_per_via": 0.5,
+      "A_fault_per_via": 0.97
+     },
+     {
+      "at": [
+       82.2,
+       95.3
+      ],
+      "n": 2,
+      "A_per_via": 0.5,
+      "A_fault_per_via": 0.97
+     }
+    ]
+   },
+   "LDO_IN": {
+    "I": 1.0,
+    "I_fault": 1.95,
+    "vias": 3,
+    "groups": [
+     {
+      "at": [
+       83.2,
+       86.0779
+      ],
+      "n": 2,
+      "A_per_via": 0.5,
+      "A_fault_per_via": 0.97
+     },
+     {
+      "at": [
+       46.1,
+       116.8
+      ],
+      "n": 1,
+      "A_per_via": 1.0,
+      "A_fault_per_via": 1.95
+     }
+    ]
+   },
+   "P+": {
+    "I": 1.0,
+    "I_fault": 1.8,
+    "vias": 8,
+    "groups": [
+     {
+      "at": [
+       83.7764,
+       87.5222
+      ],
+      "n": 2,
+      "A_per_via": 0.5,
+      "A_fault_per_via": 0.9
+     },
+     {
+      "at": [
+       78.6,
+       86.8754
+      ],
+      "n": 1,
+      "A_per_via": 1.0,
+      "A_fault_per_via": 1.8
+     },
+     {
+      "at": [
+       87.4,
+       59.3
+      ],
+      "n": 2,
+      "A_per_via": 0.5,
+      "A_fault_per_via": 0.9
+     },
+     {
+      "at": [
+       88.6,
+       78.7
+      ],
+      "n": 1,
+      "A_per_via": 1.0,
+      "A_fault_per_via": 1.8
+     },
+     {
+      "at": [
+       87.1,
+       86.5
+      ],
+      "n": 2,
+      "A_per_via": 0.5,
+      "A_fault_per_via": 0.9
+     }
+    ]
+   },
+   "B+": {
+    "I": 1.0,
+    "I_fault": 1.8,
+    "vias": 3,
+    "groups": [
+     {
+      "at": [
+       96.0,
+       82.5
+      ],
+      "n": 2,
+      "A_per_via": 0.5,
+      "A_fault_per_via": 0.9
+     },
+     {
+      "at": [
+       90.4,
+       83.4
+      ],
+      "n": 1,
+      "A_per_via": 1.0,
+      "A_fault_per_via": 1.8
+     }
+    ]
+   },
+   "Net-(Q3-D)": {
+    "I": 1.0,
+    "I_fault": 1.8,
+    "vias": 0,
+    "groups": []
+   },
+   "Net-(Q8-D)": {
+    "I": 1.0,
+    "I_fault": 1.8,
+    "vias": 0,
+    "groups": []
+   },
+   "B-": {
+    "I": 1.0,
+    "I_fault": 1.8,
+    "vias": 0,
+    "groups": []
+   },
+   "/B-_SENSE": {
+    "I": 1.0,
+    "I_fault": 1.8,
+    "vias": 3,
+    "groups": [
+     {
+      "at": [
+       83.5,
+       70.5
+      ],
+      "n": 1,
+      "A_per_via": 1.0,
+      "A_fault_per_via": 1.8
+     },
+     {
+      "at": [
+       81.214,
+       70.214
+      ],
+      "n": 2,
+      "A_per_via": 0.5,
+      "A_fault_per_via": 0.9
+     }
+    ]
+   },
+   "/P+_FUSE": {
+    "I": 0.75,
+    "I_fault": 1.5,
+    "vias": 2,
+    "groups": [
+     {
+      "at": [
+       87.7035,
+       56.9894
+      ],
+      "n": 1,
+      "A_per_via": 0.75,
+      "A_fault_per_via": 1.5
+     },
+     {
+      "at": [
+       92.4,
+       56.6
+      ],
+      "n": 1,
+      "A_per_via": 0.75,
+      "A_fault_per_via": 1.5
+     }
+    ]
+   },
+   "3V3": {
+    "I": 0.87,
+    "I_fault": 0.87,
+    "vias": 17,
+    "groups": [
+     {
+      "at": [
+       98.0,
+       136.4
+      ],
+      "n": 1,
+      "A_per_via": 0.87,
+      "A_fault_per_via": 0.87
+     },
+     {
+      "at": [
+       77.2,
+       92.3
+      ],
+      "n": 1,
+      "A_per_via": 0.87,
+      "A_fault_per_via": 0.87
+     },
+     {
+      "at": [
+       75.6,
+       94.4
+      ],
+      "n": 1,
+      "A_per_via": 0.87,
+      "A_fault_per_via": 0.87
+     },
+     {
+      "at": [
+       78.5,
+       82.5
+      ],
+      "n": 1,
+      "A_per_via": 0.87,
+      "A_fault_per_via": 0.87
+     },
+     {
+      "at": [
+       60.4,
+       117.3
+      ],
+      "n": 1,
+      "A_per_via": 0.87,
+      "A_fault_per_via": 0.87
+     },
+     {
+      "at": [
+       50.9,
+       134.7
+      ],
+      "n": 1,
+      "A_per_via": 0.87,
+      "A_fault_per_via": 0.87
+     },
+     {
+      "at": [
+       73.5243,
+       86.0243
+      ],
+      "n": 1,
+      "A_per_via": 0.87,
+      "A_fault_per_via": 0.87
+     },
+     {
+      "at": [
+       73.7,
+       113.4
+      ],
+      "n": 1,
+      "A_per_via": 0.87,
+      "A_fault_per_via": 0.87
+     },
+     {
+      "at": [
+       53.3388,
+       91.7612
+      ],
+      "n": 1,
+      "A_per_via": 0.87,
+      "A_fault_per_via": 0.87
+     },
+     {
+      "at": [
+       49.5,
+       114.6
+      ],
+      "n": 1,
+      "A_per_via": 0.87,
+      "A_fault_per_via": 0.87
+     },
+     {
+      "at": [
+       47.5,
+       135.6
+      ],
+      "n": 1,
+      "A_per_via": 0.87,
+      "A_fault_per_via": 0.87
+     },
+     {
+      "at": [
+       78.0,
+       112.7
+      ],
+      "n": 1,
+      "A_per_via": 0.87,
+      "A_fault_per_via": 0.87
+     },
+     {
+      "at": [
+       76.2935,
+       80.0741
+      ],
+      "n": 1,
+      "A_per_via": 0.87,
+      "A_fault_per_via": 0.87
+     },
+     {
+      "at": [
+       82.0,
+       75.5
+      ],
+      "n": 1,
+      "A_per_via": 0.87,
+      "A_fault_per_via": 0.87
+     },
+     {
+      "at": [
+       53.6,
+       96.3
+      ],
+      "n": 1,
+      "A_per_via": 0.87,
+      "A_fault_per_via": 0.87
+     },
+     {
+      "at": [
+       81.5,
+       111.5
+      ],
+      "n": 1,
+      "A_per_via": 0.87,
+      "A_fault_per_via": 0.87
+     },
+     {
+      "at": [
+       91.3,
+       119.3
+      ],
+      "n": 1,
+      "A_per_via": 0.87,
+      "A_fault_per_via": 0.87
+     }
+    ]
+   },
+   "SD_VDD": {
+    "I": 0.2,
+    "I_fault": 0.87,
+    "vias": 4,
+    "groups": [
+     {
+      "at": [
+       78.0451,
+       75.6307
+      ],
+      "n": 1,
+      "A_per_via": 0.2,
+      "A_fault_per_via": 0.87
+     },
+     {
+      "at": [
+       74.9851,
+       75.4796
+      ],
+      "n": 1,
+      "A_per_via": 0.2,
+      "A_fault_per_via": 0.87
+     },
+     {
+      "at": [
+       72.5,
+       76.0
+      ],
+      "n": 1,
+      "A_per_via": 0.2,
+      "A_fault_per_via": 0.87
+     },
+     {
+      "at": [
+       70.3,
+       77.9
+      ],
+      "n": 1,
+      "A_per_via": 0.2,
+      "A_fault_per_via": 0.87
+     }
+    ]
+   },
+   "EINK_3V3": {
+    "I": 0.1,
+    "I_fault": 0.3,
+    "vias": 2,
+    "groups": [
+     {
+      "at": [
+       84.2,
+       108.6
+      ],
+      "n": 1,
+      "A_per_via": 0.1,
+      "A_fault_per_via": 0.3
+     },
+     {
+      "at": [
+       78.3,
+       113.6
+      ],
+      "n": 1,
+      "A_per_via": 0.1,
+      "A_fault_per_via": 0.3
+     }
+    ]
+   },
+   "EINK_SW": {
+    "I": 0.3,
+    "I_fault": 0.3,
+    "vias": 0,
+    "groups": []
+   },
+   "/RESE": {
+    "I": 0.3,
+    "I_fault": 0.3,
+    "vias": 2,
+    "groups": [
+     {
+      "at": [
+       89.0304,
+       121.6304
+      ],
+      "n": 1,
+      "A_per_via": 0.3,
+      "A_fault_per_via": 0.3
+     },
+     {
+      "at": [
+       69.5,
+       127.1
+      ],
+      "n": 1,
+      "A_per_via": 0.3,
+      "A_fault_per_via": 0.3
+     }
+    ]
+   },
+   "/LED_VIN": {
+    "I": 0.3,
+    "I_fault": 0.3,
+    "vias": 2,
+    "groups": [
+     {
+      "at": [
+       49.65,
+       116.15
+      ],
+      "n": 1,
+      "A_per_via": 0.3,
+      "A_fault_per_via": 0.3
+     },
+     {
+      "at": [
+       52.0,
+       117.8
+      ],
+      "n": 1,
+      "A_per_via": 0.3,
+      "A_fault_per_via": 0.3
+     }
+    ]
+   },
+   "TPS_SW_NODE": {
+    "I": 1.0,
+    "I_fault": 2.1,
+    "vias": 0,
+    "groups": []
+   },
+   "LED_SW": {
+    "I": 0.1,
+    "I_fault": 0.1,
+    "vias": 6,
+    "groups": [
+     {
+      "at": [
+       54.9389,
+       119.999
+      ],
+      "n": 2,
+      "A_per_via": 0.05,
+      "A_fault_per_via": 0.05
+     },
+     {
+      "at": [
+       54.138,
+       133.6
+      ],
+      "n": 1,
+      "A_per_via": 0.1,
+      "A_fault_per_via": 0.1
+     },
+     {
+      "at": [
+       54.138,
+       126.7783
+      ],
+      "n": 1,
+      "A_per_via": 0.1,
+      "A_fault_per_via": 0.1
+     },
+     {
+      "at": [
+       97.1,
+       57.6
+      ],
+      "n": 1,
+      "A_per_via": 0.1,
+      "A_fault_per_via": 0.1
+     },
+     {
+      "at": [
+       97.1,
+       59.9
+      ],
+      "n": 1,
+      "A_per_via": 0.1,
+      "A_fault_per_via": 0.1
+     }
+    ]
+   },
+   "W-": {
+    "I": 0.1,
+    "I_fault": 0.1,
+    "vias": 2,
+    "groups": [
+     {
+      "at": [
+       53.2,
+       130.8
+      ],
+      "n": 1,
+      "A_per_via": 0.1,
+      "A_fault_per_via": 0.1
+     },
+     {
+      "at": [
+       96.1,
+       56.6
+      ],
+      "n": 1,
+      "A_per_via": 0.1,
+      "A_fault_per_via": 0.1
+     }
+    ]
+   },
+   "C-": {
+    "I": 0.1,
+    "I_fault": 0.1,
+    "vias": 3,
+    "groups": [
+     {
+      "at": [
+       94.7,
+       57.0
+      ],
+      "n": 1,
+      "A_per_via": 0.1,
+      "A_fault_per_via": 0.1
+     },
+     {
+      "at": [
+       46.4218,
+       128.0
+      ],
+      "n": 1,
+      "A_per_via": 0.1,
+      "A_fault_per_via": 0.1
+     },
+     {
+      "at": [
+       54.0,
+       123.0
+      ],
+      "n": 1,
+      "A_per_via": 0.1,
+      "A_fault_per_via": 0.1
+     }
+    ]
+   },
+   "J6_3V3": {
+    "I": 0.1,
+    "I_fault": 0.3,
+    "vias": 0,
+    "groups": []
+   },
+   "PREVGH": {
+    "I": 0.02,
+    "I_fault": 0.02,
+    "vias": 2,
+    "groups": [
+     {
+      "at": [
+       85.48,
+       118.54
+      ],
+      "n": 1,
+      "A_per_via": 0.02,
+      "A_fault_per_via": 0.02
+     },
+     {
+      "at": [
+       82.95,
+       126.95
+      ],
+      "n": 1,
+      "A_per_via": 0.02,
+      "A_fault_per_via": 0.02
+     }
+    ]
+   },
+   "PREVGL": {
+    "I": 0.02,
+    "I_fault": 0.02,
+    "vias": 2,
+    "groups": [
+     {
+      "at": [
+       83.1,
+       116.2
+      ],
+      "n": 1,
+      "A_per_via": 0.02,
+      "A_fault_per_via": 0.02
+     },
+     {
+      "at": [
+       83.1312,
+       122.8312
+      ],
+      "n": 1,
+      "A_per_via": 0.02,
+      "A_fault_per_via": 0.02
+     }
+    ]
+   }
+  }
+ },
+ "spacing": [
+  {
+   "a": "Net-(C15-Pad2) [VSL]",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 42.0,
+   "d": 0.2,
+   "layer": "B.Cu",
+   "at": [
+    77.99,
+    123.75
+   ],
+   "kinds": "pad-pad",
+   "where": "J2.21 / J2.22",
+   "inherent": true,
+   "inherent_why": "footprint pad gap",
+   "req_B2": 0.6,
+   "req_B4": 0.13,
+   "req_A6": 0.4,
+   "governing": "A6",
+   "req": 0.4,
+   "ok": false,
+   "ok_B2": false
+  },
+  {
+   "a": "Net-(C15-Pad2) [VSL]",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 42.0,
+   "d": 0.225,
+   "layer": "B.Cu",
+   "at": [
+    77.97,
+    124.33
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.22",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.6,
+   "req_B4": 0.13,
+   "req_A6": 0.4,
+   "governing": "A6",
+   "req": 0.4,
+   "ok": false,
+   "ok_B2": false
+  },
+  {
+   "a": "GND",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 0.2,
+   "layer": "B.Cu",
+   "at": [
+    49.05,
+    122.25
+   ],
+   "kinds": "pad-pad",
+   "where": "U10.4 / U10.5",
+   "inherent": true,
+   "inherent_why": "footprint pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": false,
+   "ok_B2": true
+  },
+  {
+   "a": "LED_SW",
+   "b": "TPS_SW_NODE",
+   "dV": 26.5,
+   "d": 0.2,
+   "layer": "B.Cu",
+   "at": [
+    49.05,
+    121.75
+   ],
+   "kinds": "pad-pad",
+   "where": "U10.5 / U10.6",
+   "inherent": true,
+   "inherent_why": "footprint pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": false,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C13-Pad2) [VSH1]",
+   "b": "Net-(C19-Pad2) [VPP]",
+   "dV": 17.0,
+   "d": 0.2,
+   "layer": "B.Cu",
+   "at": [
+    76.99,
+    123.75
+   ],
+   "kinds": "pad-pad",
+   "where": "J2.19 / J2.20",
+   "inherent": true,
+   "inherent_why": "footprint pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": false,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C13-Pad2) [VSH1]",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 25.0,
+   "d": 0.2,
+   "layer": "B.Cu",
+   "at": [
+    77.49,
+    123.75
+   ],
+   "kinds": "pad-pad",
+   "where": "J2.20 / J2.21",
+   "inherent": true,
+   "inherent_why": "footprint pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": false,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C15-Pad2) [VSL]",
+   "b": "PREVGL [VGL (PREVGL)]",
+   "dV": 25.0,
+   "d": 0.2,
+   "layer": "B.Cu",
+   "at": [
+    78.49,
+    123.75
+   ],
+   "kinds": "pad-pad",
+   "where": "J2.22 / J2.23",
+   "inherent": true,
+   "inherent_why": "footprint pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": false,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C20-Pad2) [VCOM]",
+   "b": "PREVGL [VGL (PREVGL)]",
+   "dV": 30.0,
+   "d": 0.2,
+   "layer": "B.Cu",
+   "at": [
+    78.99,
+    123.75
+   ],
+   "kinds": "pad-pad",
+   "where": "J2.23 / J2.24",
+   "inherent": true,
+   "inherent_why": "footprint pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": false,
+   "ok_B2": true
+  },
+  {
+   "a": "C-",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 0.2,
+   "layer": "B.Cu",
+   "at": [
+    53.24,
+    124.0
+   ],
+   "kinds": "pad-pad",
+   "where": "J3.1 / J3.2",
+   "inherent": true,
+   "inherent_why": "footprint pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": false,
+   "ok_B2": true
+  },
+  {
+   "a": "LED_SW",
+   "b": "W-",
+   "dV": 26.0,
+   "d": 0.2,
+   "layer": "B.Cu",
+   "at": [
+    55.24,
+    124.0
+   ],
+   "kinds": "pad-pad",
+   "where": "J3.5 / J3.6",
+   "inherent": true,
+   "inherent_why": "footprint pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": false,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C13-Pad2) [VSH1]",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 25.0,
+   "d": 0.225,
+   "layer": "B.Cu",
+   "at": [
+    77.5,
+    124.33
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.20",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": false,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C15-Pad2) [VSL]",
+   "b": "PREVGL [VGL (PREVGL)]",
+   "dV": 25.0,
+   "d": 0.225,
+   "layer": "B.Cu",
+   "at": [
+    78.5,
+    124.33
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.22",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": false,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C20-Pad2) [VCOM]",
+   "b": "PREVGL [VGL (PREVGL)]",
+   "dV": 30.0,
+   "d": 0.225,
+   "layer": "B.Cu",
+   "at": [
+    78.97,
+    124.9
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.24",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": false,
+   "ok_B2": true
+  },
+  {
+   "a": "LED_SW",
+   "b": "TPS_SW_NODE",
+   "dV": 26.5,
+   "d": 0.25,
+   "layer": "B.Cu",
+   "at": [
+    48.65,
+    121.78
+   ],
+   "kinds": "track-pad",
+   "where": "track / U10.6",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "GND",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 0.25,
+   "layer": "B.Cu",
+   "at": [
+    48.48,
+    122.22
+   ],
+   "kinds": "track-pad",
+   "where": "track / U10.4",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "C-",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 0.25,
+   "layer": "B.Cu",
+   "at": [
+    53.26,
+    124.0
+   ],
+   "kinds": "track-pad",
+   "where": "track / J3.1",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "LED_SW",
+   "b": "W-",
+   "dV": 26.0,
+   "d": 0.25,
+   "layer": "B.Cu",
+   "at": [
+    55.26,
+    124.58
+   ],
+   "kinds": "track-pad",
+   "where": "track / J3.5",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C13-Pad2) [VSH1]",
+   "b": "Net-(C19-Pad2) [VPP]",
+   "dV": 17.0,
+   "d": 0.25,
+   "layer": "B.Cu",
+   "at": [
+    77.01,
+    124.33
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.19",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "GND",
+   "b": "Net-(C15-Pad2) [VSL]",
+   "dV": 17.0,
+   "d": 0.25,
+   "layer": "B.Cu",
+   "at": [
+    80.74,
+    126.12
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.S1",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "GND",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 0.251,
+   "layer": "B.Cu",
+   "at": [
+    54.24,
+    118.39
+   ],
+   "kinds": "track-pad",
+   "where": "track / R41.2",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "C-",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 0.255,
+   "layer": "B.Cu",
+   "at": [
+    99.48,
+    48.65
+   ],
+   "kinds": "track-pad",
+   "where": "track / J6.5",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "LED_MONIT",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 0.256,
+   "layer": "B.Cu",
+   "at": [
+    53.5,
+    117.68
+   ],
+   "kinds": "track-pad",
+   "where": "track / R41.1",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "BUTTON_ADC_1",
+   "b": "C-",
+   "dV": 26.0,
+   "d": 0.263,
+   "layer": "B.Cu",
+   "at": [
+    45.22,
+    126.74
+   ],
+   "kinds": "track-pad",
+   "where": "track / Q6.3",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(D4-K) [charge-pump node]",
+   "b": "PREVGL [VGL (PREVGL)]",
+   "dV": 25.5,
+   "d": 0.267,
+   "layer": "B.Cu",
+   "at": [
+    81.33,
+    114.13
+   ],
+   "kinds": "track-pad",
+   "where": "track / D4.2",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C20-Pad2) [VCOM]",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 30.0,
+   "d": 0.27,
+   "layer": "B.Cu",
+   "at": [
+    85.12,
+    118.78
+   ],
+   "kinds": "via-pad",
+   "where": "via / C20.2",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "GND",
+   "b": "W-",
+   "dV": 26.0,
+   "d": 0.273,
+   "layer": "B.Cu",
+   "at": [
+    50.7,
+    129.17
+   ],
+   "kinds": "via-pad",
+   "where": "via / Q5.3",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "COLOR_SEL",
+   "b": "W-",
+   "dV": 26.0,
+   "d": 0.277,
+   "layer": "B.Cu",
+   "at": [
+    50.01,
+    129.25
+   ],
+   "kinds": "track-pad",
+   "where": "track / Q5.3",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/COLOR_SEL_INV",
+   "b": "C-",
+   "dV": 26.0,
+   "d": 0.278,
+   "layer": "B.Cu",
+   "at": [
+    46.88,
+    126.94
+   ],
+   "kinds": "track-pad",
+   "where": "track / Q6.3",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/DET_NODE",
+   "b": "B-",
+   "dV": 10.2,
+   "d": 0.153,
+   "layer": "B.Cu",
+   "at": [
+    92.15,
+    82.39
+   ],
+   "kinds": "track-pad",
+   "where": "track / Q9.3",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.13,
+   "governing": "A6",
+   "req": 0.13,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C20-Pad2) [VCOM]",
+   "b": "PREVGL [VGL (PREVGL)]",
+   "dV": 30.0,
+   "d": 0.301,
+   "layer": "B.Cu",
+   "at": [
+    83.72,
+    121.24
+   ],
+   "kinds": "track-pad",
+   "where": "track / C16.2",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "LED_SW",
+   "b": "PWM_LED",
+   "dV": 26.0,
+   "d": 0.301,
+   "layer": "B.Cu",
+   "at": [
+    56.13,
+    119.25
+   ],
+   "kinds": "track-pad",
+   "where": "track / R39.1",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C20-Pad2) [VCOM]",
+   "b": "Net-(D4-K) [charge-pump node]",
+   "dV": 30.0,
+   "d": 0.304,
+   "layer": "B.Cu",
+   "at": [
+    81.91,
+    122.45
+   ],
+   "kinds": "track-pad",
+   "where": "track / D6.2",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/P+_FUSE",
+   "b": "C-",
+   "dV": 26.0,
+   "d": 0.304,
+   "layer": "B.Cu",
+   "at": [
+    96.5,
+    54.3
+   ],
+   "kinds": "track-pad",
+   "where": "track / D8.1",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "C-",
+   "b": "W-",
+   "dV": 26.0,
+   "d": 0.314,
+   "layer": "B.Cu",
+   "at": [
+    94.96,
+    55.86
+   ],
+   "kinds": "track-pad",
+   "where": "track / D8.2",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "3V3",
+   "b": "Net-(D4-K) [charge-pump node]",
+   "dV": 28.6,
+   "d": 0.325,
+   "layer": "B.Cu",
+   "at": [
+    81.88,
+    111.76
+   ],
+   "kinds": "via-pad",
+   "where": "via / C11.1",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "GND",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 25.0,
+   "d": 0.332,
+   "layer": "B.Cu",
+   "at": [
+    85.87,
+    118.8
+   ],
+   "kinds": "via-pad",
+   "where": "via / C20.1",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "C-",
+   "b": "Net-(J1-SHIELD)",
+   "dV": 26.0,
+   "d": 0.336,
+   "layer": "F.Cu",
+   "at": [
+    101.77,
+    102.56
+   ],
+   "kinds": "track-pad",
+   "where": "track / J1.S1",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/P+_FUSE",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 0.344,
+   "layer": "B.Cu",
+   "at": [
+    97.97,
+    47.89
+   ],
+   "kinds": "track-pad",
+   "where": "track / J6.5",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "I2C_SDA",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 0.346,
+   "layer": "B.Cu",
+   "at": [
+    94.02,
+    59.1
+   ],
+   "kinds": "via-pad",
+   "where": "via / D3.1",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C15-Pad2) [VSL]",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 42.0,
+   "d": 0.573,
+   "layer": "B.Cu",
+   "at": [
+    84.8,
+    124.54
+   ],
+   "kinds": "pad-pad",
+   "where": "C14.2 / C15.2",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.6,
+   "req_B4": 0.13,
+   "req_A6": 0.4,
+   "governing": "A6",
+   "req": 0.4,
+   "ok": true,
+   "ok_B2": false
+  },
+  {
+   "a": "Net-(C15-Pad2) [VSL]",
+   "b": "PREVGL [VGL (PREVGL)]",
+   "dV": 25.0,
+   "d": 0.388,
+   "layer": "B.Cu",
+   "at": [
+    83.96,
+    122.64
+   ],
+   "kinds": "pad-teardrop",
+   "where": "C15.2 / teardrop",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C13-Pad2) [VSH1]",
+   "b": "Net-(C19-Pad2) [VPP]",
+   "dV": 17.0,
+   "d": 0.394,
+   "layer": "B.Cu",
+   "at": [
+    83.98,
+    128.71
+   ],
+   "kinds": "pad-teardrop",
+   "where": "C19.2 / teardrop",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/GDR",
+   "b": "EINK_SW",
+   "dV": 26.0,
+   "d": 0.413,
+   "layer": "B.Cu",
+   "at": [
+    88.57,
+    117.1
+   ],
+   "kinds": "via-pad",
+   "where": "via / Q4.3",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "EINK_SW",
+   "b": "GND",
+   "dV": 26.0,
+   "d": 0.42,
+   "layer": "B.Cu",
+   "at": [
+    85.4,
+    111.99
+   ],
+   "kinds": "via-pad",
+   "where": "via / C11.2",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C13-Pad2) [VSH1]",
+   "b": "Net-(C15-Pad2) [VSL]",
+   "dV": 34.0,
+   "d": 0.7,
+   "layer": "B.Cu",
+   "at": [
+    77.74,
+    123.75
+   ],
+   "kinds": "pad-pad",
+   "where": "J2.20 / J2.22",
+   "inherent": true,
+   "inherent_why": "footprint pad gap",
+   "req_B2": 0.6,
+   "req_B4": 0.13,
+   "req_A6": 0.4,
+   "governing": "A6",
+   "req": 0.4,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "PREVGH [VGH (PREVGH)]",
+   "b": "PREVGL [VGL (PREVGL)]",
+   "dV": 50.0,
+   "d": 0.7,
+   "layer": "B.Cu",
+   "at": [
+    78.24,
+    123.75
+   ],
+   "kinds": "pad-pad",
+   "where": "J2.21 / J2.23",
+   "inherent": true,
+   "inherent_why": "footprint pad gap",
+   "req_B2": 0.6,
+   "req_B4": 0.13,
+   "req_A6": 0.4,
+   "governing": "A6",
+   "req": 0.4,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "PREVGH [VGH (PREVGH)]",
+   "b": "PREVGL [VGL (PREVGL)]",
+   "dV": 50.0,
+   "d": 0.725,
+   "layer": "B.Cu",
+   "at": [
+    78.25,
+    124.33
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.21",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.6,
+   "req_B4": 0.13,
+   "req_A6": 0.4,
+   "governing": "A6",
+   "req": 0.4,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C13-Pad2) [VSH1]",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 25.0,
+   "d": 0.462,
+   "layer": "B.Cu",
+   "at": [
+    83.98,
+    126.66
+   ],
+   "kinds": "pad-teardrop",
+   "where": "C13.2 / teardrop",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C13-Pad2) [VSH1]",
+   "b": "Net-(C15-Pad2) [VSL]",
+   "dV": 34.0,
+   "d": 0.75,
+   "layer": "B.Cu",
+   "at": [
+    77.71,
+    124.9
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.22",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.6,
+   "req_B4": 0.13,
+   "req_A6": 0.4,
+   "governing": "A6",
+   "req": 0.4,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "COLOR_SEL",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 0.492,
+   "layer": "B.Cu",
+   "at": [
+    52.66,
+    123.83
+   ],
+   "kinds": "track-pad",
+   "where": "track / J3.1",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "EINK_SW",
+   "b": "PREVGL [VGL (PREVGL)]",
+   "dV": 51.0,
+   "d": 1.042,
+   "layer": "B.Cu",
+   "at": [
+    83.63,
+    115.03
+   ],
+   "kinds": "track-pad",
+   "where": "track / D5.2",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.6,
+   "req_B4": 0.13,
+   "req_A6": 0.5,
+   "governing": "A6",
+   "req": 0.5,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "LED_SW",
+   "b": "Net-(R11-Pad1)",
+   "dV": 26.0,
+   "d": 0.525,
+   "layer": "F.Cu",
+   "at": [
+    102.5,
+    75.18
+   ],
+   "kinds": "track-pad",
+   "where": "track / SW4.2",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C15-Pad2) [VSL]",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 42.0,
+   "d": 0.275,
+   "layer": "B.Cu",
+   "at": [
+    78.0,
+    124.33
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.6,
+   "req_B4": 0.13,
+   "req_A6": 0.4,
+   "governing": "B4",
+   "req": 0.13,
+   "ok": true,
+   "ok_B2": false
+  },
+  {
+   "a": "C-",
+   "b": "Net-(Q5-S)",
+   "dV": 26.0,
+   "d": 0.552,
+   "layer": "B.Cu",
+   "at": [
+    46.97,
+    127.83
+   ],
+   "kinds": "via-pad",
+   "where": "via / Q6.2",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "LED_SW",
+   "b": "Net-(R61-Pad1)",
+   "dV": 26.0,
+   "d": 0.57,
+   "layer": "F.Cu",
+   "at": [
+    102.47,
+    89.18
+   ],
+   "kinds": "track-pad",
+   "where": "track / SW1.2",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "C-",
+   "b": "GND",
+   "dV": 26.0,
+   "d": 0.648,
+   "layer": "B.Cu",
+   "at": [
+    94.28,
+    55.46
+   ],
+   "kinds": "track-pad",
+   "where": "track / D8.3",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "GND",
+   "b": "PREVGL [VGL (PREVGL)]",
+   "dV": 25.0,
+   "d": 0.651,
+   "layer": "B.Cu",
+   "at": [
+    80.49,
+    125.92
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.S1",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "COLOR_SEL",
+   "b": "W-",
+   "dV": 26.0,
+   "d": 0.655,
+   "layer": "B.Cu",
+   "at": [
+    49.86,
+    130.08
+   ],
+   "kinds": "pad-pad",
+   "where": "Q5.1 / Q5.3",
+   "inherent": true,
+   "inherent_why": "footprint pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(Q5-S)",
+   "b": "W-",
+   "dV": 26.0,
+   "d": 0.655,
+   "layer": "B.Cu",
+   "at": [
+    49.86,
+    129.13
+   ],
+   "kinds": "pad-pad",
+   "where": "Q5.2 / Q5.3",
+   "inherent": true,
+   "inherent_why": "footprint pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/COLOR_SEL_INV",
+   "b": "C-",
+   "dV": 26.0,
+   "d": 0.656,
+   "layer": "B.Cu",
+   "at": [
+    47.02,
+    126.11
+   ],
+   "kinds": "pad-pad",
+   "where": "Q6.1 / Q6.3",
+   "inherent": true,
+   "inherent_why": "footprint pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "C-",
+   "b": "Net-(Q5-S)",
+   "dV": 26.0,
+   "d": 0.656,
+   "layer": "B.Cu",
+   "at": [
+    47.02,
+    127.06
+   ],
+   "kinds": "pad-pad",
+   "where": "Q6.2 / Q6.3",
+   "inherent": true,
+   "inherent_why": "footprint pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/GDR",
+   "b": "EINK_SW",
+   "dV": 26.0,
+   "d": 0.656,
+   "layer": "B.Cu",
+   "at": [
+    88.57,
+    116.53
+   ],
+   "kinds": "pad-pad",
+   "where": "Q4.1 / Q4.3",
+   "inherent": true,
+   "inherent_why": "footprint pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/RESE",
+   "b": "EINK_SW",
+   "dV": 26.0,
+   "d": 0.656,
+   "layer": "B.Cu",
+   "at": [
+    88.57,
+    117.48
+   ],
+   "kinds": "pad-pad",
+   "where": "Q4.2 / Q4.3",
+   "inherent": true,
+   "inherent_why": "footprint pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/GDR",
+   "b": "EINK_SW",
+   "dV": 26.0,
+   "d": 0.658,
+   "layer": "B.Cu",
+   "at": [
+    88.7,
+    116.84
+   ],
+   "kinds": "pad-teardrop",
+   "where": "Q4.3 / teardrop",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "J6_3V3",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 0.675,
+   "layer": "B.Cu",
+   "at": [
+    94.45,
+    60.04
+   ],
+   "kinds": "track-pad",
+   "where": "track / D3.1",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(J1-SHIELD)",
+   "b": "W-",
+   "dV": 26.0,
+   "d": 0.687,
+   "layer": "F.Cu",
+   "at": [
+    101.6,
+    102.56
+   ],
+   "kinds": "track-pad",
+   "where": "track / J1.S1",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "GND",
+   "b": "TPS_SW_NODE",
+   "dV": 26.0,
+   "d": 0.7,
+   "layer": "B.Cu",
+   "at": [
+    49.05,
+    122.0
+   ],
+   "kinds": "pad-pad",
+   "where": "U10.4 / U10.6",
+   "inherent": true,
+   "inherent_why": "footprint pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/RESE",
+   "b": "Net-(C17-Pad2) [VSH2]",
+   "dV": 17.0,
+   "d": 0.7,
+   "layer": "B.Cu",
+   "at": [
+    69.24,
+    123.75
+   ],
+   "kinds": "pad-pad",
+   "where": "J2.3 / J2.5",
+   "inherent": true,
+   "inherent_why": "footprint pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C13-Pad2) [VSH1]",
+   "b": "Net-(C18-Pad2) [VDD(panel)]",
+   "dV": 17.0,
+   "d": 0.7,
+   "layer": "B.Cu",
+   "at": [
+    76.74,
+    123.75
+   ],
+   "kinds": "pad-pad",
+   "where": "J2.18 / J2.20",
+   "inherent": true,
+   "inherent_why": "footprint pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C19-Pad2) [VPP]",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 25.0,
+   "d": 0.7,
+   "layer": "B.Cu",
+   "at": [
+    77.24,
+    123.75
+   ],
+   "kinds": "pad-pad",
+   "where": "J2.19 / J2.21",
+   "inherent": true,
+   "inherent_why": "footprint pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C15-Pad2) [VSL]",
+   "b": "Net-(C20-Pad2) [VCOM]",
+   "dV": 22.0,
+   "d": 0.7,
+   "layer": "B.Cu",
+   "at": [
+    78.74,
+    123.75
+   ],
+   "kinds": "pad-pad",
+   "where": "J2.22 / J2.24",
+   "inherent": true,
+   "inherent_why": "footprint pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/RESE",
+   "b": "Net-(C17-Pad2) [VSH2]",
+   "dV": 17.0,
+   "d": 0.701,
+   "layer": "B.Cu",
+   "at": [
+    69.24,
+    124.9
+   ],
+   "kinds": "pad-teardrop",
+   "where": "J2.5 / teardrop",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "C-",
+   "b": "Net-(Q5-S)",
+   "dV": 26.0,
+   "d": 0.701,
+   "layer": "B.Cu",
+   "at": [
+    46.87,
+    127.39
+   ],
+   "kinds": "track-pad",
+   "where": "track / Q6.2",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "PREVGH [VGH (PREVGH)]",
+   "b": "PREVGL [VGL (PREVGL)]",
+   "dV": 50.0,
+   "d": 1.139,
+   "layer": "B.Cu",
+   "at": [
+    83.68,
+    116.84
+   ],
+   "kinds": "via-pad",
+   "where": "via / D5.1",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.6,
+   "req_B4": 0.13,
+   "req_A6": 0.4,
+   "governing": "A6",
+   "req": 0.4,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "GND",
+   "b": "Net-(D4-K) [charge-pump node]",
+   "dV": 25.0,
+   "d": 0.713,
+   "layer": "B.Cu",
+   "at": [
+    80.96,
+    118.31
+   ],
+   "kinds": "track-pad",
+   "where": "track / SW6.1",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/LED_VIN",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 0.715,
+   "layer": "B.Cu",
+   "at": [
+    53.04,
+    118.19
+   ],
+   "kinds": "track-pad",
+   "where": "track / C12.2",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C19-Pad2) [VPP]",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 25.0,
+   "d": 0.725,
+   "layer": "B.Cu",
+   "at": [
+    77.25,
+    124.33
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.19",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C15-Pad2) [VSL]",
+   "b": "Net-(C20-Pad2) [VCOM]",
+   "dV": 22.0,
+   "d": 0.74,
+   "layer": "B.Cu",
+   "at": [
+    78.83,
+    125.16
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.24",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "C-",
+   "b": "W-",
+   "dV": 26.0,
+   "d": 0.15,
+   "layer": "F.Cu",
+   "at": [
+    95.0,
+    57.23
+   ],
+   "kinds": "track-teardrop",
+   "where": "track / teardrop",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/COLOR_SEL_INV",
+   "b": "C-",
+   "dV": 26.0,
+   "d": 0.15,
+   "layer": "B.Cu",
+   "at": [
+    46.8,
+    128.0
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "W-",
+   "b": "GND pour",
+   "dV": 26.0,
+   "d": 0.15,
+   "layer": "F.Cu",
+   "at": [
+    52.99,
+    130.59
+   ],
+   "kinds": "copper-pour",
+   "where": "pour",
+   "inherent": false,
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "C-",
+   "b": "GND pour",
+   "dV": 26.0,
+   "d": 0.15,
+   "layer": "F.Cu",
+   "at": [
+    103.57,
+    64.53
+   ],
+   "kinds": "copper-pour",
+   "where": "pour",
+   "inherent": false,
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "W-",
+   "b": "GND pour",
+   "dV": 26.0,
+   "d": 0.15,
+   "layer": "B.Cu",
+   "at": [
+    51.56,
+    130.22
+   ],
+   "kinds": "copper-pour",
+   "where": "pour",
+   "inherent": false,
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "C-",
+   "b": "GND pour",
+   "dV": 26.0,
+   "d": 0.15,
+   "layer": "B.Cu",
+   "at": [
+    94.98,
+    55.08
+   ],
+   "kinds": "copper-pour",
+   "where": "pour",
+   "inherent": false,
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C13-Pad2) [VSH1]",
+   "b": "Net-(C18-Pad2) [VDD(panel)]",
+   "dV": 17.0,
+   "d": 0.75,
+   "layer": "B.Cu",
+   "at": [
+    76.76,
+    124.33
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.18",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "GND",
+   "b": "TPS_SW_NODE",
+   "dV": 26.0,
+   "d": 0.75,
+   "layer": "B.Cu",
+   "at": [
+    48.65,
+    121.97
+   ],
+   "kinds": "track-pad",
+   "where": "track / U10.4",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "LED_SW",
+   "b": "W-",
+   "dV": 26.0,
+   "d": 0.788,
+   "layer": "B.Cu",
+   "at": [
+    99.66,
+    48.84
+   ],
+   "kinds": "track-pad",
+   "where": "track / J6.5",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "LED_SW",
+   "b": "TPS_SW_NODE",
+   "dV": 26.5,
+   "d": 0.804,
+   "layer": "B.Cu",
+   "at": [
+    47.39,
+    117.82
+   ],
+   "kinds": "track-pad",
+   "where": "track / L2.2",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "C-",
+   "b": "COLOR_SEL",
+   "dV": 26.0,
+   "d": 0.846,
+   "layer": "B.Cu",
+   "at": [
+    53.04,
+    123.7
+   ],
+   "kinds": "track-pad",
+   "where": "track / J3.2",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/DET_NODE",
+   "b": "B-",
+   "dV": 10.2,
+   "d": 0.173,
+   "layer": "B.Cu",
+   "at": [
+    91.89,
+    84.36
+   ],
+   "kinds": "track-teardrop",
+   "where": "track / teardrop",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.13,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "J6_3V3",
+   "b": "W-",
+   "dV": 26.0,
+   "d": 0.876,
+   "layer": "B.Cu",
+   "at": [
+    102.34,
+    48.76
+   ],
+   "kinds": "track-pad",
+   "where": "track / J6.6",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "C-",
+   "b": "W-",
+   "dV": 26.0,
+   "d": 0.926,
+   "layer": "B.Cu",
+   "at": [
+    96.91,
+    55.2
+   ],
+   "kinds": "track-pad",
+   "where": "track / D8.1",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "GND",
+   "b": "Net-(C17-Pad2) [VSH2]",
+   "dV": 17.0,
+   "d": 0.952,
+   "layer": "B.Cu",
+   "at": [
+    70.75,
+    125.24
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.8",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "LDO_IN",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 0.988,
+   "layer": "B.Cu",
+   "at": [
+    47.06,
+    116.61
+   ],
+   "kinds": "track-pad",
+   "where": "track / F3.1",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "GND",
+   "b": "Net-(C13-Pad2) [VSH1]",
+   "dV": 17.0,
+   "d": 0.996,
+   "layer": "B.Cu",
+   "at": [
+    76.74,
+    123.4
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.20",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/GDR",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 25.0,
+   "d": 0.201,
+   "layer": "F.Cu",
+   "at": [
+    83.23,
+    127.23
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C15-Pad2) [VSL]",
+   "b": "PREVGL [VGL (PREVGL)]",
+   "dV": 25.0,
+   "d": 0.201,
+   "layer": "B.Cu",
+   "at": [
+    78.58,
+    125.29
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "GND",
+   "b": "W-",
+   "dV": 26.0,
+   "d": 1.183,
+   "layer": "B.Cu",
+   "at": [
+    50.7,
+    131.89
+   ],
+   "kinds": "track-pad",
+   "where": "track / R50.1",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/COLOR_SEL_INV",
+   "b": "C-",
+   "dV": 26.0,
+   "d": 1.195,
+   "layer": "B.Cu",
+   "at": [
+    46.93,
+    126.39
+   ],
+   "kinds": "pad-teardrop",
+   "where": "Q6.1 / teardrop",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/RESE",
+   "b": "EINK_SW",
+   "dV": 26.0,
+   "d": 1.212,
+   "layer": "B.Cu",
+   "at": [
+    88.67,
+    117.76
+   ],
+   "kinds": "pad-teardrop",
+   "where": "Q4.3 / teardrop",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "COLOR_SEL",
+   "b": "W-",
+   "dV": 26.0,
+   "d": 1.224,
+   "layer": "B.Cu",
+   "at": [
+    49.75,
+    130.35
+   ],
+   "kinds": "pad-teardrop",
+   "where": "Q5.3 / teardrop",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "LED_SW",
+   "b": "PWM_LED",
+   "dV": 26.0,
+   "d": 0.25,
+   "layer": "B.Cu",
+   "at": [
+    54.94,
+    120.42
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "GND",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 0.251,
+   "layer": "B.Cu",
+   "at": [
+    53.77,
+    126.98
+   ],
+   "kinds": "via-via",
+   "where": "via / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "I2C_SDA",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 0.251,
+   "layer": "F.Cu",
+   "at": [
+    97.32,
+    60.37
+   ],
+   "kinds": "track-teardrop",
+   "where": "track / teardrop",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "LED_SW",
+   "b": "W-",
+   "dV": 26.0,
+   "d": 0.251,
+   "layer": "F.Cu",
+   "at": [
+    100.99,
+    101.57
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "C-",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 0.251,
+   "layer": "F.Cu",
+   "at": [
+    96.8,
+    57.9
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "J6_3V3",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 0.251,
+   "layer": "B.Cu",
+   "at": [
+    97.1,
+    60.33
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/DET_NODE",
+   "b": "B-",
+   "dV": 10.2,
+   "d": 0.656,
+   "layer": "B.Cu",
+   "at": [
+    91.99,
+    84.07
+   ],
+   "kinds": "pad-pad",
+   "where": "Q9.2 / Q9.3",
+   "inherent": true,
+   "inherent_why": "footprint pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.13,
+   "governing": "A6",
+   "req": 0.13,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "EPD_BUSY",
+   "b": "Net-(C17-Pad2) [VSH2]",
+   "dV": 17.0,
+   "d": 1.305,
+   "layer": "B.Cu",
+   "at": [
+    71.13,
+    125.36
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.9",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "GND",
+   "b": "W-",
+   "dV": 26.0,
+   "d": 0.263,
+   "layer": "F.Cu",
+   "at": [
+    93.96,
+    56.64
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C13-Pad2) [VSH1]",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 25.0,
+   "d": 0.275,
+   "layer": "B.Cu",
+   "at": [
+    77.47,
+    127.94
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C20-Pad2) [VCOM]",
+   "b": "PREVGL [VGL (PREVGL)]",
+   "dV": 30.0,
+   "d": 0.275,
+   "layer": "B.Cu",
+   "at": [
+    79.0,
+    124.33
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C15-Pad2) [VSL]",
+   "b": "Net-(C20-Pad2) [VCOM]",
+   "dV": 22.0,
+   "d": 1.392,
+   "layer": "B.Cu",
+   "at": [
+    83.45,
+    122.39
+   ],
+   "kinds": "track-pad",
+   "where": "track / C15.2",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "LED_SW",
+   "b": "Net-(J1-SHIELD)",
+   "dV": 26.0,
+   "d": 1.398,
+   "layer": "F.Cu",
+   "at": [
+    101.64,
+    101.74
+   ],
+   "kinds": "track-pad",
+   "where": "track / J1.S1",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/DET_NODE",
+   "b": "B-",
+   "dV": 10.2,
+   "d": 0.738,
+   "layer": "B.Cu",
+   "at": [
+    91.88,
+    83.95
+   ],
+   "kinds": "track-pad",
+   "where": "track / Q9.2",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.13,
+   "governing": "A6",
+   "req": 0.13,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "PREVGH [VGH (PREVGH)]",
+   "b": "PREVGL [VGL (PREVGL)]",
+   "dV": 50.0,
+   "d": 0.75,
+   "layer": "B.Cu",
+   "at": [
+    78.24,
+    124.33
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.6,
+   "req_B4": 0.13,
+   "req_A6": 0.4,
+   "governing": "B4",
+   "req": 0.13,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "B-",
+   "b": "Net-(Q9-G)",
+   "dV": 10.2,
+   "d": 0.754,
+   "layer": "B.Cu",
+   "at": [
+    92.18,
+    85.68
+   ],
+   "kinds": "track-pad",
+   "where": "track / Q9.2",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.13,
+   "governing": "A6",
+   "req": 0.13,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "EINK_3V3",
+   "b": "EINK_SW",
+   "dV": 26.0,
+   "d": 1.474,
+   "layer": "B.Cu",
+   "at": [
+    85.59,
+    111.29
+   ],
+   "kinds": "pad-teardrop",
+   "where": "C11.2 / teardrop",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "LED_SW",
+   "b": "TPS_SW_NODE",
+   "dV": 26.5,
+   "d": 0.3,
+   "layer": "B.Cu",
+   "at": [
+    48.65,
+    121.75
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/LED_VIN",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 0.3,
+   "layer": "B.Cu",
+   "at": [
+    52.0,
+    117.35
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C13-Pad2) [VSH1]",
+   "b": "Net-(C19-Pad2) [VPP]",
+   "dV": 17.0,
+   "d": 0.3,
+   "layer": "B.Cu",
+   "at": [
+    76.99,
+    124.33
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "PREVGH [VGH (PREVGH)]",
+   "b": "GND pour",
+   "dV": 25.0,
+   "d": 0.3,
+   "layer": "F.Cu",
+   "at": [
+    83.33,
+    126.39
+   ],
+   "kinds": "copper-pour",
+   "where": "pour",
+   "inherent": false,
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "PREVGL [VGL (PREVGL)]",
+   "b": "GND pour",
+   "dV": 25.0,
+   "d": 0.3,
+   "layer": "F.Cu",
+   "at": [
+    82.89,
+    115.99
+   ],
+   "kinds": "copper-pour",
+   "where": "pour",
+   "inherent": false,
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "PREVGH [VGH (PREVGH)]",
+   "b": "GND pour",
+   "dV": 25.0,
+   "d": 0.3,
+   "layer": "B.Cu",
+   "at": [
+    77.96,
+    127.99
+   ],
+   "kinds": "copper-pour",
+   "where": "pour",
+   "inherent": false,
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "PREVGL [VGL (PREVGL)]",
+   "b": "GND pour",
+   "dV": 25.0,
+   "d": 0.3,
+   "layer": "B.Cu",
+   "at": [
+    82.89,
+    116.41
+   ],
+   "kinds": "copper-pour",
+   "where": "pour",
+   "inherent": false,
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(D4-K) [charge-pump node]",
+   "b": "GND pour",
+   "dV": 25.0,
+   "d": 0.3,
+   "layer": "B.Cu",
+   "at": [
+    81.33,
+    116.77
+   ],
+   "kinds": "copper-pour",
+   "where": "pour",
+   "inherent": false,
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C13-Pad2) [VSH1]",
+   "b": "GND pour",
+   "dV": 17.0,
+   "d": 0.3,
+   "layer": "B.Cu",
+   "at": [
+    77.39,
+    123.75
+   ],
+   "kinds": "copper-pour",
+   "where": "pour",
+   "inherent": false,
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C17-Pad2) [VSH2]",
+   "b": "GND pour",
+   "dV": 17.0,
+   "d": 0.3,
+   "layer": "B.Cu",
+   "at": [
+    69.89,
+    123.75
+   ],
+   "kinds": "copper-pour",
+   "where": "pour",
+   "inherent": false,
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C15-Pad2) [VSL]",
+   "b": "GND pour",
+   "dV": 17.0,
+   "d": 0.3,
+   "layer": "B.Cu",
+   "at": [
+    78.39,
+    123.75
+   ],
+   "kinds": "copper-pour",
+   "where": "pour",
+   "inherent": false,
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "EINK_3V3",
+   "b": "Net-(C13-Pad2) [VSH1]",
+   "dV": 17.0,
+   "d": 1.501,
+   "layer": "B.Cu",
+   "at": [
+    76.56,
+    123.22
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.20",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "C-",
+   "b": "COLOR_SEL",
+   "dV": 26.0,
+   "d": 0.307,
+   "layer": "B.Cu",
+   "at": [
+    53.68,
+    122.68
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "3V3",
+   "b": "W-",
+   "dV": 26.0,
+   "d": 1.569,
+   "layer": "B.Cu",
+   "at": [
+    52.48,
+    132.03
+   ],
+   "kinds": "track-pad",
+   "where": "track / R50.1",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/P+_FUSE",
+   "b": "C-",
+   "dV": 26.0,
+   "d": 0.314,
+   "layer": "B.Cu",
+   "at": [
+    96.54,
+    54.3
+   ],
+   "kinds": "track-teardrop",
+   "where": "track / teardrop",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "EPD_RST",
+   "b": "Net-(C17-Pad2) [VSH2]",
+   "dV": 17.0,
+   "d": 1.659,
+   "layer": "B.Cu",
+   "at": [
+    71.5,
+    125.49
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.10",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "C-",
+   "b": "GND",
+   "dV": 26.0,
+   "d": 0.335,
+   "layer": "F.Cu",
+   "at": [
+    103.06,
+    63.78
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "GND",
+   "b": "Net-(C15-Pad2) [VSL]",
+   "dV": 17.0,
+   "d": 1.703,
+   "layer": "B.Cu",
+   "at": [
+    77.49,
+    123.15
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.22",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "EINK_SW",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 26.0,
+   "d": 1.848,
+   "layer": "B.Cu",
+   "at": [
+    85.79,
+    116.61
+   ],
+   "kinds": "track-pad",
+   "where": "track / D5.1",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "EINK_3V3",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 25.0,
+   "d": 1.855,
+   "layer": "B.Cu",
+   "at": [
+    76.93,
+    123.09
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.21",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "GND",
+   "b": "Net-(C17-Pad2) [VSH2]",
+   "dV": 17.0,
+   "d": 0.378,
+   "layer": "B.Cu",
+   "at": [
+    70.35,
+    126.05
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "EPD_DC",
+   "b": "Net-(C17-Pad2) [VSH2]",
+   "dV": 17.0,
+   "d": 2.012,
+   "layer": "B.Cu",
+   "at": [
+    71.88,
+    125.61
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.11",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "EINK_SW",
+   "b": "GND",
+   "dV": 26.0,
+   "d": 0.405,
+   "layer": "B.Cu",
+   "at": [
+    85.48,
+    112.18
+   ],
+   "kinds": "via-teardrop",
+   "where": "via / teardrop",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C13-Pad2) [VSH1]",
+   "b": "SPI_MOSI",
+   "dV": 17.0,
+   "d": 2.053,
+   "layer": "B.Cu",
+   "at": [
+    76.36,
+    123.02
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.20",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "EINK_3V3",
+   "b": "Net-(C15-Pad2) [VSL]",
+   "dV": 20.6,
+   "d": 2.208,
+   "layer": "B.Cu",
+   "at": [
+    77.31,
+    122.97
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.22",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "EPD_CS",
+   "b": "Net-(C17-Pad2) [VSH2]",
+   "dV": 17.0,
+   "d": 2.366,
+   "layer": "B.Cu",
+   "at": [
+    72.25,
+    125.74
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.12",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "COLOR_SEL",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 0.5,
+   "layer": "B.Cu",
+   "at": [
+    55.5,
+    121.35
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "LED_SW",
+   "b": "GND pour",
+   "dV": 26.0,
+   "d": 0.5,
+   "layer": "F.Cu",
+   "at": [
+    66.15,
+    134.55
+   ],
+   "kinds": "copper-pour",
+   "where": "pour",
+   "inherent": false,
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "LED_SW",
+   "b": "GND pour",
+   "dV": 26.0,
+   "d": 0.5,
+   "layer": "B.Cu",
+   "at": [
+    54.66,
+    120.11
+   ],
+   "kinds": "copper-pour",
+   "where": "pour",
+   "inherent": false,
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "EINK_SW",
+   "b": "GND pour",
+   "dV": 26.0,
+   "d": 0.5,
+   "layer": "B.Cu",
+   "at": [
+    85.74,
+    112.9
+   ],
+   "kinds": "copper-pour",
+   "where": "pour",
+   "inherent": false,
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "LED_MONIT",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 0.501,
+   "layer": "B.Cu",
+   "at": [
+    54.28,
+    117.81
+   ],
+   "kinds": "track-teardrop",
+   "where": "track / teardrop",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "TPS_SW_NODE",
+   "b": "GND pour",
+   "dV": 26.0,
+   "d": 0.501,
+   "layer": "B.Cu",
+   "at": [
+    49.09,
+    121.6
+   ],
+   "kinds": "copper-pour",
+   "where": "pour",
+   "inherent": false,
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "BUTTON_ADC_1",
+   "b": "C-",
+   "dV": 26.0,
+   "d": 0.533,
+   "layer": "B.Cu",
+   "at": [
+    45.36,
+    132.14
+   ],
+   "kinds": "track-teardrop",
+   "where": "track / teardrop",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C17-Pad2) [VSH2]",
+   "b": "SPI_SCK",
+   "dV": 17.0,
+   "d": 2.72,
+   "layer": "B.Cu",
+   "at": [
+    72.63,
+    125.86
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.13",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "GND",
+   "b": "Net-(C15-Pad2) [VSL]",
+   "dV": 17.0,
+   "d": 0.55,
+   "layer": "B.Cu",
+   "at": [
+    81.21,
+    126.02
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/RESE",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 25.0,
+   "d": 0.552,
+   "layer": "F.Cu",
+   "at": [
+    83.36,
+    127.36
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "3V3",
+   "b": "Net-(D4-K) [charge-pump node]",
+   "dV": 28.6,
+   "d": 0.58,
+   "layer": "B.Cu",
+   "at": [
+    81.79,
+    112.01
+   ],
+   "kinds": "via-teardrop",
+   "where": "via / teardrop",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "LED_SW",
+   "b": "TP_INT",
+   "dV": 26.0,
+   "d": 2.962,
+   "layer": "B.Cu",
+   "at": [
+    67.2,
+    133.5
+   ],
+   "kinds": "track-pad",
+   "where": "track / TP3.1",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C17-Pad2) [VSH2]",
+   "b": "SPI_MOSI",
+   "dV": 17.0,
+   "d": 3.073,
+   "layer": "B.Cu",
+   "at": [
+    73.0,
+    125.99
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.14",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "3V3",
+   "b": "C-",
+   "dV": 26.0,
+   "d": 0.678,
+   "layer": "F.Cu",
+   "at": [
+    46.86,
+    135.6
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(D4-K) [charge-pump node]",
+   "b": "PREVGL [VGL (PREVGL)]",
+   "dV": 25.5,
+   "d": 0.685,
+   "layer": "B.Cu",
+   "at": [
+    81.54,
+    114.8
+   ],
+   "kinds": "track-teardrop",
+   "where": "track / teardrop",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "EINK_3V3",
+   "b": "Net-(C17-Pad2) [VSH2]",
+   "dV": 17.0,
+   "d": 3.427,
+   "layer": "B.Cu",
+   "at": [
+    73.38,
+    126.11
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.15",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "I2C_SDA",
+   "b": "W-",
+   "dV": 26.0,
+   "d": 0.702,
+   "layer": "F.Cu",
+   "at": [
+    100.6,
+    138.05
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/RESE",
+   "b": "Net-(C17-Pad2) [VSH2]",
+   "dV": 17.0,
+   "d": 0.709,
+   "layer": "B.Cu",
+   "at": [
+    69.24,
+    124.9
+   ],
+   "kinds": "teardrop-teardrop",
+   "where": "teardrop / teardrop",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "LDO_IN",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 0.731,
+   "layer": "B.Cu",
+   "at": [
+    46.57,
+    117.27
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C15-Pad2) [VSL]",
+   "b": "Net-(C17-Pad2) [VSH2]",
+   "dV": 34.0,
+   "d": 5.902,
+   "layer": "B.Cu",
+   "at": [
+    76.0,
+    126.99
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.22",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.6,
+   "req_B4": 0.13,
+   "req_A6": 0.4,
+   "governing": "A6",
+   "req": 0.4,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "3V3",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 3.773,
+   "layer": "B.Cu",
+   "at": [
+    56.47,
+    126.48
+   ],
+   "kinds": "track-pad",
+   "where": "track / J3.5",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "EINK_3V3",
+   "b": "Net-(C17-Pad2) [VSH2]",
+   "dV": 17.0,
+   "d": 0.763,
+   "layer": "B.Cu",
+   "at": [
+    79.36,
+    133.98
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C19-Pad2) [VPP]",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 25.0,
+   "d": 0.775,
+   "layer": "B.Cu",
+   "at": [
+    77.22,
+    124.33
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C17-Pad2) [VSH2]",
+   "b": "PREVGL [VGL (PREVGL)]",
+   "dV": 42.0,
+   "d": 6.255,
+   "layer": "B.Cu",
+   "at": [
+    76.38,
+    127.11
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.23",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.6,
+   "req_B4": 0.13,
+   "req_A6": 0.4,
+   "governing": "A6",
+   "req": 0.4,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "C-",
+   "b": "PWM_LED",
+   "dV": 26.0,
+   "d": 0.802,
+   "layer": "B.Cu",
+   "at": [
+    53.5,
+    122.5
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "GND",
+   "b": "Net-(C17-Pad2) [VSH2]",
+   "dV": 17.0,
+   "d": 4.134,
+   "layer": "B.Cu",
+   "at": [
+    74.13,
+    126.36
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.17",
+   "inherent": true,
+   "inherent_why": "fan-out within the footprint's own pad gap",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "GND",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 25.0,
+   "d": 0.835,
+   "layer": "B.Cu",
+   "at": [
+    82.28,
+    126.69
+   ],
+   "kinds": "via-via",
+   "where": "via / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "3V3",
+   "b": "W-",
+   "dV": 26.0,
+   "d": 0.848,
+   "layer": "B.Cu",
+   "at": [
+    53.71,
+    131.31
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "COLOR_SEL",
+   "b": "W-",
+   "dV": 26.0,
+   "d": 0.852,
+   "layer": "B.Cu",
+   "at": [
+    50.4,
+    129.26
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C20-Pad2) [VCOM]",
+   "b": "Net-(D4-K) [charge-pump node]",
+   "dV": 30.0,
+   "d": 0.853,
+   "layer": "B.Cu",
+   "at": [
+    81.79,
+    122.18
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C17-Pad2) [VSH2]",
+   "b": "Net-(C18-Pad2) [VDD(panel)]",
+   "dV": 17.0,
+   "d": 4.487,
+   "layer": "B.Cu",
+   "at": [
+    74.5,
+    126.49
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.18",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "3V3",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 0.945,
+   "layer": "B.Cu",
+   "at": [
+    53.59,
+    133.05
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "3V3",
+   "b": "C-",
+   "dV": 26.0,
+   "d": 4.834,
+   "layer": "B.Cu",
+   "at": [
+    55.35,
+    126.86
+   ],
+   "kinds": "track-pad",
+   "where": "track / J3.2",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C17-Pad2) [VSH2]",
+   "b": "Net-(C19-Pad2) [VPP]",
+   "dV": 17.0,
+   "d": 4.841,
+   "layer": "B.Cu",
+   "at": [
+    74.88,
+    126.61
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.19",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C20-Pad2) [VCOM]",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 30.0,
+   "d": 0.98,
+   "layer": "B.Cu",
+   "at": [
+    84.91,
+    119.09
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C13-Pad2) [VSH1]",
+   "b": "Net-(C18-Pad2) [VDD(panel)]",
+   "dV": 17.0,
+   "d": 1.002,
+   "layer": "B.Cu",
+   "at": [
+    76.81,
+    129.26
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "J6_3V3",
+   "b": "W-",
+   "dV": 26.0,
+   "d": 1.005,
+   "layer": "B.Cu",
+   "at": [
+    101.94,
+    49.07
+   ],
+   "kinds": "track-teardrop",
+   "where": "track / teardrop",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/GDR",
+   "b": "Net-(C17-Pad2) [VSH2]",
+   "dV": 17.0,
+   "d": 1.014,
+   "layer": "B.Cu",
+   "at": [
+    71.57,
+    127.73
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C13-Pad2) [VSH1]",
+   "b": "Net-(C17-Pad2) [VSH2]",
+   "dV": 17.0,
+   "d": 5.194,
+   "layer": "B.Cu",
+   "at": [
+    75.25,
+    126.74
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.20",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "GND",
+   "b": "PREVGL [VGL (PREVGL)]",
+   "dV": 25.0,
+   "d": 1.046,
+   "layer": "B.Cu",
+   "at": [
+    81.03,
+    125.85
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "C-",
+   "b": "I2C_SDA",
+   "dV": 26.0,
+   "d": 1.053,
+   "layer": "F.Cu",
+   "at": [
+    101.06,
+    112.52
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/P+_FUSE",
+   "b": "W-",
+   "dV": 26.0,
+   "d": 1.058,
+   "layer": "B.Cu",
+   "at": [
+    97.53,
+    50.3
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "I2C_SCL",
+   "b": "LED_SW",
+   "dV": 26.0,
+   "d": 1.085,
+   "layer": "F.Cu",
+   "at": [
+    101.5,
+    136.8
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C17-Pad2) [VSH2]",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 25.0,
+   "d": 5.548,
+   "layer": "B.Cu",
+   "at": [
+    75.63,
+    126.86
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.21",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C15-Pad2) [VSL]",
+   "b": "Net-(C20-Pad2) [VCOM]",
+   "dV": 22.0,
+   "d": 1.152,
+   "layer": "B.Cu",
+   "at": [
+    78.76,
+    124.8
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C17-Pad2) [VSH2]",
+   "b": "Net-(C18-Pad2) [VDD(panel)]",
+   "dV": 17.0,
+   "d": 1.214,
+   "layer": "B.Cu",
+   "at": [
+    78.4,
+    132.7
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "B-",
+   "b": "Net-(Q9-G)",
+   "dV": 10.2,
+   "d": 1.273,
+   "layer": "B.Cu",
+   "at": [
+    92.05,
+    85.35
+   ],
+   "kinds": "track-teardrop",
+   "where": "track / teardrop",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.13,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/GDR",
+   "b": "EINK_SW",
+   "dV": 26.0,
+   "d": 1.279,
+   "layer": "B.Cu",
+   "at": [
+    89.14,
+    115.41
+   ],
+   "kinds": "track-teardrop",
+   "where": "track / teardrop",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C17-Pad2) [VSH2]",
+   "b": "Net-(C20-Pad2) [VCOM]",
+   "dV": 22.0,
+   "d": 6.609,
+   "layer": "B.Cu",
+   "at": [
+    76.75,
+    127.24
+   ],
+   "kinds": "track-pad",
+   "where": "track / J2.24",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "A6",
+   "req": 0.25,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "EINK_3V3",
+   "b": "Net-(C13-Pad2) [VSH1]",
+   "dV": 17.0,
+   "d": 1.403,
+   "layer": "B.Cu",
+   "at": [
+    76.67,
+    129.4
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "GND",
+   "b": "Net-(C13-Pad2) [VSH1]",
+   "dV": 17.0,
+   "d": 1.409,
+   "layer": "B.Cu",
+   "at": [
+    76.67,
+    123.76
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "I2C_SCL",
+   "b": "W-",
+   "dV": 26.0,
+   "d": 1.536,
+   "layer": "F.Cu",
+   "at": [
+    101.66,
+    136.96
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C17-Pad2) [VSH2]",
+   "b": "Net-(C19-Pad2) [VPP]",
+   "dV": 17.0,
+   "d": 1.565,
+   "layer": "B.Cu",
+   "at": [
+    78.42,
+    132.47
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "EPD_BUSY",
+   "b": "Net-(C17-Pad2) [VSH2]",
+   "dV": 17.0,
+   "d": 1.718,
+   "layer": "B.Cu",
+   "at": [
+    71.06,
+    125.0
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "EINK_SW",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 26.0,
+   "d": 1.955,
+   "layer": "B.Cu",
+   "at": [
+    85.89,
+    116.79
+   ],
+   "kinds": "track-teardrop",
+   "where": "track / teardrop",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C18-Pad2) [VDD(panel)]",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 25.0,
+   "d": 1.967,
+   "layer": "B.Cu",
+   "at": [
+    77.82,
+    129.58
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "EPD_RST",
+   "b": "Net-(C17-Pad2) [VSH2]",
+   "dV": 17.0,
+   "d": 2.072,
+   "layer": "B.Cu",
+   "at": [
+    71.43,
+    125.13
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "C-",
+   "b": "I2C_SCL",
+   "dV": 26.0,
+   "d": 2.075,
+   "layer": "F.Cu",
+   "at": [
+    101.85,
+    137.15
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C15-Pad2) [VSL]",
+   "b": "Net-(C17-Pad2) [VSH2]",
+   "dV": 34.0,
+   "d": 5.669,
+   "layer": "B.Cu",
+   "at": [
+    76.83,
+    127.97
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.6,
+   "req_B4": 0.13,
+   "req_A6": 0.4,
+   "governing": "B4",
+   "req": 0.13,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "C-",
+   "b": "J6_3V3",
+   "dV": 26.0,
+   "d": 2.217,
+   "layer": "B.Cu",
+   "at": [
+    100.87,
+    49.29
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "EINK_3V3",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 25.0,
+   "d": 2.242,
+   "layer": "B.Cu",
+   "at": [
+    76.86,
+    123.44
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C17-Pad2) [VSH2]",
+   "b": "PREVGL [VGL (PREVGL)]",
+   "dV": 42.0,
+   "d": 6.07,
+   "layer": "B.Cu",
+   "at": [
+    76.84,
+    127.71
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.6,
+   "req_B4": 0.13,
+   "req_A6": 0.4,
+   "governing": "B4",
+   "req": 0.13,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C13-Pad2) [VSH1]",
+   "b": "Net-(C17-Pad2) [VSH2]",
+   "dV": 17.0,
+   "d": 2.416,
+   "layer": "B.Cu",
+   "at": [
+    76.31,
+    129.76
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "EPD_DC",
+   "b": "Net-(C17-Pad2) [VSH2]",
+   "dV": 17.0,
+   "d": 2.425,
+   "layer": "B.Cu",
+   "at": [
+    71.81,
+    125.25
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C13-Pad2) [VSH1]",
+   "b": "SPI_MOSI",
+   "dV": 17.0,
+   "d": 2.466,
+   "layer": "B.Cu",
+   "at": [
+    76.3,
+    123.38
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "EPD_CS",
+   "b": "Net-(C17-Pad2) [VSH2]",
+   "dV": 17.0,
+   "d": 2.779,
+   "layer": "B.Cu",
+   "at": [
+    72.18,
+    125.38
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/GDR",
+   "b": "PREVGL [VGL (PREVGL)]",
+   "dV": 28.6,
+   "d": 2.985,
+   "layer": "F.Cu",
+   "at": [
+    84.4,
+    124.1
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C17-Pad2) [VSH2]",
+   "b": "SPI_SCK",
+   "dV": 17.0,
+   "d": 3.132,
+   "layer": "B.Cu",
+   "at": [
+    72.56,
+    125.5
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "/RESE",
+   "b": "PREVGL [VGL (PREVGL)]",
+   "dV": 26.0,
+   "d": 3.336,
+   "layer": "F.Cu",
+   "at": [
+    84.52,
+    124.22
+   ],
+   "kinds": "track-via",
+   "where": "track / via",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C17-Pad2) [VSH2]",
+   "b": "PREVGH [VGH (PREVGH)]",
+   "dV": 25.0,
+   "d": 3.381,
+   "layer": "B.Cu",
+   "at": [
+    76.45,
+    129.22
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C17-Pad2) [VSH2]",
+   "b": "SPI_MOSI",
+   "dV": 17.0,
+   "d": 3.486,
+   "layer": "B.Cu",
+   "at": [
+    72.93,
+    125.63
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C17-Pad2) [VSH2]",
+   "b": "TP_INT",
+   "dV": 17.0,
+   "d": 6.001,
+   "layer": "B.Cu",
+   "at": [
+    72.69,
+    132.37
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "I2C_SCL",
+   "b": "Net-(C17-Pad2) [VSH2]",
+   "dV": 17.0,
+   "d": 6.36,
+   "layer": "B.Cu",
+   "at": [
+    70.88,
+    130.82
+   ],
+   "kinds": "track-teardrop",
+   "where": "track / teardrop",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "Net-(C17-Pad2) [VSH2]",
+   "b": "Net-(C20-Pad2) [VCOM]",
+   "dV": 22.0,
+   "d": 7.021,
+   "layer": "B.Cu",
+   "at": [
+    76.68,
+    126.88
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  },
+  {
+   "a": "I2C_SDA",
+   "b": "Net-(C17-Pad2) [VSH2]",
+   "dV": 17.0,
+   "d": 7.102,
+   "layer": "B.Cu",
+   "at": [
+    69.46,
+    129.92
+   ],
+   "kinds": "track-track",
+   "where": "track / track",
+   "inherent": false,
+   "inherent_why": "",
+   "req_B2": 0.1,
+   "req_B4": 0.05,
+   "req_A6": 0.25,
+   "governing": "B4",
+   "req": 0.05,
+   "ok": true,
+   "ok_B2": true
+  }
+ ],
+ "mechanical": {
+  "near_edge": [
+   {
+    "layer": "F.Cu",
+    "net": "GND",
+    "kind": "via",
+    "d": 0.473,
+    "what": "via",
+    "at": [
+     82.52,
+     67.8
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "GND",
+    "kind": "via",
+    "d": 0.473,
+    "what": "via",
+    "at": [
+     82.52,
+     67.8
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "C-",
+    "kind": "track",
+    "d": 0.476,
+    "what": "track w0.2",
+    "at": [
+     102.98,
+     64.08
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "C-",
+    "kind": "track",
+    "d": 0.476,
+    "what": "track w0.2",
+    "at": [
+     102.63,
+     137.97
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "I2C_SCL",
+    "kind": "track",
+    "d": 0.476,
+    "what": "track w0.2",
+    "at": [
+     94.52,
+     60.56
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "I2C_SCL",
+    "kind": "track",
+    "d": 0.476,
+    "what": "track w0.2",
+    "at": [
+     95.61,
+     61.31
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "I2C_SCL",
+    "kind": "track",
+    "d": 0.476,
+    "what": "track w0.2",
+    "at": [
+     94.95,
+     60.82
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "C-",
+    "kind": "track",
+    "d": 0.477,
+    "what": "track w0.2",
+    "at": [
+     103.66,
+     82.24
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "C-",
+    "kind": "track",
+    "d": 0.477,
+    "what": "track w0.2",
+    "at": [
+     102.58,
+     100.8
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "C-",
+    "kind": "track",
+    "d": 0.477,
+    "what": "track w0.2",
+    "at": [
+     102.58,
+     113.16
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "C-",
+    "kind": "track",
+    "d": 0.477,
+    "what": "track w0.2",
+    "at": [
+     103.66,
+     125.59
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "",
+    "kind": "pad",
+    "d": 0.48,
+    "what": "SW3.3",
+    "at": [
+     84.24,
+     143.95
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "",
+    "kind": "pad",
+    "d": 0.48,
+    "what": "SW3.4",
+    "at": [
+     77.24,
+     143.95
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "",
+    "kind": "pad",
+    "d": 0.48,
+    "what": "SW8.3",
+    "at": [
+     71.24,
+     143.95
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "",
+    "kind": "pad",
+    "d": 0.48,
+    "what": "SW8.4",
+    "at": [
+     64.24,
+     143.95
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "",
+    "kind": "pad",
+    "d": 0.48,
+    "what": "SW2.3",
+    "at": [
+     96.24,
+     143.95
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "",
+    "kind": "pad",
+    "d": 0.48,
+    "what": "SW2.4",
+    "at": [
+     89.24,
+     143.95
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "",
+    "kind": "pad",
+    "d": 0.48,
+    "what": "SW9.3",
+    "at": [
+     59.24,
+     143.95
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "",
+    "kind": "pad",
+    "d": 0.48,
+    "what": "SW9.4",
+    "at": [
+     52.24,
+     143.95
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "",
+    "kind": "pad",
+    "d": 0.48,
+    "what": "SW3.3",
+    "at": [
+     84.24,
+     143.95
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "",
+    "kind": "pad",
+    "d": 0.48,
+    "what": "SW3.4",
+    "at": [
+     77.24,
+     143.95
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "",
+    "kind": "pad",
+    "d": 0.48,
+    "what": "SW8.3",
+    "at": [
+     71.24,
+     143.95
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "",
+    "kind": "pad",
+    "d": 0.48,
+    "what": "SW8.4",
+    "at": [
+     64.24,
+     143.95
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "",
+    "kind": "pad",
+    "d": 0.48,
+    "what": "SW2.3",
+    "at": [
+     96.24,
+     143.95
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "",
+    "kind": "pad",
+    "d": 0.48,
+    "what": "SW2.4",
+    "at": [
+     89.24,
+     143.95
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "",
+    "kind": "pad",
+    "d": 0.48,
+    "what": "SW9.3",
+    "at": [
+     59.24,
+     143.95
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "",
+    "kind": "pad",
+    "d": 0.48,
+    "what": "SW9.4",
+    "at": [
+     52.24,
+     143.95
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "Net-(J1-SHIELD)",
+    "kind": "pad",
+    "d": 0.507,
+    "what": "J1.S1",
+    "at": [
+     102.83,
+     102.63
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "Net-(J1-SHIELD)",
+    "kind": "pad",
+    "d": 0.507,
+    "what": "J1.S1",
+    "at": [
+     102.83,
+     111.27
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "Net-(J1-SHIELD)",
+    "kind": "pad",
+    "d": 0.507,
+    "what": "J1.S1",
+    "at": [
+     102.83,
+     102.63
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "Net-(J1-SHIELD)",
+    "kind": "pad",
+    "d": 0.507,
+    "what": "J1.S1",
+    "at": [
+     102.83,
+     111.27
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "UNUSED_GPIO_3",
+    "kind": "track",
+    "d": 0.509,
+    "what": "track w0.2",
+    "at": [
+     85.3,
+     61.5
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "UNUSED_GPIO_3",
+    "kind": "track",
+    "d": 0.509,
+    "what": "track w0.2",
+    "at": [
+     85.5,
+     57.7
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "Net-(R60-Pad1)",
+    "kind": "track",
+    "d": 0.523,
+    "what": "track w0.2",
+    "at": [
+     98.09,
+     140.65
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "BUTTON_ADC_1",
+    "kind": "via",
+    "d": 0.524,
+    "what": "via",
+    "at": [
+     45.1,
+     118.0
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "BUTTON_ADC_1",
+    "kind": "via",
+    "d": 0.524,
+    "what": "via",
+    "at": [
+     45.1,
+     118.0
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "Net-(R20-Pad1)",
+    "kind": "pad",
+    "d": 0.531,
+    "what": "R20.1",
+    "at": [
+     45.3,
+     141.59
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "BUTTON_ADC_1",
+    "kind": "teardrop",
+    "d": 0.531,
+    "what": "teardrop",
+    "at": [
+     45.04,
+     118.27
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "UNUSED_GPIO_3",
+    "kind": "track",
+    "d": 0.532,
+    "what": "track w0.2",
+    "at": [
+     84.4,
+     66.0
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "BUTTON_ADC_1",
+    "kind": "pad",
+    "d": 0.532,
+    "what": "R20.2",
+    "at": [
+     45.3,
+     139.76
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "BUTTON_ADC_1",
+    "kind": "teardrop",
+    "d": 0.533,
+    "what": "teardrop",
+    "at": [
+     45.18,
+     139.29
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "BUTTON_ADC_1",
+    "kind": "teardrop",
+    "d": 0.534,
+    "what": "teardrop",
+    "at": [
+     45.1,
+     117.74
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "UNUSED_GPIO_3",
+    "kind": "track",
+    "d": 0.536,
+    "what": "track w0.2",
+    "at": [
+     83.5,
+     67.1
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "Net-(J1-SHIELD)",
+    "kind": "pad",
+    "d": 0.537,
+    "what": "C1.2",
+    "at": [
+     103.16,
+     100.0
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "Net-(J1-SHIELD)",
+    "kind": "pad",
+    "d": 0.537,
+    "what": "R1.2",
+    "at": [
+     103.21,
+     98.5
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "GND",
+    "kind": "via",
+    "d": 0.547,
+    "what": "via",
+    "at": [
+     103.39,
+     63.45
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "GND",
+    "kind": "via",
+    "d": 0.547,
+    "what": "via",
+    "at": [
+     103.39,
+     63.45
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "Net-(R20-Pad1)",
+    "kind": "teardrop",
+    "d": 0.553,
+    "what": "teardrop",
+    "at": [
+     45.31,
+     142.06
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "Net-(J1-SHIELD)",
+    "kind": "teardrop",
+    "d": 0.56,
+    "what": "teardrop",
+    "at": [
+     103.21,
+     98.96
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "Net-(D2-K)",
+    "kind": "pad",
+    "d": 0.562,
+    "what": "D2.1",
+    "at": [
+     102.8,
+     116.86
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "USB_VBUS",
+    "kind": "pad",
+    "d": 0.562,
+    "what": "D2.2",
+    "at": [
+     102.8,
+     119.83
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "GND",
+    "kind": "pad",
+    "d": 0.569,
+    "what": "R3.2",
+    "at": [
+     103.18,
+     97.03
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "Net-(J1-SHIELD)",
+    "kind": "teardrop",
+    "d": 0.584,
+    "what": "teardrop",
+    "at": [
+     103.19,
+     99.52
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "Net-(J1-SHIELD)",
+    "kind": "teardrop",
+    "d": 0.596,
+    "what": "teardrop",
+    "at": [
+     103.17,
+     100.48
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "GND",
+    "kind": "via",
+    "d": 0.6,
+    "what": "via",
+    "at": [
+     61.84,
+     143.4
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "GND",
+    "kind": "via",
+    "d": 0.6,
+    "what": "via",
+    "at": [
+     86.89,
+     143.4
+    ]
+   },
+   {
+    "layer": "F.Cu",
+    "net": "GND",
+    "kind": "via",
+    "d": 0.6,
+    "what": "via",
+    "at": [
+     74.89,
+     143.4
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "GND",
+    "kind": "via",
+    "d": 0.6,
+    "what": "via",
+    "at": [
+     61.84,
+     143.4
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "GND",
+    "kind": "via",
+    "d": 0.6,
+    "what": "via",
+    "at": [
+     86.89,
+     143.4
+    ]
+   },
+   {
+    "layer": "B.Cu",
+    "net": "GND",
+    "kind": "via",
+    "d": 0.6,
+    "what": "via",
+    "at": [
+     74.89,
+     143.4
+    ]
+   }
+  ],
+  "mount_holes": [
+   {
+    "ref": "H5",
+    "at": [
+     94.6,
+     72.2
+    ],
+    "own_net": [
+     "GND"
+    ],
+    "other_copper_within_2_5mm": [
+     {
+      "layer": "B.Cu",
+      "net": "Net-(Q3-G)",
+      "kind": "track",
+      "d_from_centre": 2.07
+     },
+     {
+      "layer": "B.Cu",
+      "net": "Net-(Q3-G)",
+      "kind": "teardrop",
+      "d_from_centre": 2.18
+     },
+     {
+      "layer": "B.Cu",
+      "net": "Net-(Q3-G)",
+      "kind": "track",
+      "d_from_centre": 2.19
+     },
+     {
+      "layer": "B.Cu",
+      "net": "B+",
+      "kind": "track",
+      "d_from_centre": 2.3
+     },
+     {
+      "layer": "B.Cu",
+      "net": "Net-(Q3-G)",
+      "kind": "track",
+      "d_from_centre": 2.33
+     },
+     {
+      "layer": "B.Cu",
+      "net": "Net-(Q3-G)",
+      "kind": "track",
+      "d_from_centre": 2.33
+     }
+    ]
+   },
+   {
+    "ref": "H3",
+    "at": [
+     47.9875,
+     145.25
+    ],
+    "own_net": [
+     "GND"
+    ],
+    "other_copper_within_2_5mm": [
+     {
+      "layer": "B.Cu",
+      "net": "Net-(R20-Pad1)",
+      "kind": "track",
+      "d_from_centre": 2.15
+     },
+     {
+      "layer": "B.Cu",
+      "net": "Net-(R19-Pad1)",
+      "kind": "track",
+      "d_from_centre": 2.28
+     },
+     {
+      "layer": "F.Cu",
+      "net": "Net-(R20-Pad1)",
+      "kind": "track",
+      "d_from_centre": 2.31
+     },
+     {
+      "layer": "F.Cu",
+      "net": "Net-(R20-Pad1)",
+      "kind": "track",
+      "d_from_centre": 2.43
+     }
+    ]
+   },
+   {
+    "ref": "H6",
+    "at": [
+     69.2,
+     117.5
+    ],
+    "own_net": [
+     "GND"
+    ],
+    "other_copper_within_2_5mm": [
+     {
+      "layer": "B.Cu",
+      "net": "3V3",
+      "kind": "track",
+      "d_from_centre": 2.42
+     }
+    ]
+   },
+   {
+    "ref": "H1",
+    "at": [
+     94.2411,
+     51.6457
+    ],
+    "own_net": [
+     "GND"
+    ],
+    "other_copper_within_2_5mm": [
+     {
+      "layer": "F.Cu",
+      "net": "I2C_SDA",
+      "kind": "via",
+      "d_from_centre": 2.2
+     },
+     {
+      "layer": "B.Cu",
+      "net": "I2C_SDA",
+      "kind": "via",
+      "d_from_centre": 2.2
+     },
+     {
+      "layer": "F.Cu",
+      "net": "I2C_SDA",
+      "kind": "teardrop",
+      "d_from_centre": 2.21
+     },
+     {
+      "layer": "B.Cu",
+      "net": "/P+_FUSE",
+      "kind": "track",
+      "d_from_centre": 2.21
+     },
+     {
+      "layer": "B.Cu",
+      "net": "/P+_FUSE",
+      "kind": "track",
+      "d_from_centre": 2.21
+     },
+     {
+      "layer": "F.Cu",
+      "net": "I2C_SDA",
+      "kind": "track",
+      "d_from_centre": 2.34
+     }
+    ]
+   },
+   {
+    "ref": "H4",
+    "at": [
+     100.4875,
+     145.25
+    ],
+    "own_net": [
+     "GND"
+    ],
+    "other_copper_within_2_5mm": []
+   },
+   {
+    "ref": "H2",
+    "at": [
+     53.9,
+     70.5
+    ],
+    "own_net": [
+     "GND"
+    ],
+    "other_copper_within_2_5mm": [
+     {
+      "layer": "B.Cu",
+      "net": "PWR_BUTTON",
+      "kind": "track",
+      "d_from_centre": 2.3
+     },
+     {
+      "layer": "B.Cu",
+      "net": "PWR_BUTTON",
+      "kind": "track",
+      "d_from_centre": 2.34
+     },
+     {
+      "layer": "B.Cu",
+      "net": "PWR_BUTTON",
+      "kind": "teardrop",
+      "d_from_centre": 2.42
+     },
+     {
+      "layer": "B.Cu",
+      "net": "PWR_BUTTON",
+      "kind": "track",
+      "d_from_centre": 2.45
+     }
+    ]
+   }
+  ],
+  "cut_line_crossings": [
+   [
+    "3V3",
+    "B.Cu",
+    0.25
+   ],
+   [
+    "C-",
+    "F.Cu",
+    0.2
+   ],
+   [
+    "I2C_SCL",
+    "F.Cu",
+    0.2
+   ],
+   [
+    "I2C_SDA",
+    "F.Cu",
+    0.2
+   ],
+   [
+    "LED_SW",
+    "F.Cu",
+    0.2
+   ],
+   [
+    "Net-(R62-Pad1)",
+    "B.Cu",
+    0.2
+   ],
+   [
+    "P+",
+    "F.Cu",
+    0.4
+   ],
+   [
+    "UNUSED_GPIO_3",
+    "B.Cu",
+    0.2
+   ],
+   [
+    "UNUSED_GPIO_45",
+    "F.Cu",
+    0.2
+   ],
+   [
+    "UNUSED_GPIO_46",
+    "F.Cu",
+    0.2
+   ],
+   [
+    "W-",
+    "F.Cu",
+    0.2
+   ]
+  ],
+  "acute_angles": {
+   "count": 46,
+   "under_60": 41,
+   "worst": [
+    {
+     "layer": "F.Cu",
+     "net": "VBUS_PRE_FUSE",
+     "at": [
+      94.55,
+      103.045
+     ],
+     "angle": 15.0
+    },
+    {
+     "layer": "B.Cu",
+     "net": "P+",
+     "at": [
+      83.776,
+      87.522
+     ],
+     "angle": 27.1
+    },
+    {
+     "layer": "B.Cu",
+     "net": "3V3",
+     "at": [
+      81.612,
+      110.3
+     ],
+     "angle": 39.7
+    },
+    {
+     "layer": "B.Cu",
+     "net": "EINK_3V3",
+     "at": [
+      86.598,
+      110.3
+     ],
+     "angle": 43.4
+    },
+    {
+     "layer": "B.Cu",
+     "net": "LDO_IN",
+     "at": [
+      84.849,
+      86.3
+     ],
+     "angle": 44.5
+    },
+    {
+     "layer": "B.Cu",
+     "net": "ESP32_IO0",
+     "at": [
+      72.088,
+      112.0
+     ],
+     "angle": 44.8
+    },
+    {
+     "layer": "B.Cu",
+     "net": "SD_VDD",
+     "at": [
+      78.911,
+      80.856
+     ],
+     "angle": 44.9
+    },
+    {
+     "layer": "B.Cu",
+     "net": "Net-(Q3-G)",
+     "at": [
+      94.159,
+      76.307
+     ],
+     "angle": 44.9
+    },
+    {
+     "layer": "B.Cu",
+     "net": "USB_VBUS",
+     "at": [
+      82.2,
+      95.3
+     ],
+     "angle": 45.0
+    },
+    {
+     "layer": "B.Cu",
+     "net": "USB_VBUS",
+     "at": [
+      87.5,
+      91.8
+     ],
+     "angle": 45.0
+    },
+    {
+     "layer": "B.Cu",
+     "net": "3V3",
+     "at": [
+      50.032,
+      133.929
+     ],
+     "angle": 45.0
+    },
+    {
+     "layer": "B.Cu",
+     "net": "3V3",
+     "at": [
+      61.2,
+      124.6
+     ],
+     "angle": 45.0
+    }
+   ]
+  },
+  "teardrop_candidates": {
+   "track-pad": 758,
+   "track-pad, teardrop present": 713,
+   "track-via": 277,
+   "track-via, teardrop present": 266
+  },
+  "teardrop_zones_present": 855,
+  "via_in_pad": [],
+  "via_tenting": {
+   "front": true,
+   "back": true
+  },
+  "gnd_pour": {
+   "F.Cu": {
+    "fill_pieces": 19,
+    "area_mm2": 3852.8,
+    "thin_regions_over_0_15mm2": 41,
+    "largest": [
+     [
+      86.9,
+      63.2,
+      1.61
+     ],
+     [
+      67.2,
+      128.6,
+      1.56
+     ],
+     [
+      70.8,
+      88.4,
+      1.22
+     ],
+     [
+      57.3,
+      96.4,
+      1.1
+     ],
+     [
+      85.5,
+      80.1,
+      1.09
+     ],
+     [
+      85.0,
+      62.1,
+      1.04
+     ],
+     [
+      96.6,
+      103.9,
+      1.03
+     ],
+     [
+      73.3,
+      91.8,
+      0.77
+     ]
+    ]
+   },
+   "B.Cu": {
+    "fill_pieces": 49,
+    "area_mm2": 2665.5,
+    "thin_regions_over_0_15mm2": 119,
+    "largest": [
+     [
+      77.0,
+      131.6,
+      1.85
+     ],
+     [
+      63.8,
+      81.5,
+      1.78
+     ],
+     [
+      76.1,
+      103.0,
+      1.24
+     ],
+     [
+      61.9,
+      117.9,
+      1.02
+     ],
+     [
+      92.9,
+      121.3,
+      0.98
+     ],
+     [
+      80.3,
+      74.8,
+      0.95
+     ],
+     [
+      84.7,
+      66.3,
+      0.91
+     ],
+     [
+      84.6,
+      91.5,
+      0.89
+     ]
+    ]
+   }
+  },
+  "drc_errors": [],
+  "drc_warning_counts": {
+   "silk_edge_clearance": 32,
+   "starved_thermal": 5,
+   "silk_over_copper": 13,
+   "silk_overlap": 8,
+   "track_dangling": 4
+  },
+  "starved_thermal": [
+   "PTH pad 4 [GND] of J6",
+   "Pad 2 [GND] of R50 on B.Cu",
+   "Pad 2 [GND] of R41 on B.Cu",
+   "Pad 17 [GND] of J2 on B.Cu",
+   "PTH pad 1 [GND] of SW9"
+  ],
+  "dangling": [
+   [
+    [
+     "Track [Net-(R18-Pad1)] on F.Cu, length 1.7115 mm",
+     75.71,
+     145.51
+    ]
+   ],
+   [
+    [
+     "Track [Net-(R19-Pad1)] on F.Cu, length 1.1885 mm",
+     62.71,
+     144.99
+    ]
+   ],
+   [
+    [
+     "Track [Net-(R20-Pad1)] on F.Cu, length 1.5000 mm",
+     50.7,
+     145.5
+    ]
+   ],
+   [
+    [
+     "Track [Net-(R60-Pad1)] on F.Cu, length 1.2115 mm",
+     87.71,
+     145.11
+    ]
+   ]
+  ]
+ },
+ "emi": {
+  "loops": [
+   {
+    "name": "Frontlight boost, switching (output) loop: U10 SW/VOUT -> C9 -> GND -> U10 GND",
+    "area_mm2": 2.5,
+    "perimeter_mm": 7.0,
+    "points": [
+     [
+      48.76,
+      122.0
+     ],
+     [
+      46.76,
+      121.75
+     ],
+     [
+      46.76,
+      123.83
+     ],
+     [
+      47.85,
+      123.05
+     ],
+     [
+      48.76,
+      122.5
+     ]
+    ],
+    "note": "the high di/dt loop of a boost"
+   },
+   {
+    "name": "Frontlight boost, input loop: C12 -> L2 -> U10 SW ... U10 GND -> C12 GND",
+    "area_mm2": 9.5,
+    "perimeter_mm": 13.3,
+    "points": [
+     [
+      52.38,
+      118.91
+     ],
+     [
+      50.64,
+      119.13
+     ],
+     [
+      48.32,
+      119.13
+     ],
+     [
+      48.76,
+      121.5
+     ],
+     [
+      48.76,
+      122.5
+     ],
+     [
+      52.38,
+      120.63
+     ]
+    ],
+    "note": "continuous current, lower di/dt"
+   },
+   {
+    "name": "E-paper boost, switching loop: Q4 drain -> D5 -> C14 -> GND -> R14 -> Q4 source",
+    "area_mm2": 38.7,
+    "perimeter_mm": 30.6,
+    "points": [
+     [
+      87.63,
+      117.01
+     ],
+     [
+      84.6,
+      114.35
+     ],
+     [
+      84.6,
+      117.65
+     ],
+     [
+      84.47,
+      125.55
+     ],
+     [
+      86.54,
+      125.55
+     ],
+     [
+      89.98,
+      122.51
+     ],
+     [
+      88.15,
+      122.51
+     ],
+     [
+      89.5,
+      117.96
+     ]
+    ],
+    "note": "pulsed high di/dt loop"
+   },
+   {
+    "name": "E-paper boost, input loop: C10 -> L1 -> Q4 -> R14 -> GND -> C10",
+    "area_mm2": 32.6,
+    "perimeter_mm": 31.9,
+    "points": [
+     [
+      92.1,
+      109.8
+     ],
+     [
+      88.5,
+      110.45
+     ],
+     [
+      88.5,
+      114.15
+     ],
+     [
+      87.63,
+      117.01
+     ],
+     [
+      89.5,
+      117.96
+     ],
+     [
+      88.15,
+      122.51
+     ],
+     [
+      89.98,
+      122.51
+     ],
+     [
+      92.1,
+      111.53
+     ]
+    ],
+    "note": "HARDWARE.md quoted 20-27 mm^2"
+   },
+   {
+    "name": "E-paper charge pump: Q4 drain -> C11 -> D4 -> C16 -> GND -> D6",
+    "area_mm2": 20.2,
+    "perimeter_mm": 45.2,
+    "points": [
+     [
+      87.63,
+      117.01
+     ],
+     [
+      84.6,
+      112.51
+     ],
+     [
+      82.53,
+      112.51
+     ],
+     [
+      82.07,
+      117.66
+     ],
+     [
+      82.07,
+      114.36
+     ],
+     [
+      84.46,
+      121.5
+     ],
+     [
+      86.54,
+      121.5
+     ],
+     [
+      78.12,
+      121.81
+     ],
+     [
+      81.42,
+      121.81
+     ]
+    ],
+    "note": "negative rail"
+   }
+  ],
+  "node_area": {
+   "TPS_SW_NODE": {
+    "copper_mm2": 3.96,
+    "track_length_mm": 1.6
+   },
+   "EINK_SW": {
+    "copper_mm2": 12.45,
+    "track_length_mm": 15.1
+   },
+   "Net-(D4-K)": {
+    "copper_mm2": 5.99,
+    "track_length_mm": 10.6
+   },
+   "LED_SW": {
+    "copper_mm2": 57.62,
+    "track_length_mm": 181.3
+   },
+   "W-": {
+    "copper_mm2": 48.75,
+    "track_length_mm": 174.7
+   },
+   "C-": {
+    "copper_mm2": 52.24,
+    "track_length_mm": 190.3
+   },
+   "/GDR": {
+    "copper_mm2": 10.77,
+    "track_length_mm": 36.3
+   }
+  },
+  "return_paths": {
+   "DP": {
+    "length_mm": 46.9,
+    "referenced_pct": 70.0,
+    "unreferenced_runs": [
+     {
+      "layer": "F.Cu",
+      "from_": [
+       96.9,
+       106.65
+      ],
+      "to": [
+       96.9,
+       107.9
+      ],
+      "mm": 1.2
+     },
+     {
+      "layer": "F.Cu",
+      "from_": [
+       70.5,
+       91.17
+      ],
+      "to": [
+       70.5,
+       92.28
+      ],
+      "mm": 1.1
+     },
+     {
+      "layer": "B.Cu",
+      "from_": [
+       83.45,
+       99.4
+      ],
+      "to": [
+       84.16,
+       100.11
+      ],
+      "mm": 1.0
+     }
+    ],
+    "vias": 5
+   },
+   "DN": {
+    "length_mm": 46.0,
+    "referenced_pct": 77.0,
+    "unreferenced_runs": [
+     {
+      "layer": "B.Cu",
+      "from_": [
+       83.96,
+       100.56
+      ],
+      "to": [
+       83.25,
+       99.85
+      ],
+      "mm": 1.0
+     }
+    ],
+    "vias": 2
+   },
+   "SD_CLK": {
+    "length_mm": 20.9,
+    "referenced_pct": 80.0,
+    "unreferenced_runs": [],
+    "vias": 2
+   },
+   "SD_CMD": {
+    "length_mm": 43.0,
+    "referenced_pct": 82.0,
+    "unreferenced_runs": [
+     {
+      "layer": "F.Cu",
+      "from_": [
+       71.2,
+       77.28
+      ],
+      "to": [
+       70.19,
+       76.27
+      ],
+      "mm": 1.4
+     },
+     {
+      "layer": "B.Cu",
+      "from_": [
+       71.2,
+       77.88
+      ],
+      "to": [
+       71.2,
+       78.93
+      ],
+      "mm": 1.1
+     }
+    ],
+    "vias": 2
+   },
+   "SD_DAT0": {
+    "length_mm": 29.7,
+    "referenced_pct": 86.0,
+    "unreferenced_runs": [],
+    "vias": 0
+   },
+   "SD_DAT1": {
+    "length_mm": 40.9,
+    "referenced_pct": 90.0,
+    "unreferenced_runs": [],
+    "vias": 0
+   },
+   "SD_DAT2": {
+    "length_mm": 35.2,
+    "referenced_pct": 75.0,
+    "unreferenced_runs": [
+     {
+      "layer": "F.Cu",
+      "from_": [
+       62.63,
+       88.68
+      ],
+      "to": [
+       65.68,
+       88.68
+      ],
+      "mm": 3.1
+     },
+     {
+      "layer": "F.Cu",
+      "from_": [
+       58.14,
+       87.24
+      ],
+      "to": [
+       59.14,
+       88.24
+      ],
+      "mm": 1.4
+     },
+     {
+      "layer": "F.Cu",
+      "from_": [
+       59.58,
+       88.68
+      ],
+      "to": [
+       61.0,
+       88.68
+      ],
+      "mm": 1.4
+     }
+    ],
+    "vias": 2
+   },
+   "SD_DAT3": {
+    "length_mm": 38.7,
+    "referenced_pct": 82.0,
+    "unreferenced_runs": [
+     {
+      "layer": "F.Cu",
+      "from_": [
+       68.9,
+       80.5
+      ],
+      "to": [
+       70.11,
+       81.71
+      ],
+      "mm": 1.7
+     }
+    ],
+    "vias": 2
+   },
+   "SPI_SCK": {
+    "length_mm": 23.8,
+    "referenced_pct": 94.0,
+    "unreferenced_runs": [],
+    "vias": 0
+   },
+   "SPI_MOSI": {
+    "length_mm": 25.4,
+    "referenced_pct": 94.0,
+    "unreferenced_runs": [],
+    "vias": 0
+   },
+   "EPD_CS": {
+    "length_mm": 22.2,
+    "referenced_pct": 96.0,
+    "unreferenced_runs": [],
+    "vias": 0
+   },
+   "EPD_DC": {
+    "length_mm": 20.6,
+    "referenced_pct": 97.0,
+    "unreferenced_runs": [],
+    "vias": 0
+   },
+   "EPD_RST": {
+    "length_mm": 18.7,
+    "referenced_pct": 97.0,
+    "unreferenced_runs": [],
+    "vias": 0
+   },
+   "EPD_BUSY": {
+    "length_mm": 16.8,
+    "referenced_pct": 96.0,
+    "unreferenced_runs": [],
+    "vias": 0
+   },
+   "I2C_SCL": {
+    "length_mm": 184.8,
+    "referenced_pct": 57.0,
+    "unreferenced_runs": [
+     {
+      "layer": "B.Cu",
+      "from_": [
+       99.15,
+       138.35
+      ],
+      "to": [
+       73.65,
+       138.35
+      ],
+      "mm": 25.5
+     },
+     {
+      "layer": "F.Cu",
+      "from_": [
+       63.2,
+       115.7
+      ],
+      "to": [
+       63.2,
+       120.29
+      ],
+      "mm": 4.6
+     },
+     {
+      "layer": "F.Cu",
+      "from_": [
+       101.5,
+       128.31
+      ],
+      "to": [
+       101.5,
+       131.35
+      ],
+      "mm": 3.0
+     },
+     {
+      "layer": "F.Cu",
+      "from_": [
+       67.6,
+       125.92
+      ],
+      "to": [
+       67.6,
+       128.37
+      ],
+      "mm": 2.5
+     }
+    ],
+    "vias": 6
+   },
+   "I2C_SDA": {
+    "length_mm": 182.7,
+    "referenced_pct": 54.0,
+    "unreferenced_runs": [
+     {
+      "layer": "B.Cu",
+      "from_": [
+       73.07,
+       138.7
+      ],
+      "to": [
+       99.3,
+       138.7
+      ],
+      "mm": 26.2
+     },
+     {
+      "layer": "F.Cu",
+      "from_": [
+       100.25,
+       102.36
+      ],
+      "to": [
+       100.25,
+       107.58
+      ],
+      "mm": 5.2
+     },
+     {
+      "layer": "F.Cu",
+      "from_": [
+       62.6,
+       121.0
+      ],
+      "to": [
+       65.6,
+       124.0
+      ],
+      "mm": 4.2
+     },
+     {
+      "layer": "F.Cu",
+      "from_": [
+       100.6,
+       137.4
+      ],
+      "to": [
+       98.1,
+       134.9
+      ],
+      "mm": 3.5
+     }
+    ],
+    "vias": 6
+   },
+   "PWM_LED": {
+    "length_mm": 16.5,
+    "referenced_pct": 73.0,
+    "unreferenced_runs": [
+     {
+      "layer": "B.Cu",
+      "from_": [
+       58.56,
+       116.28
+      ],
+      "to": [
+       56.52,
+       118.32
+      ],
+      "mm": 2.9
+     }
+    ],
+    "vias": 0
+   },
+   "COLOR_SEL": {
+    "length_mm": 34.5,
+    "referenced_pct": 82.0,
+    "unreferenced_runs": [
+     {
+      "layer": "B.Cu",
+      "from_": [
+       55.0,
+       121.0
+      ],
+      "to": [
+       56.29,
+       121.0
+      ],
+      "mm": 1.3
+     },
+     {
+      "layer": "B.Cu",
+      "from_": [
+       59.0,
+       118.08
+      ],
+      "to": [
+       59.0,
+       116.83
+      ],
+      "mm": 1.2
+     },
+     {
+      "layer": "B.Cu",
+      "from_": [
+       59.0,
+       116.83
+      ],
+      "to": [
+       59.76,
+       116.08
+      ],
+      "mm": 1.1
+     }
+    ],
+    "vias": 0
+   },
+   "/COLOR_SEL_INV": {
+    "length_mm": 9.7,
+    "referenced_pct": 89.0,
+    "unreferenced_runs": [],
+    "vias": 0
+   },
+   "TX": {
+    "length_mm": 3.0,
+    "referenced_pct": 100.0,
+    "unreferenced_runs": [],
+    "vias": 0
+   },
+   "RX": {
+    "length_mm": 5.4,
+    "referenced_pct": 100.0,
+    "unreferenced_runs": [],
+    "vias": 0
+   },
+   "ESP32_EN": {
+    "length_mm": 53.9,
+    "referenced_pct": 85.0,
+    "unreferenced_runs": [],
+    "vias": 2
+   },
+   "ESP32_IO0": {
+    "length_mm": 5.2,
+    "referenced_pct": 100.0,
+    "unreferenced_runs": [],
+    "vias": 0
+   },
+   "/GDR": {
+    "length_mm": 36.3,
+    "referenced_pct": 42.0,
+    "unreferenced_runs": [
+     {
+      "layer": "F.Cu",
+      "from_": [
+       80.85,
+       129.9
+      ],
+      "to": [
+       86.32,
+       124.43
+      ],
+      "mm": 7.7
+     },
+     {
+      "layer": "F.Cu",
+      "from_": [
+       77.9,
+       129.9
+      ],
+      "to": [
+       80.85,
+       129.9
+      ],
+      "mm": 2.9
+     },
+     {
+      "layer": "F.Cu",
+      "from_": [
+       76.74,
+       131.06
+      ],
+      "to": [
+       77.9,
+       129.9
+      ],
+      "mm": 1.6
+     },
+     {
+      "layer": "F.Cu",
+      "from_": [
+       87.9,
+       121.5
+      ],
+      "to": [
+       87.9,
+       119.85
+      ],
+      "mm": 1.6
+     }
+    ],
+    "vias": 3
+   }
+  },
+  "stitching": {
+   "gnd_vias": 95,
+   "points_sampled": 2204,
+   "max_distance_mm": 9.7,
+   "p95_mm": 7.1,
+   "worst": [
+    [
+     61.7,
+     132.5,
+     9.7
+    ],
+    [
+     44.7,
+     74.5,
+     9.4
+    ],
+    [
+     61.7,
+     131.5,
+     9.4
+    ],
+    [
+     44.7,
+     75.5,
+     9.1
+    ],
+    [
+     60.7,
+     132.5,
+     9.1
+    ],
+    [
+     80.7,
+     136.5,
+     9.0
+    ]
+   ],
+   "perimeter_max_mm": 9.2,
+   "perimeter_worst": [
+    [
+     103.2,
+     123.2,
+     9.2
+    ],
+    [
+     103.2,
+     122.2,
+     9.2
+    ],
+    [
+     45.2,
+     74.5,
+     9.1
+    ],
+    [
+     45.2,
+     75.5,
+     8.6
+    ],
+    [
+     103.2,
+     124.2,
+     8.5
+    ],
+    [
+     103.2,
+     121.2,
+     8.5
+    ]
+   ]
+  },
+  "antenna_keepout": [
+   {
+    "ref": "U4",
+    "keepout_on_board_mm2": 15.9,
+    "keepout_bounds": [
+     44.3,
+     92.5,
+     51.0,
+     112.5
+    ],
+    "flags": {
+     "no_tracks": true,
+     "no_vias": true,
+     "no_pours": true,
+     "no_pads": true
+    },
+    "copper": [
+     {
+      "layer": "F.Cu",
+      "net": "GND pour",
+      "kind": "fill",
+      "area_mm2": 0.0
+     },
+     {
+      "layer": "B.Cu",
+      "net": "GND pour",
+      "kind": "fill",
+      "area_mm2": 0.0
+     }
+    ]
+   },
+   {
+    "ref": "J7",
+    "keepout_on_board_mm2": 40.0,
+    "keepout_bounds": [
+     57.5,
+     77.1,
+     67.5,
+     81.1
+    ],
+    "flags": {
+     "no_tracks": true,
+     "no_vias": true,
+     "no_pours": false,
+     "no_pads": true
+    },
+    "copper": [
+     {
+      "layer": "F.Cu",
+      "net": "GND pour",
+      "kind": "fill",
+      "area_mm2": 40.0
+     },
+     {
+      "layer": "B.Cu",
+      "net": "SD_DAT3",
+      "kind": "track"
+     },
+     {
+      "layer": "B.Cu",
+      "net": "SD_DAT3",
+      "kind": "track"
+     },
+     {
+      "layer": "B.Cu",
+      "net": "GND pour",
+      "kind": "fill",
+      "area_mm2": 37.9
+     }
+    ]
+   }
+  ],
+  "esd": {
+   "nets": [
+    {
+     "net": "/GDR",
+     "connector": [
+      "J2"
+     ],
+     "esd": null,
+     "note": "no ESD device on this net"
+    },
+    {
+     "net": "/P+_FUSE",
+     "connector": [
+      "J6"
+     ],
+     "esd": [
+      "CR3"
+     ],
+     "conn_to_esd_mm": 20.8,
+     "straight_conn_to_esd_mm": 14.6,
+     "conn_to_load_mm": 31.8,
+     "esd_first": true
+    },
+    {
+     "net": "/PIN_2",
+     "connector": [
+      "J4"
+     ],
+     "esd": null,
+     "note": "no ESD device on this net"
+    },
+    {
+     "net": "/PIN_4",
+     "connector": [
+      "J4"
+     ],
+     "esd": [
+      "U7"
+     ],
+     "conn_to_esd_mm": 14.0,
+     "straight_conn_to_esd_mm": 8.1,
+     "conn_to_load_mm": null,
+     "esd_first": true
+    },
+    {
+     "net": "/PIN_5",
+     "connector": [
+      "J4"
+     ],
+     "esd": [
+      "U7"
+     ],
+     "conn_to_esd_mm": 10.7,
+     "straight_conn_to_esd_mm": 8.6,
+     "conn_to_load_mm": null,
+     "esd_first": true
+    },
+    {
+     "net": "/PIN_6",
+     "connector": [
+      "J4"
+     ],
+     "esd": [
+      "U7"
+     ],
+     "conn_to_esd_mm": 18.7,
+     "straight_conn_to_esd_mm": 9.3,
+     "conn_to_load_mm": null,
+     "esd_first": true
+    },
+    {
+     "net": "/RESE",
+     "connector": [
+      "J2"
+     ],
+     "esd": null,
+     "note": "no ESD device on this net"
+    },
+    {
+     "net": "B+",
+     "connector": [
+      "J5"
+     ],
+     "esd": null,
+     "note": "no ESD device on this net"
+    },
+    {
+     "net": "B-",
+     "connector": [
+      "J5"
+     ],
+     "esd": null,
+     "note": "no ESD device on this net"
+    },
+    {
+     "net": "C-",
+     "connector": [
+      "J3",
+      "J6"
+     ],
+     "esd": [
+      "D8"
+     ],
+     "conn_to_esd_mm": 12.3,
+     "straight_conn_to_esd_mm": 9.7,
+     "conn_to_load_mm": 16.2,
+     "esd_first": true
+    },
+    {
+     "net": "CC1",
+     "connector": [
+      "J1"
+     ],
+     "esd": [
+      "U6"
+     ],
+     "conn_to_esd_mm": 16.2,
+     "straight_conn_to_esd_mm": 7.4,
+     "conn_to_load_mm": null,
+     "esd_first": true
+    },
+    {
+     "net": "CC2",
+     "connector": [
+      "J1"
+     ],
+     "esd": [
+      "U6"
+     ],
+     "conn_to_esd_mm": null,
+     "straight_conn_to_esd_mm": 10.3,
+     "conn_to_load_mm": null,
+     "esd_first": false
+    },
+    {
+     "net": "DN",
+     "connector": [
+      "J1"
+     ],
+     "esd": [
+      "U6"
+     ],
+     "conn_to_esd_mm": 12.2,
+     "straight_conn_to_esd_mm": 5.9,
+     "conn_to_load_mm": 37.4,
+     "esd_first": true
+    },
+    {
+     "net": "DP",
+     "connector": [
+      "J1"
+     ],
+     "esd": [
+      "U6"
+     ],
+     "conn_to_esd_mm": 12.0,
+     "straight_conn_to_esd_mm": 6.5,
+     "conn_to_load_mm": 40.0,
+     "esd_first": true
+    },
+    {
+     "net": "EINK_3V3",
+     "connector": [
+      "J2"
+     ],
+     "esd": null,
+     "note": "no ESD device on this net"
+    },
+    {
+     "net": "EPD_BUSY",
+     "connector": [
+      "J2"
+     ],
+     "esd": null,
+     "note": "no ESD device on this net"
+    },
+    {
+     "net": "EPD_CS",
+     "connector": [
+      "J2"
+     ],
+     "esd": null,
+     "note": "no ESD device on this net"
+    },
+    {
+     "net": "EPD_DC",
+     "connector": [
+      "J2"
+     ],
+     "esd": null,
+     "note": "no ESD device on this net"
+    },
+    {
+     "net": "EPD_RST",
+     "connector": [
+      "J2"
+     ],
+     "esd": null,
+     "note": "no ESD device on this net"
+    },
+    {
+     "net": "I2C_SCL",
+     "connector": [
+      "J6"
+     ],
+     "esd": [
+      "U8"
+     ],
+     "conn_to_esd_mm": 8.5,
+     "straight_conn_to_esd_mm": 7.8,
+     "conn_to_load_mm": 160.6,
+     "esd_first": true
+    },
+    {
+     "net": "I2C_SDA",
+     "connector": [
+      "J6"
+     ],
+     "esd": [
+      "U8"
+     ],
+     "conn_to_esd_mm": 11.0,
+     "straight_conn_to_esd_mm": 8.4,
+     "conn_to_load_mm": 163.0,
+     "esd_first": true
+    },
+    {
+     "net": "J6_3V3",
+     "connector": [
+      "J6"
+     ],
+     "esd": [
+      "CR2"
+     ],
+     "conn_to_esd_mm": 45.6,
+     "straight_conn_to_esd_mm": 14.8,
+     "conn_to_load_mm": 35.7,
+     "esd_first": false
+    },
+    {
+     "net": "LED_SW",
+     "connector": [
+      "J3",
+      "J6"
+     ],
+     "esd": [
+      "D3"
+     ],
+     "conn_to_esd_mm": 14.3,
+     "straight_conn_to_esd_mm": 11.4,
+     "conn_to_load_mm": 25.8,
+     "esd_first": true
+    },
+    {
+     "net": "Net-(C13-Pad2)",
+     "connector": [
+      "J2"
+     ],
+     "esd": null,
+     "note": "no ESD device on this net"
+    },
+    {
+     "net": "Net-(C15-Pad2)",
+     "connector": [
+      "J2"
+     ],
+     "esd": null,
+     "note": "no ESD device on this net"
+    },
+    {
+     "net": "Net-(C17-Pad2)",
+     "connector": [
+      "J2"
+     ],
+     "esd": null,
+     "note": "no ESD device on this net"
+    },
+    {
+     "net": "Net-(C18-Pad2)",
+     "connector": [
+      "J2"
+     ],
+     "esd": null,
+     "note": "no ESD device on this net"
+    },
+    {
+     "net": "Net-(C19-Pad2)",
+     "connector": [
+      "J2"
+     ],
+     "esd": null,
+     "note": "no ESD device on this net"
+    },
+    {
+     "net": "Net-(C20-Pad2)",
+     "connector": [
+      "J2"
+     ],
+     "esd": null,
+     "note": "no ESD device on this net"
+    },
+    {
+     "net": "Net-(J1-SHIELD)",
+     "connector": [
+      "J1"
+     ],
+     "esd": null,
+     "note": "no ESD device on this net"
+    },
+    {
+     "net": "PREVGH",
+     "connector": [
+      "J2"
+     ],
+     "esd": null,
+     "note": "no ESD device on this net"
+    },
+    {
+     "net": "PREVGL",
+     "connector": [
+      "J2"
+     ],
+     "esd": null,
+     "note": "no ESD device on this net"
+    },
+    {
+     "net": "SD_CLK",
+     "connector": [
+      "J7"
+     ],
+     "esd": [
+      "U1"
+     ],
+     "conn_to_esd_mm": 17.2,
+     "straight_conn_to_esd_mm": 11.3,
+     "conn_to_load_mm": null,
+     "esd_first": true
+    },
+    {
+     "net": "SD_CMD",
+     "connector": [
+      "J7"
+     ],
+     "esd": [
+      "U1"
+     ],
+     "conn_to_esd_mm": 32.7,
+     "straight_conn_to_esd_mm": 11.5,
+     "conn_to_load_mm": null,
+     "esd_first": true
+    },
+    {
+     "net": "SD_DAT0",
+     "connector": [
+      "J7"
+     ],
+     "esd": [
+      "U9"
+     ],
+     "conn_to_esd_mm": 24.2,
+     "straight_conn_to_esd_mm": 19.9,
+     "conn_to_load_mm": null,
+     "esd_first": true
+    },
+    {
+     "net": "SD_DAT1",
+     "connector": [
+      "J7"
+     ],
+     "esd": [
+      "U9"
+     ],
+     "conn_to_esd_mm": 31.3,
+     "straight_conn_to_esd_mm": 22.5,
+     "conn_to_load_mm": null,
+     "esd_first": true
+    },
+    {
+     "net": "SD_DAT2",
+     "connector": [
+      "J7"
+     ],
+     "esd": [
+      "U1"
+     ],
+     "conn_to_esd_mm": 24.8,
+     "straight_conn_to_esd_mm": 14.4,
+     "conn_to_load_mm": null,
+     "esd_first": true
+    },
+    {
+     "net": "SD_DAT3",
+     "connector": [
+      "J7"
+     ],
+     "esd": [
+      "U1"
+     ],
+     "conn_to_esd_mm": 27.8,
+     "straight_conn_to_esd_mm": 11.5,
+     "conn_to_load_mm": null,
+     "esd_first": true
+    },
+    {
+     "net": "SD_VDD",
+     "connector": [
+      "J7"
+     ],
+     "esd": null,
+     "note": "no ESD device on this net"
+    },
+    {
+     "net": "SPI_MOSI",
+     "connector": [
+      "J2"
+     ],
+     "esd": null,
+     "note": "no ESD device on this net"
+    },
+    {
+     "net": "SPI_SCK",
+     "connector": [
+      "J2"
+     ],
+     "esd": null,
+     "note": "no ESD device on this net"
+    },
+    {
+     "net": "TP_RST",
+     "connector": [
+      "J4"
+     ],
+     "esd": [
+      "U7"
+     ],
+     "conn_to_esd_mm": 13.0,
+     "straight_conn_to_esd_mm": 7.2,
+     "conn_to_load_mm": 50.1,
+     "esd_first": true
+    },
+    {
+     "net": "UNUSED_GPIO_3",
+     "connector": [
+      "J6"
+     ],
+     "esd": [
+      "U8"
+     ],
+     "conn_to_esd_mm": 11.7,
+     "straight_conn_to_esd_mm": 9.6,
+     "conn_to_load_mm": null,
+     "esd_first": true
+    },
+    {
+     "net": "UNUSED_GPIO_45",
+     "connector": [
+      "J6"
+     ],
+     "esd": [
+      "U8"
+     ],
+     "conn_to_esd_mm": 6.3,
+     "straight_conn_to_esd_mm": 5.7,
+     "conn_to_load_mm": null,
+     "esd_first": true
+    },
+    {
+     "net": "UNUSED_GPIO_46",
+     "connector": [
+      "J6"
+     ],
+     "esd": [
+      "U9"
+     ],
+     "conn_to_esd_mm": 33.6,
+     "straight_conn_to_esd_mm": 26.6,
+     "conn_to_load_mm": null,
+     "esd_first": true
+    },
+    {
+     "net": "VBUS_PRE_FUSE",
+     "connector": [
+      "J1"
+     ],
+     "esd": [
+      "CR1"
+     ],
+     "conn_to_esd_mm": 7.2,
+     "straight_conn_to_esd_mm": 5.3,
+     "conn_to_load_mm": 12.0,
+     "esd_first": true
+    },
+    {
+     "net": "W-",
+     "connector": [
+      "J3",
+      "J6"
+     ],
+     "esd": [
+      "D8"
+     ],
+     "conn_to_esd_mm": 11.6,
+     "straight_conn_to_esd_mm": 9.8,
+     "conn_to_load_mm": 7.9,
+     "esd_first": false
+    }
+   ],
+   "gnd": [
+    {
+     "ref": "CR1",
+     "pad": "2",
+     "nearest_gnd_via_mm": 1.0
+    },
+    {
+     "ref": "CR2",
+     "pad": "2",
+     "nearest_gnd_via_mm": 0.92
+    },
+    {
+     "ref": "CR3",
+     "pad": "2",
+     "nearest_gnd_via_mm": 1.12
+    },
+    {
+     "ref": "D3",
+     "pad": "2",
+     "nearest_gnd_via_mm": 1.85
+    },
+    {
+     "ref": "D8",
+     "pad": "3",
+     "nearest_gnd_via_mm": 1.14
+    },
+    {
+     "ref": "U1",
+     "pad": "2",
+     "nearest_gnd_via_mm": 1.84
+    },
+    {
+     "ref": "U6",
+     "pad": "2",
+     "nearest_gnd_via_mm": 1.4
+    },
+    {
+     "ref": "U7",
+     "pad": "2",
+     "nearest_gnd_via_mm": 1.85
+    },
+    {
+     "ref": "U8",
+     "pad": "2",
+     "nearest_gnd_via_mm": 1.54
+    },
+    {
+     "ref": "U9",
+     "pad": "2",
+     "nearest_gnd_via_mm": 3.55
+    }
+   ]
+  },
+  "decoupling": [
+   {
+    "ic": "U4",
+    "net": "3V3",
+    "nearest_cap": "C32",
+    "routed_mm": 4.9,
+    "straight_mm": 4.6
+   },
+   {
+    "ic": "U13",
+    "net": "3V3",
+    "nearest_cap": "C30",
+    "routed_mm": 2.1,
+    "straight_mm": 2.1
+   },
+   {
+    "ic": "U12",
+    "net": "3V3",
+    "nearest_cap": "C24",
+    "routed_mm": 9.4,
+    "straight_mm": 1.8
+   },
+   {
+    "ic": "U14",
+    "net": "3V3",
+    "nearest_cap": "C30",
+    "routed_mm": 15.8,
+    "straight_mm": 2.2
+   },
+   {
+    "ic": "U3",
+    "net": "3V3",
+    "nearest_cap": "C6",
+    "routed_mm": 3.2,
+    "straight_mm": 2.3
+   },
+   {
+    "ic": "U3",
+    "net": "LDO_IN",
+    "nearest_cap": "C4",
+    "routed_mm": 2.2,
+    "straight_mm": 2.1
+   },
+   {
+    "ic": "U2",
+    "net": "LDO_IN",
+    "nearest_cap": "C4",
+    "routed_mm": 3.8,
+    "straight_mm": 2.7
+   },
+   {
+    "ic": "U2",
+    "net": "USB_VBUS",
+    "nearest_cap": "C25",
+    "routed_mm": 1.9,
+    "straight_mm": 1.8
+   },
+   {
+    "ic": "U2",
+    "net": "P+",
+    "nearest_cap": "C26",
+    "routed_mm": 3.4,
+    "straight_mm": 2.6
+   },
+   {
+    "ic": "U11",
+    "net": "USB_VBUS",
+    "nearest_cap": "C2",
+    "routed_mm": 2.6,
+    "straight_mm": 2.1
+   },
+   {
+    "ic": "U11",
+    "net": "P+",
+    "nearest_cap": "C3",
+    "routed_mm": 2.4,
+    "straight_mm": 2.4
+   },
+   {
+    "ic": "U10",
+    "net": "/LED_VIN",
+    "nearest_cap": "C12",
+    "routed_mm": 4.4,
+    "straight_mm": 3.4
+   },
+   {
+    "ic": "J2",
+    "net": "EINK_3V3",
+    "nearest_cap": "C22",
+    "routed_mm": 16.4,
+    "straight_mm": 13.2
+   },
+   {
+    "ic": "U5",
+    "net": "Net-(U5-VCC)",
+    "nearest_cap": "C7",
+    "routed_mm": 5.8,
+    "straight_mm": 4.7
+   },
+   {
+    "ic": "L1",
+    "net": "EINK_3V3",
+    "nearest_cap": "C10",
+    "routed_mm": 3.9,
+    "straight_mm": 3.7
+   }
+  ],
+  "parallel_runs": [
+   {
+    "aggressor": "DN",
+    "victim": "CC1",
+    "layer": "F.Cu",
+    "parallel_mm": 3.5,
+    "min_gap_mm": 0.151,
+    "at": [
+     95.8,
+     104.0
+    ]
+   },
+   {
+    "aggressor": "PWM_LED",
+    "victim": "TP_INT",
+    "layer": "B.Cu",
+    "parallel_mm": 2.5,
+    "min_gap_mm": 0.151,
+    "at": [
+     57.6,
+     117.2
+    ]
+   },
+   {
+    "aggressor": "COLOR_SEL",
+    "victim": "TP_INT",
+    "layer": "B.Cu",
+    "parallel_mm": 2.5,
+    "min_gap_mm": 0.151,
+    "at": [
+     60.2,
+     115.1
+    ]
+   }
+  ],
+  "fast_near_edge": [
+   {
+    "net": "I2C_SCL",
+    "layer": "F.Cu",
+    "d": 0.48,
+    "at": [
+     94.5,
+     60.6
+    ]
+   },
+   {
+    "net": "I2C_SCL",
+    "layer": "F.Cu",
+    "d": 0.48,
+    "at": [
+     95.6,
+     61.3
+    ]
+   },
+   {
+    "net": "I2C_SCL",
+    "layer": "F.Cu",
+    "d": 0.48,
+    "at": [
+     95.0,
+     60.8
+    ]
+   }
+  ],
+  "usb": {
+   "DP": {
+    "length_mm": 46.85,
+    "widths": [
+     0.2
+    ],
+    "vias": 5,
+    "layers": [
+     "B.Cu",
+     "F.Cu"
+    ]
+   },
+   "DN": {
+    "length_mm": 46.05,
+    "widths": [
+     0.2
+    ],
+    "vias": 2,
+    "layers": [
+     "B.Cu",
+     "F.Cu"
+    ]
+   },
+   "centre_spacing_mm": {
+    "min": 0.021,
+    "median": 0.46,
+    "coupled_pct": 57.0
+   },
+   "skew_mm": 0.8
+  }
+ }
+}

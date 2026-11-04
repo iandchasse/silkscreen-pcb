@@ -1,0 +1,45 @@
+(version 1)
+
+# Boost switch nodes and the frontlight boost output (net class SW: TPS_SW_NODE, LED_SW, EINK_SW).
+# Keep ground pours of other nets further from them than the 0.25 mm net-class clearance, and keep
+# other nets' vias away from the two switch nodes, without flagging the fixed 0.271 mm pad gaps inside
+# U10's 0.5 mm-pitch footprint or the 0.5 mm-pitch FPC connectors.
+# Added for Rev 1.03 after board-failures case 1; see docs/audit-2026-11-03/TRACE_AUDIT.md.
+
+(rule "SW nets: pour pull-back"
+	(constraint clearance (min 0.5mm))
+	(condition "(A.hasNetclass('SW') && B.Type == 'Zone') || (B.hasNetclass('SW') && A.Type == 'Zone')"))
+
+(rule "Switch nodes: via spacing"
+	(constraint clearance (min 0.4mm))
+	(condition "((A.NetName == 'TPS_SW_NODE' || A.NetName == 'EINK_SW') && B.Type == 'Via' && B.NetName != A.NetName) || ((B.NetName == 'TPS_SW_NODE' || B.NetName == 'EINK_SW') && A.Type == 'Via' && A.NetName != B.NetName)"))
+
+# Other high-voltage nets: keep the GND pour further away than the 0.15 mm default.
+# LED cathodes (up to about 26 V): only their bare pads get 0.25 mm (IPC-2221B A6); their mask-covered traces already meet
+# B4 at the default, and pulling the pour back from them too cuts the pour that feeds D8's ground pad in the J6 arm.
+(rule "LED cathode pads: pour pull-back"
+	(constraint clearance (min 0.25mm))
+	(condition "(B.Type == 'Zone' && A.Type == 'Pad' && (A.NetName == 'W-' || A.NetName == 'C-')) || (A.Type == 'Zone' && B.Type == 'Pad' && (B.NetName == 'W-' || B.NetName == 'C-'))"))
+
+# E-paper panel rails and the charge-pump node (up to about 25 V): 0.3 mm.
+(rule "Panel rails: pour pull-back"
+	(constraint clearance (min 0.3mm))
+	(condition "(B.Type == 'Zone' && (A.NetName == 'PREVGH' || A.NetName == 'PREVGL' || A.NetName == 'Net-(C13-Pad2)' || A.NetName == 'Net-(C17-Pad2)' || A.NetName == 'Net-(C15-Pad2)' || A.NetName == 'Net-(C20-Pad2)' || A.NetName == 'Net-(C19-Pad2)' || A.NetName == 'Net-(D4-K)')) || (A.Type == 'Zone' && (B.NetName == 'PREVGH' || B.NetName == 'PREVGL' || B.NetName == 'Net-(C13-Pad2)' || B.NetName == 'Net-(C17-Pad2)' || B.NetName == 'Net-(C15-Pad2)' || B.NetName == 'Net-(C20-Pad2)' || B.NetName == 'Net-(C19-Pad2)' || B.NetName == 'Net-(D4-K)'))"))
+
+# Footprint-fixed geometry, waived only between pads of the same footprint and only down to the as-built value, so DRC
+# stays clean but still flags anything closer (see docs/audit-2026-11-03/TRACE_AUDIT.md, section 2.2).
+# J3 frontlight FPC: 0.5 mm pitch leaves 0.2 mm between pads; the SW net class (0.25 mm) cannot apply inside it.
+(rule "J3 FPC pad pitch"
+	(constraint clearance (min 0.2mm))
+	(condition "A.memberOfFootprint('J3') && B.memberOfFootprint('J3')"))
+
+# J1 USB-C receptacle: the plastic locating-peg NPTH holes sit 0.194 mm from the receptacle's own GND pads.
+(rule "J1 USB-C peg holes"
+	(constraint hole_clearance (min 0.19mm))
+	(condition "A.memberOfFootprint('J1') && B.memberOfFootprint('J1')"))
+
+# U10 (TPS923610, TI DRL0006A): TI's example land (SNVSCN8B p.30) leaves 0.20 mm between neighbouring pads; the SW
+# net class (0.25 mm) cannot apply between the part's own pins. Same footprint-only scope as the J3 rule.
+(rule "U10 pad pitch"
+	(constraint clearance (min 0.2mm))
+	(condition "A.memberOfFootprint('U10') && B.memberOfFootprint('U10')"))

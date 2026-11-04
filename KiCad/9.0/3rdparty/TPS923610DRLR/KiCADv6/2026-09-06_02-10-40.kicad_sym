@@ -18,7 +18,7 @@
     (property "ki_locked" "" (id 5) (at 0 0 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "ki_fp_filters" "U_DRL0006A_6L_TEX U_DRL0006A_6L_TEX-M U_DRL0006A_6L_TEX-L" (id 6) (at 0 0 0)
+    (property "ki_fp_filters" "U_DRL0006A_6L_TEX U_DRL0006A_6L_TEX-M U_DRL0006A_6L_TEX-L U_DRL0006A_6L_TI-LAND" (id 6) (at 0 0 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (symbol "TPS923610DRLR_0_1"

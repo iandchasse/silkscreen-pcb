@@ -28,7 +28,7 @@ Successor to [de-link](https://de-link.me).
 > Connection facts are checked against the KiCad netlist; designed in **KiCad 9**. The
 > module is **ESP32-S3-WROOM-1-N16R8**.
 >
-> **Rev 1.02.** This document describes Rev 1.02, the revision on both title blocks and in the name of the release zip. Boards made from the Rev 1.0 files lack `R84` (1 Ω in series with `C2`'s ground leg, a USB hot-plug damper, [§3.1](#31-usb-c-input--protection)) and the 3V3 link and ground stitching vias below the cut line ([§16](#16-design-notes--conventions)), and print the `J6` pinout table with its two lines the other way round ([§11](#11-expansion-header)). They also have the through-hole `USB4085` as `J1` (Rev 1.02 has a 12-pad SMD receptacle, [§3.1](#31-usb-c-input--protection)) and feed the charge-enable gate (`Q2`, `R81`, `R82`) from 3V3 with `R79`/`R80`/`R81`/`R82` = 100 kΩ/1 MΩ/1 MΩ/1 MΩ, where Rev 1.02 uses `USB_VBUS` and 1 MΩ/10 MΩ/100 kΩ/10 kΩ ([§3.3](#33-cell-protection--reverse-polarity)), so a Rev 1.0 board's sleep current is about 10 µA above the figures in [§16](#16-design-notes--conventions). Rev 1.02 has not been fabricated. Files labelled Rev 1.01 (published 2026-10-01) already had `R84`, the vias and the `J6` label, but still the through-hole `J1` and the 3V3-fed gate; they were never built, and Rev 1.02 replaces them.
+> **Rev 1.02.** This document describes Rev 1.02, the revision in the name of the release zip. (On the `1.03` branch both title blocks already read Rev 1.03; this document catches up in the 1.03 documentation pass, [REV_1_03_STATUS.md §9](REV_1_03_STATUS.md#9-not-done-yet), and sections that already describe a 1.03 change say so.) Boards made from the Rev 1.0 files lack `R84` (1 Ω in series with `C2`'s ground leg, a USB hot-plug damper, [§3.1](#31-usb-c-input--protection)) and the 3V3 link and ground stitching vias below the cut line ([§16](#16-design-notes--conventions)), and print the `J6` pinout table with its two lines the other way round ([§11](#11-expansion-header)). They also have the through-hole `USB4085` as `J1` (Rev 1.02 has a 12-pad SMD receptacle, [§3.1](#31-usb-c-input--protection)) and feed the charge-enable gate (`Q2`, `R81`, `R82`) from 3V3 with `R79`/`R80`/`R81`/`R82` = 100 kΩ/1 MΩ/1 MΩ/1 MΩ, where Rev 1.02 uses `USB_VBUS` and 1 MΩ/10 MΩ/100 kΩ/10 kΩ ([§3.3](#33-cell-protection--reverse-polarity)), so a Rev 1.0 board's sleep current is about 10 µA above the figures in [§16](#16-design-notes--conventions). Rev 1.02 has not been fabricated. Files labelled Rev 1.01 (published 2026-10-01) already had `R84`, the vias and the `J6` label, but still the through-hole `J1` and the 3V3-fed gate; they were never built, and Rev 1.02 replaces them.
 >
 > **Full plots:** [`silkscreen_pcb_schematic.pdf`](silkscreen_pcb_schematic.pdf)
 > (schematic, one A2 sheet) and [`silkscreen_pcb_layout.pdf`](silkscreen_pcb_layout.pdf) (PCB layout: front view, then the back as you see it) are
@@ -198,9 +198,17 @@ resistors (not one shared) is correct — it lets the source determine cable ori
 > de-link safe), and nothing else on this input does that; `R84` takes over the job (see
 > the `CR1` note below).
 
-**Shield handling:** `R1` (1 MΩ) ∥ `C1` (1 nF) from shell to GND. The classic arrangement —
-DC-isolates chassis from signal ground (breaking ground loops) while giving high-frequency
-noise a low-impedance path.
+**Shield handling:** Rev 1.02 has `R1` (1 MΩ) ∥ `C1` (1 nF) from the shell to GND. From Rev 1.03
+the shell is tied straight to GND: `J1`'s four plated shell tabs sit in both GND pours, on thermal
+spokes so they still solder easily, and `R1`/`C1` are gone. The RC suits products with a metal
+chassis, which it keeps off signal ground at DC. This board has no chassis or earth, and the
+cable's ground already joins board ground through `J1`'s GND pins, so here the RC only hurt: an
+8 kV contact discharge to the shell (IEC 61000-4-2) shares its charge with `C1` and lifts the shell
+to about 1 kV, across a 50 V capacitor and next to the receptacle's signal contacts. The tabs go
+into the pours rather than through a 0 Ω because the thin track to a resistor adds a few
+nanohenries: about 100–200 V for a nanosecond during that strike, and tens of ohms at Wi-Fi
+frequencies, where the cable shield should be grounded
+([CERT_REVIEW_AUDIT.md](audit-2026-11-03/CERT_REVIEW_AUDIT.md#31-a1-shell-to-gnd), A1).
 
 **Power LED:** `D2` + `R59` (2 kΩ) across `USB_VBUS`. At 5 V this is **~1.3–1.6 mA** —
 deliberately dim. **`D2` indicates USB power present, *not* charging state**; it lights whenever
@@ -1583,8 +1591,12 @@ anything. Implications for a custom case:
   of the board where enclosure choices can ruin Wi-Fi. Leave roughly 10 mm of air in front of
   the antenna, and do **not** lay the battery over it, route battery leads across it, put a
   screw boss, a metal insert or a magnet there, or let the display's metal backplane extend over
-  that corner. Everything on the board — the cell, both boost inductors and every connector —
-  is already on the far side for this reason; a case is the easiest way to undo it.
+  that corner. The cell, the e-paper boost (`L1`) and the other connectors are on the far side
+  of the board, but not everything is: the frontlight boost (`L2`, `U10`) is
+  6.5–10 mm from the antenna, the microSD slot `J7` 10.7 mm and the frontlight connector `J3`
+  12.7 mm, all inside the 15 mm Espressif recommends
+  ([CERT_REVIEW_AUDIT.md](audit-2026-11-03/CERT_REVIEW_AUDIT.md#33-b1-and-z3-the-antenna-clearance), B1/B3).
+  A case is the easiest way to make it worse.
 - **The battery sits in front of the microSD slot.** In the normal layout the cell fills the
   board's cut-out directly in front of `J7`, so the card can only be inserted or removed with
   the battery lifted or slid aside. Design for that rather than around it — the card is not a
@@ -1615,7 +1627,7 @@ All x/y figures are board (KiCad page) coordinates, the same frame the STEP and 
 | Antenna keep-out | x 44.24 … 50.60, y 93.30 … 112.00, **plus ~10 mm of air** — nothing conductive, no battery |
 | Display-flex slot | **47.04 × 1.30 mm** at x 51.26 … 98.30, y 141.20 … 142.50 |
 | Tongue-neck slot | **5.30 × 1.10 mm** at x 89.59 … 94.89, y 61.40 … 62.50 |
-| Cut line (optional shortening) | y = 61.86, x 84.42 … 104.24 (the 3.68″ build cuts at y = 62.00) — cutting here removes `J6` with its protection parts (`U8`, `CR2`, `CR3`, `F2`), the front-light clamps `D3`/`D8`, `SW10` and mounting hole `H1`. A board with `R84` keeps the rest of the board whole after the cut: the charge-enable switch `Q2`/`R81` is fed from `USB_VBUS` and needs nothing from 3V3, and GND stitching vias join the power-section ground (`U3`, `U2`, `Q1`) to the main ground. A board without `R84` (its `Q2`/`R81` take 3V3 over a tail that the cut removes) needs two wires after the cut: `R40` pad 2 to `R81` pad 2 (or bridge the two cut 3V3 stubs at x 87.53 and 100.60), and `C6` pad 2 to `C21` pad 2. `SW10` is the power button, so a shortened board **needs the UP(2)-as-power option** ([§9.2](#92-power-button): remove `R36`/`R73` and `R62`, then fit `R72`/`R74`; `R62`, `SW10`'s series resistor, stays on the main board on a sawn stub). Without it `PWR_BUTTON` sits at 0 V through `R76`, so with firmware that wakes only on the power button, as the current firmware does, the board leaves deep sleep only through the `SW11` reset (waking on `SW1`/`SW2`, [§9.1](#91-button-ladders), or on a timer would need firmware support) |
+| Cut line (optional shortening) | y = 61.86, x 84.42 … 104.24 (the 3.68″ build cuts at y = 62.00) — cutting here removes `J6` with its protection parts (`U8`, `CR2`, `CR3`, `F2`), the front-light clamps `D3`/`D8`, `SW10` and mounting hole `H1`. A board with `R84` keeps the rest of the board whole after the cut: the charge-enable switch `Q2`/`R81` is fed from `USB_VBUS` and needs nothing from 3V3, and GND stitching vias join the power-section ground (`U3`, `U2`, `Q1`) to the main ground. A board without `R84` (its `Q2`/`R81` take 3V3 over a tail that the cut removes) needs two wires after the cut: `R40` pad 2 to `R81` pad 2 (or bridge the two cut 3V3 stubs at x 87.53 and 100.60), and `C6` pad 2 to `C21` pad 2. The cut also leaves the unfused `P+` trace (0.4 mm, F.Cu, x ≈ 87.4) bare at the new edge, because `F2` goes with the tongue and has no room below the line: deburr, check `P+` to GND, and seal the edge before reconnecting the battery (README, "Cutting the board down"). `SW10` is the power button, so a shortened board **needs the UP(2)-as-power option** ([§9.2](#92-power-button): remove `R36`/`R73` and `R62`, then fit `R72`/`R74`; `R62`, `SW10`'s series resistor, stays on the main board on a sawn stub). Without it `PWR_BUTTON` sits at 0 V through `R76`, so with firmware that wakes only on the power button, as the current firmware does, the board leaves deep sleep only through the `SW11` reset (waking on `SW1`/`SW2`, [§9.1](#91-button-ladders), or on a timer would need firmware support) |
 | Status-LED window | (102.80, 118.34), back face |
 
 **Frontlight load.** The GDEQ bonded frontlights are V_f ≈ 15 V at I_f ≤ 15 mA per channel;

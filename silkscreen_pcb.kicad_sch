@@ -6,8 +6,8 @@
 	(paper "A2")
 	(title_block
 		(title "Silkscreen Reader PCB")
-		(date "2026-10-22")
-		(rev "1.02")
+		(date "2026-11-03")
+		(rev "1.03")
 		(company "idc LLC")
 		(comment 1 "Open-hardware e-reader base board")
 		(comment 2 "Licensed under CERN-OHL-S-2.0")
@@ -9939,7 +9939,7 @@
 					)
 				)
 			)
-			(property "Footprint" "TPS923610DRLR:U_DRL0006A_6L_TEX-M"
+			(property "Footprint" "TPS923610DRLR:U_DRL0006A_6L_TI-LAND"
 				(at 0 0 0)
 				(effects
 					(font
@@ -9985,7 +9985,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_fp_filters" "U_DRL0006A_6L_TEX U_DRL0006A_6L_TEX-M U_DRL0006A_6L_TEX-L"
+			(property "ki_fp_filters" "U_DRL0006A_6L_TEX U_DRL0006A_6L_TEX-M U_DRL0006A_6L_TEX-L U_DRL0006A_6L_TI-LAND"
 				(at 0 0 0)
 				(effects
 					(font
@@ -12082,6 +12082,16 @@
 		)
 		(uuid "be135788-3de0-449d-baea-f0eb6456de68")
 	)
+	(text "Shell tied straight to GND from Rev 1.03\n(was R1 1M || C1 1n, HARDWARE.md 3.1)"
+		(exclude_from_sim no)
+		(at 41.91 82.55 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "729c5df1-29d9-54eb-bbf6-531632b0689a")
+	)
 	(text "USB-C Connector\n"
 		(exclude_from_sim no)
 		(at 44.704 16.002 0)
@@ -12242,12 +12252,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "089888aa-2bc9-4274-811a-cc6e6cd70dc2")
-	)
-	(junction
-		(at 25.4 72.39)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "089ce6a6-63d2-4a81-ab01-79845187550a")
 	)
 	(junction
 		(at 52.07 279.4)
@@ -12518,12 +12522,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "77afb58f-3880-44c7-8f97-e6d079953685")
-	)
-	(junction
-		(at 33.02 77.47)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "7c1d4c3b-1112-4d82-b347-0d2e997183d4")
 	)
 	(junction
 		(at 519.43 105.41)
@@ -12800,6 +12798,18 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "fdcb4624-461d-4bf1-887b-4670b6278014")
+	)
+	(junction
+		(at 60.96 213.36)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7bb03a7e-f230-4a4a-8245-f34690c28896")
+	)
+	(junction
+		(at 68.58 213.36)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "93af79ca-2179-474d-bb78-e1d3026ae9d1")
 	)
 	(no_connect
 		(at 157.48 261.62)
@@ -14525,7 +14535,7 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 72.39) (xy 25.4 77.47)
+			(xy 25.4 72.39) (xy 33.02 72.39)
 		)
 		(stroke
 			(width 0)
@@ -15675,7 +15685,7 @@
 	)
 	(wire
 		(pts
-			(xy 45.72 213.36) (xy 48.26 213.36)
+			(xy 45.72 213.36) (xy 60.96 213.36)
 		)
 		(stroke
 			(width 0)
@@ -17223,6 +17233,26 @@
 		)
 		(uuid "ccf7501f-2c75-5968-ae44-ac20642da1db")
 	)
+	(wire
+		(pts
+			(xy 60.96 213.36) (xy 60.96 208.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8dcd9686-9333-417a-98af-2f3d70c50dd0")
+	)
+	(wire
+		(pts
+			(xy 68.58 208.28) (xy 68.58 213.36)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "41760f16-e591-45a8-a309-e9684429e8e1")
+	)
 	(label "PIN_5"
 		(at 259.08 388.62 270)
 		(effects
@@ -17522,6 +17552,16 @@
 			(justify left bottom)
 		)
 		(uuid "10fb647a-e2a8-5a12-a030-9b5c82ad4b0e")
+	)
+	(label "B-_SENSE"
+		(at 46.99 213.36 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "00dcbe74-686c-41f8-9330-9b9b1c4d9df8")
 	)
 	(global_label "CC1"
 		(shape input)
@@ -31589,100 +31629,6 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 29.21 77.47 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "66e8f1ca-1012-4d14-aa9a-38abb936fb4e")
-		(property "Reference" "C1"
-			(at 29.21 81.534 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1n"
-			(at 29.21 84.074 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
-			(at 25.4 78.4352 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 29.21 77.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 29.21 77.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MPN" "CL10B102KB8NNNC"
-			(at 29.21 77.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer" "Samsung Electro-Mechanics"
-			(at 29.21 77.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C1588"
-			(at 29.21 77.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "7d0a1f9e-c655-4912-bf17-dd150262dc79")
-		)
-		(pin "2"
-			(uuid "3b0e47e5-b1e8-4cef-8c39-0c7437040de2")
-		)
-		(instances
-			(project "silkscreen_pcb"
-				(path "/2fbd4c8f-b784-4d80-b374-4947df99a9bf"
-					(reference "C1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
 		(at 119.38 304.8 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -34987,7 +34933,7 @@
 				)
 			)
 		)
-		(property "Footprint" "TPS923610DRLR:U_DRL0006A_6L_TEX-M"
+		(property "Footprint" "TPS923610DRLR:U_DRL0006A_6L_TI-LAND"
 			(at 293.37 257.81 0)
 			(effects
 				(font
@@ -42437,100 +42383,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 29.21 72.39 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "ce44a2da-fd30-4f97-9395-55e01af90772")
-		(property "Reference" "R1"
-			(at 29.21 67.564 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1M"
-			(at 29.21 70.104 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
-			(at 29.21 70.612 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 29.21 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 29.21 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MPN" "RC0603FR-071ML"
-			(at 29.21 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer" "Yageo"
-			(at 29.21 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C22935"
-			(at 29.21 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "d0aebf58-fe77-4bb4-a735-7ff19348b1bb")
-		)
-		(pin "2"
-			(uuid "36de4b34-581b-4dad-8fd3-b9b5bde9c6e3")
-		)
-		(instances
-			(project "silkscreen_pcb"
-				(path "/2fbd4c8f-b784-4d80-b374-4947df99a9bf"
-					(reference "R1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 218.44 369.57 270)
 		(unit 1)
@@ -43551,7 +43403,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 48.26 213.36 90)
+		(at 68.58 213.36 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -43560,7 +43412,7 @@
 		(fields_autoplaced yes)
 		(uuid "e5e34756-474a-4df1-8699-65e9b24cde8b")
 		(property "Reference" "#PWR05"
-			(at 54.61 213.36 0)
+			(at 74.93 213.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43569,7 +43421,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 52.07 213.3599 90)
+			(at 72.39 213.3599 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43578,7 +43430,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 48.26 213.36 0)
+			(at 68.58 213.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43587,7 +43439,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 48.26 213.36 0)
+			(at 68.58 213.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43596,7 +43448,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 48.26 213.36 0)
+			(at 68.58 213.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -46070,7 +45922,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "2.2n"
+		(property "Value" "0.1u"
 			(at 28.956 166.37 0)
 			(effects
 				(font
@@ -46106,7 +45958,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "CL10B222KB8NNNC"
+		(property "MPN" "CC0603KRX7R9BB104"
 			(at 26.67 165.1 0)
 			(effects
 				(font
@@ -46115,7 +45967,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer" "Samsung Electro-Mechanics"
+		(property "Manufacturer" "Yageo"
 			(at 26.67 165.1 0)
 			(effects
 				(font
@@ -46124,7 +45976,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C1604"
+		(property "LCSC" "C14663"
 			(at 26.67 165.1 0)
 			(effects
 				(font
@@ -46525,6 +46377,198 @@
 			(project "silkscreen_pcb"
 				(path "/2fbd4c8f-b784-4d80-b374-4947df99a9bf"
 					(reference "F6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 64.77 213.36 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7631cbff-20f2-4b5f-98b5-c720a5235506")
+		(property "Reference" "R85"
+			(at 64.516 215.9 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "0.1"
+			(at 65.532 215.9 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 64.77 215.138 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 64.77 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "DW01A over-current sense, 0.1 ohm 1% 0.25 W; in parallel with R86 = 50 mOhm from Q1 pin 3 (B-_SENSE) to GND (docs/NEXT_REVISION.md N7)"
+			(at 64.77 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "RL1206FR-070R1L"
+			(at 64.77 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "Yageo"
+			(at 64.77 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C25334"
+			(at 64.77 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2e91ff77-261b-4118-bc3e-024c5042924f")
+		)
+		(pin "2"
+			(uuid "88c370ba-7528-4ae1-b217-dac4e335c9de")
+		)
+		(instances
+			(project "silkscreen_pcb"
+				(path "/2fbd4c8f-b784-4d80-b374-4947df99a9bf"
+					(reference "R85")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 64.77 208.28 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "59192421-4ecc-49cd-9523-26b7bcf0a49b")
+		(property "Reference" "R86"
+			(at 64.516 205.74 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "0.1"
+			(at 65.532 205.74 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 64.77 210.058 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 64.77 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "DW01A over-current sense, 0.1 ohm 1% 0.25 W; in parallel with R85 = 50 mOhm from Q1 pin 3 (B-_SENSE) to GND (docs/NEXT_REVISION.md N7)"
+			(at 64.77 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "RL1206FR-070R1L"
+			(at 64.77 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "Yageo"
+			(at 64.77 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C25334"
+			(at 64.77 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "04ea8367-4da9-49ba-923c-92cab35d5d57")
+		)
+		(pin "2"
+			(uuid "7a3ac5e3-e361-473b-8b0d-ed68b90bfc5f")
+		)
+		(instances
+			(project "silkscreen_pcb"
+				(path "/2fbd4c8f-b784-4d80-b374-4947df99a9bf"
+					(reference "R86")
 					(unit 1)
 				)
 			)

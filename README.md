@@ -159,8 +159,10 @@ Do not mix one of them with an older copy of another.
    choose `Silkscreen_Reader_PCB_1.02.zip`.
 2. The viewer draws the board. Confirm it says **2 layers** and about **60 × 111 mm**. If it does
    not, you uploaded the wrong file.
-3. Set **PCB Qty = 5**, **Thickness = 1.6 mm**, **Outer Copper Weight = 1 oz**. Surface finish and
-   solder-mask color are your choice; nothing in this design needs a particular one.
+3. Set **PCB Qty = 5**, **Thickness = 1.6 mm**, **Outer Copper Weight = 1 oz**. For **Surface Finish**,
+   pick a lead-free one: OSP, LeadFree HASL or ENIG. Don't pick "HASL(with lead)": it isn't
+   RoHS-compliant, and selling the device in the EU needs RoHS. ENIG's flat pads also help the
+   0.5 mm-pitch connectors. Solder-mask color is your choice.
 4. Leave everything else at its default.
 5. Scroll the viewer to the board edges and check the USB-C cut-out, the microSD opening and the
    two narrow slots on the outline are open, not filled. The long one is the display-flex slot;
@@ -404,6 +406,15 @@ choose to modify one:
 
 - **Disconnect the battery first.** Battery positive runs across the cut line. Cutting into it
   with a pack connected can short the cell.
+- **Seal the cut edge before you reconnect the battery.** The cut leaves bare battery-positive
+  (`P+`) copper at the new edge. It's the 0.4 mm front-copper trace about 3 mm from the cut's left
+  end, viewed from the front. Its fuse, `F2`, goes with the cut-off part. A burr or smeared copper
+  that bridges it to the ground pour beside it shorts the cell, with only the battery protector to
+  stop it.
+  - **Deburr** the edge.
+  - **Measure.** With the battery unplugged, set a meter to ohms between that stub and any ground
+    point. It should not read near 0 Ω.
+  - **Coat the edge** (nail varnish, conformal coating or Kapton tape) before refitting the battery.
 - **It will not snap by hand.** More than half the tab width is solid 1.6 mm FR-4, with live
   copper crossing it. Use a rotary tool (Dremel or similar) and cut along the marked line.
 - **You lose the expansion header `J6` with its protection parts (`U8`, `CR2`, `CR3`, `F2`), the

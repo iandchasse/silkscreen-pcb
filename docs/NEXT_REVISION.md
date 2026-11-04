@@ -33,7 +33,7 @@ studies behind them are linked from each item.
 
 - one PTC part number, reused on four branches;
 - a sense resistor that makes the battery protector see smaller shorts;
-- front-side test pads so a short can be located with a meter.
+- front-side test pads so a short can be located with a meter (N11, dropped 2026-11-02).
 
 ## 2. Hardware changes
 
@@ -48,10 +48,10 @@ studies behind them are linked from each item.
 | **[N7](#n7-dw01a-sense-resistor-r85)** | **`DW01A` sense resistor** | 68 mΩ 1 % `Rs` from `Q1` pin 3 (new net `B-_SENSE`) to GND. `R16` stays on GND | Isolate `Q1` pin 3 from the pour. Put `Rs` in the pocket above-left of pin 3 (move the `UNUSED_GPIO_45` trace), with ≥ 0.4 mm copper and ≥ 2 vias to GND | +1 RL1206FR-070R068L (or 2 × `C25334` 0.1 Ω Basic in parallel) | [FOLLOWUP §3.2–3.3](audit-2026-10-29/PROTECTION_FOLLOWUP.md#32-dw01a-sense-resistor-the-lean) |
 | **[N8](#n8-c34-from-22-nf-to-100-nf)** | **`C34` 2.2 nF → 0.1 µF** (required with N7: keeps the cell-insertion spike off the short-circuit threshold) | value only | — | `C34` moves to the `C14663` line | [FOLLOWUP §3.2](audit-2026-10-29/PROTECTION_FOLLOWUP.md#32-dw01a-sense-resistor-the-lean) |
 | **[N9](#n9-r6-from-47k-to-10k)** | **Charge current: `R6` 4.7 kΩ → 10 kΩ** (about 0.12 A; halves `U11`'s heat) | value only | — | `R6` joins the 10 kΩ `C25804` line; the 4.7 kΩ line goes | [FOLLOWUP §5](audit-2026-10-29/PROTECTION_FOLLOWUP.md#5-charge-current-r6) |
-| **[N10](#n10-move-c36-and-c37)** | **Move `C36`/`C37`** (`SD_VDD`) out of the socket's flex zone | — | At least 5 mm from `J7`, or turned so the socket's bending axis runs along their length | — | [DURABILITY_AUDIT §3.4](audit-2026-10-29/DURABILITY_AUDIT.md#34-microsd-supply) |
-| **[N11](#n11-front-test-pads-tp6-to-tp18)** | **13 front-side test pads**, TP6–TP18 (bare F.Cu, no paste, no F.SilkS labels) | new nets as above; most pads join existing nets | Positions are checked clear of the artwork by [tp_front.py](audit-2026-10-29/test-pads/tp_front.py) (map: [tp_front.png](audit-2026-10-29/test-pads/tp_front.png)). Watch TP7 (shares N7's pocket), TP8 (stub on F.Cu) and TP16 (on N6's trace) | — | [FOLLOWUP §8.2](audit-2026-10-29/PROTECTION_FOLLOWUP.md#82-test-pads-front-side-decided-2026-11-02) |
+| **[N10](#n10-move-c36-and-c37)** | ~~**Move `C36`/`C37`** (`SD_VDD`) out of the socket's flex zone~~ **Closed 2026-11-03: left as is** ([REV_1_03_STATUS §7](REV_1_03_STATUS.md#7-n10-closed-left-as-is)) | — | At least 5 mm from `J7`, or turned so the socket's bending axis runs along their length | — | [DURABILITY_AUDIT §3.4](audit-2026-10-29/DURABILITY_AUDIT.md#34-microsd-supply) |
+| **[N11](#n11-front-test-pads-tp6-to-tp18)** | ~~**13 front-side test pads**, TP6–TP18 (bare F.Cu, no paste, no F.SilkS labels)~~ **Dropped 2026-11-02** | new nets as above; most pads join existing nets | Positions are checked clear of the artwork by [tp_front.py](audit-2026-10-29/test-pads/tp_front.py) (map: [tp_front.png](audit-2026-10-29/test-pads/tp_front.png)). Watch TP7 (shares N7's pocket), TP8 (stub on F.Cu) and TP16 (on N6's trace) | — | [FOLLOWUP §8.2](audit-2026-10-29/PROTECTION_FOLLOWUP.md#82-test-pads-front-side-decided-2026-11-02) |
 
-**Test pads (N11).**
+**Test pads (N11, dropped 2026-11-02; kept for reference).**
 
 | Pad | Net | Pad | Net |
 |---|---|---|---|
@@ -72,6 +72,29 @@ studies behind them are linked from each item.
 - Breakdown and cheaper variants: [FOLLOWUP §0](audit-2026-10-29/PROTECTION_FOLLOWUP.md#0-summary).
 
 **After layout**, re-run `python docs/audit-2026-10-29/test-pads/tp_front.py`, then DRC.
+
+**From the 2026-11-03 trace audit.** These are listed with severity and cost in [TRACE_AUDIT.md §0](audit-2026-11-03/TRACE_AUDIT.md#0-summary) and ordered in [§4](audit-2026-11-03/TRACE_AUDIT.md#4-recommendations-in-order).
+
+**The free ones are now on `1.03`** ([§1b](audit-2026-11-03/TRACE_AUDIT.md#1b-free-fixes-applied-after-the-audit)):
+
+- ESD grounds;
+- the second power vias (10 of 13);
+- solid ground pads;
+- no pours in the antenna keep-out;
+- the high-voltage spacing fixes and pour pull-backs;
+- DRC rules for the footprint errors;
+- track cleanup;
+- edge stitching.
+
+**Teardrops still need the KiCad GUI** (Edit → Add Teardrops).
+
+**Not decided yet:**
+
+- **Two would add one 0603 each:** an HF capacitor at `D5` for the e-paper boost loop, and a capacitor at `J2`'s supply pins.
+- **Two are moves for the next layout pass:** the ESD arrays to their connectors, and `C-` off the edge (which would also let the right edge be stitched). TI's land pattern for `U10` is already on `1.03` ([TRACE_AUDIT.md §1c](audit-2026-11-03/TRACE_AUDIT.md#1c-u10-on-tis-example-land-pattern)).
+- **`F2` stays above the cut line.** No room was found below it: the only strip, at `J5`'s mating face, is covered by a fitted battery plug and carries the polarity label. The cut-edge risk is documented in the README's cutting instructions instead ([TRACE_AUDIT.md §2.3](audit-2026-11-03/TRACE_AUDIT.md#23-board-edges-mounting-holes-and-the-cut-line)).
+
+The `U10`-corner layout changes from that audit are already on `1.03` (T1).
 
 ## 3. Implementation details, item by item
 
@@ -151,7 +174,7 @@ Each heading below is a stable link target (for example `docs/NEXT_REVISION.md#n
   1. `Q1` pin 3 (85.1, 71.05) is in the GND pour today. Its net change isolates it on refill.
   2. Place `R85` in the pocket above-left of pin 3 (about x 83.4–86.4, y 68.9–70.4). The `UNUSED_GPIO_45` trace from (84.78, 68.42) to (83.63, 69.57) must move, and a 1206 also needs the `B−` jog nudged about 0.5 mm. If space is short, an 0805 fits (`0805W4F680MT5E`, `C52472`).
   3. Copper: pin 3 → `R85` 0.4 mm or wider and short; `R85` → GND with at least two vias (reuse the one at (86.4, 68.8)).
-- **No extra Extended fee:** two 0.1 Ω `1206W4F100LT5E` (`C25334`, JLC Basic) in parallel, as `R85` and `R86`.
+- **No extra Extended fee:** two 0.1 Ω `1206W4F100LT5E` (`C25334`, JLC Basic) in parallel, as `R85` and `R86`. **Chosen 2026-11-03** and in the `1.03` schematic and board: `R85` (78.66, 69.11) and `R86` (75.0, 70.5), west of `Q1`, because the pocket by pin 3 has no room (see [REV_1_03_STATUS.md §6](REV_1_03_STATUS.md#6-n7-and-n8-schematic-and-board)).
 - **Requires N8.** Details: [FOLLOWUP §3.3](audit-2026-10-29/PROTECTION_FOLLOWUP.md#33-sense-resistor-implementation-and-bench-check).
 
 ### N8: C34 from 2.2 nF to 100 nF
@@ -167,11 +190,17 @@ Each heading below is a stable link target (for example `docs/NEXT_REVISION.md#n
 
 ### N10: Move C36 and C37
 
+**Status: closed 2026-11-03, left as is.** `C36`/`C37` already lie along the bending axis, and there is no room to move
+them 5 mm ([REV_1_03_STATUS §7](REV_1_03_STATUS.md#7-n10-closed-left-as-is)). The plan below is kept for reference.
+
 - **Today:** `C36` (62.5, 86.7) and `C37` (62.3, 88.2) on `SD_VDD` sit 2.2 and 3.7 mm from the push-push socket `J7` (63.0, 84.6). That is the board's worst flex-crack spot.
 - **Change:** move them at least 5 mm from `J7`'s outline, or rotate them so the socket's bending axis runs along their length. They stay on `SD_VDD`; their role is local decoupling for the card.
 - **Pad clash:** TP10 at (63.65, 86.2) is next to `C36` today. Move TP10 with the capacitors if it ends up in the way, and re-run the pad checker.
 
 ### N11: Front test pads (TP6 to TP18)
+
+**Status: dropped 2026-11-02.** Ian: "forget the test pads, we'll leave them for later, if at all." The plan below is
+kept for reference.
 
 **Symbol and footprint:** `Connector:TestPoint`, `TestPoint:TestPoint_Pad_D1.5mm` (or `_D1.0mm`, which also clears everything).
 
@@ -248,17 +277,29 @@ R85,0.068,RL1206FR-070R068L,Yageo,C327066,,YAGEO RL1206FR-070R068L,"same part; D
 
 ## 6. Verification
 
-**Before ordering** (on a Rev 1.0 board, by bodge where possible):
+**Before ordering** (on a Rev 1.0 board, by bodge where possible). [BENCH_THEORY.md](audit-2026-11-03/BENCH_THEORY.md)
+predicts each result from the datasheets and the board's copper, and says which parts still add something.
 
-1. **Frontlight PTC bench test** ([PTC_THERMAL §8](audit-2026-10-29/PTC_THERMAL.md#8-bench-test)):
-   - a 6.8 Ω stand-in for the short, fed at 3.0–5.0 V;
-   - the light at 100 % for 30 min from 3.0 and 3.7 V.
-2. **Sense-resistor trial** ([FOLLOWUP §3.3](audit-2026-10-29/PROTECTION_FOLLOWUP.md#33-sense-resistor-implementation-and-bench-check)):
-   - **Peak current:** measure the coincident battery peak on `Rs` (Wi-Fi TX + SD write + light). It must stay at
-     0.6 A or less, i.e. −41 mV or less; if it is much lower, 82 mΩ becomes possible.
-   - **Trip point:** expect 0.8–1.7 A.
-   - **Insertion:** 20 cell insertions with no latch-off.
-   - **Hot:** repeat the peak load at about 60 °C with no trip.
+1. **Frontlight PTC bench test** ([PTC_THERMAL §8](audit-2026-10-29/PTC_THERMAL.md#8-bench-test); predictions in
+   [BENCH_THEORY §2.4–2.6](audit-2026-11-03/BENCH_THEORY.md#26-what-the-bench-test-adds)):
+   - **Where:** best on a 1.03 board, because a bodge on an older board sits in different copper. Measure `F3`'s
+     resistance first.
+   - **Fault:** a 6.8 Ω stand-in for the short, from the `SW` node to GND, fed at 3.0–5.0 V. Expected worst-part trip
+     from 3.0 V: about 6 s now that `F3` has its pour keep-out
+     ([TRACE_AUDIT T20](audit-2026-11-03/TRACE_AUDIT.md#0-summary)); about 30 s without it.
+   - **Normal use:** the light at 100 % for 30 min from 3.0 and 3.7 V.
+2. **Sense-resistor trial** ([FOLLOWUP §3.3](audit-2026-10-29/PROTECTION_FOLLOWUP.md#33-sense-resistor-implementation-and-bench-check)).
+   - **Basis:** these numbers are for the pair as placed. With the copper it is about 62 mΩ from `Q1` pin 3 to ground
+     ([BENCH_THEORY §3.2](audit-2026-11-03/BENCH_THEORY.md#32-the-sense-path-as-placed)); FOLLOWUP gives them for 68 mΩ.
+   - **Probing:** with no TP7/TP8 (N11 was dropped), read `/B-_SENSE` at `R85` pad 1 (53.7 mV per amp across `R85`),
+     and `OD` at `Q1` pin 6 against `B−`.
+   - **Peak current:** measure the coincident battery peak (Wi-Fi TX + SD write + light).
+     - The datasheets put it at about 0.55 A, 0.63 A worst at the 50 % light cap.
+     - The lowest trip point is 0.83 A with the PUOLOP `DW01A` JLC fits, 0.77 A with Fortune's.
+     - If the peak is much lower, a higher resistance becomes possible.
+   - **Trip point:** expect 0.83–1.68 A, about 1.32 A typical (PUOLOP; Fortune 0.77–1.78 A).
+   - **Insertion:** theory says no risk with `C34` = 0.1 µF (BENCH_THEORY §3.4), so 3–5 insertions are enough.
+   - **Hot:** theory says the trip falls 4–7 % at 60 °C (§3.5). Optional: repeat the trip point warm.
 3. **Known-good baseline:** record the rail and PTC-pad readings from the repaired case 1 board
    ([FOLLOWUP §8.3](audit-2026-10-29/PROTECTION_FOLLOWUP.md#83-known-good-baseline)).
 
@@ -267,7 +308,9 @@ R85,0.068,RL1206FR-070R068L,Yageo,C327066,,YAGEO RL1206FR-070R068L,"same part; D
 - The e-paper rails come up through N5 (scope `GDR`/`RESE` and `VGH`/`VGL`).
 - The touch, `J6` accessory and SD all work through their PTCs.
 - The frontlight runs normally at each level and in blend mode.
-- Run the `tp_front` map against the as-built board.
+- Measure `EINK_3V3` current and ripple at `J2` pins 15/16 during a full refresh (the panel's logic supply now sits behind `F6`).
+
+**Process (any board, any revision):** after rework, wash off the flux. This matters most around `U10`/`L2`/`C9`, `J2` pins 18–24 and `J3`, where 17–40 V sits across 0.20–0.27 mm gaps ([TRACE_AUDIT.md §2.2](audit-2026-11-03/TRACE_AUDIT.md#22-spacing-against-voltage)).
 
 ## 7. Considered and not adopted
 
@@ -278,10 +321,12 @@ R85,0.068,RL1206FR-070R068L,Yageo,C327066,,YAGEO RL1206FR-070R068L,"same part; D
 | Latching electronic fuse on the boost branch | 14 parts | [BOOST_EFUSE.md](audit-2026-10-29/BOOST_EFUSE.md) |
 | 4-part current limiter on the boost branch | More parts than the PTC; **kept as the fallback** if N1's bench test fails | [BOOST_LIMITER.md](audit-2026-10-29/BOOST_LIMITER.md) |
 | Low-quiescent load switch | BGA only | — |
+| Ferrite bead in `U4`'s supply (certification review C2) | Espressif's reference design uses 22 µF + 0.1 µF and no bead, and the rail is LDO-fed | [CERT_REVIEW_AUDIT §1.1](audit-2026-11-03/CERT_REVIEW_AUDIT.md#11-verdict-per-review-item) |
+| Shipping with the cell unplugged (certification review A3) | The board is sold without a cell and has no coin cell; it matters only if a cell ever ships | [CERT_REVIEW_AUDIT §1.1](audit-2026-11-03/CERT_REVIEW_AUDIT.md#11-verdict-per-review-item) |
 
 **Still open from earlier reviews, not decided here:**
 
-- `C1` as a 1–2 kV MLCC.
+- `C1` as a 1–2 kV MLCC: moot from Rev 1.03, which ties the USB-C shell straight into the GND pours and removes `R1` and `C1` ([CERT_REVIEW_AUDIT §3.1](audit-2026-11-03/CERT_REVIEW_AUDIT.md#31-a1-shell-to-gnd)).
 - `J1` mechanical support.
 - `U6` routed flow-through.
 - Fitting `SW6` on boards that will be flashed.
@@ -299,3 +344,32 @@ See [DURABILITY_AUDIT §3.5](audit-2026-10-29/DURABILITY_AUDIT.md#35-already-pro
 - **Scope:** the plug-in and hot-plug surge, and blend mode.
 - **The 67 W charger:** test it over C–C.
 - **The owner's remaining answers:** see [BOARD_FAILURES.md §7](BOARD_FAILURES.md#7-open-items).
+
+## 9. Certification-readiness items for later (recorded 2026-11-03)
+
+From the audit of the external certification-readiness review, [CERT_REVIEW_AUDIT.md](audit-2026-11-03/CERT_REVIEW_AUDIT.md).
+The cheap set is on the `1.03` branch: A1, A2, B2, B5, B7's return vias, and the X2/X3/Z1 wording ([CERT_REVIEW_AUDIT §6](audit-2026-11-03/CERT_REVIEW_AUDIT.md#6-applied-on-2026-11-03)).
+The rest is recorded here for reference. None of it is decided.
+
+| ID | Item | Why it matters | What it takes | Details |
+|---|---|---|---|---|
+| C1 | NTC on the TP4056 `TEMP` pin, which is grounded today | **Needed before a safety evaluation.** IEC 62368-1 M.4.2 wants charging stopped when the cell is too hot, and portable equipment is tested beyond its rated ambient | 5.6 kΩ / 120 kΩ divider plus a 10 kΩ NTC, for about 0–45 °C. Placement is the hard part: on the board at (86.5, 61.5) with about 35 mm of trace to `U11`, a 3-wire pack, or an NTC on leads. The NTC is a JLC Extended part (Z6). An off-board NTC that is not connected stops all charging (Z7) | [§3.6](audit-2026-11-03/CERT_REVIEW_AUDIT.md#36-c1-charge-temperature) |
+| B1, Z3 | Antenna clearance | GND pour sits about 1 mm from the antenna's sides. Espressif, and KiCad 9's footprint for the module, keep 15 mm clear, which would flag 11 parts here | Step 1: clear the pour from the notch arms (contained). Step 2: move `SW5` and the frontlight block, a re-layout done with the enclosure | [§3.3](audit-2026-11-03/CERT_REVIEW_AUDIT.md#33-b1-and-z3-the-antenna-clearance) |
+| B3 | Frontlight boost 6.5–10 mm from the antenna | Possible Wi-Fi desense | Measure range and throughput with the light at full and off first. The fix is B1 step 2 | [§3.5](audit-2026-11-03/CERT_REVIEW_AUDIT.md#35-b3-b4-a4-not-for-103) |
+| B4 | Panel capacitors at their `J2` pins (now 5–17 mm away) | Closer to the reference circuit | No legal spots without moving parts (TRACE_AUDIT T5/T9). Check `EINK_3V3` ripple on the first boards (§6) | [§3.5](audit-2026-11-03/CERT_REVIEW_AUDIT.md#35-b3-b4-a4-not-for-103) |
+| A4 | 1.0–1.2 mm board | −2.5 to −4.1 dB on board-level loops | Changes button plunger heights, stiffness, the `J1` stake fit and the PTC calibration. Only if a pre-scan fails | [§3.5](audit-2026-11-03/CERT_REVIEW_AUDIT.md#35-b3-b4-a4-not-for-103) |
+| B6 | No B.Cu pour under `L1` | Small either way: the pour also shields | One rule area | [§1.1](audit-2026-11-03/CERT_REVIEW_AUDIT.md#11-verdict-per-review-item) |
+| B7, rest | Return vias at the other 17 fast-signal vias | Return-path loop area | Two spots under `J7` were skipped because the card slides over them. The other 15 have no legal spot, and the USB pair stays as it is (T18) | [§6](audit-2026-11-03/CERT_REVIEW_AUDIT.md#6-applied-on-2026-11-03) |
+| C3 | 0.1 µF on `VBUS_PRE_FUSE` at `J1` | Input filtering | A hot-plug study first: a ceramic at the connector rings with the cable's inductance | [§1.1](audit-2026-11-03/CERT_REVIEW_AUDIT.md#11-verdict-per-review-item) |
+| D1–D3 | Charge inhibit, switched rails, second I²C bus | Power and bus control | No spare GPIO | [§1.1](audit-2026-11-03/CERT_REVIEW_AUDIT.md#11-verdict-per-review-item) |
+| Z5 | 499 Ω in series with UART0 TX (`U4` pin 37 → `TP2`) | Espressif: it suppresses harmonics | Cheapest: production firmware doesn't log on UART0 and uses USB-Serial-JTAG instead. In hardware it is a new part | [§1.2](audit-2026-11-03/CERT_REVIEW_AUDIT.md#12-what-the-review-missed) |
+
+**Paperwork, not layout:**
+
+- **Z2, FCC filing route.** The module's FCC grant excludes portable use: "Separate approval is required for all other
+  operating configurations, including portable configurations with respect to 2.1093". Ask a TCB or test lab which route
+  applies: a Class II permissive change filed by Espressif, or the host's own FCC ID. The TX-power cap in the certification
+  plan settles the exposure maths, not the filing ([§3.7](audit-2026-11-03/CERT_REVIEW_AUDIT.md#37-z2-the-module-grant-and-portable-use)).
+- **Z4, labels.** E-labels are allowed for e-readers, but the box still needs "Contains FCC ID: 2AC7Z-ESPS3WROOM1" and
+  "Contains IC: 21098-ESPS3WROOM1", or the host's own IDs if Z2 ends there.
+- **RoHS.** The README now rules out leaded HASL (Z1). Keep the board house's RoHS statement with the technical file.

@@ -739,7 +739,7 @@ probe polarities, waiting for the reading to settle (the ceramics charge). Only 
 | 1 | `3V3` (`C10` pad 2) and `GND` | High. | The leak. Symmetric means a resistive path (a ceramic); one-way means a diode or IC junction in it. |
 | 2 | `VBUS_PRE_FUSE` (`F1`'s connector-side pad) and `GND` | About 400 kΩ: `R38` 300 kΩ plus 100 kΩ, through `F1`. | A USB-side leak (`CR1`, `U6`, `J1`). |
 | 3 | `CC1`, `CC2` and `GND` | 5.1 kΩ each (`R3`, `R2`). | `U6` or the connector. |
-| 4 | `J1` shield tab and `GND` | About 1 MΩ (`R1`, with `C1`). | Shield pins bridged to ground. |
+| 4 | `J1` shield tab and `GND` | About 1 MΩ (`R1`, with `C1`). Rev 1.03 and later read 0 Ω: the shell is tied to GND and `R1`/`C1` are gone. | Shield pins bridged to ground. |
 | 5 | `F1` end to end | A fraction of an ohm. | `F1` tripped or damaged. |
 | 6 | D+, D− and `GND` | High. | `U6` or `U4`. |
 | 7 | `EINK_SW` (`L1` pad 1), `PREVGH` (`C14` pad 2), `PREVGL` (`C16` pad 2), `C11` pad 1, each and `GND` | High. | A shorted ceramic or diode in the e-paper section. |
