@@ -5,9 +5,9 @@
 **State in one line:** the schematic, board and part fields carry N1–N9 (N7/N8 reached the board on 2026-11-03,
 section 6). N10 is closed as "leave as is", and N11 was dropped. The changes are machine-checked (DRC with schematic
 parity, ERC, netlist diff, Fabrication Toolkit dry run), and the designer has since worked on the board in KiCad
-(`R85`/`R86`, teardrops). Production files and docs are not regenerated; the docs pass is handed off in
-[REV_1_03_DOCS_HANDOFF.md](REV_1_03_DOCS_HANDOFF.md). The title blocks read Rev 1.03 (2026-11-03), and the back
-silkscreen prints it. At the 2026-11-03 commit, the board passes DRC with 0 errors (the known warnings only), 0
+(`R85`/`R86`, teardrops). Production files and docs were regenerated on 2026-11-05 ([section 16](#16-default-rtc-production-files-docs-and-renders-2026-11-05)),
+from the task list in [REV_1_03_DOCS_HANDOFF.md](REV_1_03_DOCS_HANDOFF.md). The title blocks read Rev 1.03 (now
+2026-11-04), and the back silkscreen prints it. At the 2026-11-03 commit, the board passes DRC with 0 errors (the known warnings only), 0
 unconnected and clean parity, ERC is at 46, and it has 862 teardrops. On 2026-11-04 the TP4056 charger was replaced by
 TI's BQ21040 with an NTC ([section 14](#14-bq21040-charger-2026-11-04)): DRC is unchanged, ERC is at 45, and the
 teardrops were re-added the same day (860).
@@ -290,18 +290,16 @@ soft-termination reading rests on an older catalog copy. Samsung's open-mode des
 ## 9. Not done yet
 
 - **Teardrops after the charger swap:** done on 2026-11-04 (section 10, step 12); 860 now.
-- **Production files:** `production/` is still Rev 1.02. Regenerate with the Fabrication Toolkit after the layout is reviewed,
-  edit `production/jlc_bom.csv` by hand (new PTC group, `R42` out, `R1` out of the 1M group, `C1` out, and the charger
-  lines of section 14), check the new footprints in JLC's placement preview, and rebuild the layout and schematic PDFs.
-- **Docs and images:** handed off. [REV_1_03_DOCS_HANDOFF.md](REV_1_03_DOCS_HANDOFF.md) lists every user-facing change since
-  Rev 1.02, the task for each file (HARDWARE.md, README, BOM.md, THIRD_PARTY.md, the images and PDFs) and the checks.
-  The certification audit's three wording fixes are done ([CERT_REVIEW_AUDIT.md §4](audit-2026-11-03/CERT_REVIEW_AUDIT.md#4-documentation-fixes-queued)):
+- **Production files:** regenerated for Rev 1.03 on 2026-11-05 (section 16). Still to do: look at the new footprints in
+  JLC's placement preview.
+- **Docs and images:** done on 2026-11-05 (section 16). [REV_1_03_DOCS_HANDOFF.md](REV_1_03_DOCS_HANDOFF.md) lists every
+  user-facing change since Rev 1.02, the task for each file (HARDWARE.md, README, BOM.md, THIRD_PARTY.md, the images and
+  PDFs) and the checks they followed. The certification audit's three wording fixes are done ([CERT_REVIEW_AUDIT.md §4](audit-2026-11-03/CERT_REVIEW_AUDIT.md#4-documentation-fixes-queued)):
   - HARDWARE.md §16, the antenna "far side" claim;
   - HARDWARE.md §3.1, shield handling, after A1;
   - the README's surface-finish line, which now rules out HASL with lead for RoHS.
-- **Revision label:** both title blocks now read 1.03 / 2026-11-03, and the back silkscreen prints `Rev ${REVISION} ${ISSUE_DATE}`.
-  The README, HARDWARE.md's header note and the `production/` file names still say 1.02 until the docs pass and the
-  regenerated production files.
+- **Revision label:** both title blocks read 1.03 / 2026-11-04, and the back silkscreen prints `Rev ${REVISION} ${ISSUE_DATE}`.
+  The README, HARDWARE.md and the `production/` file names say 1.03 since 2026-11-05.
 - **Firmware items F3–F7** in NEXT_REVISION §4 are untouched. F11 now describes the BQ21040's `USB_STAT` decode.
 - **Pre-order measurements** from NEXT_REVISION §6 (frontlight PTC bench test, sense-resistor trial, the coincident-peak
   measurement) have not been done. [audit-2026-11-03/BENCH_THEORY.md](audit-2026-11-03/BENCH_THEORY.md) predicts their
@@ -350,7 +348,8 @@ soft-termination reading rests on an older catalog copy. Samsung's open-mode des
 
 ## 11. Decisions needed
 
-- **Production files:** who regenerates them (section 9; [REV_1_03_DOCS_HANDOFF.md §4](REV_1_03_DOCS_HANDOFF.md#4-production-files-a-separate-job-that-readme-depends-on)). The docs pass is handed off.
+- **Production files and docs:** regenerated on 2026-11-05 (section 16). What is left for the owner: look at JLC's placement
+  preview, and commit when the files look right.
 - **For later, recorded for reference:** the certification items not done in 1.03, including how far to take the antenna
   clearance (B1) ([NEXT_REVISION.md §9](NEXT_REVISION.md#9-certification-readiness-items-for-later-recorded-2026-11-03)).
   The charge-temperature item C1 is done (section 14).
@@ -529,8 +528,8 @@ Made on branch `1.03` at the owner's request, after a review of the commits sinc
   capacitance (CTS, with a 30 ms `TS` deglitch). The four segments of the old branch through `F1`'s pads are gone, so `TS`
   is about 14 mm long (23 mm before) and none of it runs between `F1`'s pads or 0.28 mm from `USB_VBUS`. `TH1` is now
   about 7 mm from `U11`; a conduction-only estimate puts the extra self-heating at 2–3 K. The `R82` and `TH1` labels
-  moved. Schematic: the `C38` block sits above `U11`'s `OUT` wire in the charger box, and the `TH1` note now says "about
-  0-41 C" (the window with `R82` = 200k).
+  moved. Schematic: the `C38` block sits above `U11`'s `OUT` wire in the charger box, and the `TH1` note now says "0-41 C"
+  (the window with `R82` = 200k).
 - **`D3`.** The GND via inside `D3`'s pad 2 at (92.4, 59.1), added after `bfa8216`, is deleted. It was the only via-in-pad
   on the board. The pad has no room for a second via beside it (I2C copper and other parts on every side) and already has
   its own at (89.8, 58.3).
@@ -556,4 +555,75 @@ Made on branch `1.03` at the owner's request, after a review of the commits sinc
 - **Antenna notch clear-out (M-3).** Left alone: the owner is not concerned about range unless it turns out very poor.
 
 **Still to do:** docs, in [REV_1_03_DOCS_HANDOFF.md §3.9](REV_1_03_DOCS_HANDOFF.md#39-from-the-layout-pass-2026-11-04-second);
-production files as before.
+production files as before. Both are done in section 16.
+
+## 16. Default RTC, production files, docs and renders (2026-11-05)
+
+Made on branch `1.03` at the owner's request, after the layout-pass commit `9fbec1d`: regenerate the docs and renders in
+advance, and make the cheaper RTC the default in the JLC BOM. **Not committed.** Files touched: `silkscreen_pcb.kicad_sch`,
+`silkscreen_pcb.kicad_pcb`, `fabrication/part_fields.csv`, everything in `production/`, the living docs and
+`docs/images/`.
+
+**Design files**
+
+- **The default RTC is `U14`.** The Micro Crystal RV-8263-C7 (`C5137460`: ±20 ppm, about 190 nA, I²C `0x51`) is fitted. The
+  DS3231MZ `U13` (`C107410`: ±5 ppm, `0x68`) is the unfitted alternate. Fit one or none: the addresses differ, so there is
+  no bus conflict, and the firmware probes `0x68` first and falls back to `0x51`. On LCSC at 30 boards the RV-8263-C7 costs
+  $1.14 against $2.72, about $1.6 a board. The schematic flags are swapped (`U13` `dnp` yes, `in_bom` no; `U14` the
+  reverse), and so are the board attributes (`U13` `smd exclude_from_bom dnp`, `U14` `smd`). `part_fields.csv` carries the
+  same swap.
+- **JLC rotation of `U14`.** JLC's library footprint for `C5137460` (SMD3215-8P) is landscape and KiCad's is portrait, and
+  `U14` is on the bottom side. `U14` has a hidden `FT Rotation Offset` field of −90, as a schematic property and as a hidden
+  `B.Fab` field on the board, so `positions.csv` reads `U14,63.85,-118.05,270.0,bottom`. The offset comes from comparing
+  JLC's footprint pads (EasyEDA API) with KiCad's. JLC's placement preview has not been looked at.
+- **Title blocks:** 2026-11-04 (were 2026-11-03), so the back silkscreen prints "Rev 1.03 2026-11-04".
+- **Schematic notes, for the renders.** Two notes stuck out of their frames at 400 dpi: the `TH1` note in block 04 by 39 px
+  and the "used to be a schottky diode" note in block 01 by 33 px. The first now reads "TH1: ambient NTC (0-41 C)" under
+  its GND label, with the `R6` note 0.8 mm lower; the second is four lines. `C38`'s reference and value are horizontal and
+  clear of the plates and the GND symbol. `TH1`'s hidden Description (schematic and board) and the `part_fields.csv` notes
+  for `U11` and `TH1` now say about 0-41 C and the new position.
+
+**Production files (`production/`)**
+
+- Fabrication Toolkit, run headless on the board: `Silkscreen_Reader_PCB_1.03.zip` (13 files, the same names as the 1.02
+  zip), `bom.csv`, `positions.csv` (170 placed parts), `designators.csv` and `netlist.ipc`. The Rev 1.02 zip moved to
+  `production/backups/`.
+- `jlc_bom.csv`, edited by hand from the 1.02 file: the new fuse line (`F3`–`F6`, `C210355`), `R85`/`R86` (`C25334`), `C38`
+  (`C107083`), `TH1` (`C13564`); `C34` on the 0.1u line; `R42`, `R1` and the `C1` line out; `R82` on the 200k line (`C25811`);
+  `Q2` on the BSS138 line; `U11` = BQ21040DBVR (`C202311`); `U14` = RV-8263-C7 (`C5137460`), with `U13` as the DNP row.
+- `other_fabs/`: `make_fab_files.py --split`; 170 placed parts, 158 SMD and 12 through-hole.
+- Cross-checks: `jlc_bom.csv` and the Toolkit's `bom.csv` give the same LCSC code for every fitted designator (only `TP1` and
+  `TP2`, bare-copper pads with no code, are in `bom.csv` alone); the DNP set in `jlc_bom.csv` is the 11 refs in
+  `part_fields.csv` (`R43 R45 R58 R66 R72 R74 SW6 TP3 TP4 TP5 U13`); `positions.csv` lists the 170 fitted parts.
+
+**Docs and renders**
+
+- Updated: `README.md`, `docs/HARDWARE.md`, `fabrication/BOM.md`, `fabrication/BOM_handbuild_digikey.csv`,
+  `fabrication/README.md`, `fabrication/THIRD_PARTY.md`, `docs/CHANGELOG.md`, `docs/NEXT_REVISION.md` (status line) and
+  this file. DigiKey blocked automated access on 2026-11-05, so the hand-build CSV's new rows (`U11`, `U14`, `TH1`, `R85`/`R86`,
+  `C38`) have LCSC prices and no DigiKey part numbers or prices; the rows say so.
+- Images: crops 01, 04, 05, 07, 09, 10, 14, 15b, 16, 16b and 17, `board-top.png`, `board-bottom.png` and `full-capture.png`,
+  re-cut from the 1.03 files with the Rev 1.02 recipe; `silkscreen_pcb_schematic.pdf` (one A2 page) and
+  `silkscreen_pcb_layout.pdf` (two A5 pages). The other crops are byte-identical to Rev 1.02.
+- [BOARD_FAILURES.md](BOARD_FAILURES.md) Figure 3 shows the frontlight block as built on Rev 1.0, so it points to
+  `images/10-led-driver-rev1.02.png`, the Rev 1.02 crop kept from git.
+
+**Verification (repo files, KiCad closed)**
+
+| Check | Result |
+|---|---|
+| DRC with parity | Identical to section 15: 0 errors, 31 `silk_edge_clearance`, 10 `silk_over_copper`, 3 `silk_overlap`, 6 `starved_thermal`, 4 `track_dangling` (excluded). 0 unconnected, 0 parity issues |
+| ERC | 45, as before |
+| Part fields | `apply_part_fields.py` dry run: 181 parts matched, 0 to add or update, 0 DNP changes |
+| Production | Cross-checks above; the zip holds the same 13 files as the 1.02 zip |
+| Docs | Link, anchor and table checks on `README.md`, `docs/*.md` and `fabrication/*.md`: 0 problems |
+
+**Still to do**
+
+- **JLC's placement preview** for `U11`, `U14`, `J1`, `F3`–`F6` and `C38`. The rotations of `U11` and `U14` come from JLC's
+  library footprints, not from the preview.
+- **Stock:** `U10` (TPS923610) is about 80 at JLC and the RV-8263-C7 about 1,000; both are on the thin-stock list in
+  `fabrication/BOM.md`.
+- **`docs/mechanical/silkscreen_pcb.step`** was not regenerated (last changed 2026-09-13).
+- **`U14` has no 3D model** in KiCad's libraries, so the renders draw its pads bare while the unfitted `U13` shows a body.
+- `H5`'s reference text is on `B.Silkscreen` although `H5` is a front footprint (`H1` and `H6` are back footprints); harmless.

@@ -1,6 +1,8 @@
 # Next revision: decided changes (after Rev 1.02)
 
-Status: **decided 2026-11-02, not yet implemented**. Base: Rev 1.02 (`silkscreen_pcb.kicad_pcb`). Everything below comes
+Status: **decided 2026-11-02; N1–N9 are implemented in the Rev 1.03 design files** ([REV_1_03_STATUS.md](REV_1_03_STATUS.md);
+N10 is closed, N11 was dropped, and the BQ21040 charger swap of 2026-11-04 supersedes N9). Where section 5 and the status
+note differ, the status note wins. Base: Rev 1.02 (`silkscreen_pcb.kicad_pcb`). Everything below comes
 from the case 1 repair ([BOARD_FAILURES.md](BOARD_FAILURES.md#case-1-rev-10-frontlight-boost-fault)) and the studies it
 led to in [audit-2026-10-29/](audit-2026-10-29/). Section 2 is the checklist, and section 3 gives each change's exact
 references, nets, footprints, coordinates and BOM rows, with one link target per change (`#n1-…` to `#n11-…`). The

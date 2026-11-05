@@ -3,14 +3,15 @@ U4,1,ESP32-S3-WROOM-1-N16R8,Espressif,6.5,6.5,ODS,
 U3,1,TLV75533PDBVR,TI,0.35,0.35,est,
 U2,1,TPS2116DRLR,TI,0.6,0.6,est,
 U10,1,TPS923610DRLR,TI,0.7,0.7,est,
-U11,1,TP4056-42-ESOP8,TOPPOWER (LCSC-only),0.2,0.2,est,buy from LCSC
+U11,1,BQ21040DBVR,TI,0.42,0.42,LCSC,DigiKey price and part number not looked up (DigiKey blocked automated access on 2026-11-05); search: https://www.digikey.com/en/products/result?keywords=BQ21040DBVR
 U5,1,DW01A,Fortune/PUOLOP (LCSC-only),0.1,0.1,ODS,buy from LCSC
 U12,1,SN74LVC1G04DBVR,TI,0.1,0.1,est,
-U13,1,DS3231MZ+TRL,Analog Devices,13.85,13.85,DigiKey,optional; the reel part (LCSC C107410) in part_fields.csv
+U13,0,DS3231MZ+TRL,Analog Devices,13.85,0.0,DigiKey,"DNP alternate RTC (I2C 0x68, +/-5 ppm): fit instead of U14 and add 13.85; the reel part (LCSC C107410) in part_fields.csv"
+U14,1,RV-8263-C7-32.768KHZ-20PPM-TA-QA,Micro Crystal,1.58,1.58,LCSC,"default RTC, optional (I2C 0x51, +/-20 ppm); DigiKey price and part number not looked up (DigiKey blocked automated access on 2026-11-05); search: https://www.digikey.com/en/products/result?keywords=RV-8263-C7-32.768KHZ-20PPM-TA-QA"
 "U1,U6,U7,U8,U9",5,TPD4E1U06DBVR,TI,0.86,4.3,ODS,x5
 Q1,1,FS8205A,EVVOSEMI (DigiKey 26220994),0.41,0.41,est,"SOT-23-6; JLC build uses TECH PUBLIC C2830320; Fortune FS8205A is TSSOP-8 only"
-"Q2,Q3,Q7,Q8",4,AO3401A,AOS,0.45,1.8,est,x4 (AO3419 also fine)
-"Q5,Q6,Q9",3,BSS138LT1G,onsemi,0.31,0.93,ODS,x3
+"Q3,Q7,Q8",3,AO3401A,AOS,0.45,1.35,est,x3 (AO3419 also fine)
+"Q2,Q5,Q6,Q9",4,BSS138LT1G,onsemi,0.31,1.24,ODS,x4; Q2 gates the charger TS pin
 Q4,1,IRLML6346TRPBF,Infineon,0.45,0.45,est,
 "D4,D5,D6",3,B5819W / 1N5819HW-7-F,Diodes,0.22,0.66,ODS,x3
 D2,1,LTST-C150KRKT,Lite-On,0.3,0.3,est,"red 1206, pad1=cathode"
@@ -30,5 +31,9 @@ L1,1,TYS5040470M-10,Laird,0.41,0.41,ODS,"47 uH 5x5x4 mm shielded; JLC build uses
 L2,1,VLS252012HBX-100M-1,TDK,0.3,0.3,est,"10 uH, 1.2 mm; VLS252010HBU-100M is the 1.0 mm alternative"
 F1,1,0805L100WR,Littelfuse,0.3,0.3,est,
 F2,1,0805L075WR,Littelfuse,0.3,0.3,est,0.75 A PPTC in series with J6 pin 12
-"resistors (78 pcs, 26 values)",78,0603 1% thick film (Yageo RC0603FR / Panasonic ERJ),—,0.1,7.8,ODS,per piece qty-1
-capacitors (36 pcs),36,"Samsung CL10/CL21, Yageo CC0603",—,0.13,4.68,ODS,per piece qty-1; 50V parts on panel rails
+"F3,F4,F5,F6",4,MF-FSMF010X-2,Bourns,0.06,0.24,LCSC,"0603 PTC, 0.10 A hold / 0.30 A trip (JLC C210355). DigiKey stock not confirmed (2026-11-02) and DigiKey was not reachable on 2026-11-05; the DigiKey-stocked sibling MF-PSMF010X-2 (LCSC C116171) has the same ratings but is 0805, not a drop-in for the 0603 land; search: https://www.digikey.com/en/products/result?keywords=MF-FSMF010X-2"
+TH1,1,NCP18XH103F03RB,Murata,0.05,0.05,LCSC,10 kohm NTC on the charger TS pin; DigiKey price and part number not looked up (DigiKey blocked automated access on 2026-11-05); search: https://www.digikey.com/en/products/result?keywords=NCP18XH103F03RB
+"R85,R86",2,RL1206FR-070R1L,Yageo,0.01,0.02,LCSC,"0.1 ohm 1206 pair, DW01A current sense; the LCSC price is the UNI-ROYAL 1206W4F100LT5E (JLC C25334); DigiKey price and part number not looked up (DigiKey blocked automated access on 2026-11-05); search: https://www.digikey.com/en/products/result?keywords=RL1206FR-070R1L"
+C38,1,CC0603KRX7R9BB224,Yageo,0.01,0.01,LCSC,"0.22 uF 50 V X7R 0603, the BQ21040 optional TS capacitor; DigiKey part number not read (DigiKey blocked automated access on 2026-11-05): https://www.digikey.com/en/products/detail/yageo/CC0603KRX7R9BB224/5883804"
+"resistors (75 pcs, 26 values)",75,0603 1% thick film (Yageo RC0603FR / Panasonic ERJ),—,0.1,7.5,ODS,per piece qty-1
+capacitors (35 pcs),35,"Samsung CL10/CL21, Yageo CC0603",—,0.13,4.55,ODS,per piece qty-1; 50V parts on panel rails

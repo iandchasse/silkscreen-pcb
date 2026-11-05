@@ -29,16 +29,16 @@ and **SamacSys / Component Search Engine**.
 | TPD4E1U06DBVR | U1, U6–U9 | symbol | SnapEDA | https://www.snapeda.com/search/?q=TPD4E1U06DBVR |
 | TSD05CDYFR | CR1–CR3 (symbol only; CR1 is SMF6.5CA and CR2/CR3 use standard SOD-323 footprints) | symbol | SnapEDA | https://www.snapeda.com/search/?q=TSD05CDYFR |
 | FS8205A | Q1 | symbol | Ultra Librarian | https://app.ultralibrarian.com/search?queryText=FS8205A |
-| TPS923610DRLR | U10 | symbol, footprint | Ultra Librarian | https://app.ultralibrarian.com/search?queryText=TPS923610DRLR |
-| MJTP1117 | SW1–SW5, SW7–SW11 (footprint) | footprint | SamacSys / Component Search Engine | https://componentsearchengine.com/search?term=MJTP1117 |
-| RV-8263-C7 | U14 (DNP) | symbol (project-made) | derived from KiCad's stock `Timer_RTC:RV-3028-C7` symbol (KiCad libraries, CC-BY-SA-4.0 with the library exception), pins renamed for the RV-8263-C7; the footprint is KiCad-standard `Package_SON:MicroCrystal_C7_SON-8_1.5x3.2mm_P0.9mm` | n/a — edit `KiCad/9.0/3rdparty/RV-8263-C7/RV-8263-C7.kicad_sym` |
+| TPS923610DRLR | U10 | symbol; footprints (unused since Rev 1.03, see the notes) | Ultra Librarian | https://app.ultralibrarian.com/search?queryText=TPS923610DRLR |
+| MJTP1117 | SW1–SW5, SW7–SW11 (footprint) | footprint; the project-made variant `MJTP1117_FG` (see the notes) | SamacSys / Component Search Engine | https://componentsearchengine.com/search?term=MJTP1117 |
+| RV-8263-C7 | U14 | symbol (project-made) | derived from KiCad's stock `Timer_RTC:RV-3028-C7` symbol (KiCad libraries, CC-BY-SA-4.0 with the library exception), pins renamed for the RV-8263-C7; the footprint is KiCad-standard `Package_SON:MicroCrystal_C7_SON-8_1.5x3.2mm_P0.9mm` | n/a — edit `KiCad/9.0/3rdparty/RV-8263-C7/RV-8263-C7.kicad_sym` |
 | microSD push-push (unified) | J7 | footprint (project-built), 3D model | GCT MEM2075 pad geometry + SHOU HAN TF PUSH DXF + FastEDA 3D (via Protoflow) | see note below |
 
 Notes:
 - `MJTP1117` contributes only the **footprint** (and 3D model); its symbol is KiCad standard
   (`Switch:SW_Push`). `SW6` uses a KiCad-standard MJTP1243 footprint. `L1` uses the KiCad-standard footprint
   `Inductor_SMD:L_APV_ANR5040` (and its standard 3D model), so no third-party inductor files are shipped.
-- Only files the design references are vendored. The `SRN3010C-100M` footprint, the TSD05/TPD4E1U06/FS8205A
+- Only files the design references are vendored, except Ultra Librarian's three `U10` footprints (see below). The `SRN3010C-100M` footprint, the TSD05/TPD4E1U06/FS8205A
   footprints and 3D models, and the legacy KiCad-5 `MJTP1117` files are not included; re-download from the
   vendors above if you need them.
 - `J1` (USB-C) and every passive/IC not listed above use **standard KiCad libraries** — no
@@ -49,4 +49,12 @@ Notes:
   3D model (`TF-SMD_TF-PUSH.wrl`) is FastEDA-generated (obtained via Protoflow) and carries its
   generator's terms. The footprint is a dual-source land accepting either the SHOU HAN TF PUSH
   (LCSC C393941) or GCT MEM2075-00-140-01-A.
-- `TPS923610DRLR`'s 3D model (`SOT563.STEP`) is the manufacturer's, added separately.
+- `U10`'s footprint is `U_DRL0006A_6L_TI-LAND` (Rev 1.03), drawn from the example land pattern in TI's TPS923610 data
+  sheet (SNVSCN8B, p. 30), not Ultra Librarian's. It sits in `KiCad/9.0/3rdparty/TPS923610DRLR/KiCADv6/footprints.pretty/`
+  next to Ultra Librarian's three footprints (`U_DRL0006A_6L_TEX`, `-TEX-M`, `-TEX-L`), which are kept but unused. The Ultra
+  Librarian symbol is still used; the project added the new footprint's name to its `ki_fp_filters` property.
+- `MJTP1117_FG` (`Mjtp1117/MJTP1117_FG.kicad_mod`, Rev 1.03) is a variant made for this project: the SamacSys `MJTP1117`
+  footprint with pad 3 (the mounting hole beside the GND pad) numbered 1, so the switch's metal cover is tied to GND. `SW1`–`SW5`,
+  `SW8`, `SW9` and `SW11` use it; `SW7` and `SW10` keep the plain `MJTP1117`. It is derived from the SamacSys footprint, so treat
+  it under the same terms.
+- `TPS923610DRLR`'s 3D model (`SOT563.STEP`) is the manufacturer's, added separately. The new `U10` footprint uses it too.

@@ -94,8 +94,19 @@ netlist diffs of each revision, and the board figures from the board files. The 
 
 ### Silkscreen
 
-The title blocks and back silkscreen print Rev 1.03, every reference label is 0.5 mm, and the touch-option note names
-`F4`.
+The title blocks and back silkscreen print Rev 1.03 and the date 2026-11-04, every reference label is 0.5 mm, and the
+touch-option note names `F4`.
+
+### Default build (2026-11-05)
+
+- **RTC:** the default is now `U14`, the Micro Crystal RV-8263-C7 (±20 ppm, about 190 nA, I²C 0x51), in place of `U13`,
+  the DS3231MZ (±5 ppm, I²C 0x68). That is about $1.6 less per board at 30 boards. `U13` stays on the board as the DNP
+  alternate: fit one RTC or none. The firmware probes 0x68 first and falls back to 0x51. JLC stock of the RV-8263-C7 is
+  thin (1,058 on 2026-11-05).
+- **Production files:** regenerated for Rev 1.03: the Gerber zip `Silkscreen_Reader_PCB_1.03.zip`, the Toolkit BOM and
+  placement, the hand-edited `jlc_bom.csv` and the other-fab files. The Rev 1.02 zip moved to `production/backups/`.
+  `U14` carries a JLC rotation correction (the `FT Rotation Offset` field), because JLC's library footprint for the part
+  is landscape and KiCad's is portrait.
 
 ## Behaviour that differs from Rev 1.0
 
@@ -129,9 +140,10 @@ reach every board and none has ever been built:
 
 **Before any order:**
 
-1. **Regenerate the production files.** `production/` is still Rev 1.02; ordering from it would build 1.02 boards, with
-   the TP4056 and no fuses. Regenerate with the Fabrication Toolkit and hand-edit `jlc_bom.csv`
-   ([REV_1_03_DOCS_HANDOFF §4](REV_1_03_DOCS_HANDOFF.md#4-production-files-a-separate-job-that-readme-depends-on)).
+1. **Production files: regenerated on 2026-11-05.** `production/` is Rev 1.03, with the BQ21040 and the new fuses. What is
+   left is the placement preview at JLC: look at the rotation of `U11`, `U14`, `J1`, the fuses `F3`–`F6` and the new
+   0.22 µF `C38` before approving the order. The rotation corrections for `U11` and `U14` were derived from JLC's
+   library footprints, not from the preview.
 2. **Check `U10` stock.** On 2026-11-04 LCSC showed only 68 TPS923610. Everything else new was plentiful (the BQ21040
    at 3,365). Check JLC's own stock against the batch size; the README describes a two-part substitute if it runs out.
 3. **Firmware:** the pin map is the same. Add the charge-status decode (F11), keep the 50 % brightness cap (F6), and

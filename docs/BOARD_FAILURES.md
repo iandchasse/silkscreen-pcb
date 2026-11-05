@@ -163,9 +163,11 @@ temperature after the repair have not been recorded yet.
 
 ### 4. What the evidence shows
 
-![Frontlight driver schematic](images/10-led-driver.png)
+![Frontlight driver schematic, Rev 1.02](images/10-led-driver-rev1.02.png)
 
-*Figure 3. The frontlight driver block (Rev 1.0 and Rev 1.02 are identical here).*
+*Figure 3. The frontlight driver block (Rev 1.0 and Rev 1.02 are identical here). Rev 1.03 adds the fuse `F3` in
+the driver's supply, net `LED_VIN` ([HARDWARE.md §7](HARDWARE.md#7-frontlight-driver)); this figure keeps the Rev 1.02 drawing the
+failure reports describe.*
 
 #### 4.1 Firmware behaviour that matters for the account
 

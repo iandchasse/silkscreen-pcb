@@ -28,11 +28,25 @@ Successor to [de-link](https://de-link.me).
 > Connection facts are checked against the KiCad netlist; designed in **KiCad 9**. The
 > module is **ESP32-S3-WROOM-1-N16R8**.
 >
-> **Rev 1.02.** This document describes Rev 1.02, the revision in the name of the release zip. (On the `1.03` branch both title blocks already read Rev 1.03; this document catches up in the 1.03 documentation pass, [REV_1_03_STATUS.md §9](REV_1_03_STATUS.md#9-not-done-yet), and sections that already describe a 1.03 change say so.) Boards made from the Rev 1.0 files lack `R84` (1 Ω in series with `C2`'s ground leg, a USB hot-plug damper, [§3.1](#31-usb-c-input--protection)) and the 3V3 link and ground stitching vias below the cut line ([§16](#16-design-notes--conventions)), and print the `J6` pinout table with its two lines the other way round ([§11](#11-expansion-header)). They also have the through-hole `USB4085` as `J1` (Rev 1.02 has a 12-pad SMD receptacle, [§3.1](#31-usb-c-input--protection)) and feed the charge-enable gate (`Q2`, `R81`, `R82`) from 3V3 with `R79`/`R80`/`R81`/`R82` = 100 kΩ/1 MΩ/1 MΩ/1 MΩ, where Rev 1.02 uses `USB_VBUS` and 1 MΩ/10 MΩ/100 kΩ/10 kΩ ([§3.3](#33-cell-protection--reverse-polarity)), so a Rev 1.0 board's sleep current is about 10 µA above the figures in [§16](#16-design-notes--conventions). Rev 1.02 has not been fabricated. Files labelled Rev 1.01 (published 2026-10-01) already had `R84`, the vias and the `J6` label, but still the through-hole `J1` and the 3V3-fed gate; they were never built, and Rev 1.02 replaces them.
+> **Rev 1.03.** This document describes Rev 1.03. Both title blocks read Rev 1.03 and 2026-11-04, the back silkscreen prints the same, and the release zip is `Silkscreen_Reader_PCB_1.03.zip`. No Rev 1.03 board has been fabricated yet. Rev 1.0 is the only revision built so far, so the text says where a Rev 1.0 board differs. The full list of changes since the Rev 1.0 order is in [CHANGELOG.md](CHANGELOG.md); the engineering hand-over is [REV_1_03_STATUS.md](REV_1_03_STATUS.md). On every revision, use a 5 V USB source only ([§3.1](#31-usb-c-input--protection)).
+>
+> **Revision history:**
+>
+> - **Rev 1.0** (ordered 2026-09-21; the only revision built). The charger is a TP4056 (about 230–250 mA, `TEMP` grounded, no timer), `J1` is the through-hole `USB4085`, `C34` is 2.2 nF, battery protection senses only across its FETs, the RTC is the DS3231MZ, and there is no `R84` (1 Ω in series with `C2`'s ground leg, a USB hot-plug damper, [§3.1](#31-usb-c-input--protection)). It lacks the 3V3 link and ground stitching vias below the cut line ([§16](#16-design-notes--conventions)) and prints the `J6` pinout table with its two lines the other way round ([§11](#11-expansion-header)). The charge-enable gate (`Q2`, `R81`, `R82`) is fed from 3V3, with `R79`/`R80`/`R81`/`R82` = 100 kΩ/1 MΩ/1 MΩ/1 MΩ ([§3.3](#33-cell-protection--reverse-polarity)). That costs about 10 µA of sleep current more than the `USB_VBUS`-fed gate of Rev 1.02.
+> - **Rev 1.01** (published 2026-10-01; never built). Added `R84`, the 3V3 link and ground stitching vias below the cut line, and the corrected `J6` label. It kept the through-hole `J1` and the 3V3-fed gate.
+> - **Rev 1.02** (never built). `J1` became the 12-pad SMD receptacle ([§3.1](#31-usb-c-input--protection)). The charge-enable gate moved to `USB_VBUS`, with `R79`/`R80`/`R81`/`R82` = 1 MΩ/10 MΩ/100 kΩ/10 kΩ.
+> - **Rev 1.03** (2026-11-04). The design this document describes:
+>   - Four branch PTCs (Bourns MF-FSMF010X-2, 0.10 A hold, 0.30 A trip): `F3` ahead of the frontlight boost (net `/LED_VIN`, [§7](#7-frontlight-driver)); `F4` in the touch supply, in place of `R42` ([§8](#8-touch-interface)); `F5` on `J6` pin 7 (net `J6_3V3`, [§11](#11-expansion-header)); `F6` ahead of the e-paper boost and the panel's logic supply (net `EINK_3V3`, [§6](#6-display-interface)).
+>   - Battery protection: `R85` ∥ `R86` (two 0.1 Ω 1206 resistors) from `Q1` pin 3 to GND, and `C34` = 0.1 µF ([§3.3](#33-cell-protection--reverse-polarity)).
+>   - Charger: TI's BQ21040 with a 10 kΩ NTC (`TH1`) and `C38` on its `TS` pin, in place of the TP4056. It charges only between about 0 and 41 °C at `TH1`, with 30 min pre-charge and 10 h fast-charge timers, at about 115 mA. `Q2` is a BSS138 acting on `TS`, `R82` is 200 kΩ, and `R71` and the `STDBY` line are gone ([§3.2](#32-battery-charger), [§3.3](#33-cell-protection--reverse-polarity), [§3.7](#37-usb--charge-status)).
+>   - The USB-C shell is tied straight to GND, and `R1` and `C1` are removed ([§3.1](#31-usb-c-input--protection)).
+>   - `U10` sits on TI's example land pattern ([§7](#7-frontlight-driver)).
+>   - Layout: ground pours pulled back from the switch nodes and high-voltage nets (`silkscreen_pcb.kicad_dru`), pour-free areas at the cut line, more ground vias, 860 teardrops, and pad 3 of the tact-switch frames tied to GND ([§9.1.1](#911-front-mounted-bottom-buttons-optional-hand-fitted), [§16](#16-design-notes--conventions)).
+>   - The default RTC is `U14`, the RV-8263-C7; `U13`, the DS3231MZ, is the DNP alternate ([§10](#10-real-time-clock)).
 >
 > **Full plots:** [`silkscreen_pcb_schematic.pdf`](silkscreen_pcb_schematic.pdf)
 > (schematic, one A2 sheet) and [`silkscreen_pcb_layout.pdf`](silkscreen_pcb_layout.pdf) (PCB layout: front view, then the back as you see it) are
-> plotted from the current source. The per-block images in `images/` are crops of the schematic plot; the charger crop (§3.2) and the full-sheet image (§2) do not show `R84`.
+> plotted from the current source. The per-block images in `images/` are crops of the schematic plot.
 >
 > **Field-reported failures** (the owner's account, photos, measurements, and what they mean for the design, including on Rev 1.02) are logged in [`BOARD_FAILURES.md`](BOARD_FAILURES.md).
 
@@ -107,10 +121,10 @@ firmware support. An adapter or board changes may be needed.
 
 Several blocks are populated only if the chosen panel needs them:
 
-- **Frontlight** (`U10` boost, support parts and `J3`): for a `-FL01C` / `-FT01C` panel, or a compatible external light through `J6` or an external-light flex PCB on `J3`. That flex PCB is in development. Keep `J3` with the driver, including on a plain or touch-only panel.
-- **Touch** (`J4` + `U7`) — only for `-T01C` / `-FT01C` panels
-- **RTC** (`U13`, or `U14` as the alternate footprint) — always useful, but not required to boot (`U13` is populated in the full build; omit it if you don't need it)
-- **Expansion header** (`J6` + `U8`/`CR2`/`CR3`/`F2`) — omit the connector and its own protection parts together
+- **Frontlight** (`U10` boost, its PTC `F3`, support parts and `J3`): for a `-FL01C` / `-FT01C` panel, or a compatible external light through `J6` or an external-light flex PCB on `J3`. That flex PCB is in development. Keep `J3` with the driver, including on a plain or touch-only panel.
+- **Touch** (`J4` + `U7` + its PTC `F4`) — only for `-T01C` / `-FT01C` panels
+- **RTC** (`U14`, or `U13` as the alternate footprint) — always useful, but not required to boot (`U14` is populated in the full build; omit it if you don't need it, and fit one RTC or none)
+- **Expansion header** (`J6` + `U8`/`CR2`/`CR3`/`F2`/`F5`) — omit the connector and its own protection parts together
 
 The full part list for each group is in the README, [Choosing a configuration](../README.md#choosing-a-configuration).
 
@@ -125,11 +139,11 @@ The whole design is a single A2 sheet. It divides into four domains:
 | Stage | Path |
 |---|---|
 | Input | USB-C → PPTC fuse → `USB_VBUS` |
-| Charging | `USB_VBUS` → TP4056 → `P+` (protected cell) |
+| Charging | `USB_VBUS` → BQ21040 (with an NTC on the board) → `P+` (protected cell) |
 | Source select | TPS2116 picks `USB_VBUS` or `P+` → `LDO_IN` |
 | Regulation | `LDO_IN` → TLV75533P → `3V3` (everything digital) |
-| Frontlight | `LDO_IN` → TPS923610 boost → up to 24.5 V (bypasses the LDO) |
-| Panel HV | `3V3` → charge pump driven by the panel → ±15–22 V |
+| Frontlight | `LDO_IN` → PTC `F3` → TPS923610 boost → up to 24.5 V (bypasses the LDO) |
+| Panel HV | `3V3` → PTC `F6` → charge pump driven by the panel → ±15–22 V |
 
 The processor sits on `3V3` and reaches the outside world through native USB (no UART bridge),
 4-bit SDMMC to the microSD, SPI to the e-paper ZIF, I²C to the RTC and touch panel, and five
@@ -143,6 +157,7 @@ ADC channels for the buttons, battery, USB status and frontlight monitor.
 | `USB_VBUS` | ~4.4–5.5 V | charger, mux input 1 |
 | `P+` / `LDO_IN` | 3.0–5 V | mux output → LDO, frontlight boost |
 | `3V3` | 3.3 V | everything digital |
+| *(local)* `/LED_VIN`, `EINK_3V3`, `J6_3V3` | 3.0–5 V, 3.3 V, 3.3 V | the same rails after one PTC each: the frontlight boost input (`C12`, `L2`, `U10`) behind `F3`; the e-paper boost (`L1`, `C10`) and the panel's logic supply (`J2` pins 15/16) behind `F6`; `J6` pin 7 and `CR2` behind `F5` |
 | *(local)* `LED_SW` | up to 24.5 V | frontlight LEDs only |
 | *(local)* panel HV | ±15–22 V | e-paper gate/source rails only |
 
@@ -179,6 +194,8 @@ resistors (not one shared) is correct — it lets the source determine cable ori
 > category occurs (see [DESIGN_REVIEW.md](../DESIGN_REVIEW.md) §3), which is judged an
 > acceptable residual risk for this board rather than something worth a design change.
 
+**Use a 5 V USB source only.** Nothing on the input protects against over-voltage ahead of `U2`: `CR1` breaks down at 7.22–7.98 V, above `U2`'s 6.0 V absolute maximum, and `F1` is a current limit only. A compliant USB-C or USB-A charger stays at 5 V, because the board never asks for more. A fixed 9 V or 12 V supply, or any non-compliant source, kills the board: `CR1` fails, normally as a short, and `U2`, `U3` and `U10` may die. The BQ21040 charger survives such a source (it is rated 30 V and stops charging above about 6.6 V), but `U2` and everything behind it do not. A 5 V over-voltage switch ahead of `U2` is a next-revision item ([NEXT_REVISION.md](NEXT_REVISION.md#10-independent-review-items-for-later-recorded-2026-11-03), M-4).
+
 **Input protection chain:** `VBUS_PRE → F1 → USB_VBUS`
 
 - **`F1` `0805L100WR`** — resettable PPTC, **1.0 A hold / ~1.95 A trip at 25 °C**. The hold
@@ -189,9 +206,9 @@ resistors (not one shared) is correct — it lets the source determine cable ori
 > **There is no series Schottky in the VBUS path.** It would be redundant:
 > the TPS2116 specifies ~1 nA reverse leakage out of an unselected input **at 25 °C** (the same
 > `I_REV` spec is 0.05 µA at 85 °C and 0.15 µA at 105 °C — small enough that the
-> conclusion holds), and the TP4056
-> datasheet states outright that *"No blocking diode is required due to the internal PMOSFET
-> architecture."* Both paths off `USB_VBUS` already block. A series diode would also drop 0.3–0.6 V and, at
+> conclusion holds), and the BQ21040 charger takes at most 1 µA from the cell into `OUT` with
+> `VIN` at 0 V, its terminals being high-impedance below the undervoltage lockout (TI SLUSCE2
+> §8.3.1). Both paths off `USB_VBUS` already block. A series diode would also drop 0.3–0.6 V and, at
 > the ~1 A `F1` passes, would exceed a SOD-123 part's rating. `F1` feeds
 > `USB_VBUS` directly, and with no diode drop to allow for, `R38` = 300 k sets the switchover threshold (§3.4). A
 > series Schottky does damp hot-plug ringing (with de-link's 6.5–7 V input parts, it is what kept
@@ -227,7 +244,7 @@ volt clear of the 5.5 V a USB-C source may legally sit at.
 > **`CR1`'s breakdown voltage can't clamp a fast hot-plug ringing transient** the way it clamps
 > a genuine over-voltage fault. When a source whose VBUS is already live — a USB-A charger, PC
 > port or power bank on an A-to-C cable — is plugged in, the cable inductance rings against the
-> ceramics on `USB_VBUS`, `C2` (10 µF/25 V, the TP4056's input capacitor) and `C25` (1 µF, at
+> ceramics on `USB_VBUS`, `C2` (10 µF/25 V, the charger's input capacitor) and `C25` (1 µF, at
 > `U2`). The first peak arrives 6–9 µs after contact and lasts a few microseconds; it mostly
 > stays under `CR1`'s 7.22 V minimum breakdown, and even at the worst case `CR1` trims only
 > ~0.1 V. A USB-C charger on a C-to-C cable ramps VBUS up after attach and does not overshoot.
@@ -236,14 +253,15 @@ volt clear of the 5.5 V a USB-C source may legally sit at.
 > A hot-plug study graded it **MEDIUM** without `R84`. Typical USB-A chargers (aluminum
 > output capacitor) stay at or below ~5.9 V at a 5.0 V source on 1 m cables (6.26 V on 20 AWG at
 > 5.25 V); low-ESR fast-charge bricks with 20–24 AWG cables put **6.1–6.9 V on `U2`'s
-> `VIN1`/`MODE`** (6.0 V absolute maximum); the worst stack-up reaches **7.95 V**, with the
-> TP4056's `VCC` at 7.97 V against its 8 V limit. `LDO_IN` stays at or below ~5.2–5.6 V because
+> `VIN1`/`MODE`** (6.0 V absolute maximum); the worst stack-up reaches **7.95 V**. The
+> charger is not the limit (the BQ21040 is rated 30 V and stops charging above about 6.6 V); `U2`'s 6.0 V is, and it
+> is still the reason for `R84`. `LDO_IN` stays at or below ~5.2–5.6 V because
 > `U2` has not connected yet when the first peak arrives. de-link's clean record does not carry
 > over: its series Schottky and 6.5–7 V input parts are what kept it safe.
 >
 > **`R84` (1 Ω, 0603) sits in series with `C2`'s ground leg** (`C2` pin 2 → `R84` →
 > GND; Yageo `RC0603FR-071RL`, ordered at JLC as `C22936`, a UNI-ROYAL `0603WAF100KT5E`), which
-> turns `C2` into a damper — the kind of series resistor the TP4056 datasheet prescribes (it gives
+> turns `C2` into a damper — the kind of series resistor the Rev 1.0 charger's datasheet prescribes (it gives
 > 1.5 Ω, which the hot-plug study found too stiff on this board: `C25` then rings on its own).
 > `C25` goes straight from `USB_VBUS` to GND. No DC current flows in `R84`, so
 > it costs no VBUS drop and nothing in sleep. With it the worst stack-up falls to **5.60 V** on
@@ -266,34 +284,71 @@ volt clear of the 5.5 V a USB-C source may legally sit at.
 
 ![Charger](images/04-charger.png)
 
-*(This crop does not show `R84`: `C2` returns to GND through it, 1 Ω, see §3.1.)*
+*(`C2` returns to GND through `R84`, 1 Ω, see §3.1.)*
 
-**`U11` `TP4056`-class (ESOP-8)** — a standalone linear Li-ion charger, 4.2 V float.
+**`U11` BQ21040 (Texas Instruments, SOT-23-6)** — a standalone linear Li-ion charger, 4.2 V float, with a battery-temperature input and built-in safety timers. (Rev 1.0 boards have a TP4056 here, with its `TEMP` pin grounded and no timer; see the revision history at the top.)
 
 | Pin | Connection | Meaning |
 |---|---|---|
-| `VCC` (4) | `USB_VBUS` | charge only from USB |
-| `BAT` (5) | `P+` | charges the protected cell |
-| `PROG` (2) | `R6` = 4.7 kΩ | **I ≈ 0.25 A** (see below) |
-| `TEMP` (1) | GND | NTC thermistor disabled (datasheet-sanctioned) |
-| `CE` (8) | **Cell-polarity detector output** (`Q2` drain, `R82` to GND) — see §3.3 below | high (at `USB_VBUS`) only when USB is present and a correctly-oriented cell is detected |
-| `EPAD` (9) | GND | thermal path |
+| `TS` (1) | `TH1` (10 kΩ NTC), `R82` (200 kΩ) and `C38` (0.22 µF), each to GND, and **`Q2`'s drain** (the cell-polarity detector, §3.3) | temperature input and enable: charging runs only between about 0 and 41 °C at `TH1`, and `TS` pulled below about 76 mV disables the charger |
+| `OUT` (2) | `P+` | charges the protected cell |
+| `CHG` (3) | `CHRG`, with `R67` on the status ladder (§3.7) | open drain, low during the first charge after plug-in or cell insertion |
+| `ISET` (4) | `R6` = 4.7 kΩ to GND | **I ≈ 115 mA** (see below) |
+| `GND` (5) | GND | ground |
+| `VIN` (6) | `USB_VBUS` | charge only from USB |
 
-**Charge current ≈ 0.25 A.** `R6` = 4.7 kΩ sets the constant-current phase from
-`I ≈ (1100–1200)/R_PROG`, i.e. **about 0.23–0.25 A** (the TP4056 datasheet formula, `I = 1100/R_PROG`,
-gives **234 mA**) depending on which datasheet constant you trust. This is **lot-dependent — measure
-it** rather than treating any single figure as established.
-Dissipation stays modest — `(5 V − 3.0 V) × 0.25 A ≈ 500 mW` worst case in an ESOP-8 with thermal
-vias. `R6` is the knob: a small 300–500 mAh cell wants it higher (`R6` = 12 kΩ ≈ 100 mA) to stay
-near 0.25C. **`TEMP` grounded disables cell-temperature monitoring**, so choose the cell and its
-charge-temperature range accordingly.
+**Charge current ≈ 115 mA.** `R6` = 4.7 kΩ sets the fast-charge current from `I = K_ISET / R6`, with
+`K_ISET` = 490–590 AΩ (540 typical): **105–125 mA**, about 115 mA. A 500 mAh cell charges in about 5 h.
+Below 2.5 V the charger pre-charges at about 20 % of that, and it ends the charge when the current has fallen
+to about 10 % of it. The cell is regulated to 4.2 V ±1 % (4.16–4.23 V). After the first charge ends, a top-up
+starts when the cell falls below 4.04–4.16 V. `R6` is the knob: a 300 mAh cell wants more current
+(`R6` = 6.8 kΩ ≈ 80 mA, 0.26C), a cell above about 1000 mAh less time (see the timers). These are datasheet
+values; none has been measured on a built board ([NEXT_REVISION.md §6](NEXT_REVISION.md#6-verification) lists the checks).
 
-**`CE` is driven by the cell-polarity detector** (`Q2` drain, with `R82` to GND — see §3.3), not tied
-to `VCC`. `Q2` and its gate pull-up `R81` run from `USB_VBUS`, so `CE` is either 0 V or the charger's own
-supply voltage, and the detector's resistors draw nothing while USB is absent. Charging is therefore automatic whenever USB is present **and a correctly oriented cell is
-detected**; there is no GPIO on `CE`, so firmware cannot inhibit charging.
+**Timers.** A 30 min pre-charge timer and a 10 h fast-charge timer stop a charge that is not making progress.
+Both count at half speed while the charger is in thermal regulation or input DPM. Above about 1000 mAh a
+charge may not finish inside 10 h at 115 mA; `R6` = 3.9 kΩ (about 140 mA) restores the margin.
 
-The `CHRG` and `STDBY` open-drain status outputs feed the status ladder ([§3.7](#37-usb--charge-status)).
+**Input.** The BQ21040 is rated 30 V at `VIN` and stops charging above about 6.6 V (OVP, 6.5–6.8 V). If the
+source sags to 4.24–4.46 V it cuts the charge current (input DPM) rather than pull the source down, and it
+starts at 3.15–3.45 V (UVLO). `C2` (with its `R84` damper) and `C25` are the input capacitance. TI asks for 1 µF
+at `VIN`; none was added, because a plain ceramic there would undo the hot-plug tuning of `C2`/`R84`/`C25`
+([§3.1](#31-usb-c-input--protection)), and the 30 V rating makes it unnecessary. The charger surviving a 9–12 V
+source does not make one safe: `U2` and what it feeds do not survive it, so "5 V sources only" stands.
+
+**`TS`: temperature window and enable.** `TS` sources 50 µA (48–53 µA) into `TH1` (Murata `NCP18XH103F03RB`,
+10 kΩ NTC, 0603) in parallel with `R82`. The charger runs while `TS` sits between about 0.28 V (hot) and 1.25 V
+(cold). With this NTC and `R82` that is about **0 to 41 °C at `TH1`** (typical; −2 to +2 °C at the cold end and
+38 to 44 °C at the hot end over the datasheet tolerances), not TI's nominal 0 to 45 °C. Charging resumes about
+2 °C inside each limit. `C38` (0.22 µF, `TS` to GND) is the optional ESD capacitor the datasheet lists; it gives
+`TS` a 30 ms deglitch.
+
+**Fail-safe for a missing or open `TH1`.** `R82` makes an open or missing `TH1` read as cold, so nothing
+charges. Without `R82`, `TS` would float up into TI's no-sensor mode (TTDM), which also turns off the timers
+and termination. Holding 1.525 V across 200 kΩ takes 7.6 µA, more than the 4–6.5 µA the bias current folds back
+to there, so `TS` cannot climb into TTDM. The price is about 3 °C at the cold end, the trade TI describes for its
+suggested 237 kΩ.
+
+**Where `TH1` sits.** `TH1` is on the board beside `R82` at (91.2, 94.15), about 7 mm from `U11`, as an ambient
+sensor: it measures the board, not the cell, so choose the cell and its charge-temperature range accordingly.
+Spots at the edge of the battery bay would need a 66 mm `TS` route with four vias around the board's east side,
+and the `J5` area has no room for an 0603 and its ground via. While charging, `TH1` reads an estimated 1–3 °C above
+the cell, and sitting 7 mm from `U11` adds an estimated 2–3 K of self-heating (a conduction-only estimate).
+
+**Heat.** At the start of a fast charge from a flat cell the charger dissipates
+(5.25 V − 3.0 V) × 0.125 A ≈ 0.28 W. At TI's 131 °C/W for the SOT-23-6 that is about a 37 °C rise, far below the
+125 °C thermal-regulation point.
+
+**`TS` is also the enable, driven by the cell-polarity detector** (§3.3). `Q2` is a BSS138 N-FET (gate
+`/DET_NODE`, drain `TS`, source GND). It holds `TS` below the disable level until `Q9` sees a correctly oriented
+cell, then lets go. Its gate pull-up `R81` runs from `USB_VBUS`, so with USB absent the charger is unpowered,
+its terminals are high-impedance (TI SLUSCE2 §8.3.1) and `R81` draws nothing. Charging is therefore automatic
+whenever USB is present **and a correctly oriented cell is detected**; there is no GPIO on `TS`, so firmware
+cannot inhibit charging.
+
+The `CHG` open-drain status output feeds the status ladder ([§3.7](#37-usb--charge-status)). It is low only
+during the charge that starts at USB plug-in, at cell insertion or when a flat cell enters pre-charge; later
+top-ups run with `CHG` off. It also stays low if that first charge pauses for temperature.
 
 ---
 
@@ -310,8 +365,8 @@ FS8205A (a common-drain dual):
 |---|---|---|
 | Over-charge | 4.30 V | `OC` opens the charge FET |
 | Over-discharge | 2.40 V | `OD` opens the discharge FET |
-| Over-current | `V_OIP` 120 / **150** / 180 mV across R_DS(on) | `OD` opens the **discharge FET only** — the charge FET stays on, so the pack can still be charged out of the fault |
-| Short circuit | `V_SIP` 1.00–1.35 V across R_DS(on), much shorter delay | `OD` opens the discharge FET |
+| Over-current | `V_OIP` 120 / **150** / 180 mV across the FETs' R_DS(on) plus the sense pair `R85` ∥ `R86` (below) | `OD` opens the **discharge FET only** — the charge FET stays on, so the pack can still be charged out of the fault |
+| Short circuit | `V_SIP` 1.00–1.35 V across the same path, much shorter delay | `OD` opens the discharge FET |
 
 The FETs are back-to-back so that blocking one direction still permits the other through the
 opposite body diode — an over-discharged cell can still be charged, and an over-charged cell
@@ -319,8 +374,9 @@ can still be discharged.
 
 **Three details that are easy to get wrong, and are right on this board (all verified in the netlist):**
 
-1. **`R16` (1 kΩ) from `CS` to the pack-negative side.** The DW01A senses current as the
-   voltage across *both* FETs' R_DS(on); its `GND` sits at `B−`. The 1 k also provides
+1. **`R16` (1 kΩ) from `CS` to system `GND`.** The DW01A senses current as the
+   voltage across *both* FETs' R_DS(on) and, since Rev 1.03, the sense pair `R85` ∥ `R86` (below):
+   `R16` returns `CS` to `GND` beyond the pair, and the DW01A's own `GND` sits at `B−`. The 1 k also provides
    latch-up protection when a charger meets an over-discharged pack.
 2. **`R83` (100 Ω) + `C7` (0.1 µF) — the datasheet's VCC filter.** `R83` sits in the *side
    branch* that feeds only `U5` pin 5 from `P+`; it is not in the load path, so it costs nothing
@@ -329,19 +385,51 @@ can still be discharged.
    low-pass (τ = 10 µs) that keeps load steps and charger ripple out of the voltage comparators,
    and `R83` limits the current into pin 5 when a pack is hot-plugged or a charger is connected
    backwards.
-3. **`C34` (2.2 nF) from `CS` to `B−`.** With `R16` it is a 2.2 µs filter on the current-sense
-   pin, so the inrush spike when a cell is first connected (the board's bulk capacitors charging
-   through the FETs) is not read as a short circuit and latched. It delays a real short-circuit
-   trip by a couple of microseconds, which is small next to the FET turn-off itself. `CS` is
+3. **`C34` (0.1 µF) from `CS` to `B−`.** With `R16` it is a 100 µs filter on the current-sense
+   pin, so the inrush spike when a cell is first connected (10–15 A for 3–4 µs, the board's bulk
+   capacitors charging through the FETs and the sense pair) reaches `CS` as only about 0.04–0.08 V instead of
+   being read as a short circuit (the DW01A's short-circuit threshold starts at 0.82–1.0 V) and latched.
+   Rev 1.0's 2.2 nF was enough without the sense pair; with it, the spike would reach that threshold.
+   The price is a slower response to a real short circuit, of the order of the 100 µs time constant, on top of
+   the DW01A's own delay (400 µs typical for the PUOLOP part JLC fits). `CS` is
    never pulled to GND by this part: `C34` returns to `B−`, the same node `U5` measures from.
 
-**Reverse-polarity intent: `Q3` + `Q8` (AO3401A P-channel).** As built (per netlist): `Q3`
+**Sense pair `R85` ∥ `R86` (new in Rev 1.03).** Two 0.1 Ω 1206 resistors in parallel (Yageo `RL1206FR-070R1L`,
+JLC Basic `C25334`), 50 mΩ, sit between `Q1` pin 3 (net `/B-_SENSE`) and GND. They add to the FETs' resistance in
+the DW01A's measurement. Rev 1.0 sensed only across the FETs, so their R_DS(on) alone set its over-current trip.
+With the copper, the path from `Q1` pin 3 to the ground pour is about 62 mΩ, and the over-current trip sits at
+**0.83–1.68 A** (1.32 A typical) with the PUOLOP DW01A that JLC fits (Fortune's part: 0.77–1.78 A). The coincident
+battery peak from the datasheets (Wi-Fi transmit, SD write, e-paper refresh, light at its 50 % cap) is about 0.55 A,
+0.63 A worst plausible, so the lowest trip point leaves about 1.3× margin. The measured peak is still an open
+bench item. There are no test pads on the sense node: probe `/B-_SENSE` at `R85` pad 1 (about 54 mV per amp across
+`R85`), and `OD` at `Q1` pin 6 against `B−`
+([BENCH_THEORY.md §3.2](audit-2026-11-03/BENCH_THEORY.md#32-the-sense-path-as-placed)).
+
+**What `Q3` and `Q8` do (AO3401A P-channel).** As built (per netlist): `Q3`
 source = `B+`, drain toward `R27`/`Q8`, gate pulled toward `B−` through `R56` (10 kΩ) with
 `R57` (10 MΩ, to keep standing drain low) to `B+`; **`Q8` source = `P+`, drain toward `R27`/`Q3`, gate permanently at board
-GND.** The design intent is that a correctly polarized cell enhances the series PMOS path and a
-reversed cell does not. The `Q8` arrangement comes from the EEVblog forum thread
-["Pain and suffering getting the DW01 and 8205A protection circuit work right"](https://www.eevblog.com/forum/projects/pain-and-suffering-getting-the-dw01-and-8205a-protection-circuit-work-right/)
-— that is where the short link printed beside `Q8` on the schematic goes.
+GND.** The two parts were added for different reasons. The owner keeps the circuit as it is (decided 2026-11-04:
+the boards start and run fine), so this describes it and changes nothing
+([TRIAGE.md §5.1](independent-review-2026-11-03/TRIAGE.md#51-l-8-what-q3-and-q8-do)).
+
+- **`Q3`** is labelled "Reverse polarity protection" on the schematic, but its gate goes to the cell's own
+  negative, `B−`. It is on whenever a cell is connected, and its body diode faces into `B+`, so it does not
+  block a reversed cell.
+- **`Q8`** is the DW01A's load switch, from the EEVblog forum thread
+  ["Pain and suffering getting the DW01 and 8205A protection circuit work right"](https://www.eevblog.com/forum/projects/pain-and-suffering-getting-the-dw01-and-8205a-protection-circuit-work-right/)
+  — that is where the short link printed beside `Q8` on the schematic goes. The thread puts the FET's source on
+  the battery, so with its channel off the load really is disconnected while the DW01A's ground is open. That
+  lets the DW01A reach its normal state at first connection, and return to it after an over-current trip.
+  `Q8` is fitted the other way round, with its source on `P+`: its body diode keeps the load connected whether
+  the channel is on or off, and the DW01A never sees its load released. The DW01A's start-up therefore relies on
+  `C34` alone, which works on the owner's boards (`C34` is 0.1 µF now, 2.2 nF on Rev 1.0).
+- By the same orientation, **`Q8` is the part that blocks a reversed cell**: drain toward the battery, source to
+  the load, gate to ground, the textbook reverse-polarity P-channel. It holds while `P+` stays near ground; the
+  charge-enable detector below covers the case with USB present.
+
+**If the board shuts off on battery after an overload and stays off,** plug USB in: charger detection resets the
+DW01A's protection (re-connecting the cell does too). The board's standby load, roughly 45–75 kΩ, is far below
+the 500 kΩ at which Fortune's DW01 datasheet releases an over-current trip by itself.
 
 > ### ⚠️ Reverse-polarity precautions and charger-enable mitigation
 >
@@ -355,15 +443,16 @@ reversed cell does not. The `Q8` arrangement comes from the EEVblog forum thread
 >
 > **Practical guidance:** for a controlled prototype, **verify battery-cable polarity before
 > connecting, and disconnect USB during any battery work.** Do not describe the board as
-> providing bare-cell / USB-present reverse-insertion protection. **Mitigation:** the TP4056
-> `CE` pin is driven high only by a cell-polarity detector referenced to raw
-> `B−` (`Q9` BSS138 + `Q2` AO3401A + `R79`–`R82`, ≈0.4 µA idle, see below). This circuit is
-> designed to inhibit charging with a reversed cell. Analysis, simulation and the wiring table are in
-> [DESIGN_REVIEW.md](../DESIGN_REVIEW.md) §4. **Do not test this by reversing a real LiPo** — use
+> providing bare-cell / USB-present reverse-insertion protection. **Mitigation:** the charger's `TS` pin
+> is held low, which disables the BQ21040, unless a cell-polarity detector referenced to raw
+> `B−` (`Q9` BSS138 + `Q2` BSS138 + `R79`–`R82`, ≈0.4 µA idle, see below) sees a correctly oriented cell. This
+> circuit is designed to inhibit charging with a reversed cell. Analysis, simulation and the wiring table are in
+> [DESIGN_REVIEW.md](../DESIGN_REVIEW.md) §4 (written for the Rev 1.0–1.02 wiring, where `Q2` gated the TP4056's `CE`
+> pin; the detector is the same). **Do not test this by reversing a real LiPo** — use
 > a current-limited emulator.
 >
-> **Charger enable limitation:** the detector can only enable the charger while a correctly
-> oriented cell shows above roughly 1–1.8 V at `J5`. A pack whose own protection IC has already
+> **Charger enable limitation:** the detector can only release `TS`, and so enable the charger, while a correctly
+> oriented cell shows above roughly 1–1.8 V at `J5` (the same mechanism as on Rev 1.0–1.02, which gated `CE`). A pack whose own protection IC has already
 > latched into over-discharge lockout (0 V at its terminals) or a bare cell drained past that
 > point cannot be charged by this circuit. A 0 V reading does not establish that a pack is safe
 > to recover. Follow the cell or pack manufacturer's handling instructions; do not bypass its
@@ -375,7 +464,7 @@ the protection FETs, where the DW01A can never disconnect them, so they keep dra
 after an over-discharge cutoff: the `R56`+`R57` gate divider (~0.4 µA with `R57` at 10 MΩ)
 and the detector's `R79` (1 M) + `R80` (10 M) across the raw cell
 (~0.4 µA). That is **≈0.8 µA of resistors**, or ≈3.8 µA once the DW01A's own supply current is
-included. That leaves out a loop that `R81`, `Q2` and `R82` can close around an open `Q1` through the system load after a cut-off (simulated 7–21 µA at 2.5 V depending on the load; see `docs/audit-2026-10-15/SCH-2_CHARGE_ENABLE.md` §9), which has not been measured. This is a design estimate, not a qualified safe-storage duration. Follow the cell
+included. That leaves out a loop that `R81`, `Q2` and `R82` could close around an open `Q1` through the system load after a cut-off. It was simulated for the Rev 1.02 circuit, where `Q2` was a P-FET feeding `CE` (7–21 µA at 2.5 V depending on the load; see `docs/audit-2026-10-15/SCH-2_CHARGE_ENABLE.md` §9). Rev 1.03's `Q2` is an N-FET acting on `TS`, so the loop has not been re-simulated for it, and has not been measured. This is a design estimate, not a qualified safe-storage duration. Follow the cell
 manufacturer's storage limits and check its condition and voltage before reuse.
 
 ---
@@ -428,11 +517,12 @@ no hardware off switch — "off" means ESP32 deep sleep. This is a deliberate si
 consistent with an e-paper device: the display holds its image with zero power, so "off" and
 "asleep" look identical to the user.
 
-Decoupling is generous: `C4` 22 µF in, and on the output `C6` 22 µF, `C32` 22 µF, `C10`
-4.7 µF, plus 1 µF and 0.1 µF locals. (`C37` is 1 µF on the switched `SD_VDD` rail — see
+Decoupling is generous: `C4` 22 µF in, and on the output `C6` 22 µF and `C32` 22 µF, plus 1 µF and 0.1 µF
+locals. (`C10`, 4.7 µF, is the e-paper boost's input capacitor and sits on `EINK_3V3`, behind the PTC `F6`
+([§6.2](#62-charge-pump)). `C37` is 1 µF on the switched `SD_VDD` rail — see
 [§5](#5-storage--4-bit-sdmmc).)
 
-**The frontlight boost does *not* run from 3V3** — it is fed from `LDO_IN`, upstream of the LDO.
+**The frontlight boost does *not* run from 3V3** — it is fed from `LDO_IN`, upstream of the LDO, through the PTC `F3` ([§7](#7-frontlight-driver)).
 Boosting to ~20 V from a rail an LDO has already dropped would be a pointless double conversion,
 and it would put ~130 mA through a small SOT-23-5. The designer's schematic note says exactly
 this: *"Powered via LDO_IN source instead of 3V3 to reduce stress on LDO output power."*
@@ -456,7 +546,7 @@ this: *"Powered via LDO_IN source instead of 3V3 to reduce stress on LDO output 
 > would consider "empty." What likely keeps this from mattering in practice is firmware: it
 > already treats battery voltages near 3.3 V as effectively 0 % and should be shutting the device
 > down well before this region. **Do not expect the bulk capacitance to cover a Wi-Fi TX burst**
-> — 40 µF effective holds a 355 mA pulse for about 5.6 µs before the rail has sagged 50 mV, while
+> — about 40 µF effective (a little less now that `C10` sits behind `F6`) holds a 355 mA pulse for about 5.6 µs before the rail has sagged 50 mV, while
 > a Wi-Fi frame lasts hundreds of microseconds to milliseconds. The capacitors smooth the
 > microsecond edges; the LDO supplies the whole burst. That firmware behavior is not
 > hardware-verified here (see [DESIGN_REVIEW.md](../DESIGN_REVIEW.md) §3), so it is worth a
@@ -498,56 +588,63 @@ slow monitor, not a fast brownout detector.
 
 ![USB status ladder](images/17-usb-status.png)
 
-Three open-drain status signals are encoded onto **one ADC pin** (`IO9`, `USB_STAT`) through a
-resistor ladder — a neat piece of pin economy. Each asserted signal pulls its resistor to ground
+Two open-drain status signals (`ST` from the mux, `CHG` from the charger) are encoded onto **one ADC pin**
+(`IO9`, `USB_STAT`) through a resistor ladder — a neat piece of pin economy. Each asserted signal pulls its resistor to ground
 against the 1 MΩ pull-up (`R70`); `C23` = 0.1 µF filters it and holds the node steady while the
 ADC samples.
 
-**The ladder is scaled for sleep current** — `R70` 1 M, `R17` 2 M, `R67` 510 k, `R71` 200 k,
-`C23` 0.1 µF, all JLC Basic parts. On battery it draws **1.1 µA** (a ladder a tenth of these
-values would draw 13.2 µA). The price is speed: the node is
+**The ladder is scaled for sleep current** — `R70` 1 M, `R17` 2 M, `R67` 510 k,
+`C23` 0.1 µF, all JLC Basic parts. On battery it
+draws **1.1 µA** (a ladder a tenth of these values would draw 11 µA). The price is speed: the node is
 high-impedance (up to 667 kΩ) and takes **about half a second to settle** after a state change,
 which is irrelevant for "is it charging?" but means firmware must not poll it quickly or turn on
 the pin's internal pull-up/pull-down (≈45 kΩ, which would swamp a 1 MΩ ladder).
 
 | State | Asserted | `USB_STAT` (ideal) |
 |---|---|---:|
-| Charger idle / no charge (USB healthy, or no USB fault to report) | none | **3.30 V** |
+| `CHG` off: charger idle, charge finished, no cell, or a stopped charge (USB healthy, or no USB fault to report) | none | **3.30 V** |
 | On battery (unplugged, or USB too weak to charge) | ST | **2.20 V** |
-| Charging | CHRG | **1.11 V** |
-| Charging, weak USB (mux has fallen back to the battery) | ST + CHRG | **0.95 V** |
-| Charge complete | STDBY | **0.55 V** |
-| Charge complete, weak USB (mux on the battery) | ST + STDBY | **0.51 V** |
+| Charging (the first charge after plug-in or cell insertion) | CHG | **1.11 V** |
+| Charging, weak USB (mux has fallen back to the battery) | ST + CHG | **0.95 V** |
 
-The four normal states are **2.20 / 1.11 / 0.55 / 3.30 V**. The two weak-USB rows (0.95 V and
-0.51 V) are the same charge states seen while a sagging source has pushed the power-path mux onto
-the battery; with the decode windows in [§13.1](#131-firmware-contract--things-the-board-needs-firmware-to-do)
-they resolve to the right charge state.
+The three normal states are **2.20 / 1.11 / 3.30 V**. The weak-USB row (0.95 V) is the charging
+state seen while a sagging source has pushed the power-path mux onto the battery; with the decode
+windows in [§13.1](#131-firmware-contract--things-the-board-needs-firmware-to-do) it resolves to charging.
+There is no "charge complete" level: the charger marks only the first charge, so a finished charge and an
+idle charger read the same 3.30 V.
+
+**`CHG` marks only the first charge.** It is low during the charge that starts at USB plug-in, at cell
+insertion (releasing `TS` counts) or when a flat cell enters pre-charge. Later top-ups, which start when the cell
+falls below 4.04–4.16 V, run with `CHG` off, and so does a charge that has stopped. It also stays low if the
+first charge pauses for temperature. Plugging in at any charge level shows as charging, because every power-up
+starts a charge (TI SLUSCE2 Figure 7): on a full cell it ends within about a minute, or a few minutes for a
+cell that has rested for hours.
+
+**The 3.30 V cases are told apart by `P+`.** Firmware reads `P+` = 2 × `BAT_MONIT`
+([§3.6](#36-battery-monitoring)): about 4.0 V or more is a full cell, near 0 V is no cell, and a cell present
+below about 4.0 V is a stopped charge (the 10 h timer ran out, the input is above 6.6 V, or `TS` is out of
+range). The decode is in [§13.1](#131-firmware-contract--things-the-board-needs-firmware-to-do).
 
 **`ST` reports which input the mux picked, not whether a cable is attached** — it asserts
-whenever the mux is on the battery. So `ST`+`CHRG` is not a contradiction: it means **"USB is
+whenever the mux is on the battery. So `ST`+`CHG` is not a contradiction: it means **"USB is
 attached and charging, but too weak to run the load, so the load is on the battery"** — a
 genuine "weak charger/cable" diagnostic. With no series diode, a compliant source keeps `USB_VBUS`
 above the switchover even at 1 A, so this state appears only with a marginal source.
 
-**There is no steady "no battery fitted" level.** With **no cell at plug-in**, the charge-
-enable gate never releases, the charger stays off and `USB_STAT` reads a steady **3.3 V** — the
-same as charger idle. The TP4056's no-battery blink only appears if the **cell is unplugged while
-USB is already present**: the charger then cycles between charge and termination and the node
-alternates between about **0.55 V and 0.41 V** every 1–4 s. Because 0.55 V is also the
-"charge complete" level, only time separates them — detect it by the *alternation*, not the
-level, and require a stable reading for several seconds before reporting "charged".
+**There is no "no battery fitted" level.** With **no cell at plug-in**, the charge-enable gate never
+releases `TS`, the charger stays off and `USB_STAT` reads a steady **3.3 V** — the same as charger
+idle — with `P+` near 0 V. If the **cell is unplugged while USB is already present**, `USB_STAT` also
+reads a steady **3.3 V**: the charger's own output keeps the detector released, and the BQ21040's
+battery-detect routine cycles `P+` between about 4.2 V and 3.8 V in 25 ms steps, which `BAT_MONIT` averages
+to about 4.0 V. There is no blink on `USB_STAT` to look for.
 
-> **Firmware cautions** (see [DESIGN_REVIEW.md](../DESIGN_REVIEW.md) §9)**:**
-> - The two lowest states (~0.51 V and ~0.55 V) are **too close to separate reliably** after
->   ADC error, output-low voltage, leakage and rail tolerance. Merge uncertain readings into a
->   single **degraded/unknown band** and debounce, rather than trusting an exact level.
+> **Firmware cautions** (see [DESIGN_REVIEW.md](../DESIGN_REVIEW.md) §9, written for the Rev 1.0–1.02 charger)**:**
 > - **Idle 3.3 V can top-code** the ESP32-S3 calibrated ADC range — do not require a reading
 >   *above* ~3.10 V to recognize idle, or you will misclassify it.
-> - `ST` low is **not** proof of physical USB absence (it also covers disabled/thermal states),
->   and `CHRG`+`STDBY` simultaneously low is not a normal steady charger state. Calibrate on the
->   real device over source voltage. Do not invent an exact "no-battery oscillation" voltage from
->   the ideal ladder.
+> - `ST` low is **not** proof of physical USB absence (it also covers disabled/thermal states).
+>   Calibrate on the real device over source voltage.
+> - On battery the level should be the designed **2.20 V**, because TI specifies all the BQ21040's
+>   pins high-impedance when USB is absent (SLUSCE2 §8.3.1). Read it once on a built board.
 
 ---
 
@@ -564,6 +661,11 @@ USB OTG peripheral, so there is **no CH340/CP2102 bridge**. That removes a part,
 and its driver headaches, and it enables USB Mass Storage (exposing the SD card to a host) and
 native DFU. `EN` has 10 kΩ / 1 µF (`R7`/`C5`) startup timing, with `SW11` reset through 100 Ω
 (`R63`). There is **no UART DTR/RTS auto-reset circuit** — UART RX/TX come out on `TP1`/`TP2`.
+
+**Fit `SW6` if you flash firmware that can turn off USB-Serial-JTAG.** `SW6` (BOOT, `IO0`) is DNP in the full
+build, and `IO0` has no other pad, so download mode then depends on USB-Serial-JTAG. Firmware that disables that
+peripheral (for example by claiming the USB-OTG peripheral for mass storage) or that crashes early leaves no way
+back in without soldering to `IO0`. For such firmware, fit an APEM MJTP1243 at `SW6` ([§9.3](#93-boot--reset)).
 
 > **Self-powered USB needs a disconnect policy.** After USB removal the MCU stays powered from
 > the battery, and there is **no dedicated VBUS-sense GPIO**. Espressif's self-powered
@@ -688,7 +790,7 @@ panel class, which is what makes the board display-agnostic.
 | 12 | `CS` | `IO14` |
 | 13 | `SCLK` | `IO13` |
 | 14 | `SDI` | `IO12` |
-| 15, 16 | `VDDIO`, `VCI` | 3V3 |
+| 15, 16 | `VDDIO`, `VCI` | `EINK_3V3` (3V3 behind the PTC `F6`, §6.2), with `C22` |
 | 17 | `VSS` | GND |
 | 18–24 | `VDD`,`VPP`,`VSH1`,`VGH`,`VSL`,`VGL`,`VCOM` | decoupling / charge-pump rails |
 
@@ -730,6 +832,14 @@ The e-paper panel needs roughly **±22 V** gate rails and ±15 V source rails, g
 `L1` and `Q4` form a boost stage whose switch node (`EINK_SW`) feeds two rectifier legs: `D5`
 produces the positive rail (`PREVGH` → `VGH`), while `C11` with `D6`/`D4` forms an inverting
 charge pump for the negative rail (`PREVGL` → `VGL`). `D4`–`D6` are B5819W (40 V Schottky).
+
+**Supply path (new in Rev 1.03).** The boost (`L1`, with its input capacitor `C10`) and the panel's logic supply
+(`J2` pins 15/16, `VDDIO` and `VCI`, with `C22`) run from the net `EINK_3V3`. That is `3V3` through the PTC `F6`
+(Bourns MF-FSMF010X-2, 0.10 A hold, 0.30 A trip), which sits in the trunk east of the hub. A fault in the e-paper
+block trips `F6` instead of loading the whole `3V3` rail. The touch feed is tapped upstream of `F6`, so a touch
+fault and a display fault do not take each other down. On the first boards, measure the `EINK_3V3` current and
+ripple at `J2` pins 15/16 during a full refresh: the panel's logic supply now sits behind `F6`
+([NEXT_REVISION.md §6](NEXT_REVISION.md#6-verification)).
 
 **The panel drives its own supply.** `GDR` (panel pin 2) switches `Q4`'s gate; `RESE` (pin 3)
 is the panel's current-sense return through `R14` (2.2 Ω). The panel's internal controller decides
@@ -782,7 +892,8 @@ to `PREVGH`) and `C11` (4.7 µF, through `D6` to ground) in parallel: about 9.4 
 LC half-period of 62–66 µs. 3V3 itself takes about 165–175 µs to rise (`U3`'s current limit charging the ≈28 µF
 on the rail), slower than that half-period, so the start-up peak is about 0.3 A in simulation, well under the
 1.1 A Isat of the Laird part. A 3V3 step much faster than the half-period, which this board does not produce,
-could ring toward 1 A or more, so check the 3V3 ramp time and the `GDR`/`RESE` waveforms together.
+could ring toward 1 A or more, so check the 3V3 ramp time and the `GDR`/`RESE` waveforms together. (These
+figures are for Rev 1.02, where `L1` ran from `3V3` directly; `F6` now adds series resistance in that path.)
 
 > **`Q4` = Infineon IRLML6346TRPBF (JLC `C67276`).** A **BSS138** does not meet the panel
 > supplier's switch-device criterion (`R_DS(on)` ≤ 0.4 Ω with a low
@@ -799,10 +910,26 @@ could ring toward 1 A or more, so check the 3V3 ramp time and the `GDR`/`RESE` w
 
 Optional block, for panels with a bonded frontlight (or an external light strip).
 
-**`U10` `TPS923610DRLR`** — a synchronous boost LED driver, up to 24.5 V. It boosts `LDO_IN` to
-the string's forward voltage on `LED_SW`, which feeds the anodes of both LED strings; each
-string's cathode returns through its own N-FET (`Q5` warm, `Q6` cool) to the shared sense
-resistor `R37`.
+**`U10` `TPS923610DRLR`** — a synchronous boost LED driver, up to 24.5 V. It boosts `/LED_VIN`
+(`LDO_IN` through the PTC `F3`, below) to the string's forward voltage on `LED_SW`, which feeds the anodes of
+both LED strings; each string's cathode returns through its own N-FET (`Q5` warm, `Q6` cool) to the shared sense
+resistor `R37`. `U10` sits on TI's DRL0006A example land pattern (footprint `U_DRL0006A_6L_TI-LAND`, 0.67 × 0.30 mm
+pads over a 1.48 mm span), with a "U10 pad pitch" rule in `silkscreen_pcb.kicad_dru` for the 0.20 mm gaps between
+its pads.
+
+**Input PTC `F3` (new in Rev 1.03).** `F3` (Bourns MF-FSMF010X-2, 0.10 A hold, 0.30 A trip) joins `LDO_IN` to the
+boost's input net `/LED_VIN`, which carries `C12` (`U10`'s input capacitor, kept on the `U10` side so its ripple
+does not run through the PTC), `L2` and `U10` `VIN`. It is there because of field failure case 1
+([BOARD_FAILURES.md](BOARD_FAILURES.md)): a fault in the boost stage drew less than 1 A, too little to trip `F1`,
+and burned. With `F3`, a short on the boost trips the PTC in seconds instead. A PTC trips on its own heat, and
+copper carries that heat away, so `F3` has **no copper pour within 1 mm of its pads, on either layer** (a rule area
+on the board). That keep-out sets the trip time: for a 7 Ω short from a 3.0 V cell at 25 °C the worst part trips in
+about 6 s with it, against about 30 s without
+([BENCH_THEORY.md §2.4](audit-2026-11-03/BENCH_THEORY.md#24-the-studys-model-with-these-numbers)). A tripped `F3`
+looks like a dead light on a working board; firmware can flag "light commanded on but `LED_MONIT` ≈ 0"
+([NEXT_REVISION.md](NEXT_REVISION.md#4-firmware-changes-no-hardware), F5). At 100 % from a low cell, `F3`'s series
+resistance can put `U10` into undervoltage lockout, which is why the firmware keeps the 50 % brightness cap and
+allows 100 % only above about 3.8 V on battery (F6).
 
 **Constant-current, not constant-voltage.** `U10` regulates `FB` to a ~195–206 mV reference
 across `R37`:
@@ -891,7 +1018,7 @@ transients at the connector and `D8` (PESD2IVN-UX) protects the return lines. `U
 
 > **Firmware note — off-state is not zero.** A boost always has a DC path from input to output
 > through the inductor and the high-side FET's body diode, so with `U10` disabled `LED_SW` sits
-> at roughly `LDO_IN` minus **a diode drop** (not a fixed 0.7 V; the exact idle voltage depends
+> at roughly `LDO_IN` (through `F3`) minus **a diode drop** (not a fixed 0.7 V; the exact idle voltage depends
 > on leakage/load). `LED_MONIT` therefore reads a small non-zero voltage tracking the battery
 > when the frontlight is off — the healthy off state, not a fault. The LED string sees far below
 > its ~15 V forward voltage, so nothing lights.
@@ -904,6 +1031,8 @@ transients at the connector and `D8` (PESD2IVN-UX) protects the return lines. `U
 > pulse charges `C9`, and so `LED_SW`, to about 5.3–5.8 V through the high-side body diode. With the light
 > on, `C9` sits near the string voltage (≈15 V), the body diode is reverse-biased and the step does nothing. This
 > is a simulation, not a measurement: scope `LED_SW` and the `L2` current at plug-in on a built board to confirm it.
+> It was run for Rev 1.02. `F3` now sits in this path, between `LDO_IN` and `C12`/`L2`, and its series resistance
+> can only lower the peak.
 
 **`J3`** is a 6-pin ZIF. **Mapping verified against a physical sample:**
 `1 C+, 2 C−, 3 NC, 4 NC, 5 W+, 6 W−` — both positive pins to `LED_SW` (common anode), `C−`/`W−`
@@ -932,16 +1061,23 @@ mapping are all four signal lines (`RST`, `INT`, `SDA`, `SCL`); pin 2, the suppl
 ![Touch jumper mux](images/15b-touch-jumpers.png)
 
 **The jumper mux.** Touch panels are inconsistent about pin order, so a re-map is built from
-0 Ω resistors — swapping **VDD and INT** between connector pins 2 and 4:
+0 Ω resistors, and since Rev 1.03 one PTC — swapping **VDD and INT** between connector pins 2 and 4:
 
 | Config | Fitted | Not fitted (DNP) |
 |---|---|---|
-| **Default** | `R42` (3V3→PIN_2), `R44` (TP_INT→PIN_4) | `R43`, `R66` |
-| **Alternate** | `R43` (TP_INT→PIN_2), `R66` (3V3→PIN_4) | `R42`, `R44` |
+| **Default** | `F4` (3V3→PIN_2, a PTC), `R44` (TP_INT→PIN_4) | `R43`, `R66` |
+| **Alternate** | `R43` (TP_INT→PIN_2), `R66` (3V3→PIN_4, with a PTC on its pads) | `F4`, `R44` |
 
-Also `R46`/`R52` (default SDA/SCL) vs `R45`/`R58` (swapped). **Choose exactly one option in each
+Also `R46`/`R52` (default SDA/SCL) vs `R45`/`R58` (swapped). The whole alternate mapping therefore removes `F4`,
+`R44`, `R46` and `R52`, and fits `R43`, `R45`, `R58` and `R66`; the back silkscreen's touch-option note reads
+"unpopulate F4,R44,46,52". **Choose exactly one option in each
 pair** — these are mutually exclusive wiring choices, not spare jumpers to fit together. Confirm
 the whole mapping against the specific panel before changing them.
+
+**`F4` is a PTC, not a link.** `F4` (Bourns MF-FSMF010X-2, 0.10 A hold, 0.30 A trip) replaced the 0 Ω `R42` in
+Rev 1.03, on the same pads and traces, so a fault on the touch tail trips `F4` instead of loading the `3V3` rail.
+In the alternate mapping, 3V3 reaches `J4` pin 4 through `R66`: fit a PTC of the same type (MF-FSMF010X-2) on
+`R66`'s pads, not a 0 Ω link.
 
 **The alternate option leaves `INT` without a board-level ESD clamp.** `U7`'s four channels sit on
 `J4` pins 3–6 only (`TP_RST`, `/PIN_4`, `/PIN_5`, `/PIN_6` in the netlist); nothing clamps pin 2.
@@ -1156,7 +1292,8 @@ flashing: the ESP32-S3's **USB-Serial-JTAG** lets `esptool` trigger download mod
 with no BOOT button. The one caveat is recovery — if application firmware fully claims the
 USB-OTG peripheral and hangs, forcing download mode then means momentarily grounding `IO0` by
 hand (it's on `R64`/`R13`). Fit an MJTP1243 (or an equivalent 6 × 3.5 × 4.3 mm part such as ALPS
-SKHLACA010) if you want hardware boot-mode entry.
+SKHLACA010) if you flash firmware that can turn off USB-Serial-JTAG ([§4](#4-the-processor)), or if you want
+hardware boot-mode entry.
 
 ---
 
@@ -1164,38 +1301,55 @@ SKHLACA010) if you want hardware boot-mode entry.
 
 ![RTC](images/14-rtc.png)
 
-**`U13` `DS3231MZ`** — a temperature-compensated RTC, **±5 ppm (about ±2.6 minutes/year)**.
-Populated in the full build (LCSC `C107410`, DS3231MZ+TRL — the reel part; see
-`fabrication/BOM.md`); omit it if you don't need a clock.
+**`U14` `RV-8263-C7` (Micro Crystal)** — the default RTC, fitted in the full build (LCSC `C5137460`, JLC
+Extended; omit it if you don't need a clock). A 3.2 × 1.5 mm module with the crystal inside: **±20 ppm at 25 °C
+(about ±10.5 minutes/year)**, **190 nA typical and 240 nA maximum** in timekeeping mode (I²C idle, 3 V, 25 °C; the
+datasheet gives no hot figure), I²C address **0x51**. The ±20 ppm is a 25 °C figure: the crystal is not
+temperature-compensated, so the error grows away from 25 °C (see the datasheet's frequency-versus-temperature
+curve). It is a conventional single-supply part, wired like this (verified in the netlist):
 
-The wiring looks wrong at first glance but is correct (verified in the netlist):
+- **`VDD` (5) → 3V3**, **`VSS` (2) → GND**, `SCL` (7) and `SDA` (8) on the shared I²C bus
+- **`CLKOE` (3) → GND**, so the clock output stays off
+- **`INT` (4) and `CLKOUT` (6) unconnected**, so there is no RTC interrupt / wake output to the MCU
+
+JLC's library footprint for the part is landscape and KiCad's is portrait, so the placement file carries a −90°
+rotation correction for `U14` (the Toolkit field `FT Rotation Offset`); look at it in JLC's placement preview. JLC's
+stock of the part is small (about 1,000 on 2026-11-04).
+
+**`U13` `DS3231MZ` — the accurate alternate, DNP by default.** A temperature-compensated RTC, **±5 ppm (about
+±2.6 minutes/year)**, about 2 µA, I²C address **0x68**. Fit it in place of `U14` if you want the better clock (LCSC
+`C107410`, DS3231MZ+TRL — the reel part; see `fabrication/BOM.md`). It costs more ($2.72 against $1.14 at 30 pieces
+on LCSC, 2026-11-04) and draws about 1.8 µA more in sleep.
+
+`U13`'s wiring looks wrong at first glance but is correct (verified in the netlist):
 
 - **`VBAT` (6) → 3V3**
 - **`VCC` (2) → GND**
 
 This is the datasheet's **Figure 5 single-supply VBAT-only configuration**, which explicitly
-requires `VCC` grounded, not floating. Three consequences firmware must know (they apply to
-`U13`; the `U14` alternate below is a conventional single-supply part):
+requires `VCC` grounded, not floating. Three consequences firmware must know (the first applies to
+`U13` only, the other two to either RTC):
 
-1. The oscillator **does not start until a valid I²C write occurs**, because `VCC` never rises
+1. On `U13` the oscillator **does not start until a valid I²C write occurs**, because `VCC` never rises
    above the power-fail threshold. Init code must touch the RTC and check the oscillator-stop
-   flag rather than assume valid time at first power-up.
-2. `RST` (pin 4) and `INT`/`SQW` (pin 3) are **unconnected** — so there is **no RTC interrupt /
-   wake output** to the MCU.
+   flag rather than assume valid time at first power-up. (The RV-8263-C7 has oscillator stop detection too;
+   check it as well.)
+2. Neither RTC's interrupt output is connected (`U13`: `RST` (pin 4) and `INT`/`SQW` (pin 3); `U14`: `INT`) —
+   so there is **no RTC interrupt / wake output** to the MCU.
 3. There is **no independent time backup**: with no coin cell, time is lost if the battery is
    removed or fully discharged. For an e-reader that is an acceptable trade to avoid a coin-cell
    holder that would fight the "case agnostic" goal.
 
-The RTC's local decoupler is **`C30` = 0.1 µF**. `R47`/`R48` (2.2 kΩ) pull up the
-shared I²C bus. (`C22` = 1 µF is a separate 3V3 decoupler in the display area, not an RTC part.)
+The RTC's local decoupler is **`C30` = 0.1 µF**, about 4–5 mm from the centre of either footprint. `R47`/`R48`
+(2.2 kΩ) pull up the shared I²C bus. (`C22` = 1 µF decouples the panel's logic supply, `EINK_3V3`, at `J2`; it is
+not an RTC part.)
 
-**`U14` `RV-8263-C7` (Micro Crystal) — a second RTC footprint, DNP by default.**
-Fit **either `U13` or `U14`, never both** — the board only ever needs one clock, and there is no
-reason to pay for two. They answer on different I²C addresses (`0x68` for the DS3231MZ, `0x51`
-for the RV-8263-C7), so the two would not clash on the bus if both were fitted; the rule is about
-cost, not conflict. `U13` is the accurate one (±5 ppm, temperature-compensated); `U14` is the
-cheaper, lower-current alternative for builds that only need approximate time. `U14` is DNP in
-the full build.
+**Fit one RTC or none, never both.** The board only ever needs one clock, and there is no reason to pay for
+two. They answer on different I²C addresses (`0x68` for the DS3231MZ, `0x51` for the RV-8263-C7), so the two would
+not clash on the bus if both were fitted; the rule is about cost, not conflict. The Silkscreen firmware probes
+`0x68` first, counting a device there as a DS3231 only when its registers show the DS3231 pattern, and falls back
+to `0x51`, which it drives as a PCF85063-class RTC. `U14` is the default because it costs less and draws a tenth of
+the current; `U13` is the accurate one (±5 ppm, temperature-compensated), for builds that need good time.
 
 ---
 
@@ -1230,7 +1384,7 @@ What it exposes:
 
 | Category | Pins |
 |---|---|
-| Power | `3V3` (7), `P+` raw battery (12, PPTC-fused — see the rules below), 2× `GND` (1, 4) |
+| Power | `3V3` (7, behind the PTC `F5`, 20 mA budget — see the rules below), `P+` raw battery (12, PPTC-fused — see the rules below), 2× `GND` (1, 4) |
 | I²C | `SDA` (8), `SCL` (10) — shared bus, already pulled up |
 | Spare GPIO | `IO46` (2, strap — internal pull-down, must be LOW at reset), `IO45` (3, strap), `IO3` (9, strap) |
 | Frontlight | `LED_SW` (5), `W−` (6), `C−` (11) — drive external LED strips |
@@ -1246,13 +1400,13 @@ conducting one sits at the `FB` sense voltage).
 ![Expansion ESD](images/16b-expansion-esd.png)
 
 **Every signal pin is ESD-protected:** `U8` covers `IO45`/`IO3`/`SDA`/`SCL`, `U9`'s spare
-channel covers `IO46`, `CR2` protects the 3V3 pin, `CR3` protects the battery pin (it sits on the `J6` side of the PPTC `F2`, net `/P+_FUSE`, so a clamped surge is also current-limited by the fuse), `D3` (SMAJ26A) clamps
+channel covers `IO46`, `CR2` protects the 3V3 pin (it sits on the `J6` side of the PTC `F5`, net `J6_3V3`, so, as with `CR3` and `F2`, a TVS that fails short is current-limited by the fuse), `CR3` protects the battery pin (it sits on the `J6` side of the PPTC `F2`, net `/P+_FUSE`, so a clamped surge is also current-limited by the fuse), `D3` (SMAJ26A) clamps
 `LED_SW`, and `D8` (PESD2IVN-UX) covers the `C−`/`W−` returns. The three GPIOs carry 33 Ω series
 resistors (`R65`, `R68`, `R69`).
 
-**Which of those go away with `J6`.** Leave `J6` off and **`U8`, `CR2` and `CR3` come off with
-it** — all four of `U8`'s channels land on `J6` pins, and `CR2`/`CR3` only guard the `3V3` and
-`P+` rails at the point where they leave the board. The others stay:
+**Which of those go away with `J6`.** Leave `J6` off and **`U8`, `CR2`, `CR3`, `F2` and `F5` come off with
+it** — all four of `U8`'s channels land on `J6` pins, `CR2`/`CR3` only guard the `3V3` and
+`P+` rails at the point where they leave the board, and `F2`/`F5` are the fuses in series with pins 12 and 7. The others stay:
 
 - **`U9` is not `J6`-only** — its other two channels are the microSD `DAT0`/`DAT1` lines.
 - **`D3` and `D8` are not `J6`-only** — they clamp `LED_SW`, `W−` and `C−`, which are the front
@@ -1292,8 +1446,19 @@ the accessory's LEDs that burn.
 3.3 V LDO and downstream of the cell protection, and it is **fused by a 0.75 A PPTC**
 (`0805L075WR`) in series with the pin. Treat it as a
 battery terminal: it is live whenever a cell is connected, it is not current-limited beyond the
-PPTC, and a short across pins 11/12 or 12-to-GND will trip the fuse rather than the cell's own
-protection.
+PPTC, and a short from pin 12 to GND will trip the fuse rather than the cell's own
+protection. Pin 12 also sits next to pin 11 (`C−`) and across from pin 6 (`W−`). A bridge to either, such as a
+solder whisker or an accessory wired wrongly, turns that string's N-FET (`Q6` for `C−`, `Q5` for `W−`) into a source
+follower while its gate is high. The independent review estimates about 80 mA flowing continuously, with `R37` at
+about its 0.1 W rating and `Q6` at about 0.24 W, until the cell is flat; `F2` does not trip. That is an
+estimate, not a measurement. Check an accessory's pin order before plugging it in.
+
+**4. `J6` pin 7 (`3V3`) is behind a PTC and limited to 20 mA.** It is fed from `3V3` through `F5` (Bourns
+MF-FSMF010X-2, 0.10 A hold, 0.30 A trip), so a short or a miswired accessory on pin 7 trips `F5` instead of
+loading the `3V3` rail. Budget **20 mA per accessory** on this pin. Across the part's tolerance `F5` adds 0.9–6.0 Ω
+in series, which drops 19–127 mV at 20 mA and 25 °C (up to 0.26 V at 60 °C), and its hold current falls as it
+warms, so at 80 mA it can trip. Anything heavier should take power from `P+` on pin 12 and regulate it itself
+([PROTECTION_FOLLOWUP.md](audit-2026-10-29/PROTECTION_FOLLOWUP.md) has the table).
 
 ---
 
@@ -1372,28 +1537,32 @@ substantial share of ADC1's channels.
 Several behaviours this board depends on are not enforced by anything on the PCB — they only happen
 if the firmware does them. This list is written for whoever ports firmware to the board.
 
-* **`USB_STAT` (`IO9`, ADC1_CH8, 11 dB attenuation) — decode "charger idle / no charge" as
+* **`USB_STAT` (`IO9`, ADC1_CH8, 11 dB attenuation) — decode "`CHG` off" as
   `> 2.6 V`, not `> 3.10 V`.** The ESP32-S3's SAR ADC is only specified to **2900 mV** at 11 dB
   (datasheet Table 5-6), so a `> 3.10 V` test asks the converter for a reading it is not specified to
   produce. Nothing real sits between about 2.3 V and 3.27 V, so there is ~1 V of free space to put
   the threshold in. Nominal node levels: **2.20 V** on battery,
-  **1.11 V** charging, **0.55 V** charge complete, **3.3 V** charger idle. Decode on battery as
+  **1.11 V** charging, **3.3 V** with `CHG` off. Decode on battery as
   `1.80–2.60 V`.
-* **Accept `0.80–1.35 V` as charging and `0.35–0.70 V` as complete.** When a weak USB source sags
-  `VBUS` below the power-path mux's ≈4.0 V threshold while the charger is still running, those two
-  states read **0.95 V** and **0.51 V** instead of 1.11 V and 0.55 V. The wider windows keep the rare
-  weak-USB cases decoding to the right charge state.
+* **Accept `0.80–1.35 V` as charging.** When a weak USB source sags `VBUS` below the power-path mux's ≈4.0 V
+  threshold while the charger is still running, charging reads **0.95 V** instead of 1.11 V. The wider window
+  keeps the rare weak-USB case decoding as charging.
+* **Split the 3.3 V cases with `P+`.** `CHG` marks only the first charge after plug-in or cell insertion, so
+  above 2.6 V the ladder cannot tell a full cell from an idle charger, no cell, or a charge that stopped. Read
+  `P+` = 2 × `BAT_MONIT` ([§3.6](#36-battery-monitoring)): about 4.0 V or more is full, near 0 V is no cell,
+  and a cell present below about 4.0 V is a stopped charge (the 10 h timer, an input above 6.6 V, or `TS` out of
+  range). The levels have not been read on a built board, including with VBUS absent
+  ([NEXT_REVISION.md](NEXT_REVISION.md#4-firmware-changes-no-hardware), F11).
 * **Treat `USB_STAT` as a slow, high-impedance node.** The ladder is 1 MΩ-class (up to 667 kΩ
   source impedance) with `C23` = 0.1 µF on the pin, so it needs **about 0.5 s to settle** after a
   cable or charge-state change — read it once a second or slower, never in a tight loop after a
   wake, and **leave the pin's internal pull-up and pull-down off** (they are ≈45 kΩ and would
   swamp the ladder). Keep the 11 dB attenuation; no other ADC setting matters at this impedance
   because `C23` supplies the sampling charge.
-* **Require a stable reading for several seconds before reporting "charged".** If the cell is
-  unplugged while USB power is present, the TP4056 enters its no-battery blink and `USB_STAT`
-  alternates between about **0.55 V** and **0.41 V** every 1–4 s — and 0.55 V is the *same* node
-  voltage as "charge complete", so only time separates them. (At a cold plug-in with no cell fitted
-  the `CE` gate keeps the charger off entirely and the node reads a steady 3.3 V.)
+* **Do not look for a no-battery blink on `USB_STAT`.** At a cold plug-in with no cell fitted the `TS` gate
+  keeps the charger off entirely: the node reads a steady 3.3 V and `P+` sits near 0 V. If the cell is
+  unplugged while USB power is present, the node also reads a steady 3.3 V, and the charger's battery-detect
+  routine cycles `P+` between 3.8 V and 4.2 V in 25 ms steps, which `BAT_MONIT` averages to about 4.0 V.
 * **Front light (`PWM_LED` / `IO42` → `TPS923610` `ADIM`) — `ADIM` is also the enable.** TI datasheet
   SNVSCN8 §6.5: the first HIGH pulse must be **≥ 40 µs** (`tADIM_EN`), and LOW for **> 2.5 ms**
   (`tADIM_SD`) shuts the driver down. A bare 10–25 kHz PWM carrier may never start it — at 25 kHz /
@@ -1447,8 +1616,8 @@ if the firmware does them. This list is written for whoever ports firmware to th
   gate saves nothing.
 * **Deep-sleep wake sources are the RTC-capable pins `GPIO0`–`GPIO21` only.** The power button
   (`PWR_BUTTON`, `IO18`) can wake the chip; arm it as `ext1` (`ANY_HIGH`), not `ext0`, so the RTC
-  peripherals can power down in sleep (§9.2). `TP_INT` is on `IO41` and **cannot**, and the DS3231's
-  `INT`/`SQW` pin is deliberately not routed — there is no alarm wake on this board, by design.
+  peripherals can power down in sleep (§9.2). `TP_INT` is on `IO41` and **cannot**, and the RTC's interrupt pin
+  (`INT`/`SQW` on the DS3231, `INT` on the RV-8263-C7) is deliberately not routed — there is no alarm wake on this board, by design.
 * **Battery edge cases to tell users about.** A 0 V or protection-latched pack **will not start
   charging**: the charge-enable gate needs roughly **1.7 V at `J5`** in the worst case (`Q9`'s
   BSS138 threshold is 0.5–1.6 V behind a 0.909 divider, so 0.6–1.8 V across the lot), and a
@@ -1471,7 +1640,9 @@ room for expansion.
 power-gated SD card, a ~130 nA-shutdown LED driver, and a 100 k (not 10 k) rail bleed. On an
 e-paper device the display costs nothing to hold an image, so standby current *is* battery life.
 
-**3. Defense in depth on power.** PPTC → TVS on the input; DW01A + FS8205A on the cell; a
+**3. Defense in depth on power.** PPTC → TVS on the input; a PTC on each branch that can fault
+(frontlight, touch, `J6` pin 7, e-paper); DW01A + FS8205A on the cell, with a current-sense pair; a charger
+that stops outside about 0–41 °C and on its timers; a
 priority mux that blocks reverse current; back-to-back FETs *intended* for reverse-polarity
 blocking. That last item is the qualifier: as-built it does **not** hold when USB is present
 (§3.3, and [DESIGN_REVIEW.md](../DESIGN_REVIEW.md) §4). The rest genuinely make "bring your own cell" a defensible proposition once
@@ -1500,7 +1671,7 @@ The material differences:
 | **Accessory header** | Refined into the current 12-pin `J6`, grouped by voltage domain and fully ESD-protected |
 | **Power path** | Reworked around the TPS2116 priority mux; idle-current behaviour tightened throughout (high-value dividers, power-gated SD, low-shutdown LED driver) |
 | **Touch** | Added — `J4` plus the `U7` ESD array and the 0 Ω pin-swap jumpers |
-| **RTC** | Added — `U13` DS3231MZ on the shared I²C bus |
+| **RTC** | Added — `U14` RV-8263-C7 (or the `U13` DS3231MZ alternate) on the shared I²C bus |
 | **Frontlight** | Moved from the AP3012 to the TPS923610, gaining proper dimming; the two colour-select GPIOs became one GPIO plus the `U12` inverter |
 | **ESD** | Expanded and refined — now six arrays plus three rail clamps |
 | **Charge reporting** | Added the `USB_STAT` resistor ladder |
@@ -1517,43 +1688,45 @@ without a respin.
 **Sleep current target.** No numeric spec — the goal is "as low as practical." The figures
 below are itemized part by part against the netlist and the firmware's sleep path; **none
 of it has been measured on a board.** Conditions: on battery with USB and any UART adapter
-unplugged, panel in its deep sleep, light off (`ADIM` held low), SD gated off, `U13` fitted, `J6`
+unplugged, panel in its deep sleep, light off (`ADIM` held low), SD gated off, `U14` fitted, `J6`
 empty, no touch tail; typical at a 3.7 V cell and 25 °C, maximum at 4.2 V with datasheet maxima.
 
 | Contributor | Typ µA | Max µA | Basis |
 |---|---:|---:|---|
 | `U3` TLV75533P quiescent (`EN` tied to `IN`, §3.5) | 25 | 33 | datasheet; max at 85 °C |
-| Cell-polarity detector: `R79` + `R80` across the cell (`R81`/`R82` run from `USB_VBUS`: 0 on battery) | 0.3 | 0.4 | calculated: 3.7 V / 4.2 V across 11 MΩ |
+| Cell-polarity detector: `R79` + `R80` across the cell (`R81` runs from `USB_VBUS` and `R82` from the charger's `TS` pin: 0 on battery) | 0.3 | 0.4 | calculated: 3.7 V / 4.2 V across 11 MΩ |
 | `U4` ESP32-S3 deep sleep, `ext1` wake, RTC peripherals off (§9.2) | 7 | 13 | datasheet typ (v2.2 Table 5-10); Espressif publishes no max, so 13 is a placeholder |
 | `U5` DW01A | 3 | 6 | datasheet (a generic DW01A sheet; the fitted clone's own sheet was not obtained) |
 | `LED_MONIT` divider `R39` + `R41`, fed from `LED_SW` through `U10`'s body diode (§7) | 2.9 | 3.4 | calculated; the body-diode drop is estimated |
-| `U13` DS3231MZ, VBAT-only | 2 | 3 | datasheet; temperature conversions included |
 | Panel (GDEQ0426T82) in deep sleep | 2 | 6 | panel datasheet |
 | `BAT_MONIT` divider `R12` + `R10` | 1.9 | 2.1 | calculated |
 | `U2` TPS2116 on battery (`VIN2` only) | 1.4 | 3.7 | datasheet |
-| `USB_STAT` ladder `R70` + `R17` (`ST` low) | 1.1 | 2.1 | calculated; the max assumes the unpowered TP4056 status pins clamp |
-| `U11` TP4056 `BAT` pin with `VCC` = 0 | 1 | 2 | datasheet |
+| `USB_STAT` ladder `R70` + `R17` (`ST` low) | 1.1 | 1.2 | calculated: 3.3 V (3.4 V at the max) across 3 MΩ (2.97 MΩ); TI specifies the unpowered BQ21040's pins high-impedance (§8.3.1), so no status-pin clamp is assumed |
+| `U11` BQ21040 `OUT` pin with `VIN` = 0 | 1 | 1 | datasheet `I_OUT(PDWN)`; TI gives only a 1 µA maximum, used for both columns |
 | `R56` + `R57` (`Q3` gate bias) | 0.4 | 0.4 | calculated |
+| `U14` RV-8263-C7, timekeeping | 0.19 | 0.24 | datasheet: I²C idle, 3 V, 25 °C (190 nA typ, 240 nA max); no hot figure |
 | `U12` 74LVC1G04, input low | 0.1 | 4 | datasheet (Nexperia; TI's limit is 10, the fitted clone is undocumented) |
 | `U10` TPS923610 in shutdown | 0.1 | 0.5 | datasheet; max at 85 °C |
 | Leakage: MCU pads, `Q4`, `Q7`, ESD/TVS parts, MLCCs | ≈0.1 | ≈5 | estimate; the max is mostly datasheet limits specified at far higher voltages than these parts see (`Q7` at −30 V, `Q4` at 24 V) |
-| **Total** | **≈48** | **≈81–85** | ≈46 µA typ without the panel; ≈81 once the `Q4`, `Q7` and ESD/TVS limits are discounted |
+| **Total** | **≈46** | **≈76–80** | ≈44 µA typ without the panel; ≈76 once the `Q4`, `Q7` and ESD/TVS limits are discounted |
 
-That is ≈1.2 mAh a day typical and ≈2.0 mAh at the maximum. The maximum mixes 25 °C and 85 °C
+That is ≈1.1 mAh a day typical and ≈1.9 mAh at the maximum. (Against the Rev 1.02 table, which had the DS3231MZ
+and the TP4056 and totalled ≈48 µA typ and ≈81–85 µA max, the typical total falls by about 1.8 µA from the RTC
+and the maximum by about 5 µA from the RTC, the charger and the ladder row.) The maximum mixes 25 °C and 85 °C
 datasheet limits, so it is not a hot-case figure (the leakage terms rise steeply at 60–85 °C), and
 two terms are left out of it on purpose: the LDO's extra ground current at its real ≈20–40 µA load
 (TI characterises it at no load and from 1 mA up — ≈145 µA at 1 mA — with nothing in between; an
 estimated +0–20 µA, to be measured), and the possible `IO47`/`IO48` back-feed (an unverified
 100–300 µA; see the bench check in [§6.1](#61-24-pin-e-paper-connector)). The detector row
-is `R79`/`R80` across the cell (1 MΩ + 10 MΩ, ≈0.4 µA); `R81`/`R82` run from `USB_VBUS` and conduct
-only while USB is present (except in the DW01A lock-out state, §3.3). §3.3's ≈3.8 µA — what keeps draining the cell after an over-discharge cutoff — is a subset
+is `R79`/`R80` across the cell (1 MΩ + 10 MΩ, ≈0.4 µA); `R81` runs from `USB_VBUS` and `R82` hangs on the
+charger's `TS` pin, so both conduct only while USB is present (§3.3 covers the DW01A lock-out state). §3.3's ≈3.8 µA — what keeps draining the cell after an over-discharge cutoff — is a subset
 of these rows (`R79`/`R80`, `R56`/`R57` and the DW01A), not an addition. The LDO's own quiescent
 draw is the largest single term.
 
 Two situations move the board well off that floor:
 
 - **A touch tail on `J4`.** `J4`'s 3V3 is not switched, so a connected FT6336U-class controller
-  adds **≈55 µA even hibernated** (datasheet typical at 2.8 V; no max), nearly doubling the floor.
+  adds **≈55 µA even hibernated** (datasheet typical at 2.8 V; no max), more than doubling the floor.
   Never sent to hibernate, it idles in its monitor mode at ≈220 µA, and holding `TP_RST` LOW
   through sleep costs ≈1.1 mA (estimate: 3.3 V across the controller's internal ≈3 kΩ reset
   pull-up) — so firmware should hibernate the controller and leave `TP_RST` high.
@@ -1563,12 +1736,14 @@ Two situations move the board well off that floor:
   there eventually, and from then on drains four to five times faster — so the firmware's
   low-battery shutdown (§3.5) should leave the resting cell comfortably above that knee.
 
-**Detector term already cut:** `R81`/`R82` run from `USB_VBUS` instead of 3V3 (−6.6 µA; they are
-100 kΩ and 10 kΩ), and `R79`/`R80` are 1 MΩ/10 MΩ (−3.0 µA at the same 1:10 ratio and thresholds). The
+**Detector term already cut (Rev 1.02):** `R81` and `R82` (then 100 kΩ and 10 kΩ) were moved from 3V3 to
+`USB_VBUS` (−6.6 µA), and `R79`/`R80` made 1 MΩ/10 MΩ (−3.0 µA at the same 1:10 ratio and thresholds). In Rev 1.03
+`R82` is the 200 kΩ `TS` pull-down and draws only while the charger is powered. The
 price is a tenfold smaller leakage tolerance at `Q9`'s gate, which still leaves roughly 6–19× margin
 over the BSS138's guaranteed gate leakage ([DESIGN_REVIEW.md](../DESIGN_REVIEW.md) §4; the analysis is in
-`docs/audit-2026-10-15/SCH-2_CHARGE_ENABLE.md`). Check it on the first board, with USB present: `CE` should go to `USB_VBUS` (about 5 V) once a
-supply on the cell pins passes about 2 V, and stay low with no cell. With USB absent `CE` is 0 V whatever the cell.
+`docs/audit-2026-10-15/SCH-2_CHARGE_ENABLE.md`). Check it on the first board, with USB present: `TS` should sit at
+about 0.48 V at 25 °C (50 µA through `TH1` ∥ `R82`, 10 kΩ ∥ 200 kΩ) once a supply on the cell pins passes about 2 V,
+and be held near 0 V with no cell. With USB absent the charger is unpowered and `TS` carries nothing whatever the cell.
 If deep-sleep current is ever worth chasing seriously, the LDO's always-on `EN` tied to `IN`
 (§3.5) is the bigger, more separable target. Past that, the *avoidable* loads
 are the `LED_MONIT` divider, which `LED_SW` keeps fed through the boost's body diode while
@@ -1582,12 +1757,15 @@ anything. Implications for a custom case:
 - The six `MountingHole_Pad`s (`H1`–`H6`) are **plated and GND-connected**, so a conductive
   enclosure will be bonded to signal ground through the standoffs — usually good for EMC, but make
   it deliberate (use one bonded standoff and isolate the rest if a chassis ground loop is a concern).
-- **Keep screw heads at or under 4 mm and do not use metal washers.** Each hole's exposed GND pad
-  is 3.8 mm across; live tracks pass 2.1–2.6 mm from the hole centres under nothing but solder
-  mask, so a 5 mm washer or pan head sits on top of them. Solder mask is not insulation you
-  should clamp a screw onto. The two to respect most are on the battery side: `H5` (the `Q3`
-  gate net, 2.1 mm from centre) and `H1` (the fused battery rail to `J6`, 2.3 mm). An M2
-  cap-head or a nylon washer is fine everywhere.
+- **Keep screw heads at or under 4 mm, and use no metal washer or standoff wider than Ø4.4 mm (nylon is
+  fine at any size).** Each hole's exposed GND pad is 3.8 mm across. Rev 1.03 moved other nets' copper out of
+  2.5 mm of five of the eight hole centres. Three nets could not move without moving parts, and pass under
+  nothing but solder mask: the `Q3` gate net at `H5` (2.07 mm from the centre), `R20`'s net at `H3` (2.15 mm) and
+  the fused battery rail to `J6`, `/P+_FUSE`, at `H1` (2.22 mm). A 5 mm washer or pan head sits on top of all three.
+  Solder mask is not insulation you should clamp a screw onto. A Ø4.4 mm part just reaches the `Q3` gate net and
+  `R20`'s net (by 0.05–0.13 mm); touching the `Q3` gate net only holds `Q3` on, which is harmless with a correctly
+  fitted cell. An M2 cap-head or a nylon washer is fine everywhere
+  ([TRACE_AUDIT.md](audit-2026-11-03/TRACE_AUDIT.md#t17-copper-within-25-mm-of-a-mounting-hole)).
 - A conductive case must not bridge the exposed high-voltage nets: `LED_SW` (up to 25.5 V at OVP) and
   the panel's ±22 V rails are the ones to keep clear of metalwork.
 - **Keep the battery, screws and metal away from the antenna corner.** The ESP32-S3-WROOM-1's
@@ -1632,7 +1810,7 @@ All x/y figures are board (KiCad page) coordinates, the same frame the STEP and 
 | Antenna keep-out | x 44.24 … 50.60, y 93.30 … 112.00, **plus ~10 mm of air** — nothing conductive, no battery |
 | Display-flex slot | **47.04 × 1.30 mm** at x 51.26 … 98.30, y 141.20 … 142.50 |
 | Tongue-neck slot | **5.30 × 1.10 mm** at x 89.59 … 94.89, y 61.40 … 62.50 |
-| Cut line (optional shortening) | y = 61.86, x 84.42 … 104.24 (the 3.68″ build cuts at y = 62.00) — cutting here removes `J6` with its protection parts (`U8`, `CR2`, `CR3`, `F2`), the front-light clamps `D3`/`D8`, `SW10` and mounting hole `H1`. A board with `R84` keeps the rest of the board whole after the cut: the charge-enable switch `Q2`/`R81` is fed from `USB_VBUS` and needs nothing from 3V3, and GND stitching vias join the power-section ground (`U3`, `U2`, `Q1`) to the main ground. A board without `R84` (its `Q2`/`R81` take 3V3 over a tail that the cut removes) needs two wires after the cut: `R40` pad 2 to `R81` pad 2 (or bridge the two cut 3V3 stubs at x 87.53 and 100.60), and `C6` pad 2 to `C21` pad 2. The cut also leaves the unfused `P+` trace (0.4 mm, F.Cu, x ≈ 87.4) bare at the new edge, because `F2` goes with the tongue and has no room below the line: deburr, check `P+` to GND, and seal the edge before reconnecting the battery (README, "Cutting the board down"). `SW10` is the power button, so a shortened board **needs the UP(2)-as-power option** ([§9.2](#92-power-button): remove `R36`/`R73` and `R62`, then fit `R72`/`R74`; `R62`, `SW10`'s series resistor, stays on the main board on a sawn stub). Without it `PWR_BUTTON` sits at 0 V through `R76`, so with firmware that wakes only on the power button, as the current firmware does, the board leaves deep sleep only through the `SW11` reset (waking on `SW1`/`SW2`, [§9.1](#91-button-ladders), or on a timer would need firmware support) |
+| Cut line (optional shortening) | y = 61.86, x 84.42 … 104.24 (the 3.68″ build cuts at y = 62.00) — cutting here removes `J6` with its protection parts (`U8`, `CR2`, `CR3`, `F2`, `F5`), the front-light clamps `D3`/`D8`, `SW10` and mounting hole `H1`. A Rev 1.03 board keeps the rest of the board whole after the cut: the charge-enable switch `Q2`/`R81` is fed from `USB_VBUS` and needs nothing from 3V3, and GND stitching vias join the power-section ground (`U3`, `U2`, `Q1`) to the main ground. A Rev 1.0 board (no `R84`; its `Q2`/`R81` take 3V3 over a tail that the cut removes) needs two wires after the cut: `R40` pad 2 to `R81` pad 2 (or bridge the two cut 3V3 stubs at x 87.53 and 100.60), and `C6` pad 2 to `C21` pad 2. The cut also leaves the unfused `P+` trace (0.4 mm, F.Cu, x ≈ 87.4) bare at the new edge, because `F2` goes with the tongue and has no room below the line: deburr, check `P+` to GND, and seal the edge before reconnecting the battery (README, "Cutting the board down"). Rev 1.03 added two pour-free areas (x 86.2–88.6 and 98.85–102.45, y 60.8–63.1, both layers) that keep ground about 1 mm from `P+` and 3V3 at the cut, where it was 0.2 mm; keep the deburr, check and seal steps anyway. `SW10` is the power button, so a shortened board **needs the UP(2)-as-power option** ([§9.2](#92-power-button): remove `R36`/`R73` and `R62`, then fit `R72`/`R74`; `R62`, `SW10`'s series resistor, stays on the main board on a sawn stub). Without it `PWR_BUTTON` sits at 0 V through `R76`, so with firmware that wakes only on the power button, as the current firmware does, the board leaves deep sleep only through the `SW11` reset (waking on `SW1`/`SW2`, [§9.1](#91-button-ladders), or on a timer would need firmware support) |
 | Status-LED window | (102.80, 118.34), back face |
 
 **Frontlight load.** The GDEQ bonded frontlights are V_f ≈ 15 V at I_f ≤ 15 mA per channel;
@@ -1656,11 +1834,12 @@ A handful of items look like errors in KiCad or in a fab's DFM check. They are d
   are expected.
 - **The empty, mirrored silkscreen text box at the tongue neck is the cut line** — the marked
   line for shortening the board for a smaller panel. It is mirrored because it reads from the
-  front face. The single `mirrored-text` DRC item is this.
-- **Four `hole_clearance` DRC errors at `J1`.** The two locating pegs (Ø0.65 mm, unplated) of the USB-C land sit
-  0.194 mm from the stacked GND pads `A1`/`B12` and `A12`/`B1`, against the board's 0.25 mm hole rule. That is the
-  manufacturer's land (GCT `USB4105-GF-A`; the Shou Han part draws the same), not a board mistake. They are excluded
-  in the project file (`silkscreen_pcb.kicad_pro`).
+  front face.
+- **`J1`'s peg holes are closer to its own pads than the board's hole rule allows.** The two locating pegs (Ø0.65 mm,
+  unplated) of the USB-C land sit 0.194 mm from the stacked GND pads `A1`/`B12` and `A12`/`B1`, against the board's
+  0.25 mm hole rule (four `hole_clearance` errors). That is the manufacturer's land (GCT `USB4105-GF-A`; the Shou Han
+  part draws the same), not a board mistake. Since Rev 1.03 the rule file `silkscreen_pcb.kicad_dru` waives it (next
+  bullet), where Rev 1.02 excluded the four errors in the project file.
 - **`H2` and `H5` are deliberately not in line** (`H2` at y 70.5, `H5` at y 72.2). They serve
   different things in the case; they are not a misplaced pair.
 - **`D2` is a "USB power present" indicator for the user**, not a charge-state indicator. It
@@ -1669,12 +1848,32 @@ A handful of items look like errors in KiCad or in a fab's DFM check. They are d
 - **Eight `lib_symbol_mismatch` ERC warnings are expected** — `CR1`–`CR3`, `D8`, `J3`, `J4`, `J5` and `U10`. Their
   symbols were edited inside this schematic (pin names, graphics) after being placed, so the copy cached in the
   schematic differs from the library it came from. Do **not** run "Update symbols from library" on them.
-- **Five `footprint_link_issues` ERC warnings are expected** — `F1`, `F2`, `CR1`, `CR2`, `CR3` use hand-solder
+- **Nine `footprint_link_issues` ERC warnings are expected** — `F1`–`F6` and `CR1`–`CR3` use hand-solder
   footprints that their symbols' footprint filters do not list (`Q1`'s is excluded in the project file for the same reason).
+  `F3`–`F6` are the four branch PTCs that Rev 1.03 added. ERC reports 45 warnings and no errors in all: those 17, plus
+  24 `pin_to_pin`, 2 `single_global_label`, 1 `multiple_net_names` and 1 `four_way_junction`.
 - **Nine DRC rules are set to "ignore" in the project file** (`solder_mask_bridge`, `text_height`, `text_thickness`,
   `footprint_type_mismatch`, `lib_footprint_mismatch`, `footprint_filters_mismatch`, `missing_courtyard`,
   `npth_inside_courtyard`, `pth_inside_courtyard`). They silence noise from the vendor footprints, the 0.5 mm-pitch
   FPC connectors and the fine silkscreen art; none of them hides a clearance, connection or parity check.
+- **A custom rule file, `silkscreen_pcb.kicad_dru`, is part of the design (new in Rev 1.03).** It holds seven rules.
+  Four add clearance around high-voltage nets: GND pours stay 0.5 mm from the switch nodes and the frontlight boost
+  output (net class `SW`: `TPS_SW_NODE`, `LED_SW`, `EINK_SW`), 0.3 mm from the panel's high-voltage rails (`PREVGH`,
+  `PREVGL` and the charge-pump nodes) and 0.25 mm from the bare LED-cathode pads (`W−`, `C−`); and other nets' vias stay
+  0.4 mm from the two switch nodes. Three waive geometry that a part's footprint fixes, only between that part's own
+  pads and only down to the as-built value, so anything closer is still flagged: `J3`'s FPC pads and `U10`'s pads
+  (0.2 mm gaps) and `J1`'s peg holes (0.19 mm). Without those three, KiCad reports errors that are not board mistakes.
+  Keep the file next to the project.
+- **Six `starved_thermal` DRC warnings are expected** (a pad whose thermal relief has fewer than two spokes
+  connected). Five were kept on purpose ([TRACE_AUDIT.md §2.5](audit-2026-11-03/TRACE_AUDIT.md#25-ground-pour)):
+  `R41` and `R50` (DC only), `J2` pin 17 (one ground pin of the FPC, where even heating during reflow matters more
+  than a solid connection), and `J6` pin 4 and `SW9` pin 1 (through-hole, so they also connect on the other layer).
+  The sixth is `J1`'s top-left shell tab on F.Cu, which is bonded to ground on both layers
+  ([CERT_REVIEW_AUDIT.md §6](audit-2026-11-03/CERT_REVIEW_AUDIT.md#6-applied-on-2026-11-03)).
+- **DRC on the Rev 1.03 files:** 0 errors, 0 unconnected items, schematic parity clean, and 54 warnings: the 6
+  starved thermals, the 4 dangling stub tracks above (`track_dangling`, excluded in the project file), and 44
+  silkscreen warnings on artwork and part outlines (31 `silk_edge_clearance`, 10 `silk_over_copper`, 3
+  `silk_overlap`), none on a reference designator. The board has 251 vias and 860 teardrops.
 
 ---
 
@@ -1682,19 +1881,20 @@ A handful of items look like errors in KiCad or in a fab's DFM check. They are d
 
 | Type | Count | Notable |
 |---|---:|---|
-| Resistors | 84 | all **0603** (except `R27`, 0805); incl. 15× 33 Ω series, 5× DNP 0 Ω config jumpers plus the DNP 10 kΩ `R72`, 4× cell-polarity detector (R79–R82), `R83` DW01A VCC filter, `R84` 1 Ω USB hot-plug damper |
+| Resistors | 83 | all **0603** (except `R27`, 0805, and `R85`/`R86`, 1206); incl. 15× 33 Ω series, 5× DNP 0 Ω config jumpers plus the DNP 10 kΩ `R72`, 4× cell-polarity detector (R79–R82; `R82` is also the 200 kΩ `TS` pull-down), `R83` DW01A VCC filter, `R84` 1 Ω USB hot-plug damper, `R85` ∥ `R86` 0.1 Ω DW01A current sense |
 | Capacitors | 36 | 23× **0603**, 13× **0805** (HV / bulk — see below); 10× marked 50 V (`C9`, `C11`, `C13`–`C20`) |
-| ICs | 14 | see below; includes the **DNP** alternate RTC `U14` |
+| ICs | 14 | see below; includes the **DNP** alternate RTC `U13` |
 | Switches | 11 | 8 ladder + power + reset (right-angle `TS365ZJ`) + boot `SW6` (APEM MJTP1243, **DNP** → 10 populated) |
 | Diodes | 6 | 3× B5819W, SMAJ26A, PESD2IVN-UX, LED |
 | Connectors | 7 | USB-C, 24p ZIF, 2× 6p ZIF, microSD, 2-pin battery, 2×6 header |
-| Transistors | 9 | 4× AO3401A (Q2/Q3/Q7/Q8; see `fabrication/BOM.md`), 3× BSS138 (Q5/Q6/Q9), IRLML6346 (Q4), FS8205A (Q1, SOT-23-6 — TECH PUBLIC/EVVOSEMI make this MPN in that package; Fortune Semiconductor's own FS8205A is TSSOP-8 only, their SOT-23-6 part is "FS8205" with no A) |
+| Transistors | 9 | 3× AO3401A (Q3/Q7/Q8; see `fabrication/BOM.md`), 4× BSS138 (Q2/Q5/Q6/Q9), IRLML6346 (Q4), FS8205A (Q1, SOT-23-6 — TECH PUBLIC/EVVOSEMI make this MPN in that package; Fortune Semiconductor's own FS8205A is TSSOP-8 only, their SOT-23-6 part is "FS8205" with no A) |
+| Thermistor | 1 | `TH1`, Murata NCP18XH103F03RB, 10 kΩ NTC (0603, LCSC `C13564`) on the charger's `TS` pin ([§3.2](#32-battery-charger)) |
 | Test points | 5 | UART RX/TX bare pads (`TP1`/`TP2`, fitted) + frontlight `LED_SW`/`C−`/`W−` 1-pin header footprints (`TP3`–`TP5`, **DNP**) |
 | Mounting | 6 | plated, GND (`H1`–`H6`) |
-| TVS | 3 | `CR1` SMF6.5CA (VBUS, SOD-123FL, LCSC `C19077501`); `CR2`/`CR3` TSD05CDYFR prime / DOWO SD05C-01FTG (`C5299440`) on 3V3 and on `J6`'s fused battery pin (`/P+_FUSE`) |
+| TVS | 3 | `CR1` SMF6.5CA (VBUS, SOD-123FL, LCSC `C19077501`); `CR2`/`CR3` TSD05CDYFR prime / DOWO SD05C-01FTG (`C5299440`) on `J6`'s 3V3 pin (`J6_3V3`, behind `F5`) and on `J6`'s fused battery pin (`/P+_FUSE`) |
 | Inductors | 2 | 47 µH (charge pump, `L1`), 10 µH (frontlight, `L2`) |
-| Fuse | 2 | `F1` 0805L100WR 1 A PPTC on VBUS; `F2` 0805L075WR 0.75 A PPTC in series with `J6` pin 12 (both 0805) |
-| **Total** | **185** | full build: 166 fitted + 11 DNP (TP3–TP5, R43/R45/R58/R66/R72/R74, SW6, U14) + 8 bare-copper refs (H1–H6, TP1, TP2); includes the six cell-polarity detector parts Q2/Q9/R79–R82 |
+| Fuse | 6 | `F1` 0805L100WR 1 A PPTC on VBUS; `F2` 0805L075WR 0.75 A PPTC in series with `J6` pin 12 (both 0805); `F3`–`F6` Bourns MF-FSMF010X-2 PTCs, 0.10 A hold / 0.30 A trip (0603, `C210355`) ahead of the frontlight boost (`F3`), in the touch supply (`F4`), on `J6` pin 7 (`F5`) and ahead of the e-paper boost and the panel's logic supply (`F6`) |
+| **Total** | **189** | full build: 170 fitted + 11 DNP (TP3–TP5, R43/R45/R58/R66/R72/R74, SW6, U13) + 8 bare-copper refs (H1–H6, TP1, TP2); includes the six cell-polarity detector parts Q2/Q9/R79–R82 |
 
 **Passive case sizes.** The board standardizes on **0603** for hand-solderability at the smallest
 comfortable size. **Thirteen capacitors are 0805** because the value does not exist in 0603 or
@@ -1707,7 +1907,7 @@ DC-bias derating would gut it:
 | `C9` | 4.7 µF/50 V | Frontlight boost output (`TPS923610` COUT). A 1 µF part derates to ~0.6–0.8 µF effective at the 15–24 V LED rail bias, below TI's own COUT minimum; 4.7 µF sits inside TI's 1–4.7 µF window. See §7's blend-time note |
 | `C18`–`C20` | 1 µF @ 15 V | Kept with the rest of the `J2` HV cluster |
 
-`F1` (fuse) is 0805 and `D2` (power LED) is 1206.
+`F1` and `F2` (fuses) are 0805; `R85`/`R86` (current-sense resistors) and `D2` (power LED) are 1206.
 
 **Integrated circuits:**
 
@@ -1719,10 +1919,10 @@ DC-bias derating would gut it:
 | `U4` | ESP32-S3-WROOM-1-N16R8 | Processor |
 | `U5` | DW01A | Cell protection controller |
 | `U10` | TPS923610DRLR | Frontlight boost driver |
-| `U11` | TP4056-class | Li-ion charger |
+| `U11` | BQ21040DBVR | Li-ion charger with an NTC input and safety timers |
 | `U12` | 74LVC1G04 | Inverter (colour select) |
-| `U13` | DS3231MZ | Real-time clock (populated in the full build; optional) |
-| `U14` | RV-8263-C7 | Alternate real-time clock, **DNP** — fit either `U13` or `U14`, never both ([§10](#10-real-time-clock)) |
+| `U13` | DS3231MZ | Alternate real-time clock, **DNP** — fit one RTC or none, never both ([§10](#10-real-time-clock)) |
+| `U14` | RV-8263-C7 | Real-time clock (fitted in the full build; optional) |
 
 > **Manufacturer note.** Several fitted parts are house-brand equivalents (TECH PUBLIC, MDD,
 > PUOLOP, TOPPOWER, etc.) rather than the TI/Onsemi/Nexperia parts the schematic labels suggest.

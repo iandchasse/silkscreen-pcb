@@ -27,7 +27,10 @@ branch. I designed Silkscreen in KiCad 9, but
   is sold as `GDEY0426T82`; the others are `GDEQ0426T82` with a suffix for the variant (`-T01C`
   touch, `-FL01C` front light, `-FT01C` both), so always order by the full part number.
 - **Power:** charges and runs from a single-cell Li-ion/LiPo pack over USB-C, with charger,
-  cell protection and a 3.3 V regulator on board.
+  cell protection and a 3.3 V regulator on board. The charger is a TI BQ21040: about 115 mA, which
+  takes about 5 hours for a 500 mAh pack, and only between about 0 and 41 °C, measured by a
+  thermistor on the board. Power it from a 5 V source only.
+- **Temperature:** 0 to 50 °C in use, a limit set by the display panel.
 - **Storage:** a push-push microSD socket.
 - **Buttons:** eight page/navigation buttons, plus power and reset.
 - **Size:** 60.05 × 111.30 mm, 1.6 mm thick. Every part is soldered onto the **back** face, so
@@ -54,9 +57,9 @@ The factory sends you a populated circuit board and nothing else. You also need:
 | Item | What to get |
 |---|---|
 | **Display panel** | One of the 4.26" Good Display variants: `GDEY0426T82` (plain), `GDEQ0426T82-T01C` (touch), `-FL01C` (frontlight), `-FT01C` (touch + frontlight). The panel you pick decides which optional parts you fit. See [Choosing a configuration](#choosing-a-configuration). |
-| **Battery** | A protected **single-cell** (3.7 V nominal / 4.2 V charged) Li-ion or LiPo pack fitted with a **JST-PH 2.0 mm, 2-pin** plug. Its manufacturer's limits must permit 4.2 V charging at the board's approximately 0.25 A charge current. Read the polarity note below before you plug it in. I use [this 500 mAh `503035` pack (5 × 30 × 35 mm, JST-PH 2.0)](https://www.amazon.com/dp/B0GDQLLF12). It fits the board's 38.75 × 30.50 mm battery bay snugly. If a cell requires a lower charge current, adjust `R6` and verify the resulting current against its specifications ([HARDWARE.md §3.2](docs/HARDWARE.md#32-battery-charger)). A matching size, plug or protection board alone does not establish compatibility. |
+| **Battery** | A protected **single-cell** (3.7 V nominal / 4.2 V charged) Li-ion or LiPo pack fitted with a **JST-PH 2.0 mm, 2-pin** plug. Its manufacturer's limits must permit 4.2 V charging at the board's approximately 115 mA charge current (a 500 mAh pack charges in about 5 hours; the charger stops after 10 hours, so a pack above about 1000 mAh may not fill completely at this current, and `R6` = 3.9k gives about 140 mA). Read the polarity note below before you plug it in. I use [this 500 mAh `503035` pack (5 × 30 × 35 mm, JST-PH 2.0)](https://www.amazon.com/dp/B0GDQLLF12). It fits the board's 38.75 × 30.50 mm battery bay snugly. If a cell requires a lower charge current, adjust `R6` and verify the resulting current against its specifications ([HARDWARE.md §3.2](docs/HARDWARE.md#32-battery-charger)). A matching size, plug or protection board alone does not establish compatibility. |
 | **microSD card** | Any normal microSD card. The battery normally sits in the board's cut-out directly in front of the card slot, so you lift or slide the cell aside to put a card in or take one out. I designed it that way; the card is not meant to be swapped often. |
-| **USB-C cable** | A **data** cable, not a charge-only one, or the board will charge but never appear on your computer. |
+| **USB-C cable** | A **data** cable, not a charge-only one, or the board will charge but never appear on your computer. Power the board from a **5 V** USB-C charger or a PC port only. It has no input over-voltage protection and makes no USB-PD request, so a compliant charger stays at 5 V, but a faulty or fixed 9 V or 12 V supply would kill it. |
 
 **Battery lead order.** On the board, `J5` pin 1 is battery **negative** and pin 2 is battery
 **positive**, and the board prints **- +** with the word **CHECK** right beside the connector's
@@ -72,6 +75,10 @@ A multimeter is the surest check.
 > Lithium cells are a fire risk if reversed, shorted or crushed. Check your pack against the
 > **- +** marks beside `J5` before plugging it in, and measure it if you can. Use a pack with its
 > own protection board. Stop using any cell that is puffed, hot or damaged.
+
+**If the board shuts off on battery and stays off.** The board has its own cell protection
+(`U5`, `Q1`), which cuts the battery off on an overload or a short; it trips between about 0.83 and
+1.68 A. A trip on battery needs USB to clear: plug in USB and the protection resets.
 
 **Screws and case are not on this list.** The board has six M2 mounting holes, but which screws
 you need depends on the case you use, and no case is supplied here. See
@@ -96,11 +103,13 @@ you need depends on the case you use, and no case is supplied here. See
 > charger, an ordinary USB-A charger or a PC port rather than a fast-charge USB-A brick on a short,
 > thick cable ([HARDWARE.md §3.1](docs/HARDWARE.md#31-usb-c-input--protection)), check `J6`'s pins
 > with a meter ([§11](docs/HARDWARE.md#11-expansion-header)), and add two wires after a cut (see
-> [below](#cutting-the-board-down-for-a-smaller-display)). The files in `production/` are Rev 1.02:
-> they add `R84`, a 3V3 link and ground vias, a 12-pad SMD USB-C socket in place of the
-> through-hole one, and a charge-enable gate fed from `USB_VBUS` (`R79` to `R82` changed), and have
-> not been built yet. (Files labelled Rev 1.01 were published on 2026-10-01 and never ordered;
-> Rev 1.02 replaces them.)
+> [below](#cutting-the-board-down-for-a-smaller-display)). The files in `production/` are Rev 1.03:
+> they add `R84`, ground vias, a 12-pad SMD USB-C socket in place of the through-hole one and a
+> charge-enable gate fed from `USB_VBUS` (all from Rev 1.02) and, new in 1.03, a TI BQ21040 charger
+> with a temperature sensor in place of the TP4056, resettable fuses on the frontlight, touch,
+> e-paper and `J6` pin 7 supplies (`F3` to `F6`), and a current-sense pair for the cell protection
+> (`R85`/`R86`). They have not been built yet. (Files labelled Rev 1.01 and Rev 1.02 were published
+> on 2026-10-01 and 2026-10-23 and never ordered; Rev 1.03 replaces them.)
 >
 > Your screen panel and battery are not part of the board order: see
 > [What you need besides the board](#what-you-need-besides-the-board). You can start on an
@@ -123,7 +132,7 @@ files that are already in this repository. Unfamiliar words are defined in
 
 The minimum order is **5 bare boards**, and you choose how many of them the factory assembles:
 as few as **2**, all 5, or more boards if you want them. Most of the bill is one-off (the bare
-boards, setup, the solder stencil, and a small loading fee for each of about two dozen "Extended"
+boards, setup, the solder stencil, and a small loading fee for each of about thirty "Extended"
 part types the factory has to fetch), so the price per assembled board falls quickly as you build
 more. The website's cost page breaks the cost down by order size and explains where each fee
 comes from.
@@ -146,7 +155,7 @@ you need is in the `production/` folder. You upload exactly three files:
 
 | Upload this | What it is | Where it goes |
 |---|---|---|
-| `production/Silkscreen_Reader_PCB_1.02.zip` | the **Gerber** files: the board itself, meaning copper layers, outline and hole positions | the *Add Gerber file* box |
+| `production/Silkscreen_Reader_PCB_1.03.zip` | the **Gerber** files: the board itself, meaning copper layers, outline and hole positions | the *Add Gerber file* box |
 | `production/jlc_bom.csv` | the **BOM** (bill of materials): the shopping list of parts | the *Add BOM file* box |
 | `production/positions.csv` | the **CPL** (also called the centroid or pick-and-place file): where each part sits and which way it faces | the *Add CPL file* box |
 
@@ -156,7 +165,7 @@ Do not mix one of them with an older copy of another.
 ### Step 2: order the bare board
 
 1. Sign in at [jlcpcb.com](https://jlcpcb.com), click **Order now**, then **Add Gerber file** and
-   choose `Silkscreen_Reader_PCB_1.02.zip`.
+   choose `Silkscreen_Reader_PCB_1.03.zip`.
 2. The viewer draws the board. Confirm it says **2 layers** and about **60 × 111 mm**. If it does
    not, you uploaded the wrong file.
 3. Set **PCB Qty = 5**, **Thickness = 1.6 mm**, **Outer Copper Weight = 1 oz**. For **Surface Finish**,
@@ -204,7 +213,7 @@ for you, instead of shipping you a bare board.
 You get a table with one row per part. Most rows will be matched.
 
 - **Rows with a blank part number are meant to be blank.** These references (`TP3 TP4 TP5`,
-  `R43 R45 R58 R66 R72 R74`, `SW6` and `U14`, the alternate clock chip; the board uses `U13`) are
+  `R43 R45 R58 R66 R72 R74`, `SW6` and `U13`, the alternate clock chip; the board uses `U14`) are
   tagged *"DNP (standard build)"*. **DNP** means "do not populate": a spot on the board
   deliberately left empty. **Leave them unselected.**
 - **Every other row must show a match.** If a row says *No Parts Selected* or *out of stock*, or
@@ -214,9 +223,12 @@ You get a table with one row per part. Most rows will be matched.
   board. Use that list rather than picking a look-alike yourself, because several of these parts
   have near-identical siblings with different pinouts.
 - The part most often short is **TPS923610DRLR** (`U10`, LCSC `C52919131`), the frontlight driver.
-  Check its stock. If you are not fitting a frontlight panel, untick it along with the rest of the
+  Check its stock (JLCPCB had 80 on 2026-11-05). If you are not fitting a frontlight panel, untick it along with the rest of the
   *Frontlight* group in [Choosing a configuration](#choosing-a-configuration). If you *are* fitting
   one and it is out of stock, see [If the frontlight driver is out of stock](#if-the-frontlight-driver-is-out-of-stock).
+- The clock `U14` (RV-8263-C7, LCSC `C5137460`) is also thinly stocked (1,058 on 2026-11-05). The
+  reader runs without a clock, so if it is out of stock you can leave it off, or fit the DS3231MZ+TRL
+  (`C107410`) at `U13` instead and leave `U14` off.
 - If you are deliberately leaving a block off, remove its parts from the BOM **and** the CPL, or
   untick them here.
 - Click **Next**.
@@ -272,8 +284,10 @@ The parts below are the ones most often turned or offset in JLCPCB's preview; ch
 | Part | What to check |
 |---|---|
 | `D2` | The USB power LED. **Pad 1 is the cathode** (the marked end). Some part libraries use the opposite convention. |
-| `U2`, `U5`, `D8` | Small 3 to 8 pin chips. Check their rotation. |
-| `U10` | The frontlight driver, 6 pins in two rows of 3. Pin 1 (`LDO_IN`) is the corner at (50.35, 121.50) in the KiCad file; pin 4 (`GND`) is diagonally opposite. |
+| `U2`, `U5`, `D8`, `U11` | Small 3 to 8 pin chips (`U11` is the BQ21040 charger). Check their rotation. |
+| `U14` | The clock chip: eight small pads in two rows of four. JLCPCB's library draws this part at 90° to KiCad's footprint, so the placement file rotates it; check that its pads line up. |
+| `U10` | The frontlight driver, 6 pins in two rows of 3. Pin 1 (the `/LED_VIN` net, behind the fuse `F3`) is the corner at (50.24, 121.50) in the KiCad file; pin 4 (`GND`) is diagonally opposite. |
+| `F3`–`F6`, `R85`/`R86`, `TH1`, `C38` | The new two-pad parts: four fuses (0603), two sense resistors (1206), the thermistor and a capacitor. None has a polarity; check that each one sits centered on its pads. |
 | `D3`–`D6` | The polarized diodes: the SMAJ26A (`D3`) and the three B5819W (`D4`, `D5`, `D6`). **Pad 1 is the cathode (the bar end) on all four.** |
 | `J4` | The touch connector. It should sit on its pads; the pads are what matter. |
 | `J1` | The USB-C socket: twelve small pads in a row, two pegs and four shield slots. It should sit on its pads with the opening facing the board edge. JLCPCB's library footprint has a different origin from KiCad's, so the placement file carries a 1.305 mm correction for it; check that it is not shifted and that the opening faces the board edge. |
@@ -340,13 +354,13 @@ behind that does no work. The website's builder uses the same groups.
 
 | Group | References | Fit it when | Works without it? |
 |---|---|---|---|
-| **Core** (always) | Everything not listed below: ESP32-S3 `U4`, USB-C `J1`/`U6` and protection, charger `U11`, cell protection `U5`/`Q1`/`Q3`/`Q8`, power mux `U2`, LDO `U3` with its input capacitor `C4`, battery monitor, microSD `J7`/`Q7`/`U1`/`U9`, the 24-pin display connector `J2` with its charge pump and boost (`L1`, `Q4`, `D4`-`D6`, `R14`, ...), power button `SW10`, reset `SW11`, LED `D2`, and the I²C pull-ups `R47`/`R48` (shared by touch, clock and `J6`) | Always | This is the minimum working board |
-| **Touch** | `J4`, `U7`, jumpers `R42 R44 R46 R52` | The panel has a touch layer (`-T01C`, `-FT01C`) | Yes: omit the whole block on a non-touch panel |
-| **Frontlight** | driver `U10` with `L2`, input capacitor `C12` and output capacitor `C9`; current set `R37`; warm/cool select `Q5`, `Q6`, `U12` (with its decoupling `C24`) and `R75`; LED monitor `R39`, `R41`, `C31`; string bleeders `R49`, `R50`; output clamps `D3`, `D8` (`TP3`-`TP5` stay DNP) | The panel has a frontlight (`-FL01C`, `-FT01C`), or you want to drive a compatible external light through `J6` or `J3` | Yes: omit if the panel has no bonded light and you do not want an external light |
+| **Core** (always) | Everything not listed below: ESP32-S3 `U4`, USB-C `J1`/`U6` and protection, charger `U11` with its thermistor `TH1`, cell protection `U5`/`Q1`/`Q3`/`Q8` with its sense resistors `R85`/`R86`, power mux `U2`, LDO `U3` with its input capacitor `C4`, battery monitor, microSD `J7`/`Q7`/`U1`/`U9`, the 24-pin display connector `J2` with its charge pump and boost (`L1`, `Q4`, `D4`-`D6`, `R14`, ...) and the boost's fuse `F6`, power button `SW10`, reset `SW11`, LED `D2`, and the I²C pull-ups `R47`/`R48` (shared by touch, clock and `J6`) | Always | This is the minimum working board |
+| **Touch** | `J4`, `U7`, the supply fuse `F4`, jumpers `R44 R46 R52` | The panel has a touch layer (`-T01C`, `-FT01C`) | Yes: omit the whole block on a non-touch panel |
+| **Frontlight** | driver `U10` with its supply fuse `F3`, `L2`, input capacitor `C12` and output capacitor `C9`; current set `R37`; warm/cool select `Q5`, `Q6`, `U12` (with its decoupling `C24`) and `R75`; LED monitor `R39`, `R41`, `C31`; string bleeders `R49`, `R50`; output clamps `D3`, `D8` (`TP3`-`TP5` stay DNP) | The panel has a frontlight (`-FL01C`, `-FT01C`), or you want to drive a compatible external light through `J6` or `J3` | Yes: omit if the panel has no bonded light and you do not want an external light |
 | **Frontlight connector** | `J3` | Fit with the frontlight driver, for a bonded panel light or compatible external-light flex PCB (in development) | Omit with the driver |
-| **Expansion header** | `J6`, `U8`, `CR2`, `CR3`, `F2`, and the GPIO series resistors `R65 R68 R69` | You want spare GPIO, I²C and the external-light output | Yes |
-| **Real-time clock** | `U13`, `C30` (or `U14` instead of `U13`) | You want accurate time | Yes: the reader runs without it, and it can be added later by hand |
-| **Alternate RTC** | `U14` (**not fitted in the full build**) | You want the cheaper clock instead of `U13` | Fit **either** `U13` **or** `U14`, never both |
+| **Expansion header** | `J6`, `U8`, `CR2`, `CR3`, `F2`, `F5`, and the GPIO series resistors `R65 R68 R69` | You want spare GPIO, I²C and the external-light output | Yes |
+| **Real-time clock** | `U14`, `C30` (or `U13` instead of `U14`) | You want the time kept | Yes: the reader runs without it, and it can be added later by hand |
+| **Alternate RTC** | `U13` (**not fitted in the full build**) | You want the more accurate clock (±5 ppm, temperature-compensated, against ±20 ppm) instead of `U14`; it costs about $1.8 more per board at 30 boards | Fit **one** clock or none; their I²C addresses differ (`0x51` and `0x68`), so there is no bus conflict, but a second clock is wasted money |
 | **Side page-turn keys** | per key: `SW1`+`R61` (right-down), `SW4`+`R11` (right-up), `SW7`+`R36`+`R73` (left-up), `SW5`+`R35` (left-down); with any side key, the ladder's pull-up `R28` and filter `C28` | Your case has side keys | Yes: fit any subset |
 | **Bottom-row keys** | per key: `SW2`+`R60`, `SW3`+`R18`, `SW8`+`R19`, `SW9`+`R20`; with any bottom key, the ladder's pull-up `R4` and filter `C27` | Your case has bottom keys | Yes: fit any subset; with touch you can drop most keys |
 
@@ -357,16 +371,16 @@ Notes:
   frontlight).
   Fit the touch parts only for a touch variant. Fit the frontlight driver and `J3` for a light
   variant, or keep both for a compatible external light on a plain or touch-only panel.
-- **`U8`, `CR2`, `CR3` and `F2` are `J6`'s own protection and come off with it.** `U8` protects only
+- **`U8`, `CR2`, `CR3`, `F2` and `F5` are `J6`'s own protection and come off with it.** `U8` protects only
   `J6` pins; `CR2` and `CR3` clamp the 3V3 and raw-battery pins where they leave the board, and the
-  resettable fuse `F2` sits in series with that battery pin and feeds nothing else. The 33 Ω
+  resettable fuses `F5` (3V3 pin) and `F2` (battery pin) sit in series with those pins and feed nothing else. The 33 Ω
   series resistors `R65`/`R68`/`R69` only reach `J6` too; they cost nothing, so leaving them fitted
   on a header-less board is harmless. Do **not** remove `U9`, `D3` or `D8` with `J6`. `U9` also
   protects the microSD data lines, and `D3`/`D8` belong to the frontlight: they clamp its nets
   whether or not `J6` is fitted.
-- **`C12` belongs to the frontlight.** It is on the shared `LDO_IN` rail but sits beside `U10` as
-  the driver's input capacitor; the LDO and power mux have their own, `C4`. Without the frontlight
-  it can go.
+- **`C12` and `F3` belong to the frontlight.** `F3` feeds the driver from the shared `LDO_IN` rail,
+  and `C12` sits beside `U10` as the driver's input capacitor on the fuse's output; the LDO and power
+  mux have their own, `C4`. Without the frontlight both can go.
 - **An external light can use `J6` or `J3`.** A wired light connects through `J6`; `J3` can
   connect a compatible external-light flex PCB, which is in development. With no bonded panel
   light and no `J6`, that flex PCB is the planned connection. Removing the driver removes `J3` too.
@@ -374,9 +388,16 @@ Notes:
   the back, and the pinout on the front silkscreen shows the openings as you see them with the
   display side toward you. A board without `R84` prints its two rows the other way round, so
   trust the meter, not the label. See [HARDWARE.md §11](docs/HARDWARE.md#11-expansion-header).
-- **Fit only one of the two touch pin-order options.** The default build fits `R42 R44 R46 R52`.
-  The alternate wiring (`R43 R45 R58 R66`, DNP here) is for panels with the swapped pin order.
-  Confirm the panel's pinout first.
+- **`J6` pin 7 (3V3) is behind a resettable fuse, `F5`: about 20 mA is available there.** Put heavier
+  loads on pin 12, the raw battery, which is fused by `F2`. Pin 12 sits next to pin 11 (`C−`), so
+  watch for a solder whisker between them. An accessory must not drive `IO45` or `IO46` (pins 3 and 2)
+  while the board is in reset: both are strapping pins.
+- **Fit only one of the two touch pin-order options.** The default build fits `F4 R44 R46 R52`.
+  The alternate wiring (`R43 R45 R58 R66`, DNP here) is for panels with the swapped pin order: take
+  off `F4 R44 R46 R52`, fit `R43 R45 R58 R66`, and put a resettable fuse (`MF-FSMF010X-2`, the part
+  used for `F4`) on `R66`'s pads rather than a 0 Ω link. Confirm the panel's pinout first.
+- **Never fit both parts of one of these pairs:** `R73`/`R74`, `F4`/`R43`, `R66`/`R44`, `R45`/`R46`
+  and `R52`/`R58`. Each pair joins two nets that must stay apart.
 - Leaving a button off needs nothing else changed. Its ladder resistor then does nothing and can be
   left off with it, but fitting it is harmless. Keep a ladder's pull-up and filter (`R4`/`C27`
   bottom, `R28`/`C28` side) as long as any key on that ladder is fitted.
@@ -390,6 +411,9 @@ Notes:
 ESP32-S3 has native USB, so it presents itself to your computer without any button press. If you
 ever do need download mode (a firmware that has wedged the USB stack, for instance), bridge the
 two `SW6` pads with a pair of metal tweezers while you tap **RESET** (`SW11`).
+
+If you plan to flash firmware that can turn USB-Serial-JTAG off, fit `SW6` (APEM MJTP1243) when you
+build the board, so that the button is there when you need download mode.
 
 `SW11` (RESET) is set back from the board edge on purpose: it is meant to be pressed through a
 pin-hole in the case with a paperclip, not by a finger.
@@ -407,17 +431,19 @@ choose to modify one:
 - **Disconnect the battery first.** Battery positive runs across the cut line. Cutting into it
   with a pack connected can short the cell.
 - **Seal the cut edge before you reconnect the battery.** The cut leaves bare battery-positive
-  (`P+`) copper at the new edge. It's the 0.4 mm front-copper trace about 3 mm from the cut's left
-  end, viewed from the front. Its fuse, `F2`, goes with the cut-off part. A burr or smeared copper
-  that bridges it to the ground pour beside it shorts the cell, with only the battery protector to
-  stop it.
+  (`P+`) and 3V3 copper at the new edge. `P+` is the 0.4 mm front-copper trace about 3 mm from the
+  cut's left end, viewed from the front; 3V3 is a 0.25 mm back-copper trace about 3 mm from its
+  right end. `P+`'s fuse, `F2`, goes with the cut-off part. In the Rev 1.03 files the ground pour is
+  kept about 1 mm away from both traces at the cut, on both layers; boards made from older files
+  have ground pour only 0.2 mm from them. Either way, a burr or smeared copper that bridges `P+` to
+  the ground pour shorts the cell, with only the battery protector to stop it.
   - **Deburr** the edge.
-  - **Measure.** With the battery unplugged, set a meter to ohms between that stub and any ground
-    point. It should not read near 0 Ω.
+  - **Measure.** With the battery unplugged, set a meter to ohms between the `P+` stub and any
+    ground point, and again between the 3V3 stub and ground. Neither should read near 0 Ω.
   - **Coat the edge** (nail varnish, conformal coating or Kapton tape) before refitting the battery.
 - **It will not snap by hand.** More than half the tab width is solid 1.6 mm FR-4, with live
   copper crossing it. Use a rotary tool (Dremel or similar) and cut along the marked line.
-- **You lose the expansion header `J6` with its protection parts (`U8`, `CR2`, `CR3`, `F2`), the
+- **You lose the expansion header `J6` with its protection parts (`U8`, `CR2`, `CR3`, `F2`, `F5`), the
   power button `SW10`, mounting hole `H1` (five mounting points remain) and the two frontlight
   clamps `D3`/`D8`**, which sit on that tongue. A cut board therefore runs its frontlight without those two clamps; read
   [HARDWARE.md §7](docs/HARDWARE.md#7-frontlight-driver) before you drive a frontlight from one. After the cut, UP(2) can serve as the power button instead: leave `R36`
@@ -426,12 +452,13 @@ choose to modify one:
   stub to ground would hold the power-button input near 1.6 V, which the ESP32 does not read as a high.
 - **Check your board before you cut.** A board with an `R84` resistor has ground stitching vias
   below the cut line and needs no wires afterwards: its charge-enable switch (`Q2`/`R81`) is fed
-  from `USB_VBUS`, not from 3V3, so the cut does not touch it. A board without `R84` does need
-  wires: the cut takes both 3V3 feeds to the charge-enable switch (`Q2`/`R81`) with it, so the
-  charger never turns on, and it leaves the power section's ground (`U3`, `U2`, `Q1`) joined to the
-  rest of the board only through one shell tab of the microSD socket. Wire `R40` pad 2 to `R81`
-  pad 2 (or bridge the two cut 3V3 stubs at the cut edge), and `C6` pad 2 to `C21` pad 2. With a
-  correctly oriented cell fitted, the TP4056's `CE` pin (pin 8) should then read 3.3 V.
+  from `USB_VBUS`, not from 3V3, so the cut does not touch it. A board without `R84` (a Rev 1.0
+  board) does need wires: the cut takes both 3V3 feeds to the charge-enable switch (`Q2`/`R81`) with
+  it, so the charger never turns on, and it leaves the power section's ground (`U3`, `U2`, `Q1`)
+  joined to the rest of the board only through one shell tab of the microSD socket. Wire `R40` pad 2
+  to `R81` pad 2 (or bridge the two cut 3V3 stubs at the cut edge), and `C6` pad 2 to `C21` pad 2.
+  With a correctly oriented cell fitted, the TP4056's `CE` pin (pin 8) should then read 3.3 V. (That
+  is the Rev 1.0 charger; Rev 1.03 has a BQ21040, and no wires are needed.)
 - Plan the cut before you order, so you can leave the parts you are cutting off out of the BOM.
   `J6`'s series resistors `R65`/`R68`/`R69` stay on the main board near the ESP32 but have nothing
   left to connect to, so they can be left out too.
@@ -494,11 +521,11 @@ What you need in order to design around it:
 | **Display** | 24-pin 0.5 mm ZIF for SPI e-paper; primary target Good Display's 4.26" panels (`GDEY0426T82` plain, `GDEQ0426T82-*` variants); panel-driven charge pump generates the ±15 to 22 V rails |
 | **Frontlight** | TPS923610 constant-current boost, warm/cool selection through one GPIO and an inverter |
 | **Touch** | Optional I²C capacitive touch (for `-FT01C`-class panels) with a 0 Ω pin-swap mux |
-| **Power** | USB-C in, TP4056 charger, DW01A + FS8205A cell protection, TPS2116 priority mux, TLV75533P 3V3 LDO |
+| **Power** | USB-C in, TI BQ21040 charger (about 115 mA, with a temperature sensor), DW01A + FS8205A cell protection, TPS2116 priority mux, TLV75533P 3V3 LDO, resettable fuses on four supply branches (frontlight, touch, `J6` pin 7, e-paper) |
 | **Battery** | Single-cell 4.2 V-charge Li-ion/LiPo on a JST-PH 2.0 mm 2-pin connector (`J5` pin 1 = negative) |
 | **Storage** | push-push microSD in 4-bit SDMMC, power-gated |
 | **Input** | 8 buttons on two ADC resistor ladders, a wake/power **button** (`SW10`, a wake input, not a hardware power switch; the 3.3 V rail is always live) and reset (`SW11`); a BOOT button footprint (`SW6`) is left unpopulated because USB-Serial-JTAG makes it unnecessary |
-| **RTC** | DS3231MZ (±5 ppm), VBAT-only mode; fitted in the full build, optional. A second footprint (`U14`, Micro Crystal RV-8263-C7) is DNP. Fit either, never both |
+| **RTC** | `U14`, Micro Crystal RV-8263-C7 (±20 ppm, about 190 nA, I²C `0x51`); fitted in the full build, optional. A second footprint (`U13`, DS3231MZ, ±5 ppm, I²C `0x68`) is DNP. Fit either, never both |
 | **Board** | 2-layer, 60.05 × 111.30 × 1.6 mm, 1 oz Cu |
 
 Connection and GPIO reference: **[docs/HARDWARE.md](docs/HARDWARE.md)**.
@@ -509,7 +536,7 @@ Connection and GPIO reference: **[docs/HARDWARE.md](docs/HARDWARE.md)**.
 
 | Word | What it means |
 |---|---|
-| **Gerber** | The standard file format for a bare circuit board: one file per copper, mask and silkscreen layer, plus the drill holes. Here they are zipped together in `production/Silkscreen_Reader_PCB_1.02.zip`. |
+| **Gerber** | The standard file format for a bare circuit board: one file per copper, mask and silkscreen layer, plus the drill holes. Here they are zipped together in `production/Silkscreen_Reader_PCB_1.03.zip`. |
 | **BOM** | Bill of materials: the list of every part on the board and how many of each. |
 | **CPL / centroid / pick-and-place** | Three names for the same file: where each part sits on the board, which side it is on, and which way it faces. Here, `production/positions.csv`. |
 | **PCBA** | Printed circuit board assembly: the service where the factory buys the parts and solders them on, rather than shipping a bare board. |

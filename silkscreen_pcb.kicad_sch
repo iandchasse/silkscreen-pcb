@@ -6,7 +6,7 @@
 	(paper "A2")
 	(title_block
 		(title "Silkscreen Reader PCB")
-		(date "2026-11-03")
+		(date "2026-11-04")
 		(rev "1.03")
 		(company "idc LLC")
 		(comment 1 "Open-hardware e-reader base board")
@@ -12595,7 +12595,7 @@
 	)
 	(text "R6 4.7k: 105-125 mA (I = 540/R6)"
 		(exclude_from_sim no)
-		(at 147.32 123.952 0)
+		(at 147.32 124.78 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12644,7 +12644,7 @@
 		)
 		(uuid "fbd3337b-3c99-437b-841e-8c9f98245eb1")
 	)
-	(text "used to be a schottky diode on VBUS \nbut removed: the charger (BQ21040) blocks reverse \ncurrent (max 1 uA into OUT with IN at 0 V)"
+	(text "used to be a schottky diode on VBUS\nbut removed: the charger (BQ21040)\nblocks reverse current (max 1 uA\ninto OUT with IN at 0 V)"
 		(exclude_from_sim no)
 		(at 63.754 68.834 0)
 		(effects
@@ -12654,9 +12654,9 @@
 		)
 		(uuid "fc74d796-cf19-4e6e-a38e-335cfe16184e")
 	)
-	(text "TH1: ambient NTC (about 0-41 C)"
+	(text "TH1: ambient NTC (0-41 C)"
 		(exclude_from_sim no)
-		(at 153.67 119.0 0)
+		(at 147.32 122.69 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -35466,9 +35466,9 @@
 		(at 351.79 187.96 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "8a72dda6-72ba-427b-a334-1cdf0683fa51")
 		(property "Reference" "U13"
@@ -42290,9 +42290,9 @@
 		(at 379.73 165.1 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom no)
+		(in_bom yes)
 		(on_board yes)
-		(dnp yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "cbdb6e88-ad4e-4561-babd-40fbb0d2ca0f")
 		(property "Reference" "U14"
@@ -42359,6 +42359,15 @@
 			)
 		)
 		(property "LCSC" "C5137460"
+			(at 379.73 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "FT Rotation Offset" "-90"
 			(at 379.73 165.1 0)
 			(effects
 				(font
@@ -46998,7 +47007,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "NTC 10k 1% B3380 0603, board-ambient sensor on the open right side (board x 100.6, y 93.0); BQ21040 TS, charges 0-45 C"
+		(property "Description" "NTC 10k 1% B3380 0603, board-ambient sensor beside R82 (board x 91.2, y 94.15); BQ21040 TS, charges about 0-41 C with R82 = 200k"
 			(at 144.78 111.76 0)
 			(effects
 				(font
@@ -47059,7 +47068,7 @@
 		(dnp no)
 		(uuid "f975da72-2aa4-5c95-8d8f-61fac618b9c4")
 		(property "Reference" "C38"
-			(at 151.13 85.598 0)
+			(at 151.13 85.598 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -47067,7 +47076,7 @@
 			)
 		)
 		(property "Value" "0.22u"
-			(at 151.13 92.202 0)
+			(at 149.9 92.202 90)
 			(effects
 				(font
 					(size 1.27 1.27)

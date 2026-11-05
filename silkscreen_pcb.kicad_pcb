@@ -9,7 +9,7 @@
 	(paper "A5" portrait)
 	(title_block
 		(title "Silkscreen Reader PCB")
-		(date "2026-11-03")
+		(date "2026-11-04")
 		(rev "1.03")
 		(company "idc LLC")
 		(comment 1 "Open-hardware e-reader base board")
@@ -45148,7 +45148,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Description" "NTC 10k 1% B3380 0603, board-ambient sensor on the open right side (board x 100.6, y 93.0); BQ21040 TS, charges 0-45 C"
+		(property "Description" "NTC 10k 1% B3380 0603, board-ambient sensor beside R82 (board x 91.2, y 94.15); BQ21040 TS, charges about 0-41 C with R82 = 200k"
 			(at 0 0 180)
 			(layer "B.Fab")
 			(hide yes)
@@ -58118,11 +58118,25 @@
 				(justify mirror)
 			)
 		)
+		(property "FT Rotation Offset" "-90"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "508a6f92-3666-5a82-a47a-76aa1ec68356")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
 		(property ki_fp_filters "MicroCrystal*C7*1.5x3.2mm*")
 		(path "/cbdb6e88-ad4e-4561-babd-40fbb0d2ca0f")
 		(sheetname "/")
 		(sheetfile "silkscreen_pcb.kicad_sch")
-		(attr smd exclude_from_bom dnp)
+		(attr smd)
 		(fp_line
 			(start 0.86 -1.935)
 			(end -0.86 -1.935)
@@ -62340,7 +62354,7 @@
 		(path "/8a72dda6-72ba-427b-a334-1cdf0683fa51")
 		(sheetname "/")
 		(sheetfile "silkscreen_pcb.kicad_sch")
-		(attr smd)
+		(attr smd exclude_from_bom dnp)
 		(fp_line
 			(start 2.06 -2.56)
 			(end -2.06 -2.56)

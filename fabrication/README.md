@@ -5,7 +5,7 @@ for placements. Board: 2 layers, 60 × 111 mm, 1.6 mm thickness, 1 oz copper.
 
 **Read [DESIGN_REVIEW.md](../DESIGN_REVIEW.md) before releasing files.** It is the only
 engineering verdict/action list.
-The current source has **185 references = 166 fitted + 11 DNP + 8 bare-copper** (H1–H6, TP1, TP2). The files in
+The current source (Rev 1.03) has **189 references = 170 fitted (158 SMD + 12 through-hole) + 11 DNP + 8 bare-copper** (H1–H6, TP1, TP2). The files in
 `production/` are generated from it: the Gerber zip, BOM, placement and `netlist.ipc`.
 Regenerate them after any schematic or PCB edit.
 
@@ -23,9 +23,9 @@ Keep these together as one revision, including the accepted factory copies:
 
 | Record | Local file | Meaning |
 |---|---|---|
-| Gerbers/drills | `production/Silkscreen_Reader_PCB_1.02.zip` | Toolkit output, checked against a fresh `kicad-cli` export; re-verify after any board change |
-| Placement | `production/positions.csv` | Toolkit CPL: 166 rows, all bottom side; `U14`, `SW6`, `TP3`–`TP5` and the DNP resistors are absent, and so are the bare-copper `TP1`/`TP2` and `H1`–`H6`. The rows for `U2`, `U5`, `D2`, `D8`, `J4`, `J7` and `U4` come out corrected for JLC's library footprints from the Toolkit offset fields (see the assembly checklist) |
-| Factory BOM | `production/bom.csv` (+ `designators.csv`, `netlist.ipc`) | Toolkit BOM, populated from the footprints' `LCSC` field — 67 codes over 166 placements |
+| Gerbers/drills | `production/Silkscreen_Reader_PCB_1.03.zip` | Toolkit output, checked against a fresh `kicad-cli` export; re-verify after any board change |
+| Placement | `production/positions.csv` | Toolkit CPL: 170 rows, all bottom side; `U13`, `SW6`, `TP3`–`TP5` and the DNP resistors are absent, and so are the bare-copper `TP1`/`TP2` and `H1`–`H6`. The rows for `U2`, `U5`, `D2`, `D8`, `J4`, `J7`, `U4`, `J1` and `U14` come out corrected for JLC's library footprints from the Toolkit offset fields (see the assembly checklist) |
+| Factory BOM | `production/bom.csv` (+ `designators.csv`, `netlist.ipc`) | Toolkit BOM, populated from the footprints' `LCSC` field — 70 codes over 170 placements. The ten switches come out on two lines (`MJTP1117_FG` ×8 and `MJTP1117` ×2, same code `C557598`); `jlc_bom.csv` keeps them as one |
 | Upload BOM | `production/jlc_bom.csv` | **The single BOM to upload.** Every part verified against JLC's library (see `BOM.md`); every fitted reference's value and part code cross-checked against the schematic and against the Toolkit's `bom.csv`. DNP parts are listed with an empty part number so JLC skips them |
 
 The Toolkit files are regenerated locally and are not the same thing as an accepted factory release: matching local
@@ -79,14 +79,15 @@ encoding); compare geometry (rasterize or use a viewer) instead.
 ## Assembly checklist
 
 - Export the **final CPL through Fabrication Toolkit**, preserving its component-rotation corrections. A raw KiCad
-  angle may differ from a JLC assembly angle. **Seven parts' raw rows do not match JLC's library footprints** (U2
-  TPS2116 SOT-583 and U5 DW01A rotation, D8 SOT-323 rotation, D2 LED polarity, J4's footprint anchor 0.73 mm off its
+  angle may differ from a JLC assembly angle. **Eight parts' raw rows do not match JLC's library footprints** (U2
+  TPS2116 SOT-583 and U5 DW01A rotation, D8 SOT-323 rotation, D2 LED polarity, U14's body orientation (JLC's footprint
+  for the RV-8263-C7 is landscape, KiCad's is portrait), J4's footprint anchor 0.73 mm off its
   pad pattern, U4/J7 origin offsets). They carry Toolkit fields on both the schematic symbol and
-  the footprint, so every Toolkit run writes the corrected rows: `FT Rotation Offset` -90 on U2, 90 on U5, 180 on
+  the footprint, so every Toolkit run writes the corrected rows: `FT Rotation Offset` -90 on U2 and U14, 90 on U5, 180 on
   D2 and D8; `FT Position Offset` `1.6,-5.3` on J7, `-0.73,0.218` on J4, `0,-3.664` on U4 (and, since Rev 1.02, `0,1.305` on J1, below). D2's KiCad **pad 1 is
   the cathode**; JLC's pin 1 for it is the anode, hence its 180°. Set JLC's **Confirm Parts Placement** to
-  Yes and check these parts in the preview. Check `U10` too (TPS923610DRLR: pin 1 is the `LDO_IN` corner at
-  (50.35, 121.50), pin 4 `GND` diagonally opposite) and the polarized diodes `D3`–`D6`, whose **pad 1 is the cathode**:
+  Yes and check these parts in the preview. Check `U10` too (TPS923610DRLR on TI's example land: pin 1 is the `/LED_VIN` corner, behind `F3`, at
+  (50.24, 121.50), pin 4 `GND` diagonally opposite) and the polarized diodes `D3`–`D6`, whose **pad 1 is the cathode**:
   pad 1 of `D3` SMAJ26A is at (95.45, 58.80); pad 1 of `D4`, `D5`, `D6` B5819W at (82.07, 117.66), (84.60, 117.65), (78.12, 121.81).
   They carry no Toolkit offset fields.
   Check `J1` as well: it is the 12-pad SMD USB-C socket (Shou Han `C2765186`, the GCT `USB4105` land). JLC's library
@@ -99,6 +100,10 @@ encoding); compare geometry (rasterize or use a viewer) instead.
   change the field. Its four shield slots carry paste apertures (`B.Paste`) for the tab joints. Its twelve pads also have copper-and-mask extensions
   0.3 mm behind them (extra pads of the same number and net with no paste layer, 0.2 mm at `A8`), for hand-soldering: the factory's
   paste apertures stay the library land's and the mask dams stay 0.2 mm.
+- Check the other parts that are new in Rev 1.03: `U11` (BQ21040, SOT-23-6), `U14` (RV-8263-C7, SMD3215-8P; its CPL row is
+  (63.85, −118.05, 270)), the 0603 fuses `F3`–`F6`, the 1206 sense resistors `R85`/`R86`, `TH1` and `C38`. The rotation
+  corrections for `U11` and `U14` were derived from JLC's library footprints, not from JLC's preview, which has not been seen
+  for this revision.
 - Reconcile each BOM reference and exact manufacturer/MPN/LCSC code with the accepted order.
   Check the JLC preview for rotation, side and polarity; a matched code alone does not verify these.
 - Confirm through-hole soldering for J5, J6 and fitted buttons. They are not all SMT parts.
@@ -112,11 +117,13 @@ encoding); compare geometry (rasterize or use a viewer) instead.
 
 ## Population and origin
 
-- Full-build DNP: **TP3, TP4, TP5, R43, R45, R58, R66, R72, R74, SW6, U14** — flagged DNP in
-  both the schematic and the PCB, so Toolkit exports agree with the BOM. U13 (DS3231MZ+TRL) is
-  populated; `U14` (RV-8263-C7) is its DNP alternate — fit one or the other, never both. Keep unselected references in the order when useful for explicit population tracking.
+- Full-build DNP: **TP3, TP4, TP5, R43, R45, R58, R66, R72, R74, SW6, U13** — flagged DNP in
+  both the schematic and the PCB, so Toolkit exports agree with the BOM. `U14` (RV-8263-C7, `C5137460`, ±20 ppm, I²C `0x51`) is
+  populated; `U13` (DS3231MZ+TRL, `C107410`, ±5 ppm, I²C `0x68`) is its DNP alternate — fit one RTC or none. The addresses differ,
+  so two would not clash on the bus, but the second is wasted money. Keep unselected references in the order when useful for explicit population tracking.
 - Holes H1–H6 and the bare test pads TP1/TP2 need no purchased components; TP3–TP5 are 1-pin header footprints,
   DNP in the full build.
 - Centroid uses the KiCad page origin (same as the gerbers); Y is negative (KiCad Y-up
   convention). Preserve a common origin and check the assembled overlay.
-- Never populate both sides of mutually exclusive touch/button link options.
+- Never populate both sides of mutually exclusive touch/button link options: `R73`/`R74`, `F4`/`R43`, `R66`/`R44`,
+  `R45`/`R46` and `R52`/`R58` each join two nets that must stay apart.

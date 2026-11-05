@@ -4,6 +4,11 @@
 **Written:** 2026-11-03, with the commit that brought the `1.03` design files up to date. **Branch:** `1.03`.
 **Updated:** 2026-11-04 for the BQ21040 charger (section 3.8).
 
+**Status 2026-11-05: done.** The docs, images, PDFs and production files are Rev 1.03
+([REV_1_03_STATUS.md §16](REV_1_03_STATUS.md#16-default-rtc-production-files-docs-and-renders-2026-11-05)). The default RTC
+is now `U14` (RV-8263-C7) and the DS3231MZ `U13` is the DNP alternate, so wherever this note says `U14` is DNP, read `U13`;
+the DNP count is still 11. This note stays as the record of the task list.
+
 The Rev 1.03 design work is finished and checked, but the user docs and images still describe Rev 1.02. This note
 lists what changed, what to update in each file, and how to check the result. [REV_1_03_STATUS.md](REV_1_03_STATUS.md)
 is the engineering hand-over; this note covers only the docs.
@@ -281,7 +286,8 @@ HARDWARE.md §9.1.1, the CHANGELOG, NEXT_REVISION's L-16 row and TRIAGE's status
 
 ## 4. Production files (a separate job that README depends on)
 
-`production/` is still Rev 1.02. Regenerating it needs the Fabrication Toolkit, a KiCad plugin: the owner's KiCad, or a
+Done on 2026-11-05 with a headless run of the Fabrication Toolkit (STATUS §16); the steps below are the record. Before that,
+`production/` was Rev 1.02. Regenerating it needs the Fabrication Toolkit, a KiCad plugin: the owner's KiCad, or a
 headless run of the plugin.
 
 1. **JLC set (Fabrication Toolkit):**
