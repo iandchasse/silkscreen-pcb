@@ -11,10 +11,11 @@ netlist diffs of each revision, and the board figures from the board files. The 
 
 - **Unchanged:** the outline (60 × 111.25 mm), cut-outs, mounting holes, layer count and the ESP32-S3 pin map. No
   processor pin changed nets, so firmware pin assignments carry over.
-- **Parts:** 184 → 188, with 11 not fitted before and after. Added `R84`, `F3`–`F6`, `R85`, `R86`, `TH1`; removed `R1`,
-  `C1`, `R42`, `R71`.
-- **New footprints:** `J1` (USB-C), `U10` (frontlight driver), `U11` (charger).
-- **Board:** vias 192 → 252, teardrops 0 → 860, three no-pour zones, and a custom design-rule file
+- **Parts:** 184 → 189, with 11 not fitted before and after. Added `R84`, `F3`–`F6`, `R85`, `R86`, `TH1`, `C38`; removed
+  `R1`, `C1`, `R42`, `R71`.
+- **New footprints:** `J1` (USB-C), `U10` (frontlight driver), `U11` (charger), and `MJTP1117_FG` for eight of the ten
+  tact switches.
+- **Board:** vias 192 → 251, teardrops 0 → 860, three no-pour zones, and a custom design-rule file
   (`silkscreen_pcb.kicad_dru`).
 
 ## Rev 1.01 (never built)
@@ -59,6 +60,9 @@ netlist diffs of each revision, and the board figures from the board files. The 
 - **Charge-enable switch now drives the charger's `TS` pin:** `Q2` goes from AO3401A to BSS138, and `R82` becomes 200k,
   so an unplugged sensor means no charging. `R71` and the `STDBY` status line are removed, so the charge-status ADC
   reading loses its "charge complete" level.
+- **`TS` hardening (layout pass, 2026-11-04):** `C38`, the BQ21040 datasheet's optional 0.22 µF ESD capacitor, from
+  `TS` to GND, and `TH1` moved from beside the USB-C port to beside `R82` (about 7 mm from `U11`). `TS` is about 14 mm
+  long instead of 23 mm and no longer runs between `F1`'s pads.
 
 ### Frontlight driver
 
@@ -82,6 +86,11 @@ netlist diffs of each revision, and the board figures from the board files. The 
 - Pour-free areas keep ground about 1 mm from `P+` and 3V3 where they cross the cut line.
 - To make room for `R85`/`R86`: `R76` relocated, `R8`, `R9` and `U9` moved and rotated, `R72`/`R74` nudged.
 - Teardrops on all pads and vias (860).
+- Tact-switch metal covers: the leg beside the GND pad (pad 3) is tied to GND on `SW1`–`SW5`, `SW8`, `SW9` and `SW11`.
+  The other leg (pad 4) stays free for the front-mounted bottom-button option
+  ([HARDWARE.md §9.1.1](HARDWARE.md#911-front-mounted-bottom-buttons-optional-hand-fitted)); `SW7` and `SW10` are
+  unchanged.
+- The duplicate GND via inside `D3`'s pad is removed; `D3` keeps its own via beside the pad.
 
 ### Silkscreen
 

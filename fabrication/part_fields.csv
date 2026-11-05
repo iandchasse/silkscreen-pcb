@@ -10,6 +10,7 @@ C20,1u/50V,CL21B105KBFNNNE,Samsung Electro-Mechanics,C28323,,Samsung Electro-Mec
 "C18,C19",1u/50V,CL21B105KBFNNNE,Samsung Electro-Mechanics,C28323,,Samsung Electro-Mechanics CL21B105KBFNNNE,same part
 "C27,C28,C29",2.2n,CL10B222KB8NNNC,Samsung Electro-Mechanics,C1604,,FH (Guangdong Fenghua Advanced Tech) 0603B222K500NT,equivalent (FH)
 "C23,C24,C31",0.1u,CC0603KRX7R9BB104,Yageo,C14663,,YAGEO CC0603KRX7R9BB104,same part
+C38,0.22u,CC0603KRX7R9BB224,Yageo,C107083,,YAGEO CC0603KRX7R9BB224,"same part; 0.22 uF 50 V X7R 10 % 0603, JLC Extended. TS-to-GND capacitor beside TH1: the BQ21040 datasheet's optional 0.22 uF ESD capacitor (CTS) for the TS pin"
 CR1,SMF6.5CA,SMF6.5CA,Littelfuse,C19077501,,hongjiacheng SMF6.5CA,"standard part, other maker"
 "CR2,CR3",TSD05CDYFR,TSD05CDYFR,Texas Instruments,C5299440,,DOWO SD05C-01FTG,"equivalent (DOWO SD05C-01FTG, 5.0 V class)"
 D2,LED,LTST-C150KRKT,Lite-On,C28310439,,YONGYUTAI YLED1206R,"equivalent (YONGYUTAI red 1206, top-emitting)"

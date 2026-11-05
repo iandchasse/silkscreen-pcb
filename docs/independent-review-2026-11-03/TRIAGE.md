@@ -392,6 +392,7 @@ This table records what that change and the discussion around it moved. Every fi
 | L-9 | Still accepted. With the cell pulled while charging, the BQ21040's battery detection cycles `J5` between 3.8 and 4.2 V, still limited to 105–125 mA | — |
 | L-12 | The gap is now at least 20 mV: the BQ21040 regulates at 4.23 V at most | — |
 | L-8 | **Accepted as is (owner, 2026-11-04):** the boards start and run fine. The research behind it is in [section 5.1](#51-l-8-what-q3-and-q8-do). `Q8` is meant as the DW01A's load switch from the EEVblog thread its note links, but it is fitted the other way round to that thread's circuit, so start-up relies on `C34` (0.1 µF in 1.03, 2.2 nF on the working Rev 1.0 boards). By the same orientation `Q8` is what blocks a reversed cell. "Flip `Q3`" is withdrawn | None. If a board ever shuts off on battery after an overload and stays off, plugging in USB resets the DW01A (documented in the hand-off) |
+| L-16 | **Frames done in 1.03 (2026-11-04):** pad 3 (the hole beside the GND pad) is tied to GND on `SW1`–`SW5`, `SW8`, `SW9` and `SW11` (footprint `MJTP1117_FG`, solid connection). Pad 4 stays free for the front-mounted bottom buttons ([HARDWARE.md §9.1.1](../HARDWARE.md#911-front-mounted-bottom-buttons-optional-hand-fitted)); `SW7` and `SW10` are unchanged because their pad 1 is not GND | A TVS on the button lines, only if the field shows a problem |
 
 **Still open after this update:**
 
@@ -406,7 +407,7 @@ This table records what that change and the discussion around it moved. Every fi
   - L-11: the SD switch-on dip;
   - the charger checks on the first 1.03 boards (NEXT_REVISION §6).
 - **Firmware:** F6 (M-1), F8 (M-2), F9 (L-18), F10 (I-6), F11 (L-4), F12 (L-5).
-- **Next revision:** M-4, M-5, L-5 (with F12), L-15 (after a pre-scan), L-16 and L-17; M-2's hardware only on data.
+- **Next revision:** M-4, M-5, L-5 (with F12), L-15 (after a pre-scan), L-16 (the button TVS only; the frames are done) and L-17; M-2's hardware only on data.
 - **Documentation:** the hand-off's §3.7 items, and its §3.8 for the charger.
 
 

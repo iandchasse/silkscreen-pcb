@@ -260,6 +260,25 @@ numbers and their sources (TI SLUSCE2D). The schematic's own notes are already u
   - `full-capture.png`;
   - the bottom render.
 
+### 3.9 From the layout pass (2026-11-04, second)
+
+[REV_1_03_STATUS §15](REV_1_03_STATUS.md#15-layout-pass-2026-11-04-after-the-bq21040-commit) has the changes.
+HARDWARE.md §9.1.1, the CHANGELOG, NEXT_REVISION's L-16 row and TRIAGE's status table are already updated.
+
+- **HARDWARE.md:** §3.2's `TS` text gets `C38` (0.22 µF, `TS` to GND, the datasheet's optional ESD capacitor) and says
+  `TH1` sits beside `R82`, about 7 mm from `U11`, at (91.2, 94.15), not beside the USB-C port at (100.6, 93.0); §16's
+  parts table gains `C38`. The charger row of section 2 above still says (100.6, 93.0).
+- **BOM.md and `BOM_handbuild_digikey.csv`:** new `C38`: Yageo CC0603KRX7R9BB224 (`C107083`, Extended; DigiKey
+  <https://www.digikey.com/en/products/detail/yageo/CC0603KRX7R9BB224/5883804>). The population is now 170 placed + 11 DNP
+  + 8 bare-copper = **189**, not 188. Cost model: one more Extended part (the fee applies if `C38` is the order's only
+  0.22 µF) and about $0.013 of ceramic.
+- **Production:** the Toolkit's raw `bom.csv` now has two switch lines with the same LCSC (`SW1, SW11, SW2, SW3, SW4, SW5,
+  SW8, SW9` on `MJTP1117_FG`; `SW10, SW7` on `MJTP1117`); keep the hand-curated `jlc_bom.csv` on its single `SW_Push` /
+  `C557598` line. The CPL changes only for `TH1` (moved) and `C38` (new); the switch rows are identical.
+- **Images:** `04-charger` (the `C38` block and the `TH1` note), the bottom render and `full-capture.png` (`TH1` moved,
+  `C38` new).
+- **Placement preview:** add `C38` to the checks in section 4.
+
 ## 4. Production files (a separate job that README depends on)
 
 `production/` is still Rev 1.02. Regenerating it needs the Fabrication Toolkit, a KiCad plugin: the owner's KiCad, or a

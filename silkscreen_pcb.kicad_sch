@@ -12654,7 +12654,7 @@
 		)
 		(uuid "fc74d796-cf19-4e6e-a38e-335cfe16184e")
 	)
-	(text "TH1: ambient NTC (0-45 C)"
+	(text "TH1: ambient NTC (about 0-41 C)"
 		(exclude_from_sim no)
 		(at 153.67 119.0 0)
 		(effects
@@ -12673,6 +12673,16 @@
 			)
 		)
 		(uuid "77657724-0cdf-5af4-ad7b-eb57975425ad")
+	)
+	(text "C38: TS ESD cap"
+		(exclude_from_sim no)
+		(at 151.13 83 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "f134f90e-68f4-5a8b-8484-b2d316884b0e")
 	)
 	(text_box "TPS923 chip is a series LED boost converter. \nRecommended to run between 10kHz-25kHz via PWM_LED for brightness control.\nPWM_LED (ADIM) is also the ENABLE: first HIGH pulse must be >= 40 us (tADIM_EN), so hold HIGH >= 100 us\nbefore starting the PWM carrier; LOW for > 2.5 ms (tADIM_SD) shuts the driver down.\nReturn path for LEDs is toggled via COLOR_SEL for warm/cool selection.\nFeedback current is ~13.3mA tuned via R37. Reference datasheet to change as needed.\nLED_MONIT is analog signal that references 0-24.5V output on LED voltage. (ADC range from 0 to ~30V)\nInternal OVP should cut out at ~24V, but software protection should kick in and disable PWM_LED at safe voltage above known forward voltage (15V)\nAfter 3 OVP trips the driver LATCHES off: re-applying PWM will not restart it - hold PWM_LED LOW > 2.5 ms (or power-cycle).\nChange COLOR_SEL only with PWM duty at 0. With no light connected, LED_MONIT (software trip ~23V) and the U10 OVP latch protect the driver; avoid enabling it with J3 and J6 empty."
 		(exclude_from_sim no)
@@ -17632,6 +17642,16 @@
 		)
 		(uuid "f3b8ca99-190e-57bd-ae94-21537d251de2")
 	)
+	(wire
+		(pts
+			(xy 154.94 88.9) (xy 154.94 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a3a8dca6-9196-5eef-98c2-898036210f0d")
+	)
 	(label "PIN_5"
 		(at 259.08 388.62 270)
 		(effects
@@ -22113,6 +22133,28 @@
 			)
 		)
 	)
+	(global_label "TS"
+		(shape input)
+		(at 147.32 88.9 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "347a7589-22b4-5674-a160-9909402c8418")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 141.8352 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(symbol
 		(lib_id "power:GND")
 		(at 72.39 163.83 0)
@@ -24632,7 +24674,7 @@
 				)
 			)
 		)
-		(property "Footprint" "mjtp1117:MJTP1117"
+		(property "Footprint" "mjtp1117:MJTP1117_FG"
 			(at 130.81 373.38 0)
 			(effects
 				(font
@@ -26382,7 +26424,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "mjtp1117:MJTP1117"
+		(property "Footprint" "mjtp1117:MJTP1117_FG"
 			(at 158.75 189.23 0)
 			(effects
 				(font
@@ -28815,7 +28857,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "mjtp1117:MJTP1117"
+		(property "Footprint" "mjtp1117:MJTP1117_FG"
 			(at 233.68 189.23 0)
 			(effects
 				(font
@@ -33490,7 +33532,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "mjtp1117:MJTP1117"
+		(property "Footprint" "mjtp1117:MJTP1117_FG"
 			(at 260.35 189.23 0)
 			(effects
 				(font
@@ -37862,7 +37904,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "mjtp1117:MJTP1117"
+		(property "Footprint" "mjtp1117:MJTP1117_FG"
 			(at 247.65 189.23 0)
 			(effects
 				(font
@@ -39015,7 +39057,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "mjtp1117:MJTP1117"
+		(property "Footprint" "mjtp1117:MJTP1117_FG"
 			(at 172.72 189.23 0)
 			(effects
 				(font
@@ -40286,7 +40328,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "mjtp1117:MJTP1117"
+		(property "Footprint" "mjtp1117:MJTP1117_FG"
 			(at 185.42 189.23 0)
 			(effects
 				(font
@@ -42519,7 +42561,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "mjtp1117:MJTP1117"
+		(property "Footprint" "mjtp1117:MJTP1117_FG"
 			(at 196.85 189.23 0)
 			(effects
 				(font
@@ -47002,6 +47044,166 @@
 			(project "silkscreen_pcb"
 				(path "/2fbd4c8f-b784-4d80-b374-4947df99a9bf"
 					(reference "TH1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 151.13 88.9 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f975da72-2aa4-5c95-8d8f-61fac618b9c4")
+		(property "Reference" "C38"
+			(at 151.13 85.598 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.22u"
+			(at 151.13 92.202 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
+			(at 151.13 90.8 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 151.13 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 151.13 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CC0603KRX7R9BB224"
+			(at 151.13 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "Yageo"
+			(at 151.13 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C107083"
+			(at 151.13 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2dc47439-caf7-5143-95fa-ce2dfce33a49")
+		)
+		(pin "2"
+			(uuid "84bca90c-44e9-56a3-8b93-9ee5b860bb96")
+		)
+		(instances
+			(project "silkscreen_pcb"
+				(path "/2fbd4c8f-b784-4d80-b374-4947df99a9bf"
+					(reference "C38")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 154.94 91.44 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "42e0f18f-77d6-512d-aee5-86f05993b969")
+		(property "Reference" "#PWR085"
+			(at 154.94 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 154.94 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 154.94 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 154.94 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 154.94 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e7985b41-e515-5d8f-9873-58fba8ad3c82")
+		)
+		(instances
+			(project "silkscreen_pcb"
+				(path "/2fbd4c8f-b784-4d80-b374-4947df99a9bf"
+					(reference "#PWR085")
 					(unit 1)
 				)
 			)

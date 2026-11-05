@@ -508,3 +508,52 @@ up to `USB_VBUS`.
 - Firmware: F11, the new `USB_STAT` decode.
 - Docs: [REV_1_03_DOCS_HANDOFF.md §3.8](REV_1_03_DOCS_HANDOFF.md#38-from-the-bq21040-charger-swap-2026-11-04). Production
   files: §4 there.
+
+## 15. Layout pass (2026-11-04, after the BQ21040 commit)
+
+Made on branch `1.03` at the owner's request, after a review of the commits since `bfa8216`. Files touched:
+`silkscreen_pcb.kicad_sch`, `silkscreen_pcb.kicad_pcb`, `fabrication/part_fields.csv`, and the new footprint
+`KiCad/9.0/3rdparty/Mjtp1117/MJTP1117_FG.kicad_mod`. The project file and the rules file are untouched.
+
+**What changed**
+
+- **Tact-switch frames.** Pad 3 (the mounting hole beside the GND pad) is tied to GND on `SW1`–`SW5`, `SW8`, `SW9` and
+  `SW11`. `MJTP1117_FG` is `MJTP1117` with pad 3 numbered 1 and a solid zone connection (the thermal spokes starved on
+  `SW2` and `SW9`); those eight symbols' Footprint field points at it. Only one leg is grounded, because the cover's two
+  legs are tied together inside the switch, and pad 4 must stay netless: the front-mounted bottom buttons
+  ([HARDWARE.md §9.1.1](HARDWARE.md#911-front-mounted-bottom-buttons-optional-hand-fitted)) bridge a signal tab to it by
+  hand, and a grounded pad 4 would put the ladder node on GND. `SW7` and `SW10` have a signal on pad 1, so they are
+  unchanged.
+- **`TS` net.** `TH1` moved from (100.6, 93.0) to (91.2, 94.15). New `C38`, 0.22 µF 0603 (Yageo CC0603KRX7R9BB224,
+  `C107083`, Extended) at (91.2, 92.6), from `TS` to GND: the BQ21040 datasheet lists 0.22 µF as optional `TS` ESD
+  capacitance (CTS, with a 30 ms `TS` deglitch). The four segments of the old branch through `F1`'s pads are gone, so `TS`
+  is about 14 mm long (23 mm before) and none of it runs between `F1`'s pads or 0.28 mm from `USB_VBUS`. `TH1` is now
+  about 7 mm from `U11`; a conduction-only estimate puts the extra self-heating at 2–3 K. The `R82` and `TH1` labels
+  moved. Schematic: the `C38` block sits above `U11`'s `OUT` wire in the charger box, and the `TH1` note now says "about
+  0-41 C" (the window with `R82` = 200k).
+- **`D3`.** The GND via inside `D3`'s pad 2 at (92.4, 59.1), added after `bfa8216`, is deleted. It was the only via-in-pad
+  on the board. The pad has no room for a second via beside it (I2C copper and other parts on every side) and already has
+  its own at (89.8, 58.3).
+
+**Verification (scratch copy, then the repo files re-checked)**
+
+| Check | Result |
+|---|---|
+| DRC with parity | Identical to `e3b26b2`: 0 errors, 31 `silk_edge_clearance`, 10 `silk_over_copper`, 3 `silk_overlap`, 6 `starved_thermal`, 4 excluded `track_dangling`. 0 unconnected, parity clean |
+| ERC | 45, no item added or removed |
+| Netlist | 189 components; the only pin-to-net change is `C38` pin 1 on `TS` and pin 2 on GND |
+| PCB structure | `C38` added; 4 segments removed and 2 added; 1 via removed; changed footprints are `R82` (label), `TH1` (position) and the eight switches. The GND pour's stored fill is re-computed (about 14k changed lines in the file, one zone) |
+| Part fields | `apply_part_fields.py` dry run: 181 parts matched, 0 to update |
+| Production output | Fabrication Toolkit run on both boards: `positions.csv` differs only for `TH1` and `C38`; `bom.csv` gains the `C38` line and splits the switch line into `MJTP1117_FG` x 8 and `MJTP1117` x 2 (same `C557598`) |
+
+**Looked at and not done**
+
+- **`U6` (USB ESD array) next to `J1`.** It sits 6–7 mm from `J1`'s D+/D− pins and the stubs are 7–8 mm. No legal pose
+  exists beside `J1`: the corridor between the two `VBUS_PRE_FUSE` rails is 4.1 mm high, `U6` needs about 4.7 mm with
+  clearances, and with D+ above D− in the corridor the stubs cross unless the rails and `C10` move. Left as is.
+- **Wider battery tracks.** The copper is about 124 mΩ of the 344 mΩ battery loop; widening all of it saves at most 70 mΩ,
+  about 45 mV at 0.65 A. Only worth bundling with a bench-driven LDO change (M-2).
+- **Antenna notch clear-out (M-3).** Left alone: the owner is not concerned about range unless it turns out very poor.
+
+**Still to do:** docs, in [REV_1_03_DOCS_HANDOFF.md §3.9](REV_1_03_DOCS_HANDOFF.md#39-from-the-layout-pass-2026-11-04-second);
+production files as before.

@@ -428,5 +428,5 @@ The rest is recorded here for reference. None of it is decided.
 | L-11 | SD switch-on dip on 3V3 | Possible brown-out at card power-up | If above 0.2 V: `R78` → 10–22 kΩ (value only) |
 | L-5 | Ladder 2's UP(2) level is at the ADC's calibrated limit | Misread power key on cut boards | `R36` 47k and `R35` 27k, together with F12 |
 | L-15 | The e-paper boost loop is about 39 mm², and GDR/RESE run 36 mm | EMI while the panel refreshes | After a pre-scan: a 1 µF/50 V capacitor at `D5`, and GDR/RESE routed as a pair |
-| L-16 | Tact-switch frames are floating, and the button lines have no TVS | ESD at the buttons | Tie the frame pads to GND (footprint and schematic) |
+| L-16 | Tact-switch frames are floating, and the button lines have no TVS | ESD at the buttons | **Frames: done in 1.03 (2026-11-04).** Pad 3 (the hole beside the GND pad) is tied to GND on `SW1`–`SW5`, `SW8`, `SW9` and `SW11` through the footprint `MJTP1117_FG`; pad 4 stays free for the front-mounted bottom buttons ([HARDWARE.md §9.1.1](HARDWARE.md#911-front-mounted-bottom-buttons-optional-hand-fitted)); `SW7` and `SW10` keep floating frames (their pad 1 is not GND). A TVS on the button lines is still open |
 | L-17 | Some DNP option pairs short rails if both parts are fitted | Builder error | 3-pad solder jumpers |

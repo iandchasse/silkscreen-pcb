@@ -1034,12 +1034,15 @@ same voltage levels, same firmware.
 
 **How it works.** The `MJTP1117` land has four holes. Pads 1 and 2 are the two contacts (GND and the
 button's ladder resistor). Pads 3 and 4 are the two large plated mounting holes (ø 1.3 mm, 1.95 mm rings,
-7.0 mm apart); they carry **no net** on the board. The `MJTP1243`'s two legs go in those mounting holes,
-and two small copper tabs on the **front** connect them to the contacts:
+7.0 mm apart). **Pad 4 carries no net.** Since Rev 1.03, **pad 3, the hole beside the GND pad, is tied to GND**
+(footprint `MJTP1117_FG`, which numbers it 1) on `SW1`–`SW5`, `SW8`, `SW9` and `SW11`, so the metal cover of a
+fitted right-angle switch is grounded for ESD; pad 4 is left free on purpose, because the signal bridge below lands
+on it. The `MJTP1243`'s two legs go in those mounting holes, and two small copper tabs on the **front** connect them
+to the contacts:
 
 | Bridge | From (tab on the front) | To (mounting-hole ring) | Result |
 |---|---|---|---|
-| GND | tab growing from pad 1 (GND) | pad 3 ring (the hole beside the GND pad) | one `MJTP1243` leg is on GND |
+| GND | tab growing from pad 1 (GND) | pad 3 ring (the hole beside the GND pad) | one `MJTP1243` leg is on GND (on Rev 1.03 pad 3 is already on GND, so this bridge is optional and harmless) |
 | Signal | tab growing from pad 2 (ladder resistor) | pad 4 ring (the hole beside the signal pad) | the other leg is on the ladder node |
 
 Each tab stops short of its ring by two different measurements, and both matter. **Exposed copper to
@@ -1071,7 +1074,8 @@ against a deep-sleep budget of roughly 60 µA.)
    the designator list in that cell — and each has its own row in `production/positions.csv`) or mark them DNP in
    KiCad the way `SW6` is, so the fab does not fit them.
 2. **Bridge both tabs first**, before the switch goes in; its body sits over them. Use a normal iron; the GND
-   tab is on the ground pour and takes a little more heat than the signal tab.
+   tab is on the ground pour and takes a little more heat than the signal tab (on Rev 1.03 pad 3 is also on the
+   pour, with a solid connection, so the GND leg takes the most heat).
 3. Push the `MJTP1243` into pad 3 and pad 4 from the front (it is a two-pin switch, so it has no
    orientation) and solder the two legs.
 4. Check before powering: with the board unpowered and the switch released, the ladder node reads open to GND;
@@ -1089,7 +1093,8 @@ BACK, OK) sit where the switch body goes and will be covered.
 > Bridging both tabs there puts the ladder node permanently on GND through the cover: that button reads
 > pressed all the time, the other three on its ladder become unreadable, and the idle current climbs by
 > the amount in the table. Bridging only one tab is also unsupported. It either puts the cover on the ladder
-> node or grounds it for no reason.
+> node or grounds it for no reason. On Rev 1.03 boards pad 3 already grounds the cover, so the GND tab is
+> redundant there and the signal tab is the dangerous one: it ties the ladder node to the grounded cover.
 
 The side buttons (`SW1`, `SW4`, `SW5`, `SW7`) and the power/reset buttons have no front option. Only the four
 bottom-edge buttons carry these tabs.
