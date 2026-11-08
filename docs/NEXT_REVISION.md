@@ -314,6 +314,13 @@ predicts each result from the datasheets and the board's copper, and says which 
      - The datasheets put it at about 0.55 A, 0.63 A worst at the 50 % light cap.
      - The lowest trip point is 0.83 A with the PUOLOP `DW01A` JLC fits, 0.77 A with Fortune's.
      - If the peak is much lower, a higher resistance becomes possible.
+     - **How:** on the cell with USB unplugged (with USB in, `U2` takes the load from `USB_VBUS`). Put a 0.05–0.1 Ω shunt in
+       the cell's positive lead (outside the `DW01A`'s sense loop) and read it with a differential probe or two scope
+       channels, triggered at 0.4 A and band-limited to about 1 kHz: the `DW01A` trips on an overcurrent of 7–20 ms, so
+       peaks of a few milliseconds are what count. A power profiler (PPK2 class) does the same. A multimeter in series
+       reads only the average, a few readings a second, and on its mA range the burden voltage (often several tenths of a
+       volt at 400 mA) can starve the board and hide the peak; if it is all there is, use its 10 A range. Worst case: a
+       cell at 3.4–3.6 V, Wi-Fi transmitting, an SD write, a full refresh and the light at 50 %.
    - **Trip point:** expect 0.83–1.68 A, about 1.32 A typical (PUOLOP; Fortune 0.77–1.78 A).
    - **Insertion:** theory says no risk with `C34` = 0.1 µF (BENCH_THEORY §3.4), so 3–5 insertions are enough.
    - **Hot:** theory says the trip falls 4–7 % at 60 °C (§3.5). Optional: repeat the trip point warm.
@@ -333,6 +340,21 @@ predicts each result from the datasheets and the board's copper, and says which 
     (about 39 °C); freeze spray for the cold end (about 0 °C); with `TH1` not fitted, nothing charges;
   - log `TH1` and the cell's temperature through a full charge, the evidence C1 needs (§9);
   - repeat the hot-plug check of HARDWARE.md §3.1: `VIN1` stays at or below 5.6 V.
+  - from the 2026-11-07 audit ([BQ21040_AUDIT.md §4](audit-2026-11-07/BQ21040_AUDIT.md#4-first-article-checks-added-by-this-audit)):
+    - on the bare board before first power-up: `U11` pin 5 to GND and pin 6 to `USB_VBUS` each under 1 Ω (a 180° placement
+      error would put pins 2 and 3 there); with a cell attached, `TS` at `C38` pin 1 reads about 0.476 V at 25 °C;
+    - `USB_STAT` with USB in and a full cell reads 3.2 V or more (under 2.8 V means `CHG` leakage above about 0.4 µA); read
+      `IO9` at about 1.0 V and 2.2 V against a meter and set the F11 thresholds from the data;
+    - `TH1` and the cell with thermocouples in a 30 °C room and in the closed case during a charge, noting whether it pauses;
+    - revive a cell held at 2.2–2.6 V in the `DW01A`'s over-discharge lockout: log `B-` to GND, `TS` and the charge current at
+      25 and 45 °C. `Q2`'s gate sits near 0.7 V there and a low-threshold part could stutter the charge (audit finding 3; if
+      it does, use a `Q2` with a gate threshold of at least 1.0 V);
+    - scope `U11` pin 6 against pin 5 during a hot-plug with a 1 m cable and at charge start (`C25` is 14.5 mm of trace
+      from the pin, and `C2` sits behind `R84`; audit finding 5);
+    - pull the cell while charging: `P+` should cycle 3.8–4.2 V and `USB_STAT` read 3.3 V;
+    - optional, over 10 h: 30 mA on `J6` pin 12 with a cell on USB, to see whether the charger restarts after its timer
+      (audit finding 1);
+    - in JLC's placement preview: `U11`'s pin-1 dot sits on the `TS` pad at (83.15, 93.45).
 
 **From the independent review (2026-11-03;** [BOARD_REVIEW §7](independent-review-2026-11-03/BOARD_REVIEW.md#7-bench-tests-for-the-suspected-items) **has the set-ups):**
 

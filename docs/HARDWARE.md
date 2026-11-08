@@ -309,6 +309,17 @@ values; none has been measured on a built board ([NEXT_REVISION.md §6](NEXT_REV
 Both count at half speed while the charger is in thermal regulation or input DPM. Above about 1000 mAh a
 charge may not finish inside 10 h at 115 mA; `R6` = 3.9 kΩ (about 140 mA) restores the margin.
 
+**Loads on `P+` while charging.** The BQ21040 has no power path, so everything on `P+` is part of the charge current.
+With USB present the system runs from `USB_VBUS` (`U2` selects it), and the only DC load left on `P+` is about 10 µA
+(the `R12`/`R10` divider, `R83`, `U2`'s `VIN2`), so termination is unaffected. The one load that can break this is an
+accessory on `J6` pin 12 (`P+` through `F2`, [§11](#11-expansion-header)). The charge ends when the current into `P+`
+has fallen to about 10 % of the fast-charge current (9–14 mA at 115 mA; Rev 1.0's TP4056 ended at about 23 mA), so
+**a continuous load of more than about 5 mA on pin 12 keeps the charge from terminating.** The cell then stays at 4.2 V
+with the charger carrying the load, and the 10 h timer finally stops the charge, after which the accessory runs from the
+cell although USB is plugged in. The datasheet does not say whether the charger restarts when the cell then falls to the
+recharge level. Switch such an accessory off while charging, or accept this
+([audit finding 1](audit-2026-11-07/BQ21040_AUDIT.md#2-findings-that-matter-merged-across-the-lenses)).
+
 **Input.** The BQ21040 is rated 30 V at `VIN` and stops charging above about 6.6 V (OVP, 6.5–6.8 V). If the
 source sags to 4.24–4.46 V it cuts the charge current (input DPM) rather than pull the source down, and it
 starts at 3.15–3.45 V (UVLO). `C2` (with its `R84` damper) and `C25` are the input capacitance. TI asks for 1 µF
@@ -323,6 +334,11 @@ source does not make one safe: `U2` and what it feeds do not survive it, so "5 V
 2 °C inside each limit. `C38` (0.22 µF, `TS` to GND) is the optional ESD capacitor the datasheet lists; it gives
 `TS` a 30 ms deglitch.
 
+**Guaranteed window.** With the tolerances of `TH1` (R25 and B, ±1 %), `R82` (1 %) and the bias current added to those of
+the datasheet thresholds, the independent audit puts the guaranteed charging window at **+1.6 to +37.7 °C** at `TH1` and
+the nominal one at −1.1 to +40.9 °C
+([audit finding 2](audit-2026-11-07/BQ21040_AUDIT.md#2-findings-that-matter-merged-across-the-lenses)).
+
 **Fail-safe for a missing or open `TH1`.** `R82` makes an open or missing `TH1` read as cold, so nothing
 charges. Without `R82`, `TS` would float up into TI's no-sensor mode (TTDM), which also turns off the timers
 and termination. Holding 1.525 V across 200 kΩ takes 7.6 µA, more than the 4–6.5 µA the bias current folds back
@@ -334,6 +350,7 @@ sensor: it measures the board, not the cell, so choose the cell and its charge-t
 Spots at the edge of the battery bay would need a 66 mm `TS` route with four vias around the board's east side,
 and the `J5` area has no room for an 0603 and its ground via. While charging, `TH1` reads an estimated 1–3 °C above
 the cell, and sitting 7 mm from `U11` adds an estimated 2–3 K of self-heating (a conduction-only estimate).
+In a 30–35 °C room or a closed case that can be enough to pause a charge until `TH1` has cooled by about 2 °C.
 
 **Heat.** At the start of a fast charge from a flat cell the charger dissipates
 (5.25 V − 3.0 V) × 0.125 A ≈ 0.28 W. At TI's 131 °C/W for the SOT-23-6 that is about a 37 °C rise, far below the
@@ -1452,12 +1469,15 @@ solder whisker or an accessory wired wrongly, turns that string's N-FET (`Q6` fo
 follower while its gate is high. The independent review estimates about 80 mA flowing continuously, with `R37` at
 about its 0.1 W rating and `Q6` at about 0.24 W, until the cell is flat; `F2` does not trip. That is an
 estimate, not a measurement. Check an accessory's pin order before plugging it in.
+While USB is connected, keep an accessory's average draw on pin 12 below about 5 mA: the charger ends a charge only when
+the current into `P+` falls to about 10 % of 115 mA, so a larger continuous load stops it terminating and, after the 10 h
+timer, the accessory runs from the cell ([§3.2](#32-battery-charger)).
 
 **4. `J6` pin 7 (`3V3`) is behind a PTC and limited to 20 mA.** It is fed from `3V3` through `F5` (Bourns
 MF-FSMF010X-2, 0.10 A hold, 0.30 A trip), so a short or a miswired accessory on pin 7 trips `F5` instead of
 loading the `3V3` rail. Budget **20 mA per accessory** on this pin. Across the part's tolerance `F5` adds 0.9–6.0 Ω
 in series, which drops 19–127 mV at 20 mA and 25 °C (up to 0.26 V at 60 °C), and its hold current falls as it
-warms, so at 80 mA it can trip. Anything heavier should take power from `P+` on pin 12 and regulate it itself
+warms, so at 80 mA it can trip. Anything heavier should take power from `P+` on pin 12 and regulate it itself, within the charging limit of item 3
 ([PROTECTION_FOLLOWUP.md](audit-2026-10-29/PROTECTION_FOLLOWUP.md) has the table).
 
 ---

@@ -389,7 +389,9 @@ Notes:
   display side toward you. A board without `R84` prints its two rows the other way round, so
   trust the meter, not the label. See [HARDWARE.md §11](docs/HARDWARE.md#11-expansion-header).
 - **`J6` pin 7 (3V3) is behind a resettable fuse, `F5`: about 20 mA is available there.** Put heavier
-  loads on pin 12, the raw battery, which is fused by `F2`. Pin 12 sits next to pin 11 (`C−`), so
+  loads on pin 12, the raw battery, which is fused by `F2`; while USB is connected keep the average draw there
+  under about 5 mA, because the charger ends a charge only when the current falls to about 10 % of 115 mA and its
+  10 h timer stops a charge that cannot finish. Pin 12 sits next to pin 11 (`C−`), so
   watch for a solder whisker between them. An accessory must not drive `IO45` or `IO46` (pins 3 and 2)
   while the board is in reset: both are strapping pins.
 - **Fit only one of the two touch pin-order options.** The default build fits `F4 R44 R46 R52`.

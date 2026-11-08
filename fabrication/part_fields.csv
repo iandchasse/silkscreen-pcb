@@ -31,7 +31,7 @@ L2,10u,VLS252012HBX-100M-1,TDK,C88532,,TDK VLS252012HBX-100M-1,same part
 Q1,FS8205A,FS8205A,EVVOSEMI,C2830320,,TECH PUBLIC FS8205A,"clone (TECH PUBLIC); Manufacturer corrected 2026-09-18 from Fortune Semiconductor — Fortune's own FS8205A is TSSOP-8 only, their SOT-23-6 part is named FS8205 (no A); EVVOSEMI genuinely makes SOT-23-6 FS8205A, DigiKey PN 26220994"
 "Q3,Q7,Q8",AO3401A,AO3401A,Alpha & Omega Semiconductor,C15127,,Alpha & Omega Semicon AO3401A,same part
 Q4,IRLML6346TRPBF,IRLML6346TRPBF,Infineon,C67276,,Infineon Technologies IRLML6346TRPBF,same part - do not accept a clone
-"Q2,Q5,Q6,Q9",BSS138,BSS138LT1G,onsemi,C7420339,,hongjiacheng BSS138,clone (hongjiacheng BSS138)
+"Q2,Q5,Q6,Q9",BSS138,BSS138LT1G,onsemi,C7420339,,hongjiacheng BSS138,clone (hongjiacheng BSS138; LCSC lists the brand as R+O; gate threshold 0.8 / 1.2 / 1.6 V min / typ / max at 250 uA; see docs/audit-2026-11-07/BQ21040_AUDIT.md finding 3)
 "R10,R12,R15,R39,R49,R50,R70,R79",1M,RC0603FR-071ML,Yageo,C22935,,UNI-ROYAL(Uniroyal Elec) 0603WAF1004T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1004T5E)
 "R2,R3",5.1k,RC0603FR-075K1L,Yageo,C23186,,UNI-ROYAL(Uniroyal Elec) 0603WAF5101T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF5101T5E)
 "R4,R5,R7,R8,R9,R13,R28,R53,R54,R55,R56,R62",10k,RC0603FR-0710KL,Yageo,C25804,,UNI-ROYAL(Uniroyal Elec) 0603WAF1002T5E,equivalent (UNI-ROYAL(Uniroyal Elec) 0603WAF1002T5E)

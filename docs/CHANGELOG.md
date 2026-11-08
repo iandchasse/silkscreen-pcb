@@ -61,7 +61,7 @@ netlist diffs of each revision, and the board figures from the board files. The 
   so an unplugged sensor means no charging. `R71` and the `STDBY` status line are removed, so the charge-status ADC
   reading loses its "charge complete" level.
 - **`TS` hardening (layout pass, 2026-11-04):** `C38`, the BQ21040 datasheet's optional 0.22 µF ESD capacitor, from
-  `TS` to GND, and `TH1` moved from beside the USB-C port to beside `R82` (about 7 mm from `U11`). `TS` is about 14 mm
+  `TS` to GND, and `TH1` moved from beside the USB-C port to beside `R82` (about 7 mm from `U11`). `TS` is 15.75 mm
   long instead of 23 mm and no longer runs between `F1`'s pads.
 
 ### Frontlight driver
@@ -125,6 +125,12 @@ touch-option note names `F4`.
   ([TRIAGE §5.1](independent-review-2026-11-03/TRIAGE.md#51-l-8-what-q3-and-q8-do)).
 - **Faults:** on the frontlight, e-paper, touch or `J6` pin 7 branches, a fault now trips that branch's fuse instead of
   loading the whole rail.
+- **`J6` pin 12 while charging:** the BQ21040 ends a charge when the current into `P+` falls to about 10 % of 115 mA
+  (9–14 mA; the TP4056 ended at about 23 mA). A continuous load of more than about 5 mA on pin 12 while USB is connected
+  keeps the charge from terminating, and the 10 h timer then stops it
+  ([audit](audit-2026-11-07/BQ21040_AUDIT.md#2-findings-that-matter-merged-across-the-lenses), finding 1).
+- **Charging window:** guaranteed only from +1.6 to +37.7 °C at `TH1` (nominal −1.1 to +40.9 °C), and `TH1` reads about
+  1.5–3 K warm while charging, so in a warm room or a closed case a charge can pause and resume (audit finding 2).
 
 ## Readiness for an order (2026-11-04)
 
@@ -145,6 +151,10 @@ reach every board and none has ever been built:
 | Branch fuses `F3`–`F6` (1.03) | Brown-outs or false trips during refresh, full brightness, or touch | Full refresh, 30 min at 100 % light, touch test |
 | Sense resistors and `C34` (1.03) | Protection trips on load peaks, device dead until USB | Measure the combined peak current (review item L-2) |
 | Layout edits, vias, teardrops, shield tie | Low; all pass the design-rule check | Visual inspection |
+
+An independent audit of the charger block (2026-11-07: the IC and its power path, the `TS` network and enable logic, the
+JLC files, the layout) found no blocker and no major. Its minor findings and the added first-article checks are in
+[audit-2026-11-07/BQ21040_AUDIT.md](audit-2026-11-07/BQ21040_AUDIT.md).
 
 **Before any order:**
 

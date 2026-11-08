@@ -526,7 +526,7 @@ Made on branch `1.03` at the owner's request, after a review of the commits sinc
 - **`TS` net.** `TH1` moved from (100.6, 93.0) to (91.2, 94.15). New `C38`, 0.22 µF 0603 (Yageo CC0603KRX7R9BB224,
   `C107083`, Extended) at (91.2, 92.6), from `TS` to GND: the BQ21040 datasheet lists 0.22 µF as optional `TS` ESD
   capacitance (CTS, with a 30 ms `TS` deglitch). The four segments of the old branch through `F1`'s pads are gone, so `TS`
-  is about 14 mm long (23 mm before) and none of it runs between `F1`'s pads or 0.28 mm from `USB_VBUS`. `TH1` is now
+  is 15.75 mm long (23 mm before) and none of it runs between `F1`'s pads or 0.28 mm from `USB_VBUS`. `TH1` is now
   about 7 mm from `U11`; a conduction-only estimate puts the extra self-heating at 2–3 K. The `R82` and `TH1` labels
   moved. Schematic: the `C38` block sits above `U11`'s `OUT` wire in the charger box, and the `TH1` note now says "0-41 C"
   (the window with `R82` = 200k).
@@ -693,3 +693,24 @@ The right edge was already one dead-straight line (x = 104.2375, y 39 to 146.5).
     lid part is therefore specific to the board revision; reprint the 4.26 lid with the Rev 1.03 boards.
 - The images, the layout PDF and the STEP model were not redrawn: the changes are 0.2 mm or less.
 - The title-block date still reads 2026-11-04.
+
+## 18. BQ21040 independent audit (2026-11-07)
+
+Four independent auditors, one lens each (the IC and its power path; the `TS` network, enable logic and status ladder; the
+JLC footprints, placement file, BOMs and order zip; the physical layout), audited the charger block at `7b7d2fb`: 0
+blockers, 0 majors, 13 minors, and nothing that should stop a five-board first article. Report and verbatim lens reports:
+[audit-2026-11-07/BQ21040_AUDIT.md](audit-2026-11-07/BQ21040_AUDIT.md).
+
+Changed in the docs because of it:
+
+- `J6` pin 12: a continuous load above about 5 mA while USB is connected keeps the charge from terminating, and the 10 h
+  timer then stops it (HARDWARE.md §3.2 and §11, README, CHANGELOG).
+- `TS` is 15.75 mm long, not 14 mm (section 15 and CHANGELOG; measured the same way, it was 22.98 mm before the layout pass).
+- HARDWARE.md §3.2 gives the guaranteed charging window at `TH1` (+1.6 to +37.7 °C) beside the nominal one.
+- [NEXT_REVISION.md §6](NEXT_REVISION.md#6-verification) lists the new first-article checks and how to measure the
+  coincident battery peak.
+- `fabrication/part_fields.csv` notes that the BSS138 is a clone (LCSC brand "R+O") with a 0.8 V minimum gate threshold.
+
+Left for the bench, not changed in the design: the `Q2` gate-threshold question (finding 3: `B-` sits about 0.7 V above GND
+while a cell in the `DW01A`'s over-discharge lockout is revived), the input capacitor's distance from `U11` (finding 5), and
+`TH1`'s thermal position (finding 2). Firmware F11 has a proposed decode table in the report (section 5).
