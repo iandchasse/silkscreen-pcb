@@ -91,6 +91,14 @@ netlist diffs of each revision, and the board figures from the board files. The 
   ([HARDWARE.md §9.1.1](HARDWARE.md#911-front-mounted-bottom-buttons-optional-hand-fitted)); `SW7` and `SW10` are
   unchanged.
 - The duplicate GND via inside `D3`'s pad is removed; `D3` keeps its own via beside the pad.
+- **Side buttons level (2026-11-07):** `SW1`, `SW4`, `SW10` (right) and `SW5`, `SW7` (left) now all sit 2.75 mm behind
+  their edge, so the plungers stand out the same 0.97 mm. In Rev 1.0, `SW10` stood out 0.22 mm more than `SW4` and
+  `SW1` 0.05 mm less. The copper that ran beside `SW10` (`J6_3V3`, `W-`, `C-`, `R62`, `3V3`) and `SW1` (`R61`) moved with
+  them. The 4.26 case draws its power key (`SW10`) from the board file, so a lid printed for Rev 1.0 boards does not
+  suit Rev 1.03 boards: regenerate and reprint it with them ([REV_1_03_STATUS §17](REV_1_03_STATUS.md#17-side-buttons-level-straight-left-edge-2026-11-07)).
+- **Straight left edge (2026-11-07):** the left edge and the antenna notch's walls leaned 0.045° (the bottom end sat
+  0.06 mm further in than the top); they are now exactly vertical, so the main body is 60.000 mm wide from top to
+  bottom. The right edge was already straight.
 
 ### Silkscreen
 

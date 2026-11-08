@@ -5,7 +5,7 @@
 **State in one line:** the schematic, board and part fields carry N1–N9 (N7/N8 reached the board on 2026-11-03,
 section 6). N10 is closed as "leave as is", and N11 was dropped. The changes are machine-checked (DRC with schematic
 parity, ERC, netlist diff, Fabrication Toolkit dry run), and the designer has since worked on the board in KiCad
-(`R85`/`R86`, teardrops). Production files and docs were regenerated on 2026-11-05 ([section 16](#16-default-rtc-production-files-docs-and-renders-2026-11-05)),
+(`R85`/`R86`, teardrops). On 2026-11-07 the side buttons were levelled and the left edge straightened ([section 17](#17-side-buttons-level-straight-left-edge-2026-11-07)). Production files and docs were regenerated on 2026-11-05 ([section 16](#16-default-rtc-production-files-docs-and-renders-2026-11-05)), and the production files again on 2026-11-07,
 from the task list in [REV_1_03_DOCS_HANDOFF.md](REV_1_03_DOCS_HANDOFF.md). The title blocks read Rev 1.03 (now
 2026-11-04), and the back silkscreen prints it. At the 2026-11-03 commit, the board passes DRC with 0 errors (the known warnings only), 0
 unconnected and clean parity, ERC is at 46, and it has 862 teardrops. On 2026-11-04 the TP4056 charger was replaced by
@@ -627,3 +627,69 @@ advance, and make the cheaper RTC the default in the JLC BOM. **Not committed.**
 - **`docs/mechanical/silkscreen_pcb.step`** was not regenerated (last changed 2026-09-13).
 - **`U14` has no 3D model** in KiCad's libraries, so the renders draw its pads bare while the unfitted `U13` shows a body.
 - `H5`'s reference text is on `B.Silkscreen` although `H5` is a front footprint (`H1` and `H6` are back footprints); harmless.
+
+## 17. Side buttons level, straight left edge (2026-11-07)
+
+Made on branch `1.03` at the owner's request: the power button looked offset from the up/down buttons, and the left and
+right sides were said not to be flat. Files touched: `silkscreen_pcb.kicad_pcb`, the two
+`MJTP1117*.kicad_mod` footprints, `production/` (regenerated), `docs/HARDWARE.md` (one table row) and `docs/CHANGELOG.md`.
+
+**What was measured (identical on Rev 1.0 and on every commit since)**
+
+| Part | Origin to edge | Plunger tip past the edge |
+|---|---|---|
+| `SW10` power, right | 2.5325 mm | 1.19 mm |
+| `SW4` up(1), right | 2.7500 mm | 0.97 mm |
+| `SW1` down(1), right | 2.7950 mm | 0.93 mm |
+| `SW7` up(2), left | 2.7448 mm | 0.98 mm |
+| `SW5` down(2), left | 2.7339 mm | 0.99 mm |
+
+The design intent is 2.75 mm: `SW4` and the left pair were placed there, `SW10` and `SW1` were not. The left pair's small
+difference came from the left edge, which was not vertical: one straight line from (44.2375, 68.5) to (44.2983, 146.73),
+tilted 0.0446° (0.061 mm over 78 mm), so the board was 60.000 mm wide at the top and 59.939 mm at the bottom. The notch's
+inner wall leaned the same way (50.585 at y 93.3, 50.600 at y 112), and the bottom-left corner arc sat 0.06 mm too far in.
+The right edge was already one dead-straight line (x = 104.2375, y 39 to 146.5).
+
+**What changed**
+
+- `SW1` +0.045 mm and `SW10` −0.2175 mm in x, so all five side switches are 2.75 mm behind their edge
+  (x = 101.4875 on the right, 46.9875 on the left; the plunger tip stands 0.97 mm past the edge).
+- `SW1`: the `R61` net run beside the pad column moved with it (45° ends kept).
+- `SW10` is the tightest place on the board, so its move needed local re-routing on `B.Cu`: the `J6_3V3` spur between the
+  pad columns moved 0.28 mm to x = 100.35 (0.26 mm to each side), its top diagonal moved up 0.4 mm to clear pad 1; `W-`
+  and `C-` beside pad 3 moved 0.23 and 0.15 mm left (clearances 0.15–0.17 mm, as before); the `R62` and `3V3` stubs followed
+  their pads. Four teardrops (`SW1.2`, `R61.1`, `SW10.1`, `SW10.2`) were moved or re-seated by hand, because pcbnew's
+  Python cannot regenerate them: the other 856 are untouched.
+- Left edge, notch walls and the bottom-left corner re-drawn on x = 44.237462 (the main body is 60.000 mm wide from top to bottom);
+  the notch's inner wall is x = 50.6 (the value its lower end already had); the bottom edge starts 0.06 mm further left.
+  The tongue's slanted edge (3.9°, the battery bay's wall) and the 0.19 mm kink where the top-right corner arc meets the
+  right edge were left alone.
+- `SW10`'s courtyard sat 1.0 mm behind its body; with the part 0.22 mm further in it overlapped `D3` and `D8` by 0.07 mm.
+  The rear margin is now 0.75 mm, on the board and in `MJTP1117` and `MJTP1117_FG` in the project library (so *Update
+  footprints from library* does not bring the overlap back).
+
+**Checked** (scratch copy first, then the repo files, KiCad closed)
+
+| Check | Result |
+|---|---|
+| Structural diff of the board | only the two footprints, seven `Edge.Cuts` shapes, 20 track segments, four teardrops and the GND pour changed; a no-op load, refill and save reproduces the committed file byte for byte |
+| DRC with parity | the same 54: 31 `silk_edge_clearance`, 10 `silk_over_copper`, 3 `silk_overlap`, 6 `starved_thermal`, 4 `track_dangling` (excluded). 0 errors, 0 unconnected, 0 parity issues |
+| Geometry read back | all five switches 2.7500 mm from their edge; the left, right and bottom edge segments are exactly vertical or horizontal; the plotted `Edge_Cuts.gm1` has the left edge at x = 44.237462 |
+| Production | Toolkit run headless: the zip holds the same 13 files; `bom.csv` and `designators.csv` are byte-identical; `positions.csv` and the NextPCB centroids differ only in the `SW1` and `SW10` rows; `netlist.ipc` has the new pad positions (its via lines carry a per-run number, so most of its lines change on every run) |
+
+**Still to do**
+
+- **The case:** `silkscreen-enclosures` builds from its own copy of the Rev 1.0 board
+  (`enclosures/case-*/hardware/board-2026-09-21`), so nothing there has changed yet and no redesign is needed. Both cases
+  place each key's nub a fixed 0.15 mm (right side) or 0.25 mm (left) from its switch's plunger, measured in the board
+  file, so a refreshed copy moves the nubs by itself:
+  - 4.26: only the power key. `SW10`'s nub comes out 0.22 mm longer and `SW1`'s 0.045 mm shorter; `SW4`, `SW5` and `SW7`
+    are unchanged. The 3.68 has no `SW10` key (it is cut off) and takes only the `SW1` change; neither case uses the
+    board's left edge.
+  - A lid printed for a Rev 1.0 board does not suit a Rev 1.03 board. Worked out from the case's own travel budget
+    (`mechanics.side_key_reach`, not from a build): `SW10`'s plunger then sits 0.37 mm from the nub, so the key bottoms
+    about 0.18 mm after contact where the switch needs about 0.25 to click (the case asks for 0.39). A lid regenerated for
+    Rev 1.03 does the opposite to a Rev 1.0 board: its nub presses the plunger in by about 0.1 mm at rest. The power key's
+    lid part is therefore specific to the board revision; reprint the 4.26 lid with the Rev 1.03 boards.
+- The images, the layout PDF and the STEP model were not redrawn: the changes are 0.2 mm or less.
+- The title-block date still reads 2026-11-04.

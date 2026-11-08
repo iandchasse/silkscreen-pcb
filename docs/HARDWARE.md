@@ -1801,7 +1801,7 @@ All x/y figures are board (KiCad page) coordinates, the same frame the STEP and 
 | Mounting bosses | M2 × 6: `H1` (94.241, 51.646) · `H2` (53.900, 70.500) · `H3` (47.987, 145.250) · `H4` (100.487, 145.250) · `H5` (94.600, 72.200) · `H6` (69.200, 117.500); keep bosses and screw heads ≤ **4 mm** diameter, all six GND-plated |
 | Button plunger axis | **4.30 mm** below the bottom face; travel 0.25 mm; force 1.77 N; tip ≈1.5 mm |
 | Bottom-button centres | x = 55.737 / 67.737 / 80.737 / 92.737 (12 / 13 / 12 mm apart, centred) |
-| Side-button centres | left y = 75.25, 89.25; right y = 70.25, 84.25, and 52.25 for `SW10` |
+| Side-button centres | left x = 46.9875, y = 75.25, 89.25; right x = 101.4875, y = 70.25, 84.25, and 52.25 for `SW10`. All five sit 2.75 mm behind their edge, so every plunger tip stands 0.97 mm past it (Rev 1.0 had `SW10` 0.22 mm and `SW1` 0.05 mm off that) |
 | Inner walls | right ≥ x 105.6, left ≤ x 43.1, bottom ≥ y 150.4 (plunger tips) |
 | USB-C aperture | mating face x = 105.485, centred y = 103.975; opening ≥ **9.3 × 3.6 mm** |
 | microSD access | no wall aperture: the card goes in from the battery cut-out, moving +y into `J7` (slot centred x = 63.05, mouth at y ≈ 69.3), with the cell lifted or slid aside (see [§5](#5-storage--4-bit-sdmmc)); keep ≥ **12 × 2.2 mm** clear for the card |
