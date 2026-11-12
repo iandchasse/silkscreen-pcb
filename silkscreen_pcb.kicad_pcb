@@ -18442,7 +18442,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C151146"
+		(property "LCSC" "C269105"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -26069,7 +26069,7 @@
 				(justify mirror)
 			)
 		)
-		(property "MPN" "74LVC1G04GV,125"
+		(property "MPN" "SN74LVC1G04DBVR"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -26083,7 +26083,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Manufacturer" "Nexperia"
+		(property "Manufacturer" "Texas Instruments"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -26097,7 +26097,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C53185133"
+		(property "LCSC" "C7827"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -58050,7 +58050,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://www.microcrystal.com/fileadmin/Media/Products/RTC/Datasheet/RV-3028-C7.pdf"
+		(property "Datasheet" "https://www.microcrystal.com/fileadmin/Media/Products/RTC/Datasheet/RV-8263-C7.pdf"
 			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)
@@ -58063,7 +58063,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Description" "Realtime Clock/Calendar I2C Interface, Extreme Low Power, 1.1 V to 5.5 V, MicroCrystal C7"
+		(property "Description" "Real-Time Clock Module, I2C, integrated 32.768 kHz crystal, CLKOE/CLKOUT, 190 nA, Micro Crystal C7 package (pin 3 = CLKOE; derived from the stock RV-3028-C7 symbol)"
 			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)
@@ -61557,7 +61557,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C107083"
+		(property "LCSC" "C21120"
 			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)

@@ -10,7 +10,7 @@ C20,1u/50V,CL21B105KBFNNNE,Samsung Electro-Mechanics,C28323,,Samsung Electro-Mec
 "C18,C19",1u/50V,CL21B105KBFNNNE,Samsung Electro-Mechanics,C28323,,Samsung Electro-Mechanics CL21B105KBFNNNE,same part
 "C27,C28,C29",2.2n,CL10B222KB8NNNC,Samsung Electro-Mechanics,C1604,,FH (Guangdong Fenghua Advanced Tech) 0603B222K500NT,equivalent (FH)
 "C23,C24,C31",0.1u,CC0603KRX7R9BB104,Yageo,C14663,,YAGEO CC0603KRX7R9BB104,same part
-C38,0.22u,CC0603KRX7R9BB224,Yageo,C107083,,YAGEO CC0603KRX7R9BB224,"same part; 0.22 uF 50 V X7R 10 % 0603, JLC Extended. TS-to-GND capacitor beside TH1: the BQ21040 datasheet's optional 0.22 uF ESD capacitor (CTS) for the TS pin"
+C38,0.22u,CC0603KRX7R9BB224,Yageo,C21120,,Samsung Electro-Mechanics CL10B224KA8NNNC,"equivalent (Samsung CL10B224KA8NNNC, 0.22 uF 25 V X7R 10 % 0603, JLC Basic; TS self-clamps at about 2 V). TS-to-GND capacitor beside TH1: the BQ21040 datasheet's optional 0.22 uF ESD capacitor (CTS) for the TS pin"
 CR1,SMF6.5CA,SMF6.5CA,Littelfuse,C19077501,,hongjiacheng SMF6.5CA,"standard part, other maker"
 "CR2,CR3",TSD05CDYFR,TSD05CDYFR,Texas Instruments,C5299440,,DOWO SD05C-01FTG,"equivalent (DOWO SD05C-01FTG, 5.0 V class)"
 D2,LED,LTST-C150KRKT,Lite-On,C28310439,,YONGYUTAI YLED1206R,"equivalent (YONGYUTAI red 1206, top-emitting)"
@@ -18,7 +18,7 @@ D3,SMAJ26A,SMAJ26A,Littelfuse,C19077543,,hongjiacheng SMAJ26A,"standard part, ot
 "D4,D5,D6",B5819W,1N5819HW-7-F,Diodes Incorporated,C8598,,"Jiangsu Changjing Electronics Technology Co., Ltd. B5819W SL",equivalent (JCET B5819W)
 D8,PESD2IVN-UX,PESD2IVN-UX,Nexperia,C42370512,,TECH PUBLIC PESD2IVN-UX,clone (TECH PUBLIC)
 F1,0805L100WR,0805L100WR,Littelfuse,C269106,,Brightking SMD0805B100TFT,equivalent (Brightking SMD0805B100TFT)
-F2,0805L075WR,0805L075WR,Littelfuse,C151146,,Littelfuse 0805L075WR,"same part; 0.75 A-hold PPTC in series with J6 pin 12 (raw battery +) only - NOT in the main battery path. Added 2026-09-21 (review HMI-01)"
+F2,0805L075WR,0805L075WR,Littelfuse,C269105,,Brightking SMD0805B075TF,"equivalent (Brightking SMD0805B075TF; JLC lists the same 0.75 A hold, 1.5 A trip, 6 V and 40 A); 0.75 A-hold PPTC in series with J6 pin 12 (raw battery +) only - NOT in the main battery path. Added 2026-09-21 (review HMI-01)"
 "F3,F4,F5,F6",MF-FSMF010X-2,MF-FSMF010X-2,Bourns,C210355,,BOURNS MF-FSMF010X-2,"same part; 0.10 A hold / 0.30 A trip 0603 PPTC on the frontlight (F3), touch (F4, was R42), J6 pin 7 (F5) and e-paper (F6) feeds (docs/NEXT_REVISION.md N1-N6). DigiKey alternate MF-PSMF010X-2 (C116171, 0805 footprint)"
 J1,USB_C_Receptacle,USB4105-GF-A,GCT,C2765186,,SHOU HAN TYPE-C 16PIN 2MD(073),equivalent (SHOU HAN TYPE-C 16PIN 2MD(073)); 12-pad hybrid land with pegs and plated shield slots; KiCad ships the GCT USB4105 footprint and the Shou Han drawing matches it within 0.02 mm; Hroparts TYPE-C-31-M-12 (C165948) is the alternate (see docs/audit-2026-10-15/J1_USB_C_OPTIONS.md)
 J2,FH34SRJ-24S-0.5SH_50_,FH34SRJ-24S-0.5SH(50),Hirose,C324726,,HRS(Hirose) FH34SRJ-24S-0.5SH(50),same part
@@ -72,7 +72,7 @@ U4,ESP32-S3-WROOM-1,ESP32-S3-WROOM-1-N16R8,Espressif Systems,C2913202,,Espressif
 U5,DW01A,DW01A,Fortune Semiconductor,C351410,,PUOLOP DW01A,clone (PUOLOP)
 U10,TPS923610DRLR,TPS923610DRLR,Texas Instruments,C52919131,,Texas Instruments TPS923610DRLR,same part
 U11,BQ21040DBVR,BQ21040DBVR,Texas Instruments,C202311,,Texas Instruments BQ21040DBVR,"same part. Li-ion linear charger: NTC on TS (TI's nominal 0-45 C; about 0-41 C here with R82), 10 h safety timer, 30 V input with 6.6 V OVP (replaces TP4056, 2026-11-04)"
-U12,74LVC1G04,"74LVC1G04GV,125",Nexperia,C53185133,,MDD(Microdiode Semiconductor) 74LVC1G04GV,clone (MDD)
+U12,74LVC1G04,SN74LVC1G04DBVR,Texas Instruments,C7827,,Texas Instruments SN74LVC1G04DBVR,"same part; replaces the MDD clone C53185133 (2,908 in stock on 2026-11-12). JLC has a footprint for it, and its rotation is unchanged"
 U13,DS3231MZ,DS3231MZ+TRL,Analog Devices,C107410,yes,Analog Devices Inc./Maxim Integrated DS3231MZ+TRL,"same part; DNP alternative to U14 since 2026-11-04 - the accurate clock (+/-5 ppm, temperature-compensated, I2C 0x68, VBAT-only wiring). Fit ONE RTC or none. JLC stock 9.5k on 2026-11-04, Extended"
 U14,RV-8263-C7,RV-8263-C7-32.768KHZ-20PPM-TA-QA,Micro Crystal,C5137460,,Micro Crystal RV-8263-C7-32.768KHZ-20PPM-TA-QA,"same part; the default RTC since 2026-11-04 - cheaper than U13 ($1.14 vs $2.72 at 30 boards on LCSC, 190 nA, +/-20 ppm, I2C 0x51; the firmware probes it when 0x68 does not answer). Fit ONE RTC or none (the I2C addresses differ, no conflict). Custom symbol in KiCad/9.0/3rdparty/RV-8263-C7 (pin 3 = CLKOE, tied to GND). JLC stock 1,058 on 2026-11-04, Extended"
 TH1,10k,NCP18XH103F03RB,Murata Electronics,C13564,,muRata NCP18XH103F03RB,"same part. NTC 10k 1% B3380 0603, board-ambient sensor beside R82, BQ21040 TS (charges about 0-41 C with R82 = 200k); JLC Extended"

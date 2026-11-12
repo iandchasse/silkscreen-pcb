@@ -1206,8 +1206,9 @@ sits entirely on the 0.8 mm tab; the board's minimum clearance rule is 0.15 mm, 
 rule but with very little to spare. With the solder mask opened over the tab tip, a small
 blob of solder from an iron closes the gap. The tabs are plain copper, not parts: they add nothing to the
 schematic or the BOM, and left open (every shipped build) the board is electrically identical to one
-without them. **The four tabs are intentional and are meant to stay open on a factory build.** They
-are netless, so KiCad reports them as dangling `F.Cu` tracks; that is expected. They are a DIY
+without them. **The eight tabs (two per button) are intentional and are meant to stay open on a factory build.**
+Each is a short `F.Cu` track on the net of the pad it grows from: GND for the pad-1 tab, the button's ladder net
+for the pad-2 tab. KiCad reports the four signal tabs as dangling tracks (excluded in DRC); that is expected. They are a DIY
 hand-soldering feature — nothing for a PCB fab to populate, bridge or "correct".
 
 | Button | Function | Ladder resistor | If the switch is left permanently pressed |
@@ -1725,14 +1726,15 @@ empty, no touch tail; typical at a 3.7 V cell and 25 °C, maximum at 4.2 V with 
 | `U11` BQ21040 `OUT` pin with `VIN` = 0 | 1 | 1 | datasheet `I_OUT(PDWN)`; TI gives only a 1 µA maximum, used for both columns |
 | `R56` + `R57` (`Q3` gate bias) | 0.4 | 0.4 | calculated |
 | `U14` RV-8263-C7, timekeeping | 0.19 | 0.24 | datasheet: I²C idle, 3 V, 25 °C (190 nA typ, 240 nA max); no hot figure |
-| `U12` 74LVC1G04, input low | 0.1 | 4 | datasheet (Nexperia; TI's limit is 10, the fitted clone is undocumented) |
+| `U12` SN74LVC1G04 (TI), input low | 0.1 | 10 | datasheet: TI's maximum over temperature (TI's part has been fitted since 2026-11-12). TI gives no typical, so the 0.1 is Nexperia's for the same function |
 | `U10` TPS923610 in shutdown | 0.1 | 0.5 | datasheet; max at 85 °C |
 | Leakage: MCU pads, `Q4`, `Q7`, ESD/TVS parts, MLCCs | ≈0.1 | ≈5 | estimate; the max is mostly datasheet limits specified at far higher voltages than these parts see (`Q7` at −30 V, `Q4` at 24 V) |
-| **Total** | **≈46** | **≈76–80** | ≈44 µA typ without the panel; ≈76 once the `Q4`, `Q7` and ESD/TVS limits are discounted |
+| **Total** | **≈46** | **≈82–86** | ≈44 µA typ without the panel; ≈82 once the `Q4`, `Q7` and ESD/TVS limits are discounted |
 
-That is ≈1.1 mAh a day typical and ≈1.9 mAh at the maximum. (Against the Rev 1.02 table, which had the DS3231MZ
-and the TP4056 and totalled ≈48 µA typ and ≈81–85 µA max, the typical total falls by about 1.8 µA from the RTC
-and the maximum by about 5 µA from the RTC, the charger and the ladder row.) The maximum mixes 25 °C and 85 °C
+That is ≈1.1 mAh a day typical and ≈2.1 mAh at the maximum. (Against the Rev 1.02 table, which had the DS3231MZ, the
+TP4056 and the MDD inverter costed at Nexperia's 4 µA limit, and totalled ≈48 µA typ and ≈81–85 µA max: the typical total
+falls by about 1.8 µA from the RTC. The maximum falls by about 5 µA from the RTC, the charger and the ladder row, and rises
+by 6 µA because `U12` is now costed at TI's documented 10 µA limit, so it ends about 1 µA higher.) The maximum mixes 25 °C and 85 °C
 datasheet limits, so it is not a hot-case figure (the leakage terms rise steeply at 60–85 °C), and
 two terms are left out of it on purpose: the LDO's extra ground current at its real ≈20–40 µA load
 (TI characterises it at no load and from 1 mA up — ≈145 µA at 1 mA — with nothing in between; an
@@ -1944,8 +1946,8 @@ DC-bias derating would gut it:
 | `U13` | DS3231MZ | Alternate real-time clock, **DNP** — fit one RTC or none, never both ([§10](#10-real-time-clock)) |
 | `U14` | RV-8263-C7 | Real-time clock (fitted in the full build; optional) |
 
-> **Manufacturer note.** Several fitted parts are house-brand equivalents (TECH PUBLIC, MDD,
-> PUOLOP, TOPPOWER, etc.) rather than the TI/Onsemi/Nexperia parts the schematic labels suggest.
+> **Manufacturer note.** Several fitted parts are house-brand equivalents (TECH PUBLIC, PUOLOP,
+> etc.) rather than the TI/Onsemi/Nexperia parts the schematic labels suggest.
 > The exact parts' pinouts are verified in
 > [DESIGN_REVIEW.md](../DESIGN_REVIEW.md) §10 and §12.
 

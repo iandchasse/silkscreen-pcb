@@ -492,7 +492,7 @@ The previous review's unresolved exact-vendor pin drawings are now **closed**:
 | Ordered component | Verified manufacturer drawing | Result |
 |---|---|---|
 | TECH PUBLIC TPD4E1U06DBVR, C19829453, U1/U6/U7/U8/U9 | Signal pins **1/3/4/6**, GND **2**, NC **5**; independent shunt channels | Current PCB assignments compatible; not pass-through pairs |
-| MDD 74LVC1G04GV, C53185133, U12 | NC **1**, A **2**, GND **3**, Y **4**, VCC **5** | Pinout and inversion role compatible at 3.3 V |
+| MDD 74LVC1G04GV, C53185133, U12 | NC **1**, A **2**, GND **3**, Y **4**, VCC **5** | Pinout and inversion role compatible at 3.3 V. Replaced on 2026-11-12 by TI's own SN74LVC1G04DBVR (`C7827`), with the same pinout |
 | TECH PUBLIC PESD2IVN-UX, C42370512, D8 | Signals **1/2**, common **3**; 24 V bidirectional protection | Current cathode-to-ground use compatible |
 
 The TECH PUBLIC TPD sheet specifies 5.5 V standoff and a substantially higher transient clamp; it is not a precision 3.3 V limiter. Pin compatibility does not establish identical dynamic clamp, lifetime or system ESD qualification to TI/Nexperia parts. Sources and retrieved PDF hashes are in [complete-review-sources.json](docs/audit-2026-09-16/complete-review-sources.json): [TPD array](https://jlcpcb.com/partdetail/TECHPUBLIC-TPD4E1U06DBVR/C19829453), [MDD inverter](https://jlcpcb.com/partdetail/MDD_MicrodiodeSemiconductor-74LVC1G04GV/C53185133), [24 V array](https://jlcpcb.com/partdetail/TECHPUBLIC-PESD2IVNUX/C42370512).

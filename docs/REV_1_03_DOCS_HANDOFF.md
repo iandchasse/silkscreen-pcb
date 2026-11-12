@@ -276,7 +276,9 @@ HARDWARE.md §9.1.1, the CHANGELOG, NEXT_REVISION's L-16 row and TRIAGE's status
 - **BOM.md and `BOM_handbuild_digikey.csv`:** new `C38`: Yageo CC0603KRX7R9BB224 (`C107083`, Extended; DigiKey
   <https://www.digikey.com/en/products/detail/yageo/CC0603KRX7R9BB224/5883804>). The population is now 170 placed + 11 DNP
   + 8 bare-copper = **189**, not 188. Cost model: one more Extended part (the fee applies if `C38` is the order's only
-  0.22 µF) and about $0.013 of ceramic.
+  0.22 µF) and about $0.013 of ceramic. **Since 2026-11-12** JLC fits the Basic Samsung CL10B224KA8NNNC (`C21120`), so
+  `C38` adds no Extended fee; hand builds keep the Yageo part
+  ([STATUS §20](REV_1_03_STATUS.md#20-review-findings-decisions-and-to-do-2026-11-12)).
 - **Production:** the Toolkit's raw `bom.csv` now has two switch lines with the same LCSC (`SW1, SW11, SW2, SW3, SW4, SW5,
   SW8, SW9` on `MJTP1117_FG`; `SW10, SW7` on `MJTP1117`); keep the hand-curated `jlc_bom.csv` on its single `SW_Push` /
   `C557598` line. The CPL changes only for `TH1` (moved) and `C38` (new); the switch rows are identical.

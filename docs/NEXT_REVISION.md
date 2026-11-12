@@ -247,6 +247,9 @@ R85,0.068,RL1206FR-070R068L,Yageo,C327066,,YAGEO RL1206FR-070R068L,"same part; D
 - **`R6`:** remove the 4.7 kΩ `R6` line and add `R6` to the 10 kΩ `C25804` line.
 - **`R42`:** remove it from the 0 Ω line `"R42,R44,R46,R52,R73"`.
 - **TP6–TP18:** add them to the test-point handling, excluded from BOM and positions.
+- **Applied on 2026-11-12:** three BOM-only swaps from the [BOM audit](audit-2026-11-12/BOM_AUDIT.md):
+  `C38` → `C21120`, `F2` → `C269105`, `U12` → `C7827`. The rows, steps and checks are in
+  [REV_1_03_STATUS.md §20.3](REV_1_03_STATUS.md#203-to-do-agreed-and-done-2026-11-12).
 
 ## 4. Firmware changes (no hardware)
 
@@ -355,6 +358,10 @@ predicts each result from the datasheets and the board's copper, and says which 
     - optional, over 10 h: 30 mA on `J6` pin 12 with a cell on USB, to see whether the charger restarts after its timer
       (audit finding 1);
     - in JLC's placement preview: `U11`'s pin-1 dot sits on the `TS` pad at (83.15, 93.45).
+- **Grounded switch frame legs** ([REV_1_03_STATUS §20](REV_1_03_STATUS.md#20-review-findings-decisions-and-to-do-2026-11-12),
+  finding 4): on the eight `MJTP1117_FG` legs (`SW1`–`SW5`, `SW8`, `SW9`, `SW11`), solder fills the hole and wets the ring
+  on both sides, and no switch rocks when pressed hard. These legs join the ground pour solid on both layers, which can
+  leave a hole partly filled.
 
 **From the independent review (2026-11-03;** [BOARD_REVIEW §7](independent-review-2026-11-03/BOARD_REVIEW.md#7-bench-tests-for-the-suspected-items) **has the set-ups):**
 

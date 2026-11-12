@@ -283,7 +283,7 @@ The parts below are the ones most often turned or offset in JLCPCB's preview; ch
 
 | Part | What to check |
 |---|---|
-| `D2` | The USB power LED. **Pad 1 is the cathode** (the marked end). Some part libraries use the opposite convention. |
+| `D2` | The USB power LED. **Pad 1, the end next to `R59`, is the cathode.** JLCPCB's part numbers the anode as pin 1, so if the preview shows a pin-1 dot on `D2`, it belongs at the other end (`USB_VBUS`). The placement file already turns the part to suit: don't rotate it to put the dot on pad 1. |
 | `U2`, `U5`, `D8`, `U11` | Small 3 to 8 pin chips (`U11` is the BQ21040 charger). Check their rotation. |
 | `U14` | The clock chip: eight small pads in two rows of four. JLCPCB's library draws this part at 90° to KiCad's footprint, so the placement file rotates it; check that its pads line up. |
 | `U10` | The frontlight driver, 6 pins in two rows of 3. Pin 1 (the `/LED_VIN` net, behind the fuse `F3`) is the corner at (50.24, 121.50) in the KiCad file; pin 4 (`GND`) is diagonally opposite. |

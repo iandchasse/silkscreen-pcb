@@ -36,12 +36,15 @@ slightly dearer Basic part is often cheaper overall. The table lists the cost sw
 | `J1` | GCT USB4085-GF-A `C7095263`, through-hole, $1.04 and 20 joints hand-soldered by the factory | **SHOU HAN TYPE-C 16PIN 2MD(073) `C2765186`**, SMD, 832k in stock, $0.075 @20 (prime/DigiKey part: GCT USB4105-GF-A, $0.80) | 12-pad hybrid land with pegs and plated shield slots, machine-placed: **−$1.60 / −$1.29 / −$1.12 per board at 5 / 30 / 150 boards**, and 20 fewer through-hole joints. Hroparts `C165948` fits the same land. [`docs/audit-2026-10-15/J1_USB_C_OPTIONS.md`](../docs/audit-2026-10-15/J1_USB_C_OPTIONS.md) |
 | `U14` (default RTC) | DS3231MZ+TRL `C107410` (the former default, now `U13`), ±5 ppm, $2.90 @10 / $2.69 @30 | **Micro Crystal RV-8263-C7-32.768KHZ-20PPM-TA-QA `C5137460`**, Extended, **1,058 in stock**, $1.29 @10 / $1.13 @30 | ±20 ppm against ±5 ppm, about 190 nA, I²C `0x51`. Both parts are Extended, so the fee count does not change: **−$3.22 / −$2.41 / −$1.81 / −$1.54 per board at 5 / 10 / 30 / 100 boards** (2026-11-05 prices). The firmware probes `0x68` first and falls back to `0x51`. Fit `U13` instead for the ±5 ppm clock |
 | `U13` (DNP alternate) | DS3231MZ+ `C722467` cut tape, $3.60 @10, **324 in stock** | **DS3231MZ+TRL `C107410`**, $2.90 @10, 7.5k stock | identical ADI part on reel — **−$0.70 a part at 10** (−$0.55 at 30), removes a stock risk |
-| `U11` | TP4056-42-ESOP8 `C16581`, JLC **Preferred** (no fee), $0.185 @1 | **TI BQ21040DBVR `C202311`**, Extended, 2.6k stock, $0.41 @1 / $0.34 @50 | a temperature input (`TH1`: charging only between about 0 and 41 °C at `TH1`), 30 min and 10 h timers, a 30 V input rating and a 6.6 V over-voltage stop, none of which the TP4056 had (HARDWARE.md §3.2). The charging block (`U11`, `TH1` `C13564` and `C38` `C107083` are three Extended types where the TP4056 paid no fee) costs **+$1.42 / +$0.82 / +$0.44 / +$0.27 per board at 5 / 10 / 30 / 100 boards**, fees included |
+| `U11` | TP4056-42-ESOP8 `C16581`, JLC **Preferred** (no fee), $0.185 @1 | **TI BQ21040DBVR `C202311`**, Extended, 2.6k stock, $0.41 @1 / $0.34 @50 | a temperature input (`TH1`: charging only between about 0 and 41 °C at `TH1`), 30 min and 10 h timers, a 30 V input rating and a 6.6 V over-voltage stop, none of which the TP4056 had (HARDWARE.md §3.2). The charging block (`U11`, `TH1` `C13564` and, until 2026-11-12, `C38` `C107083` were three Extended types where the TP4056 paid no fee) cost **+$1.42 / +$0.82 / +$0.44 / +$0.27 per board at 5 / 10 / 30 / 100 boards**, fees included, at 2026-11-05 prices. With `C38` now the Basic `C21120`, it costs about $0.31 / $0.16 / $0.05 / $0.02 less |
 | `F3 F4 F5 F6` | Bourns MF-PSMF010X-2 `C116171`, 0805, the DigiKey-stocked sibling | **Bourns MF-FSMF010X-2 `C210355`**, Extended, 26k stock, $0.058 @1 / $0.048 @100 | 0.10 A hold, 0.30 A trip, 15 V, 0603: one Extended type for four fuses, **+$0.59 / +$0.41 / +$0.25 / +$0.19 per board at 5 / 10 / 30 / 100 boards** (with `R42` gone). The 0805 part has the same ratings but is not a drop-in for the 0603 land |
 | `Q3 Q7 Q8` | AO3419 `C88053`, Extended, 5.1k stock | **AO3401A `C15127`**, **Basic**, 1.6M stock | the same price or less ($0.083 vs $0.095 @1); −30 V P-ch, 85 mΩ @ 2.5 V vs 140 mΩ, Vgs(th) ≈ −0.9 V — a drop-in improvement for these load switches; no feeder fee. The schematic Value on Q3/Q7/Q8 reads AO3401A (same SOT-23 pinout). `Q2` was on this line before Rev 1.03; it is a BSS138 N-FET now (the `Q5`/`Q6`/`Q9` line) |
 | `D4 D5 D6` | B5819W `C64885` (MDD) | **B5819W SL `C8598`**, **Basic** | when chosen, `C64885` was Extended: +$0.03/board on the part, −$1.50/order in fees, cheaper below ~55 boards. On 2026-11-05 JLC lists `C64885` as **Preferred** ($0.0195 against $0.0262 @1, 609k stock), so that fee argument is gone and the swap now costs about $0.02/board more; `jlc_bom.csv` still uses `C8598`, a Basic part that never needs a feeder |
 | `D3` | SMAJ26A `C1509531`, Extended | **SMAJ26A `C19077543`**, **Preferred** (no fee) | $0.036 vs $0.054, 57k stock, same 26 V/400 W spec |
 | `F1` | Littelfuse 0805L100WR `C80270` | **Brightking SMD0805B100TFT `C269106`** | 1 A hold / 1.95 A trip / 6 V max — the same numbers — at $0.033 vs $0.138 |
+| `F2` | Littelfuse 0805L075WR `C151146`, 1.7k stock, $0.146 @1 (used until 2026-11-12) | **Brightking SMD0805B075TF `C269105`**, 65k stock, $0.027 @1 | JLC lists the same 0.75 A hold / 1.5 A trip / 6 V / 40 A / 200 ms ratings, as with `F1`: **−$0.24 / −$0.18 / −$0.14 / −$0.10 per board at 5 / 10 / 30 / 100 boards** (2026-11-12 prices). Hand builds keep the Littelfuse part |
+| `C38` | Yageo CC0603KRX7R9BB224 `C107083`, 50 V, Extended (used until 2026-11-12) | **Samsung CL10B224KA8NNNC `C21120`**, 25 V X7R, **Basic**, 815k stock, $0.009 @1 | `TS` self-clamps at about 2 V, so 25 V is ample, and one Extended type goes: **−$0.31 / −$0.16 / −$0.05 / −$0.02 per board** (2026-11-12 prices). Hand builds keep the Yageo part |
+| `U12` | MDD 74LVC1G04GV `C53185133`, a clone, 2.9k stock, $0.072 @1 (used until 2026-11-12) | **TI SN74LVC1G04DBVR `C7827`**, 58.7k stock, $0.065 @1 | the genuine part, cheaper and better stocked: the same pinout and rotation, and JLC has a footprint for it. TI's supply-current limit is 10 µA (HARDWARE.md §16). **−$0.02 / −$0.01 / −$0.01 / −$0.01 per board** |
 | `CR2 CR3` | SD05C TECH PUBLIC `C907858`, 4k stock | **SD05C-01FTG DOWO `C5299440`**, 99k stock | $0.025 vs $0.035; on 3V3 and P+ (≤4.2 V) a 5.0 V standoff has real margin, and the higher capacitance (60 pF) is irrelevant on a rail |
 | `CR1` (VBUS) | SD05C-class, **5.0 V** standoff, SOD-323 | **SMF6.5CA `C19077501`** (hongjiacheng, **Preferred** — no fee, 1.75 M stock, $0.029), **SOD-123FL** | a USB-C source may legally sit at 5.5 V; "05" parts specify leakage only at 5.0 V and clones break down from 6 V. TI's TSD05C is genuinely rated ±5.5 V, but anything sold under an "05" name at LCSC is a 5.0 V part — prime and clone disagree on exactly the spec that matters. **SMFxx is a standardized ladder where the name is the spec**: every SMF6.5CA, official (Littelfuse) or clone, is 6.5 V standoff, V_BR 7.22–7.98 V, ≤11.2 V clamp @ 17.9 A (10/1000 µs), 200 W, bidirectional. 1 V of real margin over 5.5 V, clamp as low as TSD05C's, 40 JLC listings / 2.9 M pcs. **CR1's footprint is `Diode_SMD:D_SMF`** (4.2 × 2.2 mm courtyard) |
 | `C9 C11 C13–C17` | Samsung CL21A475KBQNNNE `C98192` (1 µF `C28323` for `C9`) | **Samwha CS2012X5R475K500NRE `C513770`** | 4.7 µF **50 V** X5R 0805 from a reputable maker, $0.045 vs $0.077, 209k stock; `C9` is on this line too (see "C9: 4.7 µF" below) |
@@ -60,9 +63,22 @@ stock risk. `R15` (GDR pull-down) is 1 M to match Good Display's reference circu
 §8.2, R1 = 1 M); it is in the existing 1 M group.
 
 **Parts with thin JLC stock** (JLC counts on 2026-11-05, about 3,000 or fewer): TPS923610DRLR `C52919131` (**80**: order
-promptly or consign), A2541HWR-2x6P `C5333437` (392), RV-8263-C7 `C5137460` (1,058), 0805L075WR `C151146` (1,793),
+promptly or consign), A2541HWR-2x6P `C5333437` (392), RV-8263-C7 `C5137460` (1,058),
 BQ21040DBVR `C202311` (2,576), PESD2IVN-UX `C42370512` (2,918), SLW5040S470MST `C206267` (3,146). IRLML6346TRPBF `C67276`
 was on this list for Rev 1.02 and now has 33k. If the RV-8263-C7 runs short, the DS3231MZ+TRL `C107410` (7.5k) fits `U13`.
+`F2`'s Littelfuse code `C151146` (1,793) left the list with the 2026-11-12 swap to Brightking `C269105` (65k).
+
+**BOM audit of 2026-11-12; its three swaps were applied the same day** ([docs/audit-2026-11-12/BOM_AUDIT.md](../docs/audit-2026-11-12/BOM_AUDIT.md);
+[REV_1_03_STATUS.md §20.3](../docs/REV_1_03_STATUS.md#203-to-do-agreed-and-done-2026-11-12) records the steps and checks).
+All three are same-footprint, and none needs a rotation change:
+
+- `C38` → Samsung CL10B224KA8NNNC `C21120` (Basic: one Extended type fewer).
+- `F2` → Brightking SMD0805B075TF `C269105` (the same listed ratings; 65k in stock against 1.7k).
+- `U12` → TI SN74LVC1G04DBVR `C7827` (the genuine part, 58.7k in stock; JLC has a footprint for it).
+
+Together they take $0.56 / $0.35 / $0.20 / $0.12 off each board at 5 / 10 / 30 / 100 boards. The audit also checks every
+diode's orientation against its JLC part (all correct; `D2` depends on its `FT Rotation Offset`) and lists the stock on
+2026-11-12: `U10` had 77, and its documented fallback TPS923611 only 46.
 
 **If TPS923610 is out of stock:** JLC had 80 on 2026-11-05 and says restocking is unpredictable. For a frontlight build: (1) pre-order it through JLC
 Parts Manager (any account; lead time only), or (2) fit **TPS923611DRLR for U10 *and* SMAJ33A for D3**
@@ -143,17 +159,17 @@ loading fee.
 
 | Per board, parts + fees | 5 boards | 10 | 30 | 100 |
 |---|--:|--:|--:|--:|
-| a brand-conservative BOM (31 Extended types) | $33.17 | $23.23 | $15.61 | $11.74 |
-| **`jlc_bom.csv` (29 Extended types)** | **$30.84** | **$21.52** | **$14.28** | **$10.71** |
-| …if JLC's fee is $3.00 instead of $1.50 | $39.54 | $25.87 | $15.73 | $11.15 |
+| a brand-conservative BOM (31 Extended types) | $33.15 | $23.22 | $15.60 | $11.73 |
+| **`jlc_bom.csv` (28 Extended types)** | **$30.28** | **$21.17** | **$14.08** | **$10.59** |
+| …if JLC's fee is $3.00 instead of $1.50 | $38.68 | $25.37 | $15.48 | $11.01 |
 
-*Re-run 2026-11-05 on the current `jlc_bom.csv` (170 placed references, 70 part numbers) with JLC's library prices fetched that day, so the clock is the Micro Crystal `U14` ($1.29 / $1.13 a piece at 10 / 30 boards), the charger is the BQ21040 and `J1` is the SMD Shou Han `C2765186` ($0.15 / $0.11 / $0.09 / $0.08 a board at 5 / 10 / 30 / 100 boards). Every SMD line is bought with 3 % + 4 pieces of spares, through-hole parts exactly; Extended parts pay $1.50 per type, Basic and Preferred (`C19077501`, `C19077543`, `C22810`, `C7420339`) pay nothing. The brand-conservative row is the same BOM with the swaps in the table above put back (`J1`, `Q3 Q7 Q8`, `D3`–`D6`, `F1`, `CR1`–`CR3`, `C9`, `C11`, `C13`–`C17`, `L1`, `L2`; `CR1` costed as the SD05C `C907858`, and `D4`–`D6` as `C64885`, which JLC now lists as Preferred and which therefore adds no Extended type). These are estimates: JLC may buy a different number of spares, and prices and stock move. A real quote for five boards with two assembled was $223.95 before shipping (see the root README).*
+*Re-run 2026-11-05 on the current `jlc_bom.csv` (170 placed references, 70 part numbers) with JLC's library prices fetched that day, so the clock is the Micro Crystal `U14` ($1.29 / $1.13 a piece at 10 / 30 boards), the charger is the BQ21040 and `J1` is the SMD Shou Han `C2765186` ($0.15 / $0.11 / $0.09 / $0.08 a board at 5 / 10 / 30 / 100 boards). Every SMD line is bought with 3 % + 4 pieces of spares, through-hole parts exactly; Extended parts pay $1.50 per type, Basic and Preferred (`C19077501`, `C19077543`, `C22810`, `C7420339`) pay nothing. The brand-conservative row is the same BOM with the swaps in the table above put back (`J1`, `Q3 Q7 Q8`, `D3`–`D6`, `F1`, `F2`, `CR1`–`CR3`, `C9`, `C11`, `C13`–`C17`, `C38`, `L1`, `L2`; `CR1` costed as the SD05C `C907858`, and `D4`–`D6` as `C64885`, which JLC now lists as Preferred and which therefore adds no Extended type); `U12` is TI's part in both rows. Adjusted on 2026-11-12 for that day's three swaps (`C38` → Samsung `C21120`, Basic; `F2` → Brightking `C269105`; `U12` → TI `C7827`): each row is its 2026-11-05 figure less those lines' saving at 2026-11-12 prices, $0.56 / $0.35 / $0.20 / $0.12 a board at a $1.50 fee and $0.86 / $0.50 / $0.25 / $0.14 at $3.00. The brand-conservative row keeps the Yageo `C38` and the Littelfuse `F2`, so it only gains TI's cheaper `U12`, about a cent. These are estimates: JLC may buy a different number of spares, and prices and stock move. A real quote for five boards with two assembled was $223.95 before shipping (see the root README).*
 
-**Against the Rev 1.02 table** (2026-10-23: $32.48 / $23.03 / $15.58 / $11.94, 25 Extended types, 166 references): the Extended count rises by four, to 29. New: the BQ21040, the NTC, the PTC and the 0.22 µF `C38`. The TP4056 was Preferred and paid no fee, and the RTC swap trades one Extended type for another. Priced on the same day, the charger block (`U11`, `TH1`, `C38`, `R71` out) adds $1.42 / $0.82 / $0.44 / $0.27 a board at 5 / 10 / 30 / 100 boards, the four fuses add $0.59 / $0.41 / $0.25 / $0.19, the sense pair and `C34` net about nothing, and the RTC swap takes off $3.22 / $2.41 / $1.81 / $1.54. Fitting `U13` (DS3231MZ+TRL) instead of `U14` gives $34.06 / $23.93 / $16.09 / $12.26 a board; no RTC at all gives $27.97 / $19.44 / $12.91 / $9.67. Part-price drift since 10-23 is $0.15–$0.43 of the difference: the Rev 1.02 files priced today come to $32.05 / $22.70 / $15.40 / $11.79.
+**Against the Rev 1.02 table** (2026-10-23: $32.48 / $23.03 / $15.58 / $11.94, 25 Extended types, 166 references): the Extended count rises by four, to 29. New: the BQ21040, the NTC, the PTC and the 0.22 µF `C38`. The TP4056 was Preferred and paid no fee, and the RTC swap trades one Extended type for another. Priced on the same day, the charger block (`U11`, `TH1`, `C38`, `R71` out) adds $1.42 / $0.82 / $0.44 / $0.27 a board at 5 / 10 / 30 / 100 boards, the four fuses add $0.59 / $0.41 / $0.25 / $0.19, the sense pair and `C34` net about nothing, and the RTC swap takes off $3.22 / $2.41 / $1.81 / $1.54. Fitting `U13` (DS3231MZ+TRL) instead of `U14` gives $34.06 / $23.93 / $16.09 / $12.26 a board; no RTC at all gives $27.97 / $19.44 / $12.91 / $9.67. Part-price drift since 10-23 is $0.15–$0.43 of the difference: the Rev 1.02 files priced today come to $32.05 / $22.70 / $15.40 / $11.79. All of these figures predate the 2026-11-12 swaps, which take $0.56 / $0.35 / $0.20 / $0.12 off each: `C38` became a Basic part (28 Extended types), and `F2` and `U12` moved to cheaper, better-stocked codes.
 
-Where the money goes at 30 boards (optimized, $14.28/board): ESP32-S3-WROOM-1-N16R8 $4.89 · RV-8263-C7 $1.32 ·
+Where the money goes at 30 boards (optimized, $14.08/board): ESP32-S3-WROOM-1-N16R8 $4.89 · RV-8263-C7 $1.32 ·
 TPS923610 $0.63 · three Samsung 22 µF `C45783` $0.59 · ten TS365ZJ switches $0.51 · BQ21040 $0.48 · TPS2116 $0.29 ·
-Hirose FH34SRJ-24S $0.29 · USB-C receptacle $0.09 · fees $1.45 · everything else ≈ $3.7. Consigning the module and the RTC removes $6.31 (the two lines and their fees).
+Hirose FH34SRJ-24S $0.29 · USB-C receptacle $0.09 · fees $1.40 · everything else ≈ $3.6. Consigning the module and the RTC removes $6.31 (the two lines and their fees).
 
 **PCB + assembly** is not in those files: a 30-board order came to about $624 total against about $338 of parts, i.e.
 ≈ **$9.5/board** for PCB, SMT, hand-soldered THT and setup at that quantity (roughly $15–20/board at 5 boards,
@@ -166,7 +182,7 @@ TSSOP-8 only (every datasheet revision, 2009–2016; their SOT-23-6 dual-FET par
 **EVVOSEMI's SOT-23-6 "FS8205A" (DigiKey PN `26220994`) is a real part**, pin-compatible with this footprint —
 use that as the hand-build source. TECH PUBLIC's SOT-23-6 FS8205A
 (LCSC `C2830320`) is the JLC-build source. Everything else is a stock DigiKey/Mouser line, except possibly the fuses `F3`–`F6` (DigiKey stock of the 0603 MF-FSMF010X-2 is unconfirmed). Roughly four
-times the JLC per-board parts cost at 30 boards ($14.28), which is the expected premium for building singles.
+times the JLC per-board parts cost at 30 boards ($14.08), which is the expected premium for building singles.
 
 ## Other cost and sourcing choices
 
@@ -187,7 +203,7 @@ Three further choices are in the BOM for cost, against a brand-conservative alte
 | 1 | U11 | BQ21040DBVR | `C202311` | TI BQ21040DBVR (SOT-23-6, JLC Extended) | Li-ion charger with a 10 kΩ NTC input (`TS`, sensor `TH1`) and 30 min / 10 h timers; R6 = 4.7 kΩ ≈ 115 mA |
 | 1 | U5 | DW01A | `C351410` | PUOLOP DW01A | cell protection controller |
 | 1 | U10 | TPS923610DRLR | `C52919131` | TI TPS923610DRLR | frontlight boost driver — **low JLC stock** |
-| 1 | U12 | 74LVC1G04 | `C53185133` | MDD 74LVC1G04GV | inverter (warm/cool select) |
+| 1 | U12 | 74LVC1G04 | `C7827` | TI SN74LVC1G04DBVR | inverter (warm/cool select); TI's own part since 2026-11-12 (the MDD clone `C53185133` before) |
 | 1 | U14 | RV-8263-C7 | `C5137460` | Micro Crystal RV-8263-C7-32.768KHZ-20PPM-TA-QA (JLC Extended) | RTC, ±20 ppm, I²C `0x51`, powered from 3V3; optional; **thin JLC stock**; needs the `FT Rotation Offset` field |
 | 5 | U1 U6 U7 U8 U9 | TPD4E1U06DBVR | `C19829453` | TECH PUBLIC TPD4E1U06DBVR | ESD arrays: SD (U1, U9), USB (U6), touch (U7), expansion (U8) |
 
@@ -236,7 +252,7 @@ Three further choices are in the BOM for cost, against a brand-conservative alte
 | 1 | L1 | **47u** | `C206267` | **Sunltech SLW5040S470MST** | EPD charge-pump inductor, **5 × 5 × 4 mm shielded**; 47 µH matches the SSD1677 reference design; prime/DigiKey part is **Laird TYS5040470M-10**, same case size, also shielded. KiCad footprint `Inductor_SMD:L_APV_ANR5040` (pad gap checked against Bourns' published land pattern for this case class); see `DESIGN_REVIEW.md` §7 and §12 |
 | 1 | L2 | **10u** | `C88532` | TDK VLS252012HBX-100M-1 | frontlight boost inductor, 2.5 × 2.0 × 1.2 mm (schematic reads 10u / VLS252012HBX-100M-1; 1.0 mm alternative VLS252010HBU-100M `C2042741`) |
 | 1 | F1 | 0805L100WR | `C269106` | Brightking SMD0805B100TFT | 1 A hold / 1.95 A trip / 6 V PTC (≈0.65 A hold at 60 °C) |
-| 1 | F2 | 0805L075WR | `C151146` | Littelfuse 0805L075WR | 0.75 A hold / 1.5 A trip / 6 V PTC in series with `J6` pin 12 (raw battery on the expansion header) |
+| 1 | F2 | 0805L075WR | `C269105` | Brightking SMD0805B075TF | 0.75 A hold / 1.5 A trip / 6 V PTC in series with `J6` pin 12 (raw battery on the expansion header); the same listed ratings as the Littelfuse 0805L075WR (`C151146` until 2026-11-12), which hand builds use |
 | 4 | F3 F4 F5 F6 | MF-FSMF010X-2 | `C210355` | Bourns MF-FSMF010X-2 (JLC Extended) | 0.10 A hold / 0.30 A trip / 15 V 0603 PTC: `F3` on the frontlight boost's input (`/LED_VIN`), `F4` on the touch supply (replaces `R42`), `F5` in series with `J6` pin 7 (`J6_3V3`; 20 mA budget, heavier loads go on pin 12), `F6` on the e-paper boost and the panel's logic supply (`EINK_3V3`). The DigiKey-stocked sibling MF-PSMF010X-2 (`C116171`) is 0805, so not a drop-in |
 
 ### Resistors (0603, 1 %, except R27 which is 0805 and R85/R86 which are 1206; all Basic except R37, which is Preferred, and the NTC `TH1`, which is Extended)
@@ -279,7 +295,7 @@ Three further choices are in the BOM for cost, against a brand-conservative alte
 |--:|---|---|---|---|---|
 | 3 | C27 C28 C29 | 2.2n | 0603 | `C1604` | FH 0603B222K500NT 50 V X7R (Basic) |
 | 8 | C7 C23 C24 C30 C31 C33 C34 C36 | 0.1u | 0603 | `C14663` | Yageo CC0603KRX7R9BB104 50 V X7R (Basic). `C34` is the DW01A `CS` filter (2.2 nF before Rev 1.03) |
-| 1 | C38 | 0.22u | 0603 | `C107083` | Yageo CC0603KRX7R9BB224 50 V X7R (**Extended**, $0.013). The BQ21040's optional `TS`-to-GND ESD capacitor. DigiKey: <https://www.digikey.com/en/products/detail/yageo/CC0603KRX7R9BB224/5883804> |
+| 1 | C38 | 0.22u | 0603 | `C21120` | Samsung CL10B224KA8NNNC 25 V X7R (Basic, $0.009; `TS` self-clamps at about 2 V). The BQ21040's optional `TS`-to-GND ESD capacitor. Until 2026-11-12 the Extended Yageo CC0603KRX7R9BB224 (`C107083`), which hand builds still use. DigiKey: <https://www.digikey.com/en/products/detail/yageo/CC0603KRX7R9BB224/5883804> |
 | 7 | C5 C8 C21 C22 C25 C26 C37 | 1u | 0603 | `C15849` | Samsung CL10A105KB8NNNC 50 V X5R (Basic) |
 | 2 | C10 C12 | 4.7u | 0603 | `C19666` | Samsung CL10A475KO8NNNC 16 V X5R (Basic) |
 | 1 | C2 | 10u/25V | 0603 | `C96446` | Samsung CL10A106MA8NRNC **25 V** X5R (Basic) — the hot-plugged USB VBUS bulk cap; its ground leg runs through `R84` (1 Ω) |

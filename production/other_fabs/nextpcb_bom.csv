@@ -69,5 +69,5 @@
 68,U5,1,DW01A,,Fortune Semiconductor | DW01A | SOT-23-6_Handsoldering | SMD
 69,U10,1,TPS923610DRLR,,Texas Instruments | TPS923610DRLR | U_DRL0006A_6L_TI-LAND | SMD
 70,U11,1,BQ21040DBVR,,Texas Instruments | BQ21040DBVR | SOT-23-6_Handsoldering | SMD
-71,U12,1,"74LVC1G04GV,125",,Nexperia | 74LVC1G04 | SOT-23-5_HandSoldering | SMD
+71,U12,1,SN74LVC1G04DBVR,,Texas Instruments | 74LVC1G04 | SOT-23-5_HandSoldering | SMD
 72,U14,1,RV-8263-C7-32.768KHZ-20PPM-TA-QA,,Micro Crystal | RV-8263-C7 | MicroCrystal_C7_SON-8_1.5x3.2mm_P0.9mm | SMD

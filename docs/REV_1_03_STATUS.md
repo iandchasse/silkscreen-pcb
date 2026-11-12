@@ -10,7 +10,10 @@ from the task list in [REV_1_03_DOCS_HANDOFF.md](REV_1_03_DOCS_HANDOFF.md). The 
 2026-11-04), and the back silkscreen prints it. At the 2026-11-03 commit, the board passes DRC with 0 errors (the known warnings only), 0
 unconnected and clean parity, ERC is at 46, and it has 862 teardrops. On 2026-11-04 the TP4056 charger was replaced by
 TI's BQ21040 with an NTC ([section 14](#14-bq21040-charger-2026-11-04)): DRC is unchanged, ERC is at 45, and the
-teardrops were re-added the same day (860).
+teardrops were re-added the same day (860). On 2026-11-12 every diode was checked against its JLC part (all correct), the
+BOM was audited for cheaper or better-stocked parts ([section 19](#19-diode-orientation-check-and-bom-audit-2026-11-12)),
+and the commits up to `6a1b54a` were reviewed. The owner approved three BOM swaps and one field fix, and they were applied
+the same day ([section 20](#20-review-findings-decisions-and-to-do-2026-11-12)).
 
 This is the hand-over note. It covers what changed, where it deviates from [NEXT_REVISION.md](NEXT_REVISION.md) and
 why, what is parked, how it was checked, and what to do next. The whole change list from the Rev 1.0 order to 1.03,
@@ -20,12 +23,12 @@ with an order-readiness note, is in [CHANGELOG.md](CHANGELOG.md).
 
 | File | Change |
 |---|---|
-| `silkscreen_pcb.kicad_sch` | `F3`, `F5`, `F6` added; `R42` became `F4`; `3V3` and `LDO_IN` labels split and renamed; `R6` = 10k. Later: `R1`/`C1` removed and `J1`'s shield tied to GND, title block 1.03 (certification review A1/A2). 2026-11-04: `U11` is a BQ21040 with the NTC `TH1`, `Q2` a BSS138, `R6` 4.7k, `R82` 200k, `R71` removed (section 14) |
-| `silkscreen_pcb.kicad_pcb` | footprints, nets and copper as in section 2; zones refilled |
+| `silkscreen_pcb.kicad_sch` | `F3`, `F5`, `F6` added; `R42` became `F4`; `3V3` and `LDO_IN` labels split and renamed; `R6` = 10k. Later: `R1`/`C1` removed and `J1`'s shield tied to GND, title block 1.03 (certification review A1/A2). 2026-11-04: `U11` is a BQ21040 with the NTC `TH1`, `Q2` a BSS138, `R6` 4.7k, `R82` 200k, `R71` removed (section 14). 2026-11-12: `U14`'s Datasheet and Description, and the `C38`, `F2` and `U12` part fields (section 20) |
+| `silkscreen_pcb.kicad_pcb` | footprints, nets and copper as in section 2; zones refilled. 2026-11-12: the same field values on the footprints (section 20) |
 | `silkscreen_pcb.kicad_pro` | three Power net-class patterns for the new nets (`/LED_VIN`, `J6_3V3`, `EINK_3V3`); nothing else, the DRC exclusions are untouched |
 | `silkscreen_pcb.kicad_dru` | **new (2026-11-03):** custom DRC rules. GND pours at least 0.5 mm from the SW nets, and other nets' vias at least 0.4 mm from the two switch nodes ([TRACE_AUDIT.md §1](audit-2026-11-03/TRACE_AUDIT.md#1-changes-made-in-this-pass-u10-corner-case-1-follow-up)). Then pours 0.3 mm from the panel rails and 0.25 mm from the LED-cathode pads, and the `J3`/`J1` footprint rules ([§1b](audit-2026-11-03/TRACE_AUDIT.md#1b-free-fixes-applied-after-the-audit)). Then the `U10` pad-pitch rule ([§1c](audit-2026-11-03/TRACE_AUDIT.md#1c-u10-on-tis-example-land-pattern)) |
 | `KiCad/9.0/3rdparty/TPS923610DRLR/` | **new footprint (2026-11-03):** `footprints.pretty/U_DRL0006A_6L_TI-LAND.kicad_mod`, TI's DRL0006A example land for `U10`. The symbol library `2026-09-06_02-10-40.kicad_sym` adds it to `U10`'s footprint filter. The Ultra Librarian footprints are untouched ([§1c](audit-2026-11-03/TRACE_AUDIT.md#1c-u10-on-tis-example-land-pattern)) |
-| `fabrication/part_fields.csv` | one new PTC row; `R42` and `R6` moved to other rows. Later: `R1` and `C1` removed. 2026-11-04: the charger rows (section 14) |
+| `fabrication/part_fields.csv` | one new PTC row; `R42` and `R6` moved to other rows. Later: `R1` and `C1` removed. 2026-11-04: the charger rows (section 14). 2026-11-12: the `C38`, `F2` and `U12` rows (section 20) |
 | `docs/REV_1_03_STATUS.md` | this file |
 
 **2026-11-03 additions on the working copy (uncommitted):**
@@ -289,6 +292,9 @@ soft-termination reading rests on an older catalog copy. Samsung's open-mode des
 
 ## 9. Not done yet
 
+- **Agreed and done on 2026-11-12:** three BOM swaps, `U14`'s Datasheet and Description, and the frame legs kept solid
+  with a first-article check ([section 20.3](#203-to-do-agreed-and-done-2026-11-12)). Left: JLC's placement preview for the
+  three swapped parts at the next order.
 - **Teardrops after the charger swap:** done on 2026-11-04 (section 10, step 12); 860 now.
 - **Production files:** regenerated for Rev 1.03 on 2026-11-05 (section 16). Still to do: look at the new footprints in
   JLC's placement preview.
@@ -367,6 +373,13 @@ Settled on 2026-11-03:
 Settled on 2026-11-04:
 - The TP4056 is replaced by TI's BQ21040 with a board-mounted NTC (owner's choice of "option B" after a cost and
   specification comparison; section 14). The NTC sits on the board as an ambient sensor, not at the cell.
+
+Settled on 2026-11-12 and applied the same day ([section 20](#20-review-findings-decisions-and-to-do-2026-11-12)):
+- The BOM audit's swaps 1–3 (`C38`, `F2`, `U12`) are in. Swaps 4–6 are recorded for reference, not planned.
+- `U14`'s Datasheet and Description now match its library symbol.
+- The solder-bridge risk at the bottom-button tabs (finding 1) is accepted with no change.
+- The frame legs stay solid, with a first-article check (finding 4; the owner has no preference).
+- README Step 6's `D2` row and HARDWARE.md §9.1.1's tab description are corrected.
 
 ## 12. How the edit was made
 
@@ -714,3 +727,139 @@ Changed in the docs because of it:
 Left for the bench, not changed in the design: the `Q2` gate-threshold question (finding 3: `B-` sits about 0.7 V above GND
 while a cell in the `DW01A`'s over-discharge lockout is revived), the input capacitor's distance from `U11` (finding 5), and
 `TH1`'s thermal position (finding 2). Firmware F11 has a proposed decode table in the report (section 5).
+
+## 19. Diode orientation check and BOM audit (2026-11-12)
+
+At `6a1b54a`, every diode, TVS and ESD array (`D2`–`D6`, `D8`, `CR1`–`CR3`, `U1`, `U6`–`U9`) was checked against the JLC
+part it will be placed from: the cathode or key pin in JLC's symbol and footprint (and the maker's datasheet where those do
+not say), against our pad nets and the rotation in `positions.csv`. **All are correct.** `D2` is correct only because of
+its `FT Rotation Offset` of 180: the YLED1206R numbers its anode 1, KiCad numbers an LED's cathode 1. Keep the offset.
+
+A full BOM audit followed: all 70 coded lines of `production/jlc_bom.csv` against JLC's library type, stock and prices, with
+searches for cheaper or better-stocked parts in the same footprint. Report:
+[audit-2026-11-12/BOM_AUDIT.md](audit-2026-11-12/BOM_AUDIT.md). Recommended, all BOM-only (same footprint, no rotation
+change). **The owner approved all three on 2026-11-12, and they were applied the same day**
+([section 20.3](#203-to-do-agreed-and-done-2026-11-12)):
+
+- **`C38`** (the `TS` capacitor added in `9fbec1d`) → Samsung CL10B224KA8NNNC `C21120`: 0.22 µF 25 V X7R, a Basic part,
+  against the Extended Yageo 50 V part now listed. It removes one Extended fee, which is most of the saving on a small order.
+- **`F2`** → Brightking SMD0805B075TF `C269105`: the same listed ratings as the Littelfuse 0805L075WR, with 65k in stock
+  against 1.7k.
+- **`U12`** → TI SN74LVC1G04DBVR `C7827`: the genuine part with 58.7k in stock, against MDD's 2.9k. HARDWARE.md §16's
+  sleep budget borrows Nexperia's 4 µA limit because the fitted clone publishes none; TI's documented 10 µA would replace
+  it (typical unchanged).
+
+Together: $0.56 / $0.35 / $0.20 / $0.12 a board at 5 / 10 / 30 / 100 boards. The report's three optional swaps are
+recorded for reference and not planned. The parts looked at and rejected, with reasons, are in the report too.
+
+Supply on 2026-11-12: `U10` (TPS923610) had **77** in stock, and its documented fallback TPS923611 only 46, so neither
+covers a batch: pre-order through JLC's parts manager or consign. `J6` had 324. The report lists a fallback for every line
+under about 10,000.
+
+## 20. Review findings, decisions and to-do (2026-11-12)
+
+On 2026-11-12 the branch was fast-forwarded from `e3b26b2` to `6a1b54a` (the owner's `9fbec1d`, `3bef4a7`, `7b7d2fb`,
+`408b406` and `6a1b54a`), and those commits were reviewed alongside the audit in section 19. The owner decided on the
+findings the same day, and 20.3 was carried out that afternoon; 20.4 records the checks.
+
+### 20.1 Checked and fine
+
+- DRC: 0 errors, the known warnings. ERC: 45.
+- Netlist against `e3b26b2`: `C38` added, the eight switches on `MJTP1117_FG`, and `U14` fitted with `U13` DNP (the RTC
+  default). Nothing else.
+- `U14` (RV-8263-C7): the pinout matches Micro Crystal's datasheet, and its 270° in `positions.csv` matches JLC's footprint.
+- The order zip's copper, mask, paste, edge and drill layers equal a fresh export. `positions.csv` and the BOMs agree.
+
+### 20.2 Findings and decisions
+
+| # | Finding | Decision |
+|---|---|---|
+| 1 | On the bottom buttons `SW2`, `SW3`, `SW8` and `SW9`, each front-mount signal tab's exposed tip is 0.29–0.30 mm from the pad-4 ring (0.15–0.16 mm copper to copper under the mask), on the side where the switches' joints are soldered. Since section 15, pad 3 is on GND and the switch cover joins it to pad 4, so a solder bridge from a tab tip to that ring would hold the button pressed and draw about 50–330 µA while idle ([HARDWARE.md §9.1.1](HARDWARE.md#911-front-mounted-bottom-buttons-optional-hand-fitted)). On Rev 1.0 the same bridge was harmless. | **Accepted, no action.** A 0.3 mm gap is well within what a competent assembler holds. |
+| 2 | `C38` is on an Extended code where a Basic part fits. | **Approved** as BOM swap 1, together with swaps 2 and 3. Done (20.3, item 1). |
+| 3 | `U14`'s Datasheet and Description fields were still the RV-3028-C7's, on the placed schematic symbol and on the PCB footprint alike; only the schematic's cached library symbol had the RV-8263-C7's. No production file carries them, but anyone checking the pinout against the link would see a part with a different pinout. | **Fix.** Done (20.3, item 2). |
+| 4 | The eight grounded frame legs (`MJTP1117_FG`, the 1.3 mm hole beside the GND pad) join the GND pours solid on both layers. The pours' default is a thermal relief (0.5 mm gap, 0.5 mm spokes), as on each switch's own GND contact. Section 15 chose solid because the spokes starved on `SW2` and `SW9`. | **Low stakes, and the owner has no preference,** so the default stands: kept solid, with a first-article check (20.3, item 3). |
+
+**What finding 4 puts at stake.** Solid copper on both layers draws heat away while the leg is soldered, which can leave
+the hole partly filled or the joint cold. These legs hold the switch against presses and, since section 15, carry the
+cover's ESD path to GND, so a weak joint would show later, as a switch that loosens, not at power-up. Solid joints are
+also harder to rework by hand, and so is the front-mount option, which solders an `MJTP1243` leg into this hole. A
+thermal relief makes no practical difference to the ESD path, but here it brings back the starved spokes on `SW2` and
+`SW9`. Rev 1.0's legs had no net, so there is no build history either way.
+
+### 20.3 To do (agreed and done 2026-11-12)
+
+All five items were done on 2026-11-12 with KiCad closed; the checks are in 20.4. The Fabrication Toolkit is not
+installed on the machine used, so `production/bom.csv` was edited by hand for the three codes (item 1).
+
+1. **BOM swaps 1–3** ([BOM_AUDIT.md §2.1](audit-2026-11-12/BOM_AUDIT.md#21-recommended-bom-only-same-footprint-same-function-no-rotation-change)).
+   The footprints stay, and `positions.csv` should come out unchanged.
+   - `fabrication/part_fields.csv`: replace the `C38`, `F2` and `U12` rows with these, then run
+     `python fabrication/apply_part_fields.py --write`:
+
+     ```csv
+     C38,0.22u,CC0603KRX7R9BB224,Yageo,C21120,,Samsung Electro-Mechanics CL10B224KA8NNNC,"equivalent (Samsung CL10B224KA8NNNC, 0.22 uF 25 V X7R 10 % 0603, JLC Basic; TS self-clamps at about 2 V). TS-to-GND capacitor beside TH1: the BQ21040 datasheet's optional 0.22 uF ESD capacitor (CTS) for the TS pin"
+     F2,0805L075WR,0805L075WR,Littelfuse,C269105,,Brightking SMD0805B075TF,"equivalent (Brightking SMD0805B075TF; JLC lists the same 0.75 A hold, 1.5 A trip, 6 V and 40 A); 0.75 A-hold PPTC in series with J6 pin 12 (raw battery +) only - NOT in the main battery path. Added 2026-09-21 (review HMI-01)"
+     U12,74LVC1G04,SN74LVC1G04DBVR,Texas Instruments,C7827,,Texas Instruments SN74LVC1G04DBVR,"same part; replaces the MDD clone C53185133 (2,908 in stock on 2026-11-12). JLC has a footprint for it, and its rotation is unchanged"
+     ```
+
+   - `production/jlc_bom.csv`, by hand: `C38` → `C21120`, `F2` → `C269105`, `U12` → `C7827`. Then the Toolkit
+     (`production/bom.csv`) and `fabrication/make_fab_files.py` (`production/other_fabs/`).
+   - Docs: `fabrication/BOM.md` (the three placed-parts rows, the part-choices table, the cost table and its notes with 28
+     Extended types instead of 29, the thin-stock paragraph and the audit note); HARDWARE.md §16's `U12` sleep-budget row
+     (maximum 4 → 10 µA, TI's limit, so the maximum total rises by 6 µA); `DESIGN_REVIEW.md`'s pin-compatibility row for
+     the MDD inverter; `docs/CHANGELOG.md`; this file and the audit. `fabrication/BOM_handbuild_digikey.csv` needs nothing:
+     it already lists TI for `U12`, and Yageo and Littelfuse stay the hand-build parts for `C38` and `F2`.
+   - In JLC's placement preview, the three should sit on their pads as before.
+   - **Done.** `apply_part_fields.py --write` changed five field values in the schematic: the `C38` and `F2` LCSC codes,
+     and `U12`'s MPN, Manufacturer and LCSC. The same five went onto the PCB footprints as text edits, which is what
+     Update PCB from Schematic with "Update footprint fields" writes. `jlc_bom.csv` and the Toolkit's `bom.csv` changed in
+     the same three codes. The Toolkit reads them from the PCB fields, so a run would write the same `bom.csv`; its other
+     outputs (positions, designators, `netlist.ipc`, the Gerber zip) do not depend on them and were left as they were.
+     `make_fab_files.py --split` changed only `U12`'s line in the PCBWay and NextPCB BOMs. Its CSVs were put back to LF,
+     as git stores them, and the assembly drawing (outlines and designators only) was not redrawn. The preview check is
+     left for the order.
+2. **`U14`'s Datasheet and Description.** **Done:** on the placed schematic symbol and on the footprint, both now carry
+   the cached library symbol's values: `https://www.microcrystal.com/fileadmin/Media/Products/RTC/Datasheet/RV-8263-C7.pdf`
+   and the description "Real-Time Clock Module, I2C, integrated 32.768 kHz crystal, … (pin 3 = CLKOE; derived from the stock
+   RV-3028-C7 symbol)". The placed symbol had the RV-3028's description as well as its link, so both changed
+   (`apply_part_fields.py` does not touch either field). `RV-3028` is now left only in that derivation note and in KiCad's
+   stock C7 footprint description, which cites the RV-3028-C7 application manual for the C7 land both parts share.
+3. **Frame legs (finding 4).** The default is to keep the solid connection and add a first-article check to
+   [NEXT_REVISION.md §6](NEXT_REVISION.md#6-verification): on the eight grounded legs, solder fills the hole and wets the
+   ring on both sides, and no switch rocks when pressed hard. The alternative: remove `(zone_connect 2)` from that pad in
+   `KiCad/9.0/3rdparty/Mjtp1117/MJTP1117_FG.kicad_mod`, update the eight footprints from the library, refill and run DRC.
+   Expect starved thermals on `SW2` and `SW9` again; either accept them like the six already on the board, or allow one
+   spoke on those pads with a custom rule (`min_resolved_spokes`). **Done:** kept solid; the check is in NEXT_REVISION §6,
+   under the first boards of the new revision.
+4. **README Step 6's `D2` row** (proposed, then accepted with the rest). **Done:** it now says that pad 1, the end next to
+   `R59`, is the cathode, and that JLC's part numbers the anode as pin 1, so a pin-1 dot in the preview belongs at the
+   `USB_VBUS` end ([BOM_AUDIT.md §1](audit-2026-11-12/BOM_AUDIT.md#1-diode-orientation-against-the-jlc-parts)).
+5. **HARDWARE.md §9.1.1's tab wording.** It called "the four tabs" netless. **Done:** it now says there are eight tabs, two
+   per button, each a short `F.Cu` track on the net of the pad it grows from (GND, or the button's ladder net, such as
+   `Net-(R60-Pad1)` on `SW2`), and that KiCad reports the four signal tabs as dangling tracks.
+
+### 20.4 How it was checked (2026-11-12, KiCad closed)
+
+| Check | Result |
+|---|---|
+| Design-file diff | Seven property values in the schematic and seven in the PCB: the five part fields and `U14`'s two. Nothing else |
+| Netlist, before and after | Only those fields differ |
+| Schematic against PCB | MPN, Manufacturer, LCSC, Datasheet and Description agree on all 189 symbols |
+| DRC with parity | As in section 16: 0 errors, 31 `silk_edge_clearance`, 10 `silk_over_copper`, 3 `silk_overlap`, 6 `starved_thermal`, 4 `track_dangling` (excluded). 0 unconnected, 0 parity issues |
+| ERC | 45, the same warnings |
+| Part fields | `apply_part_fields.py` dry run: 181 parts matched, 0 to update |
+| Production | All 170 fitted designators carry the same LCSC code in `part_fields.csv`, `jlc_bom.csv` and `bom.csv`; `other_fabs/` changes only in `U12`'s line |
+| Docs | Every relative link and anchor resolves |
+
+**Still to do:** check `C38`, `F2` and `U12` in JLC's placement preview at the next order (they should sit on their pads
+as before).
+
+**For the check on another machine** (one with KiCad and the Fabrication Toolkit, which the machine used here lacks):
+
+- Open the project and run Update PCB from Schematic with "Update footprint fields" ticked: it should find nothing to
+  change, because the PCB fields were written to match the schematic.
+- Run the Toolkit: `bom.csv` should come out identical to the committed file. `positions.csv` and `designators.csv`
+  should be unchanged, and the Gerber zip should differ only in the file dates. `netlist.ipc` renumbers its vias on
+  every run.
+- `python fabrication/apply_part_fields.py` (dry run): 0 fields to update.
+- DRC with parity and ERC: as in the table above.

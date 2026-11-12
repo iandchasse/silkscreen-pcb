@@ -116,6 +116,16 @@ touch-option note names `F4`.
   `U14` carries a JLC rotation correction (the `FT Rotation Offset` field), because JLC's library footprint for the part
   is landscape and KiCad's is portrait.
 
+### BOM and field fixes (2026-11-12)
+
+- **Parts, BOM only** (same footprints and rotations; [BOM audit](audit-2026-11-12/BOM_AUDIT.md)): `C38` is now Samsung
+  CL10B224KA8NNNC (`C21120`, 25 V, a Basic part; `TS` self-clamps at about 2 V), which removes one Extended fee. `F2` is
+  Brightking SMD0805B075TF (`C269105`), with the same listed ratings as the Littelfuse 0805L075WR and 65k in stock against
+  1.7k. `U12` is TI's own SN74LVC1G04DBVR (`C7827`) in place of the MDD clone. Together they take about $0.56 / $0.35 /
+  $0.20 / $0.12 off each board at 5 / 10 / 30 / 100 boards. Hand builds keep the Yageo `C38` and the Littelfuse `F2`.
+- **`U14` fields:** its Datasheet and Description were still the RV-3028-C7's, on the schematic symbol and the footprint.
+  Both now match the RV-8263-C7 library symbol. No production file carried them.
+
 ## Behaviour that differs from Rev 1.0
 
 - **Charging:** slower (about 5 h for 500 mAh, against 2.5–3 h), stops outside about 0–41 °C, and is capped at 10 h.
